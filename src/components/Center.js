@@ -2,6 +2,8 @@ import React from "react"
 import "../App.css"
 import ArtistContainer from "../components/ArtistContainer"
 
+//placeholder code
+
 function Center() {
     let backgroundImageVariable = "https://www.followlyrics.com/storage/7/62272.jpg"
     return (
