@@ -2,7 +2,7 @@
 
 ## Link
 
-[Bandwagon - Live App](https://alexgignilliat.github.io/bandwagon/)
+[Bandwagon - Live App](https://github.com/alexgignilliat/bandwagon)
 
 ## User Story
 As a music fan, I want to sample new music from lesser known bands and have my money given directly to these bands to support newer musicians.
