@@ -51,7 +51,7 @@ function Signup() {
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Sign Up Form</h2>
-                    <form>
+          
                         <div className="form-group">
                             <h3 className="text-light">{JSON.stringify(userState)}</h3>
                             <label> Name
@@ -69,7 +69,7 @@ function Signup() {
                             </label>
                         </div>
                         <button type="submit" onClick={handleSubmit}>Create Account</button>
-                        </form>
+                     
                 </div>
             </div>
         </React.Fragment>
