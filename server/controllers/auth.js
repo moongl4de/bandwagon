@@ -83,53 +83,82 @@ exports.signup = (req, res) => {
 }
 
 exports.activateAccount = (req, res) => {
-const {token} = req.body;
+    const {
+        token
+    } = req.body;
 
-if(token){
-    jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function(err, decodedToken) {
-        if(err) {
-            console.log('Failed to verify JWT')
-            return res.status(401).json({
-                error:'Expired Link.  Please sign up again'
-            })
-        }
-        const { name, email, password } = jwt.decode(token);
-
-        const user = new User({ name, email, password });
-
-        user.save((err, user) =>{
-            if(err){
+    if (token) {
+        jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function (err, decodedToken) {
+            if (err) {
+                console.log('Failed to verify JWT')
                 return res.status(401).json({
-                    error: 'Error saving user to DB, Please sign up again'
+                    error: 'Expired Link.  Please sign up again'
                 })
             }
-            return res.json({
-                message:'Sign Up Successfull'
+            const {
+                name,
+                email,
+                password
+            } = jwt.decode(token);
+
+            const user = new User({
+                name,
+                email,
+                password
+            });
+
+            user.save((err, user) => {
+                if (err) {
+                    return res.status(401).json({
+                        error: 'Error saving user to DB, Please sign up again'
+                    })
+                }
+                return res.json({
+                    message: 'Sign Up Successfull'
+                })
             })
         })
-    })
-}
+    }
 }
 
-exports.signin= (req, res) => {
-    const {email, password} = req.body;
-    User.findOne({email}).exec((err, user)=>{
-        if(!user || err){
+exports.signin = (req, res) => {
+    const {
+        email,
+        password
+    } = req.body;
+    User.findOne({
+        email
+    }).exec((err, user) => {
+        if (!user || err) {
             return res.status(400).json({
                 error: `User with that email does not exist : ${err}`
             })
         }
-        if(!user.authenticate(password)){
-             error: "Invalid password"
+        if (!user.authenticate(password)) {
+            error: "Invalid password"
         }
 
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn:'60m'});
+        const token = jwt.sign({
+            _id: user._id
+        }, process.env.JWT_SECRET, {
+            expiresIn: '60m'
+        });
 
-        const {_id, name, email, role} = user;
+        const {
+            _id,
+            name,
+            email,
+            role
+        } = user;
 
         return res.status(201).json({
             token,
-            user: {_id, name, email, role} 
+            user: {
+                _id,
+                name,
+                email,
+                role
+            }
         })
 
     })
