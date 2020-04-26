@@ -8,11 +8,13 @@ import BottomPlayer from "./components/PlayerFooter"
 
 
 
+
 //placeholder code
 function App() {
   return (
     <div>
       <Header />
+    
       <Center />
       <ReactJkMusicPlayer />,
 
