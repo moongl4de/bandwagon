@@ -9,6 +9,7 @@ function Header() {
             <p style={{ fontSize: "20px", float: "left" }}>bandwagon.</p>
             <p style={{float: "right"}}>Bandwagon logo and
                 <br/> dropdown menu here</p>
+               <a href='signup'> <button className="bg-primary text-light">Sign up</button></a>
            
 
             <br />
