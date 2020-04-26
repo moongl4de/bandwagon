@@ -1,24 +1,23 @@
 import React from 'react';
-import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import './App.css';
-import Header from "./components/Header"
 import Center from "./components/Center"
-import BottomPlayer from "./components/PlayerFooter"
+import Login from "./components/Login"
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import SignUp from "./components/SignUp"
 
 
-
-//placeholder code
 function App() {
   return (
+    <BrowserRouter>
     <div>
-      <Header />
-      <Center />
-      <ReactJkMusicPlayer />,
-
-      </div>
+     
+      <Route exact path="/" component={Login}/>
+      <Route exact path="/signup" component={SignUp}/>
+      <Route exact path="/listener" component={Center}/>
+    </div>
+    </BrowserRouter>
       
-   
   );
 }
 

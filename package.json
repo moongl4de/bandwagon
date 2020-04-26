@@ -1,0 +1,29 @@
+{
+  "name": "bandwagon",
+  "version": "1.0.0",
+  "description": "Digital music streaming platform",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-router": "^0.0.1",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "react-jinke-music-player": "^4.11.2",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexgignilliat/bandwagon.git"
+  },
+  "author": "Alex Gignilliat, Alan Grosse, Daria Naumova, Mesay Bekele",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexgignilliat/bandwagon/issues"
+  },
+  "homepage": "https://github.com/alexgignilliat/bandwagon#readme"
+}
