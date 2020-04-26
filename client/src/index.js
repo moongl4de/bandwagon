@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-alert("Just setting up the general layout. Move along. :)")
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
