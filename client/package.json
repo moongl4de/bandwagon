@@ -8,11 +8,20 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+<<<<<<< HEAD
     "bootstrap": "^4.4.1",
+=======
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+>>>>>>> 2d30f80ca32c561845310004416808d327897ee6
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-jinke-music-player": "^4.11.2",
+<<<<<<< HEAD
+=======
+    "react-router-dom": "^5.1.2",
+>>>>>>> 2d30f80ca32c561845310004416808d327897ee6
     "react-scripts": "3.4.1"
   },
   "scripts": {
