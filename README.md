@@ -35,10 +35,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Credits
-[Alex Gignilliat](https://github.com/alexgignilliat)
-[Alan Grosse](https://github.com/aagrosse)
-[Daria Naumova](https://github.com/DariaNau)
-[Mesay Bekele](https://github.com/mesayb)
+- [Alex Gignilliat](https://github.com/alexgignilliat)
+- [Alan Grosse](https://github.com/aagrosse)
+- [Daria Naumova](https://github.com/DariaNau)
+- [Mesay Bekele](https://github.com/mesayb)
 
 ## License
 [MIT]

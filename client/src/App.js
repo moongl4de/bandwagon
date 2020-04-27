@@ -15,6 +15,7 @@ import {Stitch} from "mongodb-stitch-browser-sdk";
 Stitch.initializeDefaultAppClient("bandwagon-qlcuw");
 
 
+
 //placeholder code
 function App() {
   return (
