@@ -1,1 +1,0 @@
-export var SPACE_BAR_KEYCODE = 32;
