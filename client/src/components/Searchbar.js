@@ -15,7 +15,7 @@ function Search() {
 
   
  
-  <Navbar bg="dark" variant="dark">
+  <Navbar bg="dark" variant="dark" className="mb-3">
     <Navbar.Brand href="#home">
       <img
         alt=""
@@ -33,7 +33,7 @@ function Search() {
     <Form inline>
     
       <FormControl  type="text" placeholder="search" className="mr-sm-2" style={{minWidth: "34rem"}}/>
-      <Button variant="outline-info"className= "search">Search</Button>
+      <Button variant="outline-info"className= "search mr-sm-4 ">Search</Button>
       
     </Form>
     </Navbar.Collapse>
