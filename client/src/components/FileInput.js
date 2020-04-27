@@ -9,10 +9,11 @@ function FileInput(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Upload audio</label>
+      <label>Upload audio
       <input type="file" ref={fileInput} />
+      </label>
       <br />
-      <button type="submit">Submit</button>
+      <button type="submit">Upload</button>
     </form>
   );
 }
