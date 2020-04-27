@@ -1,7 +1,7 @@
 import React from "react"
 import "../App.css"
 import ArtistContainer from "./ArtistContainer"
-import Search from "./Searchbar"
+import Search from "./SearchBar"
 
 //placeholder code
 
