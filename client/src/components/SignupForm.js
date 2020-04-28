@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios'
+import video from "./videos/stock_footage_concert.mp4"
 
 
 import "../App.css"
@@ -57,12 +58,15 @@ function Signup(props) {
     return (
 
         <div id="loginContainer">
+            <video id="videoBackground" style={{}} autoPlay muted loop>
+                <source src={video} type="video/mp4"></source>
+            </video>
             <Container style={{ justifyContent: "center" }}>
                 <Row>
                     <img style={{ margin: "1% auto" }} id="loginLogo" src={require("./images/newlogo.png")}></img>
                 </Row>
                 <Row>
-                    <h2 style={{ width: "100%", textAlign: "center" }}>Sign Up</h2>
+                    <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>Sign Up</h3>
                 </Row>
                 <Row>
                     <Form id="formContainer" style={{ margin: "3% auto" }}>
