@@ -1,4 +1,4 @@
-import React, {useState}  from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -17,20 +17,20 @@ function Signup(props) {
         password: ''
     })
 
-    
-   const signupUser = (userState) => 
-     axios({
-        //  url:`${process.env.REACT_APP_API}/signup`,
-        url:`http://localhost:8000/api/signup`,
-         data: userState,
-         method:'POST'
+
+    const signupUser = (userState) =>
+        axios({
+            //  url:`${process.env.REACT_APP_API}/signup`,
+            url: `http://localhost:8000/api/signup`,
+            data: userState,
+            method: 'POST'
         })
-        .then((res)=>{
-          return res.data
-      }).catch(err=>{
-          console.log("error")
-      })
-    
+            .then((res) => {
+                return res.data
+            }).catch(err => {
+                console.log("error")
+            })
+
 
 
     const handleInputChange = (event) => {
@@ -66,7 +66,7 @@ function Signup(props) {
                 </Row>
                 <Row>
                     <Form id="formContainer" style={{ margin: "3% auto" }}>
-                    <Form.Group controlId="formBasicName">
+                        <Form.Group controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" placeholder="Enter Name" name='name' value={userState.name} onChange={handleInputChange} />
                         </Form.Group>
@@ -80,7 +80,7 @@ function Signup(props) {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"  name='password' value={userState.password} onChange={handleInputChange} />
+                            <Form.Control type="password" placeholder="Password" name='password' value={userState.password} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
