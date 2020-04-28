@@ -1,10 +1,16 @@
 import React, { createRef } from "react";
+// import { handleFileUpload } from "../pages/Artist"
+
 
 function FileInput(props) {
   const fileInput = React.createRef()
+  const handleFileUpload = props.handleFileUpload
+
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(`selected file - ${fileInput.current.files[0].name}`);
+    const file = fileInput.current.files[0]
+    console.log(`selected file - ${file.name}`);
+    handleFileUpload(file)
   }
 
   return (

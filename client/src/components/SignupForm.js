@@ -1,29 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
+import axios from 'axios'
+import video from "./videos/stock_footage_concert.mp4"
+
 
 import "../App.css"
 
 
 function Signup(props) {
+    const [userState, setUserState] = React.useState({
+        name: '',
+        email: '',
+        password: ''
+    })
+
+
+    const signupUser = (userState) =>
+        axios({
+            //  url:`${process.env.REACT_APP_API}/signup`,
+            url: `http://localhost:8000/api/signup`,
+            data: userState,
+            method: 'POST'
+        })
+            .then((res) => {
+                return res.data
+            }).catch(err => {
+                console.log("error")
+            })
+
+
+
+    const handleInputChange = (event) => {
+        setUserState({
+            ...userState,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        signupUser(userState);
+
+        //reset the user inputs
+        setUserState({
+            name: '',
+            email: '',
+            password: ''
+        })
+    }
+
+
     return (
 
         <div id="loginContainer">
+            <video id="videoBackground" style={{}} autoPlay muted loop>
+                <source src={video} type="video/mp4"></source>
+            </video>
             <Container style={{ justifyContent: "center" }}>
                 <Row>
                     <img style={{ margin: "1% auto" }} id="loginLogo" src={require("./images/newlogo.png")}></img>
                 </Row>
                 <Row>
-                    <h2 style={{ width: "100%", textAlign: "center" }}>Sign Up</h2>
+                    <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>Sign Up</h3>
                 </Row>
                 <Row>
                     <Form id="formContainer" style={{ margin: "3% auto" }}>
+                        <Form.Group controlId="formBasicName">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Name" name='name' value={userState.name} onChange={handleInputChange} />
+                        </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" name='email' value={userState.email} onChange={handleInputChange} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
     </Form.Text>
@@ -31,7 +84,7 @@ function Signup(props) {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" name='password' value={userState.password} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
@@ -57,7 +110,7 @@ function Signup(props) {
                         </div>
 
 
-                        <Button variant="dark" type="submit">
+                        <Button variant="dark" type="submit" onClick={handleSubmit}>
                             Submit
   </Button>
 

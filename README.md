@@ -35,10 +35,16 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Credits
+
+### Development Team
 - [Alex Gignilliat](https://github.com/alexgignilliat)
 - [Alan Grosse](https://github.com/aagrosse)
 - [Daria Naumova](https://github.com/DariaNau)
 - [Mesay Bekele](https://github.com/mesayb)
+
+### Other
+- [Creative Tim](https://www.creative-tim.com/product/light-bootstrap-dashboard-react) (Bootstrap Dashboard Template)
+
 
 ## License
 [MIT]
