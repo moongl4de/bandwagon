@@ -54,19 +54,19 @@ import { handleSignup, handleLogin } from "../utils/stitch";
 // const aws = stitchClient.getServiceClient(AwsServiceClient.factory, "AWS_S3");
 
 
-import { signin } from "../../../server/controllers/auth";
+// import { signin } from "../../../server/controllers/auth";
 
 class ArtistPage extends Component {
-  componentDidMount() {
+  // componentDidMount() {
 
-    signin.then(user => {
+    // signin.then(user => {
 
       //  handleSignup('test123456789@test.com', '123456')
-      handleLogin(user.email, user.password)
-      .then(user => console.log(user))
-      .catch(err => console.warn(err));
-    })
-  }
+      // handleLogin(user.email, user.password)
+      // .then(user => console.log(user))
+      // .catch(err => console.warn(err));
+    // })
+  
 
   handleFileUpload(file) {
     if (!file) {
