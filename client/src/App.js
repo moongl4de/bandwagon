@@ -7,19 +7,17 @@ import Center from "./components/Center"
 import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
 
-import FileInput from "../src/components/FileInput"
 
 import Artist from "./pages/Artist"
-
+import {StoreProvider} from "./utils/globalContext"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
 import ActivateUser from './components/ActivateUser';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import {Stitch} from "mongodb-stitch-browser-sdk";
 
-Stitch.initializeDefaultAppClient("bandwagon-qlcuw");
+
 
 
 
@@ -27,11 +25,13 @@ Stitch.initializeDefaultAppClient("bandwagon-qlcuw");
 function App() {
   return (
     <Router>
+      <StoreProvider>
         <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
         <Route exact path='/artist' component={Artist}/>
+        </StoreProvider>
       </Router>
   );
 }
