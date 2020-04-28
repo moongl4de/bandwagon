@@ -1,9 +1,10 @@
-import React, {useState, Fragment} from "react";
+import React, { useState, Fragment } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import video from "./videos/stock_footage_concert.mp4"
 
 import axios from 'axios'
 
@@ -12,10 +13,10 @@ import "../App.css"
 
 function Login(props) {
     const [signInData, updateSignIn] = useState({
-        email:'',
-        password:''
+        email: '',
+        password: ''
     })
-    
+
     const handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -24,46 +25,53 @@ function Login(props) {
             [name]: value
         })
     }
-    
-    const handleSubmit =(event) =>{
+
+    const handleSubmit = (event) => {
         event.preventDefault();
         signIn(signInData)
-    
+
         //reset sign in form
         updateSignIn({
-            email:'',
-            password:'' 
+            email: '',
+            password: ''
         })
     }
-    
-    
+
+
     //sign in API call
-    function signIn(userCred){
+    function signIn(userCred) {
         axios({
             method: 'POST',
-            url:'http://localhost:8000/api/signin',
+            url: 'http://localhost:8000/api/signin',
             data: userCred
-        }).then((res)=>{
+        }).then((res) => {
             console.log('successfully signed in')
             return res.data
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log('failed to sign in')
             return err
         })
     }
-    
+
     return (
+        
 
         <div id="loginContainer">
-            <Container style={{ justifyContent: "center" }}>
+            
+            <video id="videoBackground" style={{}} autoPlay muted loop>
+                <source src={video} type="video/mp4"></source>
+            </video>
+
+            <Container style={{ justifyContent: "center", }}>
                 <Row>
                     <img style={{ margin: "1% auto" }} id="loginLogo" src={require("../components/images/newlogo.png")}></img>
                 </Row>
                 <Row>
-                    <h2 style={{ width: "100%", textAlign: "center" }}>Login</h2>
+                    
                 </Row>
                 <Row>
                     <Form id="formContainer" style={{ margin: "3% auto" }}>
+                    <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>Login</h3>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" name='email' value={signInData.email} onChange={handleInputChange} />
@@ -74,7 +82,7 @@ function Login(props) {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"  name='password' value={signInData.password} onChange={handleInputChange} />
+                            <Form.Control type="password" placeholder="Password" name='password' value={signInData.password} onChange={handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
@@ -93,6 +101,7 @@ function Login(props) {
                 </Row>
 
             </Container>
+
 
         </div>
 
