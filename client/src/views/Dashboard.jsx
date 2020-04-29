@@ -12,7 +12,7 @@ import {
   optionsSales,
   responsiveSales,
   legendSales,
- } from "../variables/Variables.jsx";
+} from "../variables/Variables.jsx";
 
 class Dashboard extends Component {
   createLegend(json) {
@@ -111,8 +111,8 @@ class Dashboard extends Component {
             </Col>
           </Row>
 
-        
-          
+
+
         </Container>
       </div>
     );

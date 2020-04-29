@@ -17,16 +17,16 @@ import "./assets/css/pe-icon-7-stroke.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    
-    
-    
-    <BrowserRouter>   
-    <Switch>   
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect from="/admin" to="/admin/dashboard" />
-    </Switch>
-  </BrowserRouter>
-  <App />
+
+
+
+    <BrowserRouter>
+      <Switch>
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
+        <Redirect from="/admin" to="/admin/dashboard" />
+      </Switch>
+    </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

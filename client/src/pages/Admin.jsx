@@ -22,7 +22,7 @@ class Admin extends Component {
       fixedClasses: "dropdown show-dropdown open"
     };
   }
- 
+
   getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
@@ -71,7 +71,7 @@ class Admin extends Component {
       this.setState({ fixedClasses: "dropdown" });
     }
   };
-  
+
   componentDidUpdate(e) {
     if (
       window.innerWidth < 993 &&
@@ -91,8 +91,8 @@ class Admin extends Component {
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
         <Sidebar {...this.props} routes={routes} image={this.state.image}
-        color={this.state.color}
-        hasImage={this.state.hasImage}/>
+          color={this.state.color}
+          hasImage={this.state.hasImage} />
         <div id="main-panel" className="main-panel" ref="mainPanel">
           <AdminNavbar
             {...this.props}
@@ -100,7 +100,7 @@ class Admin extends Component {
           />
           <Switch>{this.getRoutes(routes)}</Switch>
           <Footer />
-          
+
         </div>
       </div>
     );

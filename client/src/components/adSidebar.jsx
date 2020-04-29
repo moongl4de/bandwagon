@@ -32,9 +32,9 @@ class Sidebar extends Component {
         data-color="black"
         data-image={image}
       >
-          {this.props.hasImage ? (
-            <div className="sidebar-background" style={sidebarBackground} />
-          ) : (
+        {this.props.hasImage ? (
+          <div className="sidebar-background" style={sidebarBackground} />
+        ) : (
             null
           )}
         <div className="logo">
@@ -60,7 +60,7 @@ class Sidebar extends Component {
               if (!prop.redirect)
                 return (
                   <li
-                  
+
                     className={
                       prop.upgrade
                         ? "active active-pro"
@@ -72,10 +72,10 @@ class Sidebar extends Component {
                       to={prop.layout + prop.path}
                       className="nav-link"
                       activeClassName="active"
-                      style={{position:"relative", display:"block",padding:"10px 15px", minWidth:"220px"}}
-                      
+                      style={{ position: "relative", display: "block", padding: "10px 15px", minWidth: "220px" }}
+
                     >
-                      
+
                       <i className={prop.icon} />
                       <p>{prop.name}</p>
                     </NavLink>

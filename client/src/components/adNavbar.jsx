@@ -20,7 +20,7 @@ class Header extends Component {
     document.documentElement.classList.toggle("nav-open");
     var node = document.createElement("div");
     node.id = "bodyClick";
-    node.onclick = function() {
+    node.onclick = function () {
       this.parentElement.removeChild(this);
       document.documentElement.classList.toggle("nav-open");
     };
@@ -29,22 +29,22 @@ class Header extends Component {
   render() {
     return (
 
-     
+
       <Navbar collapseOnSelect bg="light" variant="light" expand="lg">
-        
-          <Navbar.Brand
-            href="#pablo">{this.props.brandText}
-          </Navbar.Brand>
-          
-          
-          <Navbar.Toggle onClick={this.mobileSidebarToggle} aria-controls="basic-navbar-nav"  />
-           
+
+        <Navbar.Brand
+          href="#pablo">{this.props.brandText}
+        </Navbar.Brand>
+
+
+        <Navbar.Toggle onClick={this.mobileSidebarToggle} aria-controls="basic-navbar-nav" />
+
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <AdminNavbarLinks />
         </Navbar.Collapse>
-        
-        </Navbar>
-     
+
+      </Navbar>
+
     );
   }
 }

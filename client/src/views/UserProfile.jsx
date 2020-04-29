@@ -41,7 +41,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Username",
-                          
+
                         },
                         {
                           label: "Email address",
@@ -59,14 +59,14 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "First name",
-                          
+
                         },
                         {
                           label: "Last name",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Last name",
-                                                  }
+                        }
                       ]}
                     />
                     <FormInputs
@@ -77,7 +77,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Home Adress",
-                                                  }
+                        }
                       ]}
                     />
                     <FormInputs
@@ -88,14 +88,14 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "City",
-                          
+
                         },
                         {
                           label: "Country",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Country",
-                          
+
                         },
                         {
                           label: "Postal Code",
@@ -115,7 +115,7 @@ class UserProfile extends Component {
                             componentClass="textarea"
                             bsClass="form-control"
                             placeholder="Write some stuff here...."
-                            
+
                           />
                         </FormGroup>
                       </Col>
@@ -139,8 +139,8 @@ class UserProfile extends Component {
                     "Brisbane, Australia"
                     <br />
                     "Soul Metal"
-                    
-                    
+
+
                   </span>
                 }
                 socials={

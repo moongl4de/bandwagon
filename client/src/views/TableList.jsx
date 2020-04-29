@@ -8,19 +8,19 @@ class TableList extends Component {
   // FileInput(props) {
   //   const fileInput = React.createRef()
   //   const handleFileUpload = props.handleFileUpload
-  
+
   // handleSubmit(event) {
   //   event.preventDefault()
   //   const file = fileInput.current.files[0]
   //   console.log(`selected file - ${file.name}`);
   //   handleFileUpload(file)
   // }
-  
-  
-  
-  
-  
-  render() {  
+
+
+
+
+
+  render() {
 
     return (
       <div className="content">
@@ -36,7 +36,7 @@ class TableList extends Component {
                   <Form className="m-3" >
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Upload Audio</Form.Label>
-                      <Form.Control type="file"  />
+                      <Form.Control type="file" />
                     </Form.Group>
                     <Button variant="danger" type="submit">
                       Upload
