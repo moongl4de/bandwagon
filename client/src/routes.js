@@ -2,6 +2,8 @@ import Dashboard from "./views/Dashboard.jsx";
 import UserProfile from "./views/UserProfile.jsx";
 import TableList from "./views/TableList.jsx";
 
+//These are the routes for the Artist Dashboard
+
 const dashboardRoutes = [
   {
     path: "/dashboard",
@@ -24,8 +26,8 @@ const dashboardRoutes = [
     component: TableList,
     layout: "/admin"
   }
- 
-  
+
+
 ];
 
 export default dashboardRoutes;
