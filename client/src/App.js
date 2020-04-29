@@ -20,12 +20,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
-        <Route exact path='/' component={Login}/>
-        <Route exact path='/signup' component={Signup}/>
-        <Route exact path='/listener' component={Center}/>
-        <Route exact path='/artist' component={Artist}/>
-        
-      </Router>
+      <Route exact path='/' component={Login} />
+      <Route exact path='/signup' component={Signup} />
+      <Route exact path='/listener' component={Center} />
+      <Route exact path='/artist' component={Artist} />
+
+    </Router>
   );
 }
 
