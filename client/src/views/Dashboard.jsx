@@ -82,6 +82,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsSales}
                       responsiveOptions={responsiveSales}
+                      
                     />
                   </div>
                 }
