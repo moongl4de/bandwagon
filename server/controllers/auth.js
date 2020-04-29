@@ -61,7 +61,7 @@ exports.signup = (req, res) => {
         to: email,
         subject: 'Activate your Band-Wagon account',
         html: `<h2>Please use the folowing link to activate your Band Wagon account</h2>
-        <p>${process.env.CLIENT_URL}/auth/activate/${token}</p>
+        <p>${process.env.CLIENT_URL}/activate/${token}</p>
         <br>
         <h5>Become an official Band Wagoner!!</h5>
         <p>${process.env.CLIENT_URL}</p>
