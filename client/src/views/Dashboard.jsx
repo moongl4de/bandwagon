@@ -82,7 +82,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsSales}
                       responsiveOptions={responsiveSales}
-                      
+                      style={{fontSize:"10px"}}
                     />
                   </div>
                 }
