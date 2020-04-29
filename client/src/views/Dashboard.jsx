@@ -70,11 +70,11 @@ class Dashboard extends Component {
           <Row>
             <Col md={8}>
               <Card
-                statsIcon="fa fa-history"
+                
                 id="chartHours"
                 title="Songs Played"
                 category="by month performance"
-                stats="Updated 3 minutes ago"
+                
                 content={
                   <div className="ct-chart">
                     <ChartistGraph
@@ -82,7 +82,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsSales}
                       responsiveOptions={responsiveSales}
-                      style={{fontSize:"10px"}}
+                      
                     />
                   </div>
                 }
@@ -93,10 +93,10 @@ class Dashboard extends Component {
             </Col>
             <Col md={4}>
               <Card
-                statsIcon="fa fa-clock-o"
+                
                 title="Total Plays"
                 category="By Album"
-                stats="since Jan 2019"
+                
                 content={
                   <div
                     id="chartPreferences"
@@ -107,7 +107,9 @@ class Dashboard extends Component {
                 }
                 legend={
                   <div className="legend">{this.createLegend(legendPie)}</div>
+                  
                 }
+              
               />
             </Col>
           </Row>
