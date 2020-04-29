@@ -1,5 +1,4 @@
 import React, { createRef } from "react";
-// import { handleFileUpload } from "../pages/Artist"
 
 
 function FileInput(props) {
