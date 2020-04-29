@@ -38,7 +38,7 @@ class TableList extends Component {
                       <Form.Label>Upload Audio</Form.Label>
                       <Form.Control type="file"  />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="danger" type="submit">
                       Upload
                     </Button>
                   </Form>
