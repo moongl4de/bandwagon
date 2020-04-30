@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chartist": "0.10.1",
+    "cookie-js": "0.0.1",
     "dotenv": "^8.2.0",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-browser-services-aws": "^4.8.0",
@@ -24,6 +25,7 @@
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",
     "react-scripts": "3.4.1",
+    "react-toastify": "^5.5.0",
     "react-toggle": "4.0.2"
   },
   "scripts": {
