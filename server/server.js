@@ -40,27 +40,46 @@ app.use(function (req, res, next) {
 //     app.use(cors({origin: `http://locahost:3000`}))
 // }
 
+app.get('/api/upload', function(req, res){
+    
+})
+
 app.use('/api', authRoutes)
 
 
 const port = process.env.PORT || 8000;
 
-app.listen(port, ()=>{
-    console.log(`API RUNNNING ON ${port}`)
-})
-
-
-//connect to DB
-const MONGODBURI = process.env.DATABASE;
-mongoose.connect(MONGODBURI, {
+const URI = process.env.MONGODB_URI || 'mongodb://localhost/bandwagon';
+mongoose.connect(URI, {
     //added to avoid deprecated warning on terminal
     useNewUrlParser: true,
     useFindAndModify: false,
-    useCreateIndex:true,
-    useUnifiedTopology:true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
 
-}).then(()=>{
+}).then(() => {
     console.log("DB Connected")
-}).catch(err=>{
+}).catch(err => {
     console.log('DB Connection ERROR: ', err)
 });
+
+app.listen(port, () => {
+    console.log(`API RUNNNING ON ${port}`)
+})
+
+// const API = 'k825MwjDf6De20ThzGUmubH7OtI86sCpJ2WSlSwsj0AN1utAphOH3GwlpgIetCgf'
+
+//connect to DB
+// const MONGODBURI = 'mongodb+srv://bandwagon:bandwagon@cluster0-dekyn.mongodb.net/test?retryWrites=true&w=majority'
+// mongoose.connect(MONGODBURI, {
+//     //added to avoid deprecated warning on terminal
+//     useNewUrlParser: true,
+//     useFindAndModify: false,
+//     useCreateIndex:true,
+//     useUnifiedTopology:true,
+
+// }).then((db)=>{
+//     console.log("DB Connected", db)
+// }).catch(err=>{
+//     console.log('DB Connection ERROR: ', err)
+// });

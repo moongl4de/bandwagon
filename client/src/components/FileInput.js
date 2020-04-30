@@ -14,8 +14,16 @@ function FileInput(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Upload audio
-      <input type="file" ref={fileInput} />
+      <label>Album name
+      <input type="text"/>
+      </label>
+      <br />
+      <label>Browse Album Cover
+      <input type="file"/>
+      </label>
+      <br />
+      <label>Browse audio
+      <input type="file" ref={fileInput} multiple/>
       </label>
       <br />
       <button type="submit">Upload</button>

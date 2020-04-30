@@ -35,7 +35,7 @@ const AlbumSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}
+},
 { timestamps: true},);
 
 module.exports = Album = mongoose.model('album', AlbumSchema);
