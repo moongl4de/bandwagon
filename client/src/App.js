@@ -10,6 +10,7 @@ import Artist from "./pages/Artist"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
 
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
@@ -18,7 +19,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 //placeholder code
 function App() {
   return (
-    <Router>
+    <Router >
         <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/listener' component={Center}/>
