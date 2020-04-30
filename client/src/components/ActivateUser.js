@@ -1,5 +1,5 @@
 import React, {useState, useEffect}  from "react";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Redirect} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios'
 import jwt from 'jsonwebtoken';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 import "../App.css"
@@ -54,11 +56,12 @@ const activateAccountAPICall = () => {
         .then(res => {
             console.log('ACCOUNT ACTIVATION', res);
             setAuthState({ ...userAuthState, display: false });
-
+            toast.success('Your Account has been activated');
         })
         .catch(err => {
             // console.log('ACCOUNT ACTIVATION ERROR', err);
             console.log('ACCOUNT ACTIVATION ERROR', err.response.data.error);
+            toast.error('Activation Failed - Account already active');
         });
 }
 
@@ -70,6 +73,7 @@ const activateAccountAPICall = () => {
 
         <div id="loginContainer">
             <Container style={{ justifyContent: "center" }}>
+            {!display ? <Redirect to="/" /> : null }
                 <Row>
                     <img style={{ margin: "1% auto" }} id="loginLogo" src={require("./images/newlogo.png")}></img>
                 </Row>
@@ -77,7 +81,7 @@ const activateAccountAPICall = () => {
                     <h2 style={{ width: "100%", textAlign: "center" }}>Activate Account</h2>
                 </Row>
                 <Row style={{ justifyContent: "center" }}>
-
+<ToastContainer />
                         <Button  variant="dark" type="submit" onClick={handleSubmit}>
                             Activate
                         </Button>
