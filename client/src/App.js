@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import Center from "./components/Center"
 import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
+import Subscription from "./components/Subscription"
 
 
 import Artist from "./pages/Artist"
@@ -27,6 +28,7 @@ function App() {
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
         <Route exact path='/artist' component={Artist}/>
+        <Route exact path='/subscription' component={Subscription}/>
         </StoreProvider>
       </Router>
   );

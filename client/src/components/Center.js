@@ -4,10 +4,11 @@ import ArtistContainer from "./ArtistContainer"
 import Search from "./Searchbar"
 import ReactDOM from "react-dom";
 import ReactJkMusicPlayer from "react-jinke-music-player";
-import "react-jinke-music-player/assets/index.css";
+// import "react-jinke-music-player/assets/index.css";
+// import "../../src/assets/less/test.less"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
-import "react-jinke-music-player/lib/styles/index.less";
+// import "react-jinke-music-player/lib/styles/index.less";
  
 
 
