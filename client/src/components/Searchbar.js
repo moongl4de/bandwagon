@@ -9,8 +9,7 @@ import Logo from '../img/newlogoRev2.png'
 
 
 function Search() {
-    return (
-
+return (
   <Navbar bg="dark" variant="dark" className="mb-3">
     <Navbar.Brand href="#home">
       <img

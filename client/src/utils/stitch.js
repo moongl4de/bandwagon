@@ -2,10 +2,11 @@
 import {
     Stitch,
     UserPasswordAuthProviderClient,
-    UserPasswordCredential
+    UserPasswordCredential,
+    AnonymousCredential
 } from 'mongodb-stitch-browser-sdk';
 
-const stitchClient = Stitch.initializeDefaultAppClient("stitch-quickstarts-zhpox");
+const stitchClient = Stitch.initializeDefaultAppClient('bandwagon-qlcuw');
 
 const emailPasswordClient = stitchClient.auth
     .getProviderClient(UserPasswordAuthProviderClient.factory, "userpass");
@@ -15,7 +16,7 @@ async function handleSignup(email, password) {
     try {
 
         await emailPasswordClient.registerWithEmail(email, password)
-        console.log("Successfully registered. Check your inbox for a confirmation email.")
+        console.log("Successfully registered")
 
     } catch (e) {
         console.log(e)
@@ -44,13 +45,14 @@ async function handleLogout() {
     await stitchClient.auth.logout();
 }
 
-async function handleResendConfirmation(email) {
-    await emailPasswordClient.resendConfirmationEmail(email);
-}
+// async function handleResendConfirmation(email) {
+//     await emailPasswordClient.resendConfirmationEmail(email);
+// }
 
 export {
+    stitchClient,
     handleSignup,
     handleLogin,
     handleLogout,
-    handleResendConfirmation
+    // handleResendConfirmation
 }
