@@ -7,17 +7,20 @@ import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
+import "react-jinke-music-player/lib/styles/index.less";
+ 
+
 
 
     const audioListTest = [
       {
-        name: 'Despacito',
-        singer: 'Luis Fonsi',
+        name: 'Hide Away From Us',
+        singer: 'Alex Gignilliat',
         cover:
-          'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+          'https://bit.ly/2xmv9IN',
         musicSrc: () => {
           return Promise.resolve(
-            'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3'
+            'https://audiotestacg.s3.us-east-2.amazonaws.com/Hide+Away+From+Us+-+Alex+Gignilliat.mp3'
           )
         },
       },
@@ -59,7 +62,7 @@ const options = {
     preload: false,
 
     //Whether the player's background displays frosted glass effect  [type `Boolean`, default `false`]
-    glassBg: false,
+    glassBg: true,
 
     //The next time you access the player, do you keep the last state  [type `Boolean` default `false`]
     remember: false,
@@ -142,7 +145,7 @@ const options = {
     loadAudioErrorPlayNext: true,
 
     // Auto hide the cover photo if no cover photo is available [type `Boolean` default `false`]
-    autoHiddenCover: false,
+    autoHiddenCover: true,
 
     // Play and pause audio through blank space [type `Boolean` default `false`]
     spaceBar: true,
