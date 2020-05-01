@@ -2,32 +2,32 @@ body {
   background-color: rgb(33,33,33);
   font-family: "Roboto";
   text-rendering: optimizeLegibility;
-}
 
+}
 
 
 .containerTest {
   width: 40rem;
   height: 40rem;
-  background-color: white;
+  background-color: #303030;
   box-shadow: 0px 4px 15px black;
   margin: 0 auto;
 }
 
-.playerFooter{
+/* .playerFooter{
   width: 100%;
   height: 20px;
   background-color: white;
   position: fixed;
   bottom: 0;
   margin: 0 auto;
-}
+} */
 
-.footer {
+/* .footer {
   width: 100%;
   height: 25px;
   background-color: rgb(255, 255, 255);
-}
+} */
 
 .artistContainer {
   width: 40rem;
@@ -35,7 +35,7 @@ body {
   background-color: rgba(255, 255, 255, 0.897);
   margin: 0 auto;
   border: 1px solid white;
-  z-index: 999;
+  
 }
 
 
@@ -58,14 +58,7 @@ body {
   
 }
 
-.bottomPlayer {
-  width: 100%;
-  background-color: white;
-  height: 15%;
-  position: fixed;
-  bottom: 0;
-  margin: 0 auto;
-}
+
 
 #loginLogo {
   width: 18%;
@@ -125,4 +118,43 @@ padding: 5px;
 /* Text size on charts */
 .ct-label {
   font-size: 1.0rem !important;
+}
+
+#centerDiv {
+  background-color: #000000;
+  height: 100%;
+  
+}
+
+/* html {
+  background-color: #303030;
+} */
+
+.subscriptionDiv{
+  background-color: rgba(255, 255, 255, 0.123);
+  height: 50vh;
+  border-radius: 15px;
+  border: 1px solid white;
+  margin-top: 15%;
+  text-align: center;
+  max-height: 500px;
+  
+}
+
+.innerContainer {
+  border: 1px solid rgba(255, 255, 255, 0.507);
+  background-color: rgba(223, 223, 223, 0.712);
+  height: 90%;
+  border-radius: 10px;
+  margin: 5% auto;
+  
+}
+.subscriptionDiv:hover {
+  box-shadow: 0px 0px 25px rgba(27, 99, 255, 0.301);
+  cursor: pointer;
+  border: 1px rgb(133, 81, 255) solid;
+  background-color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 5px rgba(0, 10, 36, 0.637);
+  transition: 1s;
+ 
 }

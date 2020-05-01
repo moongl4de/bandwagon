@@ -1,6 +1,6 @@
 import React from "react"
 import "../App.css"
-import Search from "../components/SearchBar"
+import Search from "../components/Searchbar"
 
 //placeholder code
 

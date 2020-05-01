@@ -34,6 +34,7 @@ sendgridMail.setApiKey(process.env.SENDGRID_APIKEY)
 exports.signup = (req, res) => {
     const {
         name,
+        role,
         email,
         password
     } = req.body;
@@ -49,6 +50,7 @@ exports.signup = (req, res) => {
 
     const token = jwt.sign({
         name,
+        role,
         email,
         password
     }, process.env.JWT_ACCOUNT_ACTIVATION, {
@@ -59,8 +61,9 @@ exports.signup = (req, res) => {
     const emailSendData = {
         from: process.env.EMAIL_FROM,
         to: email,
-        subject: 'Activate your Band-Wagon account',
-        html: `<h2>Please use the folowing link to activate your Band Wagon account</h2>
+        subject: `Activate your Band-Wagon ${role} account`,
+        html: `<h1>Hey ${name}, welcome to Band Wagon</h1>
+         <h2>Please use the folowing link to activate your Band Wagon ${role} account</h2>
         <p>${process.env.CLIENT_URL}/activate/${token}</p>
         <br>
         <h5>Become an official Band Wagoner!!</h5>
@@ -97,12 +100,14 @@ exports.activateAccount = (req, res) => {
             }
             const {
                 name,
+                role,
                 email,
                 password
             } = jwt.decode(token);
 
             const user = new User({
                 name,
+                role,
                 email,
                 password
             });

@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios'
 import video from "./videos/stock_footage_concert.mp4"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import "../App.css"
 
@@ -15,24 +16,9 @@ function Signup(props) {
     const [userState, setUserState] = React.useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        role:'',
     })
-
-
-    const signupUser = (userState) =>
-        axios({
-            //  url:`${process.env.REACT_APP_API}/signup`,
-            url: `http://localhost:8000/api/signup`,
-            data: userState,
-            method: 'POST'
-        })
-            .then((res) => {
-                return res.data
-            }).catch(err => {
-                console.log("error")
-            })
-
-
 
     const handleInputChange = (event) => {
         setUserState({
@@ -41,23 +27,45 @@ function Signup(props) {
         })
     }
 
+    const  setRole = (event)  => {
+        console.log(event.target.value);
+        setUserState({
+            ...userState,
+            role: event.target.value
+        })
+      }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        signupUser(userState);
-
-        //reset the user inputs
-        setUserState({
-            name: '',
-            email: '',
-            password: ''
+        axios({
+            //  url:`${process.env.REACT_APP_API}/signup`,
+            url: `http://localhost:8000/api/signup`,
+            data: userState,
+            method: 'POST'
         })
+            .then((res) => {
+                toast.success('Email has been sent to the address provided. Please Follow Instruction');
+                 // return res.data;
+                //reset the user inputs
+                setUserState({
+                    name: '',
+                    email: '',
+                    password: '',
+                    role:'',
+                })
+
+            }).catch(err => {
+                console.log("error");
+                toast.error(err.response.data.error);
+            })
     }
 
 
     return (
 
         <div id="loginContainer">
+            <ToastContainer />
             <video id="videoBackground" style={{}} autoPlay muted loop>
                 <source src={video} type="video/mp4"></source>
             </video>
@@ -94,25 +102,31 @@ function Signup(props) {
 
                             />
                         </Form.Group>
-                        <div id="radioBox">
+                        <div id="radioBox" onChange={event => setRole(event)}>
                             <Form.Check
                                 type="radio"
                                 label="Listener"
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios1"
+                                value="listener"
+                                
                             />
                             <Form.Check
                                 type="radio"
                                 label="Artist"
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios2"
+                                value="artist"
                             />
                         </div>
 
 
                         <Button variant="dark" type="submit" onClick={handleSubmit}>
-                            Submit
+                        Sign Up
   </Button>
+  <a href="/" ><Button className="offset-3"variant="dark" >
+  Sign In    
+  </Button> </a>
 
                     </Form>
 
