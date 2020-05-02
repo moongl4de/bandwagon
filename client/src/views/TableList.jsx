@@ -29,7 +29,7 @@ function TableList(props) {
                   <Form className="m-3" onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label>Upload Audio</Form.Label>
-                      <Form.Control type="file" ref={fileInput}/>
+                      <Form.Control type="file" ref={fileInput} multiple/>
                     </Form.Group>
                     <Button variant="danger" type="submit">
                       Upload

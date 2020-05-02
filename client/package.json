@@ -15,7 +15,7 @@
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-browser-services-aws": "^4.8.0",
     "mongodb-stitch-browser-services-mongodb-remote": "^4.8.0",
-    "node-sass": "4.12.0",
+    "node-sass": "^4.12.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-chartist": "0.13.3",
