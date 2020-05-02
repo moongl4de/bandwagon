@@ -40,7 +40,8 @@ function Signup(props) {
 
         axios({
             //  url:`${process.env.REACT_APP_API}/signup`,
-            url: `/api/signup`,
+            // url: 'http://localhost:8000/api/signup',
+            url: '/api/signup',
             data: userState,
             method: 'POST'
         })
@@ -56,6 +57,7 @@ function Signup(props) {
                 })
 
             }).catch(err => {
+                console.log("catch mesay")
                 console.log("error");
                 toast.error(err.response.data.error);
             })

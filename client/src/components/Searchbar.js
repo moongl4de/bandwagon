@@ -10,7 +10,7 @@ import Logo from '../img/newlogoRev2.png'
 
 function Search() {
 return (
-  <Navbar bg="dark" variant="dark" className="mb-3">
+  <Navbar id="navbar" bg="" variant="dark" className="mb-3">
     <Navbar.Brand href="#home">
       <img
         alt=""
@@ -29,7 +29,7 @@ return (
     <Form inline>
     
       <FormControl  type="text" placeholder="Search by artist, song, etc..." className="mr-sm-2" style={{minWidth: "34rem"}}/>
-      <Button variant="outline-info"className= "search mr-sm-4 ">Search</Button>
+      <Button variant="light"className= "search mr-sm-4 ">Search</Button>
       
     </Form>
     </Navbar.Collapse>
@@ -38,7 +38,7 @@ return (
     <Navbar.Collapse className="justify-content-end">
      
       
-      <NavDropdown title= {<span className="text-light my-auto">Menu</span>} id="basic-nav-dropdown "className="mr-5">
+      <NavDropdown title= {<span className="text-light my-auto">Menu</span>} id="basic-nav-dropdown" className="mr-2">
         <NavDropdown.Item href="#action/3.1">Buy Tokens</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Dashboard</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>

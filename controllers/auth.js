@@ -1,35 +1,9 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const sendgridMail = require('@sendgrid/mail')
+require('dotenv').config();
 sendgridMail.setApiKey(process.env.SENDGRID_APIKEY)
 
-// exports.signup = (req, res) =>{
-//     const {name, email, password} = req.body;
-
-//     User.findOne({email}).exec((err, user)=>{
-//         if(user){
-//            return res.status(400).json({
-//                error: 'User already exists with this email address'
-//            })
-//         }
-//     });
-
-//     //create a new user
-//     let newUser = new User({name, email, password});
-//     newUser.save((err, success)=>{
-//         if(err){
-//             console.log('sign up error');
-//             return res.status(400).json({
-//                 error: err
-//             })
-//         } else {
-//             res.json({
-//                 message:'Sign Up successfull'
-//             })
-//         }
-//     })
-
-// }
 
 exports.signup = (req, res) => {
     const {

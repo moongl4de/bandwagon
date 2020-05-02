@@ -76,10 +76,10 @@ function Login(props) {
       <video id="videoBackground" style={{}} autoPlay muted loop>
         <source src={video} type="video/mp4"></source>
       </video>
-
+      {signInData.token && signInData.user.role === 'listener' ? <Redirect to="/listener" /> : null}
+        {signInData.token && signInData.user.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
       <Container style={{ justifyContent: "center", }}>
-        {signInData.token && signInData.user.role === 'listener' ? <Redirect to="/listener" /> : null}
-        {signInData.token && signInData.user.role === 'artist' ? <Redirect to="/artist" /> : null}
+  
         <Row>
           <img style={{ margin: "1% auto" }} id="loginLogo" src={require("../components/images/newlogo.png")}></img>
         </Row>

@@ -4,13 +4,12 @@ import ArtistContainer from "./ArtistContainer"
 import Search from "./Searchbar"
 import ReactDOM from "react-dom";
 import ReactJkMusicPlayer from "react-jinke-music-player";
-// import "react-jinke-music-player/assets/index.css";
-// import "../../src/assets/less/test.less"
+import "react-jinke-music-player/assets/index.css";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
-// import "react-jinke-music-player/lib/styles/index.less";
-
-
+import "react-jinke-music-player/lib/styles/index.less";
+ 
 
 
 
@@ -157,13 +156,13 @@ const options = {
 //placeholder code
 
 function Center() {
-    let backgroundImageVariable = "https://www.followlyrics.com/storage/7/62272.jpg"
+    let backgroundImageVariable = "https://upload.wikimedia.org/wikipedia/commons/7/77/Question_mark-pixels.jpg"
     return (
        
         <div style={{backgroundColor: "#303030", height: "100vh"}} id="centerDiv">
             <Search />
 
-            <div className="containerTest" style={{ backgroundImage: 'url(https://www.followlyrics.com/storage/7/62272.jpg)', backgroundSize: "150%" }}>
+            <div className="containerTest" style={{ backgroundImage: `url(${backgroundImageVariable})`, backgroundSize: "150%", backgroundPosition: "center" }}>
                 <ArtistContainer  />
                 <i class="fas fa-heart fa-2x"></i>
                 <i class="fas fa-share fa-2x"></i>
