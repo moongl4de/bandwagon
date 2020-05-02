@@ -10,6 +10,7 @@ import Subscription from "./components/Subscription"
 
 import FileInput from "./components/FileInput"
 import Artist from "./pages/Artist"
+import Admin from "./pages/Admin"
 import {StoreProvider} from "./utils/globalContext"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
@@ -27,6 +28,7 @@ function App() {
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
+        <Route exact path='/admin/dashboard' component={Admin}/>
         <Route exact path='/test' component={Artist}/>
         <Route exact path='/subscription' component={Subscription}/>
         </StoreProvider>
