@@ -130,7 +130,7 @@ padding: 5px;
   height: 50vh;
   border-radius: 15px;
   border: 1px solid white;
-  margin-top: 15%;
+  margin-top: 10%;
   text-align: center;
   max-height: 500px;
   
@@ -152,4 +152,28 @@ padding: 5px;
   text-shadow: 0px 0px 5px rgba(0, 10, 36, 0.637);
   transition: 1s;
  
+}
+
+
+@media only screen and (max-width: 600px) {
+  .subscriptionDiv {
+    margin: 2% 10%;
+    height: 40vh;
+    
+  }
+
+  #subHeader {
+    color: red;
+  }
+
+ 
+
+}
+#subHeader {
+  font-size: 30px;
+  font-family: "Roboto";
+}
+
+#navbar {
+  background-color: #141414;
 }
