@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
+const routes = require("./routes");
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-
 //import routes
-const authRoutes = require('./routes/auth');
 
 //create a middleware
 app.use(morgan('dev'))
 
+// ability to use req.body
 app.use(bodyParser.json())
 
 app.use(function (req, res, next) {
@@ -40,14 +40,15 @@ app.use(function (req, res, next) {
 //     app.use(cors({origin: `http://locahost:3000`}))
 // }
 
-app.get('/api/upload', function(req, res){
+// app.get('/api/upload', function(req, res){
     
-})
-
-app.use('/api', authRoutes)
+// })
 
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3001;
+
+// Add routes, both API and view
+app.use(routes);
 
 const URI = process.env.MONGODB_URI || 'mongodb://localhost/bandwagon';
 mongoose.connect(URI, {
@@ -62,6 +63,11 @@ mongoose.connect(URI, {
 }).catch(err => {
     console.log('DB Connection ERROR: ', err)
 });
+
+// Serve up static assets (usually on heroku)
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("client/build"));
+//   }
 
 app.listen(port, () => {
     console.log(`API RUNNNING ON ${port}`)

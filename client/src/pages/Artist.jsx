@@ -1,14 +1,13 @@
 import React from "react";
-// import axios from "axios";
+import axios from "axios";
 import FileInput from "../components/FileInput";
 import { handleSignup, handleLogin } from "../utils/stitch";
 import { useStoreContext } from "../utils/globalContext";
-import {
-  AwsServiceClient,
-  AwsRequest,
-} from "mongodb-stitch-browser-services-aws";
+import { AwsServiceClient, AwsRequest } from "mongodb-stitch-browser-services-aws";
 import { RemoteMongoClient } from "mongodb-stitch-browser-services-mongodb-remote";
 import { stitchClient } from "../utils/stitch";
+import songsAPI from "../utils/songsAPI"
+// import { UserContext } from "../utils/UserContext";
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
@@ -35,11 +34,6 @@ function ArtistPage() {
   let userEmail = global.user.email;
   let userPass = global.user.password;
   console.log(global);
-
-  // const [state, setState] = React.useState({
-  //   email: "dariagnaumova@gmail.com",
-  //   password: "123456",
-  // })
 
   const createAccount = () => {
     handleSignup(userEmail, userPass);
@@ -82,13 +76,18 @@ function ArtistPage() {
         .withService("s3")
         .withAction("PutObject")
         .withRegion("us-east-2")
-        .withArgs(args);
+        .withArgs(args)
 
       aws
         .execute(request.build())
         .then((result) => {
           console.log("result", result);
           console.log(url);
+
+          songsAPI.uploadSong({email: "jedi@master.com", url: url})
+          .then(res => console.log("songAPI", res))
+          .catch(err => console.log(err.message));
+
           return audiofile.insertOne({
             owner_id: stitchClient.auth.user.id,
             url,

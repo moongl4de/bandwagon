@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 
-//this is just a draft
-
-const SongsSchema = new mongoose.Schema({
+const SongSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
+  },
+  album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'album'
+  },
+  fileUrl: {
+    type: String
   },
   title: {
     type: String
@@ -26,3 +31,6 @@ const SongsSchema = new mongoose.Schema({
 }, {
   timestamps: true
 }, );
+
+
+module.exports = Song = mongoose.model('songs', SongSchema);
