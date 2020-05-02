@@ -40,7 +40,7 @@ function Signup(props) {
 
         axios({
             //  url:`${process.env.REACT_APP_API}/signup`,
-            url: `http://localhost:8000/api/signup`,
+            url: `/api/signup`,
             data: userState,
             method: 'POST'
         })

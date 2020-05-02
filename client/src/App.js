@@ -8,7 +8,7 @@ import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
 
-
+import FileInput from "./components/FileInput"
 import Artist from "./pages/Artist"
 import {StoreProvider} from "./utils/globalContext"
 import Login from "./components/LoginForm"
@@ -27,7 +27,7 @@ function App() {
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
-        <Route exact path='/artist' component={Artist}/>
+        <Route exact path='/test' component={Artist}/>
         <Route exact path='/subscription' component={Subscription}/>
         </StoreProvider>
       </Router>

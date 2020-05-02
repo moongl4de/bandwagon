@@ -41,7 +41,7 @@ function Login(props) {
 
     axios({
       method: 'POST',
-      url: 'http://localhost:8000/api/signin',
+      url: '/api/signin',
       data: { email, password }
     })
       .then((res) => {
