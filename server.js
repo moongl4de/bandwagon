@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
 // })
 
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8000;
 
 // Add routes, both API and view
 app.use(routes);

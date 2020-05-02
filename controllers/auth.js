@@ -1,7 +1,10 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const sendgridMail = require('@sendgrid/mail')
+require('dotenv').config();
 sendgridMail.setApiKey(process.env.SENDGRID_APIKEY)
+// sendgridMail.setApiKey("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")
+
 
 // exports.signup = (req, res) =>{
 //     const {name, email, password} = req.body;
