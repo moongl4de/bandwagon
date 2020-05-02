@@ -11,8 +11,11 @@ require('dotenv').config();
 //create a middleware
 app.use(morgan('dev'))
 
-// ability to use req.body
+// Define middleware here
+// and ability to use req.body (parse application/json, basically parse incoming Request Object as a JSON Object )
 app.use(bodyParser.json())
+// combines the line above with line 7, then you can parse incoming Request Object if object, with nested objects, or generally any type.
+app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
 
@@ -44,31 +47,32 @@ app.use(function (req, res, next) {
     
 // })
 
-
 const port = process.env.PORT || 8000;
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
 
 // Add routes, both API and view
 app.use(routes);
 
+// Connect to the Mongo DB
 const URI = process.env.MONGODB_URI || 'mongodb://localhost/bandwagon';
+
 mongoose.connect(URI, {
     //added to avoid deprecated warning on terminal
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
     useUnifiedTopology: true,
-
 }).then(() => {
     console.log("DB Connected")
 }).catch(err => {
     console.log('DB Connection ERROR: ', err)
 });
 
-// Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//     app.use(express.static("client/build"));
-//   }
-
+// Start the API server
 app.listen(port, () => {
     console.log(`API RUNNNING ON ${port}`)
 })
