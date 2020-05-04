@@ -6,52 +6,83 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Logo from '../img/newlogoRev2.png'
+import algoliasearch from 'algoliasearch/lite';
+import {
+  InstantSearch,
+  Hits,
+  SearchBox,
+  Pagination,
+  Highlight,
+  ClearRefinements,
+  RefinementList,
+  Configure,
+} from 'react-instantsearch-dom';
+import PropTypes from 'prop-types';
 
 
-function Search() {
-return (
-  <Navbar id="navbar" bg="" variant="dark" className="mb-3">
-    <Navbar.Brand href="#home">
-      <img
-        alt=""
-        src={Logo}
-        width="35"
-        height="30"
-        className="d-inline-block align-top"
-       
-      />{' '}
+const searchClient = algoliasearch('BY7RM0A5T2',
+'c84d9d93579f57a4c7c7123119c9f4b2');
+
+
+const Search = () => (
+
+  <InstantSearch searchClient={searchClient} indexName="songs">
+    <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
+      <Navbar.Brand href="#home">
+        <img
+          alt=""
+          src={Logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+
+        />{' '}
       bandwagon
     </Navbar.Brand>
-  
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
-  
-    <Form inline>
-    
-      <FormControl  type="text" placeholder="Search by artist, song, etc..." className="mr-sm-2" style={{minWidth: "34rem"}}/>
-      <Button variant="light"className= "search mr-sm-4 ">Search</Button>
-      
-    </Form>
-    </Navbar.Collapse>
-    
-    <Nav className="mr-auto">
-    <Navbar.Collapse className="justify-content-end">
-     
-      
-      <NavDropdown title= {<span className="text-light my-auto">Menu</span>} id="basic-nav-dropdown" className="mr-2">
-        <NavDropdown.Item href="#action/3.1">Buy Tokens</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Dashboard</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Log Out</NavDropdown.Item>
-      </NavDropdown>
-   
-    </Navbar.Collapse>
-    </Nav>
-</Navbar>
 
-    )
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
+
+        <Form inline>
+          <SearchBox >
+
+            <FormControl type="text" placeholder="Search by artist, song, etc..." className="mr-sm-2" style={{ minWidth: "34rem" }} />
+            <Button variant="light" className="search mr-sm-4 ">Search</Button>
+          </SearchBox>
+        </Form>
+      </Navbar.Collapse>
+
+      <Nav className="mr-auto">
+        <Navbar.Collapse className="justify-content-end">
+
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Buy Tokens</Nav.Link>
+            <Nav.Link href="#link">Log Out</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Nav>
+    </Navbar>
+    <Configure hitsPerPage={12} />
+    <Hits hitComponent={Hit}/>
+  </InstantSearch>
+
+);
+
+function Hit(props) {
+  console.log(props)
+  return (
+    <div className="hit-container">
+      <img src={props.hit.image} style={{maxWidth:"100%"}}/>
+     
+      <div className="hit-price"  >{props.hit.artist}</div>
+      <div className="hit-price"  >{props.hit.song}</div>
+    </div>
+  );
 }
+
+Hit.propTypes = {
+  hit: PropTypes.object.isRequired,
+};
 
 export default Search;
 

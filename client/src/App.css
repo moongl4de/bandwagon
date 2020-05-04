@@ -182,3 +182,13 @@ padding: 5px;
 #navbar {
   background-color: #141414;
 }
+
+.ais-SearchBox { margin: 0; }
+.ais-Pagination { margin-top: 1em }
+
+
+.ais-InstantSearch { max-width: 960px; overflow: hidden; margin: 0 }
+.ais-Hits-item { padding: 0em; width: calc(16.6667% - 1rem) }
+
+
+.hit-price { color: rgb(255, 255, 255); font-size: 14px; text-align: center;}
