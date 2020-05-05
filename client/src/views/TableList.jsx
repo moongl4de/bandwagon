@@ -26,15 +26,36 @@ function TableList(props) {
                 ctTableFullWidth
                 ctTableResponsive
                 content={
+                  <div>
                   <Form className="m-3" onSubmit={handleSubmit}>
-                    <Form.Group controlId="formBasicPassword">
-                      <Form.Label>Upload Audio</Form.Label>
-                      <Form.Control type="file" ref={fileInput}/>
-                    </Form.Group>
-                    <Button variant="danger" type="submit">
-                      Upload
+
+                  
+                   <Form.Group controlId="formBasicPassword">
+                      <Form.Label>Step 1. - Upload Band Art</Form.Label>
+                      <Form.Control variant="danger" type="file" ref={fileInput} multiple/>
+                  </Form.Group>
+                  <Button variant="danger" type="submit">
+                      Upload Art
                     </Button>
                   </Form>
+                  <Form className="m-3" onSubmit={handleSubmit}>
+                  <Form.Group  as={Col} md="6" controlId="formBasicPassword">
+                      <Form.Label>Step 2. - Select Art to Apply to Song(s) You're Uploading</Form.Label>
+                      {/* <Form.Control type="selectOne"/> */}
+                      <div className="form-group">
+                    <label for="category">Select Art:</label>
+                    <select className="custom-select" id="designation">
+                    </select>
+                </div>
+                      <Form.Label>Step 3. - Choose Song(s) to Upload</Form.Label>
+                      <Form.Control type="file" ref={fileInput} multiple/>
+                      <Form.Label>Step 4. - Upload!</Form.Label>
+                    </Form.Group>
+                    <Button variant="danger" type="submit">
+                      Upload Music
+                    </Button>
+                  </Form>
+                  </div>
                 }
               />
             </Col>

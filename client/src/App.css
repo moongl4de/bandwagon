@@ -108,6 +108,11 @@ padding: 5px;
   
 }
 
+/* Text size on charts */
+.ct-label {
+  font-size: 1.0rem !important;
+}
+
 #centerDiv {
   background-color: #000000;
   height: 100%;
@@ -168,6 +173,18 @@ padding: 5px;
   background-color: #141414;
 }
 
+/* Algolia Search css */
+
+.ais-SearchBox { margin: 0; }
+.ais-Pagination { margin-top: 1em }
+
+
+.ais-InstantSearch { max-width: 960px; overflow: hidden; margin: 0 }
+.ais-Hits-item { padding: 0em; width: calc(16.6667% - 1rem) }
+
+
+.hit-price { color: rgb(255, 255, 255); font-size: 14px; text-align: center;}
+
 .rc-slider-handle {
   background-color: rgb(255, 255, 255) !important;
 }
@@ -222,3 +239,7 @@ svg:hover {
 .music-player-controller {
   color: pink !important;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4017b712f3895a2cbbbf65306d2bdc6569da503b
