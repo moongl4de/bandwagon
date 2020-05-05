@@ -5,6 +5,20 @@ body {
 
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(165, 0, 0, 0); 
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0); 
+}
+
 
 .containerTest {
   width: 40rem;
@@ -14,31 +28,14 @@ body {
   margin: 0 auto;
 }
 
-/* .playerFooter{
-  width: 100%;
-  height: 20px;
-  background-color: white;
-  position: fixed;
-  bottom: 0;
-  margin: 0 auto;
-} */
-
-/* .footer {
-  width: 100%;
-  height: 25px;
-  background-color: rgb(255, 255, 255);
-} */
-
 .artistContainer {
-  width: 40rem;
+  width: 40%;
   height: 40rem;
   background-color: rgba(255, 255, 255, 0.897);
   margin: 0 auto;
   border: 1px solid white;
   
 }
-
-
 
 #albumArt {
   max-width: 25rem;
@@ -58,13 +55,9 @@ body {
   
 }
 
-
-
 #loginLogo {
   width: 18%;
-  min-width: 125px;
-
-  
+  min-width: 125px;  
 }
 
 
@@ -159,14 +152,11 @@ padding: 5px;
   .subscriptionDiv {
     margin: 2% 10%;
     height: 40vh;
-    
   }
 
   #subHeader {
     color: red;
   }
-
- 
 
 }
 #subHeader {
@@ -176,4 +166,59 @@ padding: 5px;
 
 #navbar {
   background-color: #141414;
+}
+
+.rc-slider-handle {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #00a6ff00 !important;
+  transition: width .6s ease;
+}
+
+.rc-slider-track{
+  background-color: rgba(83, 71, 194, 0.877) !important;
+}
+
+.panel-content{
+  background-image:
+  linear-gradient(
+    to right,
+    rgb(121, 121, 121),
+    rgb(30, 30, 30) 100%
+  );
+}
+
+.rc-slider-step {
+  background-image:
+  linear-gradient(
+    to right,
+    rgba(212, 0, 255, 0.363),
+    rgba(255, 0, 0, 0.356) 120%
+  );
+}
+
+.react-jinke-music-player-main svg {
+  font-size: 24px;
+}
+
+svg:hover {
+  fill: rgb(160, 138, 175);
+  transition-duration: 10s !important;
+}
+.music-player-controller-setting{
+ color: black;
+ background-color: rgba(75, 0, 105, 0.37) !important;
+}
+
+.music-player-controller {
+  color: pink !important;
 }
