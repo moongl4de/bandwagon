@@ -69,7 +69,7 @@ const options = {
     remember: false,
 
     //The Audio Can be deleted  [type `Boolean`, default `true`]
-    remove: true,
+    remove: false,
 
     //audio controller initial position    [ type `Object` default '{top:0,left:0}' ]
     defaultPosition: {
@@ -95,10 +95,10 @@ const options = {
     toggleMode: true,
 
     //audio cover is show of the "mini" mode [type `Boolean` default 'true']
-    showMiniModeCover: true,
+    showMiniModeCover: false,
 
     //audio playing progress is show of the "mini"  mode
-    showMiniProcessBar: false,
+    showMiniProcessBar: true,
 
     //audio controller is can be drag of the "mini" mode     [type `Boolean` default `true`]
     drag: true,
@@ -125,7 +125,7 @@ const options = {
     showPlayMode: true,
 
     //theme toggle switch  display of the audio player panel   [type `Boolean` default `true`]
-    showThemeSwitch: true,
+    showThemeSwitch: false,
 
     //lyric display of the audio player panel   [type `Boolean` default `false`]
     showLyric: false,
