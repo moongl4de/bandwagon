@@ -184,6 +184,7 @@ padding: 5px;
 
 
 .hit-price { color: rgb(255, 255, 255); font-size: 14px; text-align: center;}
+
 .rc-slider-handle {
   background-color: rgb(255, 255, 255) !important;
 }
@@ -238,3 +239,7 @@ svg:hover {
 .music-player-controller {
   color: pink !important;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4017b712f3895a2cbbbf65306d2bdc6569da503b
