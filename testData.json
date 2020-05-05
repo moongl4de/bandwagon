@@ -1,0 +1,80 @@
+[
+    {
+      "artist": "Journey",
+      "song": "Don't Stop Believin",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/91urHZSVNdL._AC_SL1500_.jpg"
+    
+    },
+    {
+        "artist": "From Clay",
+        "song": "Cardboard Cutouts",
+        "image": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/3aba3bb0cac851057ffb1f99bad4fa57-1564002973/cardboardcutout/design-your-album-cover.jpg"
+      
+      },
+      {
+        "artist": "Logic",
+        "song": "Wannabe",
+        "image": "https://images.squarespace-cdn.com/content/v1/53b6eb62e4b06e0feb2d8e86/1557342444387-52YHZTXRZCNEBJBDBKP9/ke17ZwdGBToddI8pDm48kGDpvalPb1SqHoCn1hwN0Y57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmQPoRzxSr1hzN-vPBHt7YyLLXgctAyUJRqJUUGWVDK_ZzIgvsybGcZEPqUYiXY8im/samspratt_keanureeves_logic.jpg?format=1500w"
+      
+      },
+      {
+        "artist": "Tool",
+        "song": "Fear Inoculum",
+        "image": "https://townsquare.media/site/295/files/2019/08/ToolFI.jpg?w=980&q=75"
+      
+      },
+      {
+        "artist": "Soundgarden",
+        "song": "Black Hole Sun",
+        "image": "https://s3-us-west-1.amazonaws.com/static-spin-com/files/2017/06/soundgarden-1497552364-1000x1000.jpg"
+      
+      },
+      {
+        "artist": "Rick Astley",
+        "song": "Never Gonna Give You Up",
+        "image": "https://img.discogs.com/LLLOo2ARuETzpf6Tp-cKggpPyLU=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-6229247-1414324841-8757.jpeg.jpg"
+      
+      },
+      {
+        "artist": "Nizlopi",
+        "song": "Helen",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/61hLQsAwo7L.jpg"
+      
+      },
+      {
+        "artist": "Beatles",
+        "song": "Blackbird",
+        "image": "https://images.radiox.co.uk/images/67203?crop=16_9&width=660&relax=1&signature=55LkrqcNZrAY4toJIVC2ULMZ_AU="
+      
+      },
+      {
+        "artist": "Paul Simon",
+        "song": "You can call me Al",
+        "image": "https://img.discogs.com/-Diul3awdgHQJ-wr_0DARFy_92M=/fit-in/600x590/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-655638-1393706703-8150.jpeg.jpg"
+      
+      },
+      {
+        "artist": "Gorillaz",
+        "song": "Purple Pills",
+        "image": "https://i.imgur.com/KcR4xOa.png"
+      
+      },
+      {
+        "artist": "Nirvana",
+        "song": "Teen Spirit",
+        "image": "https://www.nme.com/wp-content/uploads/2016/10/2014Nirvana_Nevermind_150414-2.jpg"
+      
+      },
+      {
+        "artist": "Oasis",
+        "song": "Wonderwall",
+        "image": "https://www.nme.com/wp-content/uploads/2016/10/2014Oasis_DefinitelyMaybe_150414-5.jpg"
+      
+      },
+      {
+        "artist": "Bob Dylan",
+        "song": "Blowin in the Wind",
+        "image": "https://www.nme.com/wp-content/uploads/2016/10/BobDylanFreewheelinGb600.jpg"
+      
+      }
+]
