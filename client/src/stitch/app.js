@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
-import FileInput from "../components/FileInput";
-import { handleSignup, handleLogin } from "../utils/stitch";
+// import FileInput from "../components/FileInput";
+// import { handleSignup, handleLogin } from "./authentication";
 import { useStoreContext } from "../utils/globalContext";
 import { AwsServiceClient, AwsRequest } from "mongodb-stitch-browser-services-aws";
 import { RemoteMongoClient } from "mongodb-stitch-browser-services-mongodb-remote";
-import { stitchClient } from "../utils/stitch";
+import { stitchClient } from "./authentication";
 import songsAPI from "../utils/songsAPI"
 // import { UserContext } from "../utils/UserContext";
 
@@ -29,21 +28,13 @@ const convertAudioToBSONBinaryObject = (file) => {
   });
 };
 
-function ArtistPage() {
-  const [global, dispatch] = useStoreContext();
-  let userEmail = global.user.email;
-  let userPass = global.user.password;
-  console.log(global);
+// function AWS() {
 
-  const createAccount = () => {
-    handleSignup(userEmail, userPass);
-  };
+  // const [global, dispatch] = useStoreContext();
+  // let userEmail = global.user.email;
+  // let userPass = global.user.password;
+  // console.log(global);
 
-  const loginAccount = () => {
-    handleLogin(userEmail, userPass)
-      .then((user) => console.log(user))
-      .catch((err) => console.warn(err));
-  };
 
   const handleFileUpload = (file) => {
     if (!file) {
@@ -107,13 +98,16 @@ function ArtistPage() {
         });
     });
   };
-  return (
-    <div>
-      <button onClick={createAccount}> Create Account </button>
-      <button onClick={loginAccount}> Login Account </button>
-      <FileInput handleFileUpload={handleFileUpload} />
-    </div>
-  );
-}
+  // return (
+  //   <div>
+      {/* <button createAccount={createAccount}> Create Account </button>
+      <button loginAccount={loginAccount}> Login Account </button> */}
+      {/* <FileInput handleFileUpload={handleFileUpload} /> */}
+    {/* </div>
+  ); */}
+// }
 
-export default ArtistPage;
+export {
+  // AWS,
+  handleFileUpload
+};
