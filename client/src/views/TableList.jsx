@@ -21,7 +21,7 @@ function TableList(props) {
           <Row>
             <Col md={12}>
               <Card
-                title="Upload Music"
+                title="Upload Art"
                 category="Enter info below to upload."
                 ctTableFullWidth
                 ctTableResponsive
@@ -38,7 +38,25 @@ function TableList(props) {
                       Upload Art
                     </Button>
                   </Form>
+            
+                  </div>
+                }
+              />
+            </Col>
+
+            <Col md={12}>
+              <Card
+                title="Upload Music"
+                category="Enter info below to upload."
+                ctTableFullWidth
+                ctTableResponsive
+                content={
+                  <div>
                   <Form className="m-3" onSubmit={handleSubmit}>
+
+                  
+                   
+                  
                   <Form.Group  as={Col} md="6" controlId="formBasicPassword">
                       <Form.Label>Step 2. - Select Art to Apply to Song(s) You're Uploading</Form.Label>
                       {/* <Form.Control type="selectOne"/> */}
@@ -63,37 +81,7 @@ function TableList(props) {
 
 
 
-            <Col md={12}>
-              <Card
-                title="Uploaded Music"
-                category="Welcome to Your Music Library"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table striped hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                }
-              />
-            </Col>
-
+            
 
           </Row>
         </Container>
