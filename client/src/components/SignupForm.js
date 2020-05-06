@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.min.css";
 // import { AWS, createAccount } from "../stitch/app"
 import { useStoreContext } from "../utils/globalContext";
 import { handleSignup } from "../stitch/authentication";
+import { Link, Redirect } from "react-router-dom";
+import { isAuth } from "./helper";
 
 import "../App.css";
 
@@ -65,22 +67,31 @@ function Signup(props) {
         console.log("error");
         toast.error(err.response.data.error);
       });
+// call Stitch signup
+       createAccount()
   };
 
   // attempts to integrate AWS/Stitch signup
 
-  const [global, dispatch] = useStoreContext();
-  let userEmail = global.user.email;
-  let userPass = global.user.password;
-  console.log(global);
+  // const [global, dispatch] = useStoreContext();
+  let userEmail = userState.email;
+  let userPass = userState.password;
+  // console.log(global);
 
   const createAccount = () => {
     handleSignup(userEmail, userPass);
   };
 
+// get auth data from local 
+const authData = isAuth();
+
   // ------------------------------------------
 
   return (
+    <Fragment>
+      {/*Hide sign up for logged in user - checks on localstorage and logs in user if token and user info exist */}
+    { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null }
+    { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
     <div id="loginContainer">
       <ToastContainer />
       <video id="videoBackground" style={{}} autoPlay muted loop>
@@ -162,7 +173,7 @@ function Signup(props) {
             <Button
               variant="dark"
               type="submit"
-              onClick={(handleSubmit, createAccount)}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>
@@ -175,6 +186,8 @@ function Signup(props) {
         </Row>
       </Container>
     </div>
+    </Fragment>
+    
   );
 }
 
