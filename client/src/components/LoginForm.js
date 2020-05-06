@@ -8,7 +8,7 @@ import video from "./videos/stock_footage_concert.mp4";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { Link, Redirect } from "react-router-dom";
-import { authenticate } from "./helper";
+import { authenticate, isAuth } from "./helper";
 import UserContext from "../utils/UserContext";
 import { useStoreContext } from "../utils/globalContext";
 import { handleLogin } from "../stitch/authentication";
@@ -48,7 +48,8 @@ function Login(props) {
       .then((res) => {
         console.log("successfully signed in");
         toast.success(`Hey ${res.data.user.name}, Welcome back!`);
-        // authenticate(res, ()=>{
+        //call to save token on cookie and user info on localstorage
+        authenticate(res, ()=>{
         //reset sign in form
         updateSignIn({
           ...signInData,
@@ -57,8 +58,8 @@ function Login(props) {
           token: res.data.token,
           user: res.data.user,
         });
-
-        // })
+console.log("auth data === ", authData)
+        })
 
         // return res.data
       })
@@ -66,9 +67,11 @@ function Login(props) {
         console.log("error" + err);
         toast.error("Failed to sign in");
       });
+    // AWS/Stitch signup
+    // loginAccount();
   };
 
-   // attempts to integrate AWS/Stitch signup
+  // attempts to integrate AWS/Stitch signup
 
   const [global, dispatch] = useStoreContext();
   let userEmail = global.user.email;
@@ -81,9 +84,19 @@ function Login(props) {
       .catch((err) => console.warn(err));
   };
 
+// get auth data from local 
+const authData = isAuth();
+
   // ------------------------------------------
 
+
+
   return (
+    <Fragment>
+      {/* checks on localstorage and logs in user if token and user info exist */}
+      { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null} */}
+      { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null} */}
+      
     <div id="loginContainer">
       <ToastContainer />
       <video id="videoBackground" style={{}} autoPlay muted loop>
@@ -141,7 +154,7 @@ function Login(props) {
               />
             </Form.Group>
 
-            <Button variant="dark" type="submit" onClick={handleSubmit, loginAccount}>
+            <Button variant="dark" type="submit" onClick={handleSubmit}>
               Login
             </Button>
             <a href="/signup">
@@ -154,6 +167,7 @@ function Login(props) {
         </Row>
       </Container>
     </div>
+    </Fragment>
   );
 }
 
