@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
+import {handleFileUpload} from "../stitch/app"
 
 import Card from "../components/adCard.jsx";
 import { thArray, tdArray } from "../variables/Variables.jsx";
 
-function TableList(props) {
+function TableList() {
   const fileInput = React.createRef()
-  const handleFileUpload = props.handleFileUpload
+  // const handleFileUpload = props.handleFileUpload
 
   function handleSubmit(event) {
     event.preventDefault()

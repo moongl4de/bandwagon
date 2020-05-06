@@ -16,7 +16,8 @@ const SongSchema = new mongoose.Schema({
     type: String
   },
   albumcover: {
-    type: Object
+    type: Object,
+    ref: 'album'
   },
   release: {
     type: Date
