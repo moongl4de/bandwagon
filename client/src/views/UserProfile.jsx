@@ -5,7 +5,8 @@ import {
   Col,
   FormGroup,
   FormLabel,
-  FormControl
+  FormControl,
+  Form
 } from "react-bootstrap";
 
 import { Card } from "../components/adCard.jsx";
@@ -55,33 +56,45 @@ class UserProfile extends Component {
                       ncols={["col-md-6", "col-md-6"]}
                       properties={[
                         {
-                          label: "First name",
+                          label: "Primary Genre",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "First name",
+                          placeholder: "Genre",
 
                         },
                         {
-                          label: "Last name",
+                          label: "Secondary Genre",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Last name",
-                        }
-                      ]}
-                    />
-                    <FormInputs
-                      ncols={["col-md-12"]}
-                      properties={[
-                        {
-                          label: "Address",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Home Adress",
+                          placeholder: "Genre",
                         }
                       ]}
                     />
                     <FormInputs
                       ncols={["col-md-4", "col-md-4", "col-md-4"]}
+                      properties={[
+                        {
+                          label: "Facebook Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Link",
+                        },
+                        {
+                          label: "Twitter Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Link",
+                        },
+                        {
+                          label: "Instagram Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Link",
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-6", "col-md-6"]}
                       properties={[
                         {
                           label: "City",
@@ -96,12 +109,6 @@ class UserProfile extends Component {
                           bsClass: "form-control",
                           placeholder: "Country",
 
-                        },
-                        {
-                          label: "Postal Code",
-                          type: "number",
-                          bsClass: "form-control",
-                          placeholder: "ZIP Code"
                         }
                       ]}
                     />
@@ -123,44 +130,88 @@ class UserProfile extends Component {
                     <Button bsStyle="info" pullRight fill type="submit">
                       Update Profile
                     </Button>
+                    <br />
+
+
+
+
                     <div className="clearfix" />
                   </form>
                 }
               />
             </Col>
             <Col md={4}>
-              <UserCard
-                bgImage={backgd}
-                avatar={avatar}
-                name="+ Medic"
-                userName="medic2019"
-                description={
-                  <span>
-                    "Brisbane, Australia"
+            <UserCard
+              bgImage={backgd}
+              avatar={avatar}
+              name="+ Medic"
+              userName="medic2019"
+              description={
+                <span>
+                  "Brisbane, Australia"
                     <br />
                     "Soul Metal"
 
 
                   </span>
-                }
-                socials={
-                  <div>
-                    <Button simple>
-                      <i className="fa fa-facebook-square" />
-                    </Button>
-                    <Button simple>
-                      <i className="fa fa-twitter" />
-                    </Button>
-                    <Button simple>
-                      <i className="fa fa-google-plus-square" />
-                    </Button>
-                  </div>
-                }
-              />
-            </Col>
+              }
+              socials={
+                <div>
+                  <Button simple>
+                    <i className="fa fa-facebook-square" />
+                  </Button>
+                  <Button simple>
+                    <i className="fa fa-twitter" />
+                  </Button>
+                  <Button simple>
+                    <i className="fab fa-instagram" />
+                  </Button>
+                </div>
+              }
+            />
+          </Col>
           </Row>
+            <Row>
+              <Col md={8}>
+                <Card
+                  title="Edit Profile Image"
+                  content={
+                    <form>
+                      <Row className="mt-3">
+                        <Col md={12}>
+                          <FormGroup controlId="formControlsTextarea">
+
+
+
+
+                            <Form.Label>Choose Profile Picture to Upload</Form.Label>
+                            <Form.Control type="file" />
+                            <Form.Label>Upload!</Form.Label>
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Button bsStyle="info" pullRight fill type="submit">
+                        Upload Profile Image
+                    </Button>
+
+
+                    </form>
+                  }
+                />
+
+</Col>
+            </Row>
+            
+
+
+
+
+
+
+          
+          
         </Container>
-      </div>
+      </div >
     );
   }
 }
