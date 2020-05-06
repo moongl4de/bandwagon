@@ -68,15 +68,15 @@ console.log("auth data === ", authData)
         toast.error("Failed to sign in");
       });
     // AWS/Stitch signup
-    // loginAccount();
+     loginAccount();
   };
 
   // attempts to integrate AWS/Stitch signup
 
-  const [global, dispatch] = useStoreContext();
-  let userEmail = global.user.email;
-  let userPass = global.user.password;
-  console.log(global);
+  // const [global, dispatch] = useStoreContext();
+  let userEmail = signInData.email;
+  let userPass = signInData.password;
+  // console.log(global);
 
   const loginAccount = () => {
     handleLogin(userEmail, userPass)
@@ -96,7 +96,7 @@ const authData = isAuth();
       {/* checks on localstorage and logs in user if token and user info exist */}
       { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null} */}
       { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null} */}
-      
+
     <div id="loginContainer">
       <ToastContainer />
       <video id="videoBackground" style={{}} autoPlay muted loop>

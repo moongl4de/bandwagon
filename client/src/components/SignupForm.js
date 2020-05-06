@@ -67,16 +67,16 @@ function Signup(props) {
         console.log("error");
         toast.error(err.response.data.error);
       });
-//call Stitch signup
-      // createAccount()
+// call Stitch signup
+       createAccount()
   };
 
   // attempts to integrate AWS/Stitch signup
 
-  const [global, dispatch] = useStoreContext();
-  let userEmail = global.user.email;
-  let userPass = global.user.password;
-  console.log(global);
+  // const [global, dispatch] = useStoreContext();
+  let userEmail = userState.email;
+  let userPass = userState.password;
+  // console.log(global);
 
   const createAccount = () => {
     handleSignup(userEmail, userPass);
