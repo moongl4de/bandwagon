@@ -11,7 +11,7 @@ import { useStoreContext } from "../utils/globalContext";
 const Upload = () => {
   
 
-  const [state, dispatch] = useStoreContext(0);
+  const [state, dispatch] = useStoreContext();
   
   const songsRef = useRef();
   const artRef = useRef();
