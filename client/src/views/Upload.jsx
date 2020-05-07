@@ -6,7 +6,11 @@ import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/songsAPI";
 import { useStoreContext } from "../utils/globalContext";
 
-function TableList() {
+
+
+const Upload = () => {
+  
+
   const [state, dispatch] = useStoreContext();
   
   const songsRef = useRef();
@@ -148,7 +152,8 @@ function TableList() {
         </Row>
       </Container>
     </div>
-  );
+ );
 }
 
-export default TableList;
+
+export default Upload;
