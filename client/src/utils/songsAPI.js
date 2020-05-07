@@ -10,8 +10,8 @@ export default {
   // deleteSong: function(id) {
   //   return axios.delete("/api/songs/" + id);
   // },
-  uploadSong: function(data) {
-    return axios.put("/api/songs", data);
+  uploadSongs: function(data) {
+    return axios.post("/api/upload", data);
   }
 };
 

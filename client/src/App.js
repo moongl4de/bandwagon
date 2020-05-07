@@ -8,8 +8,8 @@ import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
 
-import FileInput from "./components/FileInput"
-import Artist from "./pages/Artist"
+// import FileInput from "./components/FileInput"
+// import AWS from "./stitch/app"
 
 import {StoreProvider} from "./utils/globalContext"
 import Login from "./components/LoginForm"
@@ -29,8 +29,8 @@ function App() {
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
-        
-        <Route exact path='/test' component={Artist}/>
+        {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
+        {/* <Route exact path='/test' component={AWS}/> */}
         <Route exact path='/subscription' component={Subscription}/>
         <Route exact path='/artistpage' component={ArtistPage}/>
 

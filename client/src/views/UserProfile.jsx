@@ -71,7 +71,7 @@ class UserProfile extends Component {
                       ]}
                     />
                     <FormInputs
-                      ncols={["col-md-4", "col-md-4", "col-md-4"]}
+                      ncols={["col-md-6", "col-md-6"]}
                       properties={[
                         {
                           label: "Facebook Link",
@@ -81,6 +81,17 @@ class UserProfile extends Component {
                         },
                         {
                           label: "Twitter Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Link",
+                        }                       
+                      ]}
+                    />
+                     <FormInputs
+                      ncols={["col-md-6", "col-md-6"]}
+                      properties={[
+                        {
+                          label: "Youtube Link",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Link",
@@ -141,75 +152,78 @@ class UserProfile extends Component {
               />
             </Col>
             <Col md={4}>
-            <UserCard
-              bgImage={backgd}
-              avatar={avatar}
-              name="+ Medic"
-              userName="medic2019"
-              description={
-                <span>
-                  "Brisbane, Australia"
+              <UserCard
+                bgImage={backgd}
+                avatar={avatar}
+                name="+ Medic"
+                userName="medic2019"
+                description={
+                  <span>
+                    "Brisbane, Australia"
                     <br />
                     "Soul Metal"
 
 
                   </span>
-              }
-              socials={
-                <div>
-                  <Button simple>
-                    <i className="fa fa-facebook-square" />
-                  </Button>
-                  <Button simple>
-                    <i className="fa fa-twitter" />
-                  </Button>
-                  <Button simple>
-                    <i className="fab fa-instagram" />
-                  </Button>
-                </div>
-              }
-            />
-          </Col>
+                }
+                socials={
+                  <div>
+                    <Button simple>
+                      <i className="fa fa-facebook-square" />
+                    </Button>
+                    <Button simple>
+                      <i className="fa fa-twitter" />
+                    </Button>
+                    <Button simple>
+                      <i className="fab fa-instagram" />
+                    </Button>
+                    <Button simple>
+                      <i className="fab fa-youtube" />
+                    </Button>
+                  </div>
+                }
+              />
+            </Col>
           </Row>
-            <Row>
-              <Col md={8}>
-                <Card
-                  title="Edit Profile Image"
-                  content={
-                    <form>
-                      <Row className="mt-3">
-                        <Col md={12}>
-                          <FormGroup controlId="formControlsTextarea">
+          <Row>
+            <Col md={8}>
+              <Card
+                title="Edit Profile Image"
+                content={
+                  <form>
+                    <Row className="mt-3">
+                      <Col md={12}>
+                        <FormGroup controlId="formControlsTextarea">
 
 
 
 
-                            <Form.Label>Choose Profile Picture to Upload</Form.Label>
-                            <Form.Control type="file" />
-                            <Form.Label>Upload!</Form.Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Button bsStyle="info" pullRight fill type="submit">
-                        Upload Profile Image
+                          <Form.Label>Choose Profile Picture to Upload</Form.Label>
+                          <Form.Control type="file" />
+                          <Form.Label>Upload!</Form.Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Button bsStyle="info" pullRight fill type="submit">
+                      Upload Profile Image
                     </Button>
 
 
-                    </form>
-                  }
-                />
+                  </form>
+                }
+              />
 
-</Col>
-            </Row>
-            
-
+            </Col>
+          </Row>
 
 
 
 
 
-          
-          
+
+
+
+
         </Container>
       </div >
     );

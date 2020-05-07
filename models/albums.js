@@ -10,7 +10,7 @@ const AlbumSchema = new mongoose.Schema({
   title: {
     type: String
   },
-  cover: {
+  art: {
     type: Object
   },
   release: {
@@ -25,10 +25,7 @@ const AlbumSchema = new mongoose.Schema({
     required: true,
     ref: 'songs'
   },
-  artists: {
-    type: String
-  },
-  notes: {
+  description: {
     type: String
   },
   date: {
