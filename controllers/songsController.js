@@ -1,20 +1,20 @@
-const Song = require('../models/songs')
+const Album = require('../models/albums')
 
 // Defining methods
 module.exports = {
-  findAll: function(req, res) {
-    Song.find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+  // findAll: function(req, res) {
+  //   Song.find(req.query)
+  //     .sort({ date: -1 })
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
 //   findById: function(req, res) {
 //     Song.findById(req.params.id)
 //       .then(dbModel => res.json(dbModel))
 //       .catch(err => res.status(422).json(err));
 //   },
   create: function(req, res) {
-    Song.create(req.body)
+    Album.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
