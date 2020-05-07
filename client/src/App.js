@@ -10,7 +10,7 @@ import Subscription from "./components/Subscription"
 
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
-import Admin from "./pages/Admin"
+
 import {StoreProvider} from "./utils/globalContext"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
@@ -20,7 +20,9 @@ import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
 import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 import UserProfile from "./views/UserProfile.jsx";
-import TableList from "./views/TableList.jsx";
+import Upload from "./views/Upload.jsx";
+import Library from "./views/Library.jsx";
+import Admin from "./pages/Admin"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -36,8 +38,8 @@ function App() {
         <ListenerPrivateRoute exact path='/listener' component={Center}/>
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={UserProfile}/>
-        <ArtistPrivateRoute exact path='/admin/table' component={TableList}/>
-      
+        <ArtistPrivateRoute exact path='/admin/upload' component={Upload}/>
+        <ArtistPrivateRoute exact path='/admin/library' component={Library}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>

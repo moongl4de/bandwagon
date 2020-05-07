@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AdminLayout from "./pages/Admin.jsx";
+import StripeCheckout from "react-stripe-checkout";
 
 import "./assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
 import "./assets/css/pe-icon-7-stroke.css";

@@ -159,7 +159,7 @@ function Center() {
     let backgroundImageVariable = "https://upload.wikimedia.org/wikipedia/commons/7/77/Question_mark-pixels.jpg"
     return (
        
-        <div style={{backgroundColor: "#303030", height: "110vh"}} id="centerDiv">
+        <div style={{backgroundColor: "#303030"}} id="centerDiv">
             <Search />
 
             {/* <div className="containerTest" style={{ backgroundImage: `url(${backgroundImageVariable})`, backgroundSize: "150%", backgroundPosition: "center" }}>

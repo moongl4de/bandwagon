@@ -2,40 +2,48 @@ import React, { useReducer, createContext, useContext } from "react";
 // Don't forget to import all of your actions!
 
 const StoreContext = createContext();
+const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN_USER":
+    case 'SET_CURRENT_ALBUM':
+    return {
+      ...state,
+      currentAlbum: action.post,
+      loading: false
+    };
+    case "ADD_ALBUM":
       return {
         ...state,
         user: action.payload,
-      };
-    case "LOGOUT_USER":
-      return {
-        ...state,
-        user: {},
+        loading: false
       };
     default:
       return state;
   }
 };
 
-const initialState = {
-  user: {
-    email:"test@test.com",
-    password: "123123"
-  },
+const StoreProvider = ({ value = [], ...props }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    albums: [],
+    currentAlbum: {
+      _id: 0,
+      user: "",
+      title: "",
+      art: "",
+      release: "",
+      status: "",
+      songs: [],
+      description: "",
+    },
+    // favorites: [],
+    loading: false,
+  });
+  return <Provider value={[state, dispatch]} {...props} />;
 };
 
-const StoreProvider = ({ ...props }) => {
-  return (
-    <StoreContext.Provider
-      value={useReducer(reducer, initialState)}
-      {...props}
-    />
-  );
+const useStoreContext = () => {
+  return useContext(StoreContext);
 };
-
-const useStoreContext = () => useContext(StoreContext);
 
 export { StoreProvider, useStoreContext };
