@@ -4,18 +4,15 @@ import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
 import Card from "../components/adCard.jsx";
 import { thArray, tdArray } from "../variables/Variables.jsx";
 
-function Library(props) {
-  const fileInput = React.createRef()
-  const handleFileUpload = props.handleFileUpload
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    const file = fileInput.current.files[0]
-    console.log(`selected file - ${file.name}`);
-    handleFileUpload(file)
-  }
 
-     return (
+
+class Library extends Component {
+  render() {
+    return (
+
+
+     
       <div className="content">
         <Container fluid>
           <Row>
@@ -54,7 +51,8 @@ function Library(props) {
           </Row>
         </Container>
       </div>
-    );
+      );
+    }
   }
 
 

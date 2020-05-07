@@ -1,6 +1,6 @@
 import Dashboard from "./views/Dashboard.jsx";
 import UserProfile from "./views/UserProfile.jsx";
-import TableList from "./views/TableList.jsx";
+import Upload from "./views/Upload.jsx";
 import Library from "./views/Library.jsx";
 
 //These are the routes for the Artist Dashboard
@@ -21,10 +21,10 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/table",
+    path: "/upload",
     name: "Upload Music",
     icon: "pe-7s-cloud-upload",
-    component: TableList,
+    component: Upload,
     layout: "/admin"
   },
   {
