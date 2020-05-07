@@ -9,7 +9,7 @@ const ListenertPrivateRoute = ({ component: Component, ...props }) => {
     <Route
       {...props}
       render={({ location }) =>
-        isAuth() && isAuth.role === 'listener' ? (
+        isAuth() && isAuth().role === 'listener' ? (
           <Component {...props} />
         ) : (
             <React.Fragment>

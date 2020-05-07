@@ -19,6 +19,8 @@ import ArtistPage from "./components/ArtistPage"
 import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
 import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
+import UserProfile from "./views/UserProfile.jsx";
+import TableList from "./views/TableList.jsx";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -32,7 +34,10 @@ function App() {
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <ListenerPrivateRoute exact path='/listener' component={Center}/>
-        {/* <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/> */}
+        <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/user' component={UserProfile}/>
+        <ArtistPrivateRoute exact path='/admin/table' component={TableList}/>
+      
         {/* <Route exact path='/test' component={AWS}/> */}
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>

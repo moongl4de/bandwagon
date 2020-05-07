@@ -9,7 +9,7 @@ const AdminPrivateRoute = ({ component: Component, ...props }) => {
     <Route
       {...props}
       render={({ location }) =>
-        isAuth() && isAuth.role === 'admin' ? (
+        isAuth() && isAuth().role === 'admin' ? (
           <Component {...props} />
         ) : (
             <React.Fragment>

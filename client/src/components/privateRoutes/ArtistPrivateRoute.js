@@ -5,11 +5,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const ArtistPrivateRoute = ({ component: Component, ...props }) => {
+  console.log("artist me");
   return (
     <Route
       {...props}
-      render={({ location }) =>
-        isAuth() && isAuth.role === 'artist' ? (
+      render={
+        ({ location }) =>
+        isAuth() && isAuth().role === 'artist' ? (
           <Component {...props} />
         ) : (
             <React.Fragment>

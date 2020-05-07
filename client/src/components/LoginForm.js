@@ -23,6 +23,7 @@ function Login(props) {
     password: "",
     token: "",
     user: {},
+    authCalled: false
   });
 
   const { email, password } = signInData;
@@ -68,7 +69,7 @@ function Login(props) {
         toast.error("Failed to sign in");
       });
     // AWS/Stitch signup
-     loginAccount();
+    //  loginAccount();
   };
 
   // attempts to integrate AWS/Stitch signup
@@ -83,31 +84,44 @@ function Login(props) {
       .then((user) => console.log(user))
       .catch((err) => console.warn(err));
   };
-
+   let authData = {};
 // get auth data from local 
-const authData = isAuth();
+if(signInData.authCalled === false){
+  updateSignIn({
+    ...signInData,
+   authCalled : true
+  });
+   authData = isAuth();
+
+}
+
 
   // ------------------------------------------
-
+  if(authData && authData.role === 'listener' ){
+    console.log("111")
+    return (<Redirect to="/listener" />);
+    } else if(authData &&  authData.role === 'artist'){
+      console.log("222")
+    return (<Redirect to="/admin/dashboard" />);
+    } else {
+    
 
 
   return (
     <Fragment>
       {/* checks on localstorage and logs in user if token and user info exist */}
-      { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null} */}
-      { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
 
     <div id="loginContainer">
       <ToastContainer />
       <video id="videoBackground" style={{}} autoPlay muted loop>
         <source src={video} type="video/mp4"></source>
       </video>
-      {/* {signInData.token && signInData.user.role === "listener" ? (
+      {signInData.token && signInData.user.role === "listener" ? (
         <Redirect to="/listener" />
       ) : null}
       {signInData.token && signInData.user.role === "artist" ? (
         <Redirect to="/admin/dashboard" />
-      ) : null} */}
+      ) : null}
       <Container style={{ justifyContent: "center" }}>
         <Row>
           <img
@@ -154,7 +168,7 @@ const authData = isAuth();
               />
             </Form.Group>
 
-            <Button variant="dark" type="submit" onClick={handleSubmit}>
+            <Button variant="dark"  onClick={handleSubmit}>
               Login
             </Button>
             <a href="/signup">
@@ -169,6 +183,7 @@ const authData = isAuth();
     </div>
     </Fragment>
   );
+    }
 }
 
 export default Login;
