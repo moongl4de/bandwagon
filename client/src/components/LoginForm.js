@@ -47,7 +47,7 @@ function Login(props) {
     })
       .then((res) => {
         console.log("successfully signed in");
-        toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+       
         //call to save token on cookie and user info on localstorage
         authenticate(res, ()=>{
         //reset sign in form
@@ -58,7 +58,7 @@ function Login(props) {
           token: res.data.token,
           user: res.data.user,
         });
-console.log("auth data === ", authData)
+        toast.success(`Hey ${res.data.user.name}, Welcome back!`);
         })
 
         // return res.data
@@ -95,19 +95,19 @@ const authData = isAuth();
     <Fragment>
       {/* checks on localstorage and logs in user if token and user info exist */}
       { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null} */}
-      { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null} */}
+      { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
 
     <div id="loginContainer">
       <ToastContainer />
       <video id="videoBackground" style={{}} autoPlay muted loop>
         <source src={video} type="video/mp4"></source>
       </video>
-      {signInData.token && signInData.user.role === "listener" ? (
+      {/* {signInData.token && signInData.user.role === "listener" ? (
         <Redirect to="/listener" />
       ) : null}
       {signInData.token && signInData.user.role === "artist" ? (
         <Redirect to="/admin/dashboard" />
-      ) : null}
+      ) : null} */}
       <Container style={{ justifyContent: "center" }}>
         <Row>
           <img
