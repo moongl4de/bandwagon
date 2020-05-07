@@ -63,7 +63,6 @@ function Signup(props) {
         });
       })
       .catch((err) => {
-        console.log("catch mesay");
         console.log("error");
         toast.error(err.response.data.error);
       });
