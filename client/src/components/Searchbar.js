@@ -27,7 +27,7 @@ const searchClient = algoliasearch('BY7RM0A5T2',
 const Search = () => (
 
   <InstantSearch searchClient={searchClient} indexName="songs">
-    <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
+    <Navbar  bg="dark" variant="dark" expand="lg" className="mb-3">
       <Navbar.Brand href="#home">
         <img
           alt=""
