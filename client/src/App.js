@@ -16,6 +16,13 @@ import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
 import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
+import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
+import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
+import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
+import UserProfile from "./views/UserProfile.jsx";
+import Upload from "./views/Upload.jsx";
+import Library from "./views/Library.jsx";
+import Admin from "./pages/Admin"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -28,12 +35,14 @@ function App() {
         <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
-        <Route exact path='/listener' component={Center}/>
-        {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
+        <ListenerPrivateRoute exact path='/listener' component={Center}/>
+        <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/user' component={UserProfile}/>
+        <ArtistPrivateRoute exact path='/admin/upload' component={Upload}/>
+        <ArtistPrivateRoute exact path='/admin/library' component={Library}/>
         {/* <Route exact path='/test' component={AWS}/> */}
-        <Route exact path='/subscription' component={Subscription}/>
-        <Route exact path='/artistpage' component={ArtistPage}/>
-
+        <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
+        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         </StoreProvider>
       </Router>
   );

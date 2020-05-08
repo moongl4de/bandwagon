@@ -12,7 +12,7 @@ class Sidebar extends Component {
     };
   }
   activeRoute(routeName) {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+    return 'Bandwagon'.indexOf(routeName) > -1 ? "active" : "";
   }
   updateDimensions() {
     this.setState({ width: window.innerWidth });
