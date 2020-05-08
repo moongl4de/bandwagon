@@ -9,6 +9,7 @@ import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
 import Admin from './pages/Admin';
 import User from './views/UserProfile';
+import AdminLayout from "./pages/Admin.jsx";
 
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
@@ -20,12 +21,11 @@ import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
 import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
-// import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
-import AdminLayout from "./pages/Admin.jsx";
+import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 // import UserProfile from "./views/UserProfile.jsx";
 // import Upload from "./views/Upload.jsx";
 // import Library from "./views/Library.jsx";
-// import Admin from "./pages/Admin"
+
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
@@ -52,6 +52,7 @@ function App() {
         </Switch>
       </StoreProvider>
     </Router>
+
   );
 }
 

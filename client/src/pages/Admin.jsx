@@ -46,7 +46,7 @@ class Admin extends Component {
   getBrandText = path => {
     for (let i = 0; i < routes.length; i++) {
       if (
-        this.props.location.pathname.indexOf(
+        'Bandwagon'.indexOf(
           routes[i].layout + routes[i].path
         ) !== -1
       ) {
@@ -96,7 +96,7 @@ class Admin extends Component {
         <div id="main-panel" className="main-panel" ref="mainPanel">
           <AdminNavbar
             {...this.props}
-            brandText="Bandwagon"
+            brandText={this.getBrandText('Bandwagon')}
           />
           <Switch>{this.getRoutes(routes)}</Switch>
           <Footer />
