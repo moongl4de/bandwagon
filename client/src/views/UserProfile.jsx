@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 
 import { Card } from "../components/adCard.jsx";
-import { FormInputs } from "../components/adFormInputs.jsx";
+
 import { UserCard } from "../components/adUserCard.jsx";
 import Button from "../components/adCustomButton.jsx";
 import backgd from "../assets/img/bands.jpg";
