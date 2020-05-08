@@ -7,6 +7,8 @@ import Center from "./components/Center"
 import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
+import Admin from './pages/Admin';
+import User from './views/UserProfile';
 
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
@@ -16,8 +18,9 @@ import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
 import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
+import AdminLayout from "./pages/Admin.jsx";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 
 //placeholder code
@@ -30,10 +33,14 @@ function App() {
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
         {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
+        {/* <Route exact path='/admin/user' component={User}/> */}
         {/* <Route exact path='/test' component={AWS}/> */}
         <Route exact path='/subscription' component={Subscription}/>
         <Route exact path='/artistpage' component={ArtistPage}/>
-
+        <Switch>
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
+        <Redirect from="/admin" to="/admin/dashboard" />
+      </Switch>
         </StoreProvider>
       </Router>
   );
