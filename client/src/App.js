@@ -7,6 +7,7 @@ import Center from "./components/Center"
 import BottomPlayer from "./components/PlayerFooter"
 import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
+import Upload from "./pages/test"
 
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
@@ -30,7 +31,7 @@ function App() {
         <Route exact path='/activate/:token' component={ActivateUser}/>
         <Route exact path='/listener' component={Center}/>
         {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
-        {/* <Route exact path='/test' component={AWS}/> */}
+        <Route exact path='/test' component={ Upload }/>
         <Route exact path='/subscription' component={Subscription}/>
         <Route exact path='/artistpage' component={ArtistPage}/>
 

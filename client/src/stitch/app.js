@@ -36,19 +36,23 @@ const convertAudioToBSONBinaryObject = (files) => {
 // console.log(global);
 
 const handleFileUpload = (file) => {
+
   return new Promise((resolve, reject) => {
     if (!file) {
       return reject("No file found");
     }
+
+    const urlArr = [];
+    const awsPromiseArr = [];
 
     // console.log(stitchClient.auth.user.id)
 
     // converting bson
     const BSON = convertAudioToBSONBinaryObject(file);
     Promise.all(BSON).then((result) => {
-      console.log(result);
+      // console.log(result);
 
-      for (var i in result) {
+      for (let i in result) {
         // const audiofile = mongodb.db("data").collection("audiofile");
         //now we need an instance of AWS service client
         const key = `${stitchClient.auth.user.id}-${file[i].name}`;
@@ -60,7 +64,6 @@ const handleFileUpload = (file) => {
         const bucket = "bandwagon";
         const url =
           "http://" + bucket + ".s3.amazonaws.com/" + encodeURIComponent(key);
-
         const args = {
           ACL: "public-read",
           Bucket: bucket,
@@ -75,16 +78,27 @@ const handleFileUpload = (file) => {
           .withRegion("us-east-2")
           .withArgs(args);
 
-        aws
-          .execute(request.build())
-          .then((result) => {
-            console.log("urls loaded to AWS", url);
-            resolve({ url, result });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }
+         const awsProm = aws.execute(request.build())
+        //  console.log(awsProm)
+         awsPromiseArr.push(awsProm)
+
+        //  console.log("urls loaded to AWS", url);
+         urlArr.push(url);
+
+        }
+        Promise.all(awsPromiseArr)
+        .then((result) => {
+        // console.log("AWS promises", result)
+          for (let i in result) {
+            console.log(result[i])
+          }
+          resolve(urlArr);
+          console.log("Stitch: urls array loaded to AWS", urlArr)
+          // console.log(result)
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   });
 };

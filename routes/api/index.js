@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const songRoutes = require("./songs");
+const albumRoutes = require("./albums");
 const authRoutes = require('./auth')
 
-router.use("/songs", songRoutes);
+router.use("/albums", albumRoutes);
 router.use("/", authRoutes);
 
 
