@@ -12,7 +12,7 @@ const mongodb = stitchClient.getServiceClient(
 );
 
 const convertAudioToBSONBinaryObject = (files) => {
-  console.log(files);
+  // console.log(files);
   return files.map((file) => {
     // console.log(file);
     return new Promise((resolve) => {
@@ -36,7 +36,6 @@ const convertAudioToBSONBinaryObject = (files) => {
 // console.log(global);
 
 const handleFileUpload = (file) => {
-
   return new Promise((resolve, reject) => {
     if (!file) {
       return reject("No file found");
@@ -45,7 +44,7 @@ const handleFileUpload = (file) => {
     const urlArr = [];
     const awsPromiseArr = [];
 
-    // console.log(stitchClient.auth.user.id)
+    // console.log(stitchClient.auth.user)
 
     // converting bson
     const BSON = convertAudioToBSONBinaryObject(file);
@@ -56,7 +55,7 @@ const handleFileUpload = (file) => {
         // const audiofile = mongodb.db("data").collection("audiofile");
         //now we need an instance of AWS service client
         const key = `${stitchClient.auth.user.id}-${file[i].name}`;
-        // const key = `${stitchClient.auth.user.id}-${file.name}`;
+        // const key = `5ea8ae5528e283a520824220-${file[i].name}`;
         const aws = stitchClient.getServiceClient(
           AwsServiceClient.factory,
           "AWS"
@@ -78,22 +77,21 @@ const handleFileUpload = (file) => {
           .withRegion("us-east-2")
           .withArgs(args);
 
-         const awsProm = aws.execute(request.build())
+        const awsProm = aws.execute(request.build());
         //  console.log(awsProm)
-         awsPromiseArr.push(awsProm)
+        awsPromiseArr.push(awsProm);
 
         //  console.log("urls loaded to AWS", url);
-         urlArr.push(url);
-
-        }
-        Promise.all(awsPromiseArr)
+        urlArr.push(url);
+      }
+      Promise.all(awsPromiseArr)
         .then((result) => {
-        // console.log("AWS promises", result)
+          // console.log("AWS promises", result)
           for (let i in result) {
-            console.log(result[i])
+            console.log(result[i]);
           }
           resolve(urlArr);
-          console.log("Stitch: urls array loaded to AWS", urlArr)
+          console.log("Stitch: urls array loaded to AWS", urlArr);
           // console.log(result)
         })
         .catch((err) => {
@@ -103,6 +101,4 @@ const handleFileUpload = (file) => {
   });
 };
 
-export {
-  handleFileUpload
-};
+export { handleFileUpload };
