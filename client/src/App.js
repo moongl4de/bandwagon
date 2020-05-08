@@ -13,12 +13,19 @@ import User from './views/UserProfile';
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
 
-import {StoreProvider} from "./utils/globalContext"
+import { StoreProvider } from "./utils/globalContext"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
 import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
+import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
+import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
+// import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 import AdminLayout from "./pages/Admin.jsx";
+// import UserProfile from "./views/UserProfile.jsx";
+// import Upload from "./views/Upload.jsx";
+// import Library from "./views/Library.jsx";
+// import Admin from "./pages/Admin"
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
@@ -28,21 +35,23 @@ function App() {
   return (
     <Router>
       <StoreProvider>
-        <Route exact path='/' component={Login}/>
+      <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
-        <Route exact path='/listener' component={Center}/>
-        {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
-        {/* <Route exact path='/admin/user' component={User}/> */}
+        <ListenerPrivateRoute exact path='/listener' component={Center}/>
+        {/* <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/user' component={UserProfile}/>
+        <ArtistPrivateRoute exact path='/admin/upload' component={Upload}/>
+        <ArtistPrivateRoute exact path='/admin/library' component={Library}/> */}
         {/* <Route exact path='/test' component={AWS}/> */}
-        <Route exact path='/subscription' component={Subscription}/>
-        <Route exact path='/artistpage' component={ArtistPage}/>
+        <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
+        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         <Switch>
-        <Route path="/admin" render={props => <AdminLayout {...props} />} />
-        <Redirect from="/admin" to="/admin/dashboard" />
-      </Switch>
-        </StoreProvider>
-      </Router>
+        <ArtistPrivateRoute path="/admin" render={props => <AdminLayout {...props} />} />
+          <Redirect from="/admin" to="/admin/dashboard" />
+        </Switch>
+      </StoreProvider>
+    </Router>
   );
 }
 
