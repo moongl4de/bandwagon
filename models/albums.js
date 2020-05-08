@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 //this is just a draft
 
 const AlbumSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
-  },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'user'
+  // },
   title: {
     type: String
   },
@@ -16,14 +16,9 @@ const AlbumSchema = new mongoose.Schema({
   release: {
     type: Date
   },
-  status: {
-    type: String,
-    required: true
-  },
   songs: {
-    type: [Object],
+    type: Array,
     required: true,
-    ref: 'songs'
   },
   description: {
     type: String

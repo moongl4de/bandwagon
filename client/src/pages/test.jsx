@@ -6,51 +6,52 @@ import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
 
-
-
-const Upload = () => {
+function Upload () {
   
-
-  // const [state, dispatch] = useStoreContext();
+  const [state, dispatch] = useStoreContext();
   
   const songsRef = useRef();
   const artRef = useRef();
   const titleRef = useRef();
   const descriptionRef = useRef();
+  
+  const setLoading = () => {
+    dispatch({ type: "LOADING" });
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
-    const file = Object.values(songsRef.current.files);
-    //console.log(`selected file - ${file.name}`);
-
-    handleFileUpload(file)
+    const fileArray = []
+    const audiofile = Object.values(songsRef.current.files);
+    // const artfile = Object.values(artRef.current.files);
+    // fileArray.push(audiofile, artfile)
+    handleFileUpload(audiofile)
       .then((response) => {
-        console.log("successfully loaded to AWS", response.url);
+        console.log("React: successfully loaded to AWS", response);
+        console.log("name", titleRef.current.value)
+        setLoading();
+        API.uploadAlbum({
+          // user: "",
+          title: titleRef.current.value,
+          art: response,
+          release: "123",
+          songs: response,
+          description: descriptionRef.current.value,
+        })
+          .then((result) => {
+            dispatch({
+              type: "ADD_ALBUM",
+              post: result,
+            });
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => {
         console.log(err);
       });
 
-    // dispatch({ type: LOADING });
-    API.uploadSongs({
-      user: "",
-      title: titleRef.current.value,
-      // art: artRef.current.value,
-      release: "",
-      status: "",
-      songs: [songsRef.current.value],
-      description: descriptionRef.current.value,
-    })
-      .then((result) => {
-        // dispatch({
-        //   type: "ADD_ALBUM",
-        //   post: result.data,
-        // });
-      })
-      .catch((err) => console.log(err));
-
-    titleRef.current.value = "";
-    descriptionRef.current.value = "";
+  titleRef.current.value = "";
+  descriptionRef.current.value = "";
   }
 
   return (
@@ -79,7 +80,7 @@ const Upload = () => {
                       ref={descriptionRef}
                       placeholder="Description"
                     />
-                    {/* <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicPassword">
                       <Form.Label>Step 1. - Upload Band Art</Form.Label>
                       <Form.Control
                         variant="danger"
@@ -87,30 +88,30 @@ const Upload = () => {
                         ref={artRef}
                         multiple
                       />
-                    </Form.Group> */}
+                    </Form.Group>
                     {/* <Button variant="danger" type="submit">
                       Upload Art
                     </Button> */}
                     <Form.Group as={Col} md="6" controlId="formBasicPassword">
-                      <Form.Label>
+                      {/* <Form.Label>
                         Step 2. - Select Art to Apply to Song(s) You're
                         Uploading
                       </Form.Label>
-                      {/* <Form.Control type="selectOne"/> */}
+                      <Form.Control type="selectOne"/>
                       <div className="form-group">
                         <label for="category">Select Art:</label>
                         <select
                           className="custom-select"
                           id="designation"
                         ></select>
-                      </div>
+                      </div> */}
                       <Form.Label>
                         Step 3. - Choose Song(s) to Upload
                       </Form.Label>
                       <Form.Control type="file" ref={songsRef} multiple />
                       <Form.Label>Step 4. - Upload!</Form.Label>
                     </Form.Group>
-                    <Button variant="danger" type="submit">
+                    <Button variant="danger" type="submit" disabled={state.loading}>
                       Upload Album
                     </Button>
                   </Form>
