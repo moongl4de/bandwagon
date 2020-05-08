@@ -47,7 +47,7 @@ function App() {
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         <Switch>
-        <ArtistPrivateRoute path="/admin" render={props => <AdminLayout {...props} />} />
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
           <Redirect from="/admin" to="/admin/dashboard" />
         </Switch>
       </StoreProvider>
