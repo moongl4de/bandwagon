@@ -80,11 +80,11 @@ class Admin extends Component {
     ) {
       document.documentElement.classList.toggle("nav-open");
     }
-    if (e.history.action === "PUSH") {
-      document.documentElement.scrollTop = 0;
-      document.scrollingElement.scrollTop = 0;
-      this.refs.mainPanel.scrollTop = 0;
-    }
+    // if (e.history.action === "PUSH") {
+    //   document.documentElement.scrollTop = 0;
+    //   document.scrollingElement.scrollTop = 0;
+    //   this.refs.mainPanel.scrollTop = 0;
+    // }
   }
   render() {
     return (

@@ -69,7 +69,7 @@ function Login(props) {
         toast.error("Failed to sign in");
       });
     // AWS/Stitch signup
-      loginAccount();
+      // loginAccount();
   };
 
   // attempts to integrate AWS/Stitch signup

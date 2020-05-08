@@ -83,7 +83,7 @@ class Search extends Component {
 
               <Nav className="mr-auto">
                 <Nav.Link href="/subscription" >Buy Tokens</Nav.Link>
-                <Nav.Link href="/#" onClick={() => this.logOut()}>Log Out</Nav.Link>
+                <Nav.Link href="#link" onClick={() => this.logOut()}>Log Out</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Nav>
