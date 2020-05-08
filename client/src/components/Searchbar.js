@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row'
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Logo from '../img/newlogoRev2.png'
@@ -71,12 +72,14 @@ const Search = () => (
 function Hit(props) {
   console.log(props)
   return (
+  
+    
     <div className="hit-container">
       <img src={props.hit.image} style={{maxWidth:"100%"}}/>
-     
       <div className="hit-price"  >{props.hit.artist}</div>
       <div className="hit-price"  >{props.hit.song}</div>
     </div>
+    
   );
 }
 
