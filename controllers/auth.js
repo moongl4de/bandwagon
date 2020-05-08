@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 const sendgridMail = require('@sendgrid/mail')
+const expressJwt = require('express-jwt');
 require('dotenv').config();
 sendgridMail.setApiKey(process.env.SENDGRID_APIKEY)
 
@@ -142,3 +143,7 @@ exports.signin = (req, res) => {
 
     })
 }
+
+exports.requireSignin = expressJwt({
+    secret: process.env.JWT_SECRET // req.user
+});

@@ -11,7 +11,7 @@ import { useStoreContext } from "../utils/globalContext";
 const Upload = () => {
   
 
-  const [state, dispatch] = useStoreContext();
+  // const [state, dispatch] = useStoreContext();
   
   const songsRef = useRef();
   const artRef = useRef();
@@ -42,10 +42,10 @@ const Upload = () => {
       description: descriptionRef.current.value,
     })
       .then((result) => {
-        dispatch({
-          type: "ADD_ALBUM",
-          post: result.data,
-        });
+        // dispatch({
+        //   type: "ADD_ALBUM",
+        //   post: result.data,
+        // });
       })
       .catch((err) => console.log(err));
 

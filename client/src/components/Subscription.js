@@ -21,7 +21,7 @@ function Subscription() {
 
     async function handleToken(token, addresses) {
         console.log({ token, addresses })
-        const response = await axios.post('http://localhost:9000/', {
+        const response = await axios.post('http://localhost:9000/checkout', {
             token,
             subscription
         });
@@ -29,7 +29,7 @@ function Subscription() {
         if (status == 'success'){
             toast('Success! Check email for details', {type: "success"})
         } else {
-            toast('Something went wrong.', {type: "failure"})
+            toast('Something went wrong.', {type: "error"})
         }
     }
 

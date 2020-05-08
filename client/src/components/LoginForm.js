@@ -23,6 +23,7 @@ function Login(props) {
     password: "",
     token: "",
     user: {},
+    authCalled: false
   });
 
   const { email, password } = signInData;
@@ -47,7 +48,7 @@ function Login(props) {
     })
       .then((res) => {
         console.log("successfully signed in");
-        toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+       
         //call to save token on cookie and user info on localstorage
         authenticate(res, ()=>{
         //reset sign in form
@@ -58,7 +59,7 @@ function Login(props) {
           token: res.data.token,
           user: res.data.user,
         });
-console.log("auth data === ", authData)
+        toast.success(`Hey ${res.data.user.name}, Welcome back!`);
         })
 
         // return res.data
@@ -68,7 +69,7 @@ console.log("auth data === ", authData)
         toast.error("Failed to sign in");
       });
     // AWS/Stitch signup
-     loginAccount();
+      loginAccount();
   };
 
   // attempts to integrate AWS/Stitch signup
@@ -83,19 +84,32 @@ console.log("auth data === ", authData)
       .then((user) => console.log(user))
       .catch((err) => console.warn(err));
   };
-
+   let authData = {};
 // get auth data from local 
-const authData = isAuth();
+if(signInData.authCalled === false){
+  updateSignIn({
+    ...signInData,
+   authCalled : true
+  });
+   authData = isAuth();
+
+}
+
 
   // ------------------------------------------
-
+  if(authData && authData.role === 'listener' ){
+    console.log("111")
+    return (<Redirect to="/listener" />);
+    } else if(authData &&  authData.role === 'artist'){
+      console.log("222")
+    return (<Redirect to="/admin/dashboard" />);
+    } else {
+    
 
 
   return (
     <Fragment>
       {/* checks on localstorage and logs in user if token and user info exist */}
-      { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null} */}
-      { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null} */}
 
     <div id="loginContainer">
       <ToastContainer />
@@ -154,7 +168,7 @@ const authData = isAuth();
               />
             </Form.Group>
 
-            <Button variant="dark" type="submit" onClick={handleSubmit}>
+            <Button variant="dark"  onClick={handleSubmit}>
               Login
             </Button>
             <a href="/signup">
@@ -169,6 +183,7 @@ const authData = isAuth();
     </div>
     </Fragment>
   );
+    }
 }
 
 export default Login;

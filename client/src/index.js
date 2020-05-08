@@ -15,12 +15,12 @@ ReactDOM.render(
 
 
 
-    <BrowserRouter>
+    {/* <BrowserRouter>
       <Switch>
         <Route path="/admin" render={props => <AdminLayout {...props} />} />
         <Redirect from="/admin" to="/admin/dashboard" />
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter> */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')

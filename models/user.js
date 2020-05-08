@@ -54,7 +54,7 @@ userSchema.virtual('password')
 userSchema.methods = {
     //checks if password user entered matches with the hashed password on DB
     authenticate: function(passwordText){
-        return this.encryptPassword === this.hashedPassword 
+        return this.encryptPassword(passwordText) === this.hashedPassword 
     },
 
     encryptPassword: function (password) {
