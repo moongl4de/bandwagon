@@ -5,13 +5,11 @@ import Search from "./Searchbar"
 import ReactDOM from "react-dom";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
-
+import AlbumList from "./AlbumList"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import "react-jinke-music-player/lib/styles/index.less";
- 
-
-
+import { CardDeck } from "react-bootstrap";
 
     const audioListTest = [
       {
@@ -161,7 +159,7 @@ function Center() {
        <div style={{backgroundColor: "#313131", height: "100vh"}}>
          <Search />
         <div id="centerDiv">
-            
+            <AlbumList />
 
             {/* <div className="containerTest" style={{ backgroundImage: `url(${backgroundImageVariable})`, backgroundSize: "150%", backgroundPosition: "center" }}>
                 <ArtistContainer  />
