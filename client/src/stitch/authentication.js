@@ -2,7 +2,7 @@ import {
     Stitch,
     UserPasswordAuthProviderClient,
     UserPasswordCredential,
-    AnonymousCredential,
+    // AnonymousCredential,
   } from "mongodb-stitch-browser-sdk";
   
   const stitchClient = Stitch.initializeDefaultAppClient("bandwagon-qlcuw");

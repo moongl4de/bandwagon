@@ -1,12 +1,11 @@
 import React, { useReducer, createContext, useContext } from "react";
-// Don't forget to import all of your actions!
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'SET_CURRENT_ALBUM':
+    case "SET_CURRENT_ALBUM":
     return {
       ...state,
       currentAlbum: action.post,
@@ -15,13 +14,20 @@ const reducer = (state, action) => {
     case "ADD_ALBUM":
       return {
         ...state,
-        user: action.payload,
+        currentAlbum: action.post,
         loading: false
       };
+      case "LOADING":
+    return {
+      ...state,
+      loading: true
+    };
     default:
       return state;
   }
 };
+
+// initial state of album object
 
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -32,11 +38,10 @@ const StoreProvider = ({ value = [], ...props }) => {
       title: "",
       art: "",
       release: "",
-      status: "",
       songs: [],
       description: "",
     },
-    // favorites: [],
+    addedToPlaylist: [],
     loading: false,
   });
   return <Provider value={[state, dispatch]} {...props} />;
