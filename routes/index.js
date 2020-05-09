@@ -6,14 +6,15 @@ const apiRoutes = require("./api");
 router.use("/api", apiRoutes);
 
 
-// If no API routes are hit, send the React app
+
+// // If no API routes are hit, send the React app
+
+
 router.use("*", (req, res) => {
   res.sendFile(
     path.join(
       __dirname,
-      process.env.NODE_ENV === 'production' ?
-      '../client/build/index.html' :
-      '../client/public/index.html'
+      '../client/build/index.html'
     )
   );
 });
