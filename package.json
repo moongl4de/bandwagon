@@ -38,6 +38,7 @@
     "nodemon": "^2.0.3",
     "react-bootstrap": "^1.0.1",
     "react-instantsearch-dom": "^6.4.0",
+    "react-router-dom": "^5.1.2",
     "react-stripe-checkout": "^2.6.3",
     "stripe": "^8.49.0",
     "uuid": "^8.0.0",
