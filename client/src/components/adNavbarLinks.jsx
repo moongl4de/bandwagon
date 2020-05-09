@@ -28,10 +28,7 @@ class AdminNavbarLinks extends Component {
       <div>
         <ToastContainer />
         <Nav className="mr-auto">
-          <NavItem eventKey={1} href="#"
-            className="mr-5" >
-            Account
-          </NavItem>
+         
           <NavItem eventKey={2} href="#"
             className="mr-5">
             Buy Tokens
