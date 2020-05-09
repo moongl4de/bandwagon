@@ -33,18 +33,19 @@ function App() {
       <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/activate/:token' component={ActivateUser}/>
-        <Route exact path='/listener' component={Center}/>
-        {/* <Route exact path='/admin/dashboard' component={Admin}/> */}
         <Route exact path='/test' component={ Upload }/>
-        <Route exact path='/subscription' component={Subscription}/>
-        <Route exact path='/artistpage' component={ArtistPage}/>
         <ListenerPrivateRoute exact path='/listener' component={Center}/>
+        {/* <Route exact path='/test' component={AWS}/> */}
+        <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
+        {/* <Switch>
+        <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
+          <Redirect from="/admin" to="/admin/dashboard" />
+        </Switch> */}
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
         {/* <Route exact path='/test' component={AWS}/> */}
-        <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         
       </StoreProvider>
