@@ -1,15 +1,13 @@
 const router = require("express").Router();
-const songsController = require("../../controllers/songsController");
+const albumController = require("../../controllers/albumController");
 // const Song = require('../../models/songs')
 // const User = require('../../models/user')
 // const mongoose = require('mongoose')
 
-// Matches with "/api/upload"
+// Matches with "/api/albums/upload"
 router
-  .route("/")
-//   .get(songsController.findAll)
-  .post(songsController.create);
-
+  .route("/upload")
+  .post(albumController.create);
 
 
 // router.post('/user', (req, res) => {
