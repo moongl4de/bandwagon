@@ -13,6 +13,11 @@ exports.userSignupValidator =[
     check('password')
      .isLength({min : 5})
     .withMessage('Password must be atleast 5 char length'),
+
+    check('role')
+    .not()
+    .isEmpty()
+    .withMessage('Role is required'),
 ]
 
 exports.signInValidator =[
