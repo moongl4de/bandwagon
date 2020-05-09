@@ -113,8 +113,10 @@ padding: 5px;
 }
 
 #centerDiv {
-  background-color: #ff0000;
-  height: 100vh;
+  background-color: #313131;
+  display: flex;
+  justify-content: center;
+  
   
   
 }
@@ -239,13 +241,37 @@ svg:hover {
 
 .ais-Hits-item {
   box-shadow: 0px 0px 10px black;
+  max-width: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  
+  
 }
 
 .hit-container {
-  background-color: rgba(0, 0, 0, 0.404);
-  padding: 1%;
+  background-color: rgba(0, 0, 0, 0.678);
+  margin: 0 auto !important;
+  justify-self: stretch;
+ 
+  
 }
 
 .bg-dark {
   background-color: #000000 !important;
 }
+
+.ais-Hits {
+  display: flex;
+  justify-content: center;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.ais-Hits-list {
+  display: flex;
+  padding: 0;
+  
+}
+
+
+

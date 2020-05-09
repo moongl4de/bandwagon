@@ -158,17 +158,20 @@ const options = {
 function Center() {
     let backgroundImageVariable = "https://upload.wikimedia.org/wikipedia/commons/7/77/Question_mark-pixels.jpg"
     return (
-       
-        <div style={{backgroundColor: "#303030"}} id="centerDiv">
-            <Search />
+       <div style={{backgroundColor: "#313131", height: "100vh"}}>
+         <Search />
+        <div id="centerDiv">
+            
 
             {/* <div className="containerTest" style={{ backgroundImage: `url(${backgroundImageVariable})`, backgroundSize: "150%", backgroundPosition: "center" }}>
                 <ArtistContainer  />
                 <i class="fas fa-heart fa-2x"></i>
                 <i class="fas fa-share fa-2x"></i>
             </div> */}
-            <ReactJkMusicPlayer {...options} />
+           
         </div>
+         <ReactJkMusicPlayer {...options} />
+         </div>
        
     )
 }
