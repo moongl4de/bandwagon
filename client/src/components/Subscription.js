@@ -7,16 +7,20 @@ import "../App.css"
 import video from "./videos/stock_footage_concert.mp4";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios"
+import API from "../utils/API"
+import { isAuth } from "./helper";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 toast.configure()
 
 function Subscription() {
 
-    const [subscription] = React.useState({
+    const [subscription, updateSubscription] = React.useState({
         name: "Bandwagon Subscription",
         price: "9.99",
-        description: "Subscription to Bandwagon"
+        description: "Subscription to Bandwagon",
+        paymentSuccess: false
     });
 
     async function handleToken(token, addresses) {
@@ -26,14 +30,33 @@ function Subscription() {
             subscription
         });
         const { status } = response.data
-        if (status == 'success'){
-            toast('Success! Check email for details', {type: "success"})
+        if (status == 'success') {
+            API.getUsers()
+                .then((result) => {
+                    const email = isAuth().email;
+                    const currentUser = result.data.filter(user => user.email === email);
+                    //update user payment required to false after intial signup
+                    const data = { ...currentUser[0], paymentRequired: false };
+                    API.updateUser(data._id, data)
+
+                        .catch((err) => {
+
+                            toast.error("Failed to update user");
+                        });
+                    updateSubscription({
+                        ...subscription,
+                        paymentSuccess: true
+                    })
+                    toast('Success! Check email for details', { type: "success" })
+                })
         } else {
-            toast('Something went wrong.', {type: "error"})
+            toast('Something went wrong.', { type: "error" })
         }
     }
 
-
+    if (subscription.paymentSuccess === true) {
+        return (<Redirect to="/listener" />)
+    }
 
     return (
         <div className="container">

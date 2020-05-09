@@ -22,6 +22,7 @@ function Signup(props) {
     email: "",
     password: "",
     role: "",
+    paymentRequired:"false"
   });
 
   const handleInputChange = (event) => {
@@ -33,10 +34,20 @@ function Signup(props) {
 
   const setRole = (event) => {
     console.log(event.target.value);
-    setUserState({
-      ...userState,
-      role: event.target.value,
-    });
+    const role = event.target.value;
+    if(role === 'listener'){
+      setUserState({
+        ...userState,
+        role: event.target.value,
+        paymentRequired: 'true'
+      });
+    } else {
+      setUserState({
+        ...userState,
+        role: event.target.value,
+      });
+    }
+   
   };
 
   const handleSubmit = (event) => {
@@ -60,6 +71,7 @@ function Signup(props) {
           email: "",
           password: "",
           role: "",
+          paymentRequired:"false"
         });
       })
       .catch((err) => {

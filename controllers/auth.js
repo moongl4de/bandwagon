@@ -11,7 +11,8 @@ exports.signup = (req, res) => {
         name,
         role,
         email,
-        password
+        password,
+        paymentRequired
     } = req.body;
     User.findOne({
         email
@@ -27,7 +28,8 @@ exports.signup = (req, res) => {
         name,
         role,
         email,
-        password
+        password,
+        paymentRequired
     }, process.env.JWT_ACCOUNT_ACTIVATION, {
         expiresIn: '15m'
     })
@@ -77,14 +79,17 @@ exports.activateAccount = (req, res) => {
                 name,
                 role,
                 email,
-                password
+                password,
+                paymentRequired
+
             } = jwt.decode(token);
 
             const user = new User({
                 name,
                 role,
                 email,
-                password
+                password,
+                paymentRequired
             });
 
             user.save((err, user) => {
@@ -128,7 +133,8 @@ exports.signin = (req, res) => {
             _id,
             name,
             email,
-            role
+            role,
+            paymentRequired
         } = user;
 
         return res.status(201).json({
@@ -137,7 +143,8 @@ exports.signin = (req, res) => {
                 _id,
                 name,
                 email,
-                role
+                role,
+                paymentRequired
             }
         })
 
