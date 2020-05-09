@@ -32,7 +32,11 @@ const userSchema = new mongoose.Schema({
     resetPasswordLink: {
         data: String,
         default: ''
-    }
+    },
+    paymentRequired: {
+        type: String,
+        default: 'false'
+    },
 },
 { timestamps: true},
 );
@@ -76,4 +80,5 @@ userSchema.methods = {
     },
 }
 
-module.exports = mongoose.model('user', userSchema)
+module.exports =User = mongoose.model('user', userSchema)
+// module.exports = Album = mongoose.model('album', AlbumSchema);
