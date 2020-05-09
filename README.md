@@ -14,7 +14,7 @@ A platform to connect newer musicians to fans directly, removeing the middle man
 ## Motivation
 
 ## Technologies Utilized
-React.js, Axios, Express, Material UI, Amazon S3, MongoDB, Algolia, and Stripe
+React.js, Axios, Express, Material UI, Amazon S3, MongoDB, Algolia, and Stripe.
 
 ## Screen Shots
 ### Data Flow Diagram
