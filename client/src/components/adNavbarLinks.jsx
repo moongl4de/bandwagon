@@ -23,15 +23,14 @@ class AdminNavbarLinks extends Component {
     if (this.state.loggedIn === false) {
       return <Redirect to='/' />
     }
+
+    
     
     return (
       <div>
         <ToastContainer />
         <Nav className="mr-auto">
-          <NavItem eventKey={1} href="#"
-            className="mr-5" >
-            Account
-          </NavItem>
+         
           <NavItem eventKey={2} href="#"
             className="mr-5">
             Buy Tokens

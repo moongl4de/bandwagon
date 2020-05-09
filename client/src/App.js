@@ -2,19 +2,13 @@ import React from 'react';
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import './App.css';
-import Header from "./components/Header"
 import Center from "./components/Center"
 import BottomPlayer from "./components/PlayerFooter"
-import Layout from "./components/Layout"
 import Subscription from "./components/Subscription"
 import Upload from "./pages/test"
 import Admin from './pages/Admin';
-import User from './views/UserProfile';
-import AdminLayout from "./pages/Admin.jsx";
-
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
-
 import { StoreProvider } from "./utils/globalContext"
 import Login from "./components/LoginForm"
 import Signup from "./components/SignupForm"
@@ -28,7 +22,7 @@ import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 // import Library from "./views/Library.jsx";
 
 
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 //placeholder code
@@ -43,11 +37,17 @@ function App() {
         <ListenerPrivateRoute exact path='/listener' component={Center}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
-        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
-        <Switch>
+        {/* <Switch>
         <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
           <Redirect from="/admin" to="/admin/dashboard" />
-        </Switch>
+        </Switch> */}
+        <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
+        {/* <Route exact path='/test' component={AWS}/> */}
+        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
+        
       </StoreProvider>
     </Router>
 
