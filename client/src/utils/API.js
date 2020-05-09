@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export default {
-    getUsers: function() {
+
+  //USER
+
+  getUsers: function() {
     return axios.get("/api/user");
   },
   getUser: function(id) {
@@ -13,12 +16,15 @@ export default {
   updateUser: function(id, data) {
     return axios.put("/api/user/" + id, data);
   },
-  // getSongs: function() {
-  //   return axios.get("/api/songs");
-  // },
-  // getSong: function(id) {
-  //   return axios.get("/api/songs/" + id);
-  // },
+
+  //ALBUMS 
+  
+  getAlbums: function() {
+    return axios.get("/api/albums");
+  },
+  getAlbum: function(id) {
+    return axios.get("/api/albums/" + id);
+  },
   // deleteSong: function(id) {
   //   return axios.delete("/api/songs/" + id);
   // },

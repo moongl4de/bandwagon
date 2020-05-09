@@ -8,19 +8,26 @@ const reducer = (state, action) => {
     case "SET_CURRENT_ALBUM":
     return {
       ...state,
-      currentAlbum: action.post,
+      currentAlbum: action.album,
       loading: false
     };
     case "ADD_ALBUM":
       return {
         ...state,
-        currentAlbum: action.post,
+        currentAlbum: action.album,
         loading: false
       };
       case "LOADING":
     return {
       ...state,
       loading: true
+    };
+ 
+  case "LOAD_ALBUMS":
+    return {
+      ...state,
+      albums: action.albums,
+      loading: false
     };
     default:
       return state;
@@ -41,7 +48,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       songs: [],
       description: "",
     },
-    addedToPlaylist: [],
+    // addedToPlaylist: [],
     loading: false,
   });
   return <Provider value={[state, dispatch]} {...props} />;

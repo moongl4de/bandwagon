@@ -37,6 +37,7 @@ function App() {
         <ListenerPrivateRoute exact path='/listener' component={Center}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
+        {/* <ListenerPrivateRoute exact path='/albums/:id' component={Details}/> */}
         {/* <Switch>
         <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
           <Redirect from="/admin" to="/admin/dashboard" />

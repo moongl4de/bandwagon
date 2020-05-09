@@ -78,7 +78,7 @@ function Upload() {
         console.log("sent to DB", result)
         dispatch({
           type: "ADD_ALBUM",
-          post: result,
+          album: result,
         });
       })
       .catch((err) => console.log(err));
