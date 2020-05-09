@@ -50,7 +50,7 @@ function ActivateUser (props) {
 const activateAccountAPICall = () => {
     axios({
         method: 'POST',
-        url: `http://localhost:8000/api/activate-account`,
+        url: `/api/activate-account`,
         data: {token:userAuthState.token}
     })
         .then(res => {
