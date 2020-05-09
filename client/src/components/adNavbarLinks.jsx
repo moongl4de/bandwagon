@@ -23,6 +23,8 @@ class AdminNavbarLinks extends Component {
     if (this.state.loggedIn === false) {
       return <Redirect to='/' />
     }
+
+    
     
     return (
       <div>
