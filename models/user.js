@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'false'
     },
+    subscriptionToken: {
+        type: Number,
+        default: 0
+    },
 },
 { timestamps: true},
 );

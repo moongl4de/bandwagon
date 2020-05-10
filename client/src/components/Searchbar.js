@@ -83,6 +83,8 @@ class Search extends Component {
             <Navbar.Collapse className="justify-content-end">
 
               <Nav className="mr-auto">
+              <Nav.Link  ><i class="fas fa-coins fa-sm"></i>
+    Token : {this.props.token}</Nav.Link>
                 <Nav.Link href="/subscription" >Buy Tokens</Nav.Link>
                 <Nav.Link href="#link" onClick={() => this.logOut()}>Log Out</Nav.Link>
               </Nav>
