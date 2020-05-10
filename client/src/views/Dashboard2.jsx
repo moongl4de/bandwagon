@@ -11,7 +11,7 @@ import {
   dataSales,
   optionsSales,
   responsiveSales,
-  legendSales,
+  legendSales2,
 } from "../variables/Variables.jsx";
 
 class Dashboard extends Component {
@@ -87,7 +87,7 @@ class Dashboard extends Component {
                   </div>
                 }
                 legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
+                  <div className="legend">{this.createLegend(legendSales2)}</div>
                 }
               />
             </Col>

@@ -31,14 +31,14 @@ class AdminNavbarLinks extends Component {
         <ToastContainer />
         <Nav className="mr-auto">
          
-          <NavItem eventKey={2} href="#"
+          {/* <NavItem eventKey={2} href="#"
             className="mr-5">
             Buy Tokens
           </NavItem>
           <NavItem eventKey={3} href="#"
             className="mr-5">
             Marketing
-          </NavItem>
+          </NavItem> */}
 
           <NavItem eventKey={4} href="#"
             className="mr-5" onClick={() => this.logOut()}>
