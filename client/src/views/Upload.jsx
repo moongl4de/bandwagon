@@ -25,6 +25,11 @@ function Upload() {
   // access global state
   const [state, dispatch] = useStoreContext();
 
+  //get user info from LS
+  let user = JSON.parse(localStorage.getItem('user'))
+  let userId = user._id;
+  console.log("Current Artist's ID ", userId)
+
   // set all refs for user input
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -69,7 +74,7 @@ function Upload() {
       })
       .catch((err) => {
         console.log(err);
-        toast.danger( "Something went wrong" );
+        // toast.danger( "Something went wrong" );
       });
   };
 
@@ -83,7 +88,7 @@ function Upload() {
     // API call to create Album object using reducer (defined in globalContext,js)
 
     API.uploadAlbum({
-      // user: "",
+      user: userId,
       title: titleRef.current.value,
       art: artUrl,
       release: releaseRef.current.value,
@@ -100,7 +105,7 @@ function Upload() {
       })
       .catch((err) => {
         console.log(err);
-        toast.danger( "Something went wrong" );
+        // toast.danger( "Something went wrong" );
       });
 
     titleRef.current.value = "";
