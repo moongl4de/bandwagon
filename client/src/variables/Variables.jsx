@@ -323,7 +323,7 @@ var legendSales = {
 };
 
 var legendSales2 = {
-  names: ["2018", "2019", "2020"],
+  names: ["2020", "2019", "2018"],
   types: ["info", "danger", "warning"]
 };
 

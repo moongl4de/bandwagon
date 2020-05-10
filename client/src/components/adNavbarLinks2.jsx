@@ -33,7 +33,7 @@ class AdminNavbarLinks extends Component {
 
 
           <NavItem eventKey={4} href="#"
-            className="mr-5" onClick={() => this.logOut()}>
+            className="mr-5"  onClick={() => this.logOut()}>
             Log out
           </NavItem>
         </Nav>
