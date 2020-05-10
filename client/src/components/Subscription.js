@@ -18,7 +18,7 @@ function Subscription() {
 
     const [subscription, updateSubscription] = React.useState({
         name: "Bandwagon Subscription",
-        price: "9.99",
+        price: "4.99",
         description: "Subscription to Bandwagon",
         paymentSuccess: false
     });
@@ -31,27 +31,36 @@ function Subscription() {
         });
         const { status } = response.data
         if (status == 'success') {
+
             API.getUsers()
                 .then((result) => {
                     const email = isAuth().email;
                     const currentUser = result.data.filter(user => user.email === email);
+                    //calculate subscriptionToken 
+                    const userSubscriptionToken = currentUser[0].subscriptionToken + calculateToken();
+
                     //update user payment required to false after intial signup
-                    const data = { ...currentUser[0], paymentRequired: false };
-                    API.updateUser(data._id, data)
-
-                        .catch((err) => {
-
-                            toast.error("Failed to update user");
-                        });
-                    updateSubscription({
-                        ...subscription,
-                        paymentSuccess: true
+                    const data = { ...currentUser[0], paymentRequired: false, subscriptionToken: userSubscriptionToken };
+                    API.updateUser(data._id, data).then(() => {
+                        updateSubscription({
+                            ...subscription,
+                            paymentSuccess: true
+                        })
+                        toast.success('Payment Successful!')
                     })
-                    toast('Success! Check email for details', { type: "success" })
-                })
+                }).catch((err) => {
+
+                    toast.error("Failed to update user with new token amount" + err);
+                });
+
         } else {
             toast('Something went wrong.', { type: "error" })
         }
+    }
+
+    const calculateToken = () => {
+        //added a penny to compensate a missing penny
+        return (Number(subscription.price) + 0.01) * 1000;
     }
 
     if (subscription.paymentSuccess === true) {

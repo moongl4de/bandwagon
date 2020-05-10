@@ -83,6 +83,8 @@ class Search extends Component {
             <Navbar.Collapse className="justify-content-end">
 
               <Nav className="mr-auto">
+                <Nav.Link  ><i class="fas fa-coins fa-sm"></i>
+    Token : {this.props.token}</Nav.Link>
                 <Nav.Link href="/subscription" >Buy Tokens</Nav.Link>
                 <Nav.Link href="#link" onClick={() => this.logOut()}>Log Out</Nav.Link>
               </Nav>
@@ -99,15 +101,15 @@ class Search extends Component {
 function Hit(props) {
   console.log(props)
   return (
-  
-    
+
+
     <div className="hit-container">
       <img src={props.hit.image} style={{ maxWidth: "100%" }} />
 
       <div className="hit-price"  >{props.hit.artist}</div>
       <div className="hit-price"  >{props.hit.song}</div>
     </div>
-    
+
   );
 }
 

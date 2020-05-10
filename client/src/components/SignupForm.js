@@ -22,7 +22,7 @@ function Signup(props) {
     email: "",
     password: "",
     role: "",
-    paymentRequired:"false"
+    paymentRequired: "false"
   });
 
   const handleInputChange = (event) => {
@@ -33,9 +33,9 @@ function Signup(props) {
   };
 
   const setRole = (event) => {
-    console.log(event.target.value);
+
     const role = event.target.value;
-    if(role === 'listener'){
+    if (role === 'listener') {
       setUserState({
         ...userState,
         role: event.target.value,
@@ -47,7 +47,7 @@ function Signup(props) {
         role: event.target.value,
       });
     }
-   
+
   };
 
   const handleSubmit = (event) => {
@@ -71,15 +71,15 @@ function Signup(props) {
           email: "",
           password: "",
           role: "",
-          paymentRequired:"false"
+          paymentRequired: "false"
         });
       })
       .catch((err) => {
-        console.log("error");
+
         toast.error(err.response.data.error);
       });
-// call Stitch signup
-       createAccount()
+    // call Stitch signup
+    createAccount()
   };
 
   // attempts to integrate AWS/Stitch signup
@@ -93,112 +93,112 @@ function Signup(props) {
     handleSignup(userEmail, userPass);
   };
 
-// get auth data from local 
-const authData = isAuth();
+  // get auth data from local 
+  const authData = isAuth();
 
   // ------------------------------------------
 
   return (
     <Fragment>
       {/*Hide sign up for logged in user - checks on localstorage and logs in user if token and user info exist */}
-    { authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null }
-    { authData &&  authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
-    <div id="loginContainer">
-      <ToastContainer />
-      <video id="videoBackground" style={{}} autoPlay muted loop>
-        <source src={video} type="video/mp4"></source>
-      </video>
-      <Container style={{ justifyContent: "center" }}>
-        <Row>
-          <img
-            style={{ margin: "1% auto" }}
-            id="loginLogo"
-            src={require("./images/newlogo.png")}
-          ></img>
-        </Row>
-        <Row>
-          <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>
-            Sign Up
-          </h3>
-        </Row>
-        <Row>
-          <Form id="formContainer" style={{ margin: "3% auto" }}>
-            <Form.Group controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Name"
-                name="name"
-                value={userState.name}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                value={userState.email}
-                onChange={handleInputChange}
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={userState.password}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="switch"
-                id="custom-switch"
-                label="Remember Me"
-              />
-            </Form.Group>
-            <div id="radioBox" onChange={(event) => setRole(event)}>
-              <Form.Check
-                type="radio"
-                label="Listener"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios1"
-                value="listener"
-              />
-              <Form.Check
-                type="radio"
-                label="Artist"
-                name="formHorizontalRadios"
-                id="formHorizontalRadios2"
-                value="artist"
-              />
-            </div>
-
-            <Button
-              variant="dark"
-              type="submit"
-              onClick={handleSubmit}
-            >
+      {authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null}
+      {authData && authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
+      <div id="loginContainer">
+        <ToastContainer />
+        <video id="videoBackground" style={{}} autoPlay muted loop>
+          <source src={video} type="video/mp4"></source>
+        </video>
+        <Container style={{ justifyContent: "center" }}>
+          <Row>
+            <img
+              style={{ margin: "1% auto" }}
+              id="loginLogo"
+              src={require("./images/newlogo.png")}
+            ></img>
+          </Row>
+          <Row>
+            <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>
               Sign Up
+          </h3>
+          </Row>
+          <Row>
+            <Form id="formContainer" style={{ margin: "3% auto" }}>
+              <Form.Group controlId="formBasicName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Name"
+                  name="name"
+                  value={userState.name}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  value={userState.email}
+                  onChange={handleInputChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+              </Form.Text>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={userState.password}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label="Remember Me"
+                />
+              </Form.Group>
+              <div id="radioBox" onChange={(event) => setRole(event)}>
+                <Form.Check
+                  type="radio"
+                  label="Listener"
+                  name="formHorizontalRadios"
+                  id="formHorizontalRadios1"
+                  value="listener"
+                />
+                <Form.Check
+                  type="radio"
+                  label="Artist"
+                  name="formHorizontalRadios"
+                  id="formHorizontalRadios2"
+                  value="artist"
+                />
+              </div>
+
+              <Button
+                variant="dark"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Sign Up
             </Button>
-            <a href="/">
-              <Button className="offset-3" variant="dark">
-                Sign In
+              <a href="/">
+                <Button className="offset-3" variant="dark">
+                  Sign In
               </Button>{" "}
-            </a>
-          </Form>
-        </Row>
-      </Container>
-    </div>
+              </a>
+            </Form>
+          </Row>
+        </Container>
+      </div>
     </Fragment>
-    
+
   );
 }
 
