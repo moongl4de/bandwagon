@@ -42,7 +42,7 @@ function App() {
         <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
           <Redirect from="/admin" to="/admin/dashboard" />
         </Switch> */}
-        <AdminPrivateRoute exact path='/admin/dashboard' component={Admin2}/>
+        <Route exact path='/admin/admin' component={Admin2}/>
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
