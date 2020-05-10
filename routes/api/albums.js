@@ -4,10 +4,19 @@ const albumController = require("../../controllers/albumController");
 // const User = require('../../models/user')
 // const mongoose = require('mongoose')
 
-// Matches with "/api/albums/upload"
+
 router
   .route("/upload")
   .post(albumController.create);
+
+
+  router
+  .route("/")
+  .get(albumController.findAll);
+
+  router
+  .route("/:id")
+  .get(albumController.findById)
 
 
 // router.post('/user', (req, res) => {
