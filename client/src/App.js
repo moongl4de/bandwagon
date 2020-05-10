@@ -7,6 +7,7 @@ import BottomPlayer from "./components/PlayerFooter"
 import Subscription from "./components/Subscription"
 import Upload from "./pages/test"
 import Admin from './pages/Admin';
+import Admin2 from './pages/Admin2';
 // import FileInput from "./components/FileInput"
 // import AWS from "./stitch/app"
 import { StoreProvider } from "./utils/globalContext"
@@ -42,6 +43,7 @@ function App() {
         <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
           <Redirect from="/admin" to="/admin/dashboard" />
         </Switch> */}
+        <Route exact path='/admin/admin' component={Admin2}/>
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>

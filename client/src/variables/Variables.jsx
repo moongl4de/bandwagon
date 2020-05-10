@@ -322,6 +322,12 @@ var legendSales = {
   types: ["info", "danger", "warning"]
 };
 
+var legendSales2 = {
+  names: ["2020", "2019", "2018"],
+  types: ["info", "danger", "warning"]
+};
+
+
 // Data for Bar Chart
 var dataBar = {
   labels: [
@@ -379,6 +385,7 @@ module.exports = {
   optionsSales,
   responsiveSales,
   legendSales,
+  legendSales2,
   dataBar,
   optionsBar,
   responsiveBar,
