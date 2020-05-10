@@ -30,6 +30,7 @@ function AlbumList() {
 
   useEffect(() => {
     getAlbums();
+    console.log(state)
   }, []);
 
   return (

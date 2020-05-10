@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import NotificationSystem from "react-notification-system";
 
-import AdminNavbar from "../components/adNavbar.jsx";
+import AdminNavbar from "../components/adNavbar2.jsx";
 import Footer from "../components/adFooter";
 import Sidebar from "../components/adSidebar";
 
 
 import { style } from "../variables/Variables.jsx";
-import routes from "../routes.js";
+import routes from "../routes2.js";
 import image from "../assets/img/sidebar-1.jpg";
 
 class Admin extends Component {

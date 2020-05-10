@@ -1,12 +1,24 @@
 
-import React, { useRef } from "react";
-import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Container, Row, Col, Table, Form, Button, ListGroupItem } from "react-bootstrap";
 import { handleFileUpload } from "../stitch/app";
 import Card from "../components/adCard.jsx";
 import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
 import logo from "../assets/img/reactlogo.png"
+import { ToastContainer, toast } from "react-toastify";
+
+import algoliasearch from "algoliasearch";
+
+// const searchClient = algoliasearch('BY7RM0A5T2',
+//   'c84d9d93579f57a4c7c7123119c9f4b2');
+// const index = client.initIndex('songs');
+
+// function sendToAlgolia() {
+// const records =
+// index.saveObjects(records, { autoGenerateObjectIDIfNotExist: true });
+//  }
 
 function Upload() {
 
@@ -27,7 +39,7 @@ function Upload() {
   };
 
   // empty artUrl for images that are returned from handleFileUpload function (defined in stitch folder)
-  
+
   // console.log(logo)
   let artUrl = [];
   const handleArtUpload = () => {
@@ -36,9 +48,11 @@ function Upload() {
       .then((response) => {
         artUrl = response;
         console.log("Art: successfully loaded to AWS", artUrl);
+        toast.success( "Art: successfully selected" );
       })
       .catch((err) => {
         console.log(err);
+        toast.danger( "Something went wrong" );
       });
   };
 
@@ -51,9 +65,11 @@ function Upload() {
       .then((response) => {
         audioUrl = response;
         console.log("Audio: successfully loaded to AWS", audioUrl);
+        toast.success( "Music: successfully selected" );
       })
       .catch((err) => {
         console.log(err);
+        toast.danger( "Something went wrong" );
       });
   };
 
@@ -80,8 +96,12 @@ function Upload() {
           type: "ADD_ALBUM",
           album: result,
         });
+        toast.success( "Successfully Uploaded to Website" );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.danger( "Something went wrong" );
+      });
 
     titleRef.current.value = "";
     descriptionRef.current.value = "";
@@ -90,19 +110,21 @@ function Upload() {
 
   return (
     <div className="content">
+      <ToastContainer />
       <Container fluid>
         <Row>
-          <Col md={12}>
+          <Col md={6}>
             <Card
-              title="Upload Music"
-              category="Enter info below to upload."
+              title="Upload Art"
+              category="Follow the steps below to upload."
               ctTableFullWidth
               ctTableResponsive
               content={
                 <div>
-                  {/* <Form className="m-3" onSubmit={handleSubmit}> */}
-                  {/* </Form> */}
-                  <Form className="m-3" onSubmit={handleSubmit}>
+
+
+                  <Form className="m-3" >
+                    <Form.Label>Step 1. - Fill out ALL of the fields</Form.Label>
                     <input
                       className="form-control mb-5"
                       required
@@ -120,82 +142,91 @@ function Upload() {
                       ref={descriptionRef}
                       placeholder="Description"
                     />
+                    <Form.Label>Step 2. - Choose cover art file</Form.Label>
                     <Form.Group controlId="formBasicPassword">
-                      <Form.Label>Step 1. - Upload Band Art</Form.Label>
+
                       <Form.Control
-                        variant="danger"
+                        variant="success"
                         type="file"
                         ref={artRef}
                         multiple
                       />
                     </Form.Group>
-                    <Button variant="danger" onClick={handleArtUpload}>
-                      Upload Art
+
+                    <Button variant="primary" onClick={handleArtUpload}>
+                      Step 3. - Click Here
                     </Button>
-                    <Form.Group as={Col} md="6" controlId="formBasicPassword">
-                      <Form.Label>
-                        Step 2. - Select Art to Apply to Song(s) You're
-                        Uploading
-                      </Form.Label>
-                      {/* <Form.Control type="selectOne" /> */}
-                      <div className="form-group">
-                        <label for="category">Select Art:</label>
-                        <select
-                          className="custom-select"
-                          id="designation"
-                        ></select>
-                      </div>
-                      <Form.Label>
-                        Step 3. - Choose Song(s) to Upload
-                      </Form.Label>
-                      <Form.Control type="file" ref={songsRef} multiple />
-                      <Button variant="danger" onClick={handleSongUpload}>
-                      Upload Songs
-                    </Button>
-                      <Form.Label>Step 4. - Upload!</Form.Label>
-                    </Form.Group>
-                    <Button
-                      variant="danger"
-                      type="submit"
-                      disabled={state.loading}
-                    >
-                      Submit Album
-                    </Button>
+
                   </Form>
                 </div>
               }
             />
           </Col>
 
-          <Col md={12}>
-            {/* <Card
-              title="Uploaded Music"
-              category="Welcome to Your Music Library"
+          <Col md={6}>
+            <Card
+              title="Upload Music"
+              category="Follow the steps below to upload."
               ctTableFullWidth
               ctTableResponsive
               content={
-                <Table striped hover>
-                  <thead>
-                    <tr>
-                      {thArray.map((prop, key) => {
-                        return <th key={key}>{prop}</th>;
-                      })}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tdArray.map((prop, key) => {
-                      return (
-                        <tr key={key}>
-                          {prop.map((prop, key) => {
-                            return <td key={key}>{prop}</td>;
-                          })}
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </Table>
+                <div>
+                  {/* <Form className="m-3" onSubmit={handleSubmit}> */}
+                  {/* </Form> */}
+                  <Form className="m-3" >
+
+                    <Form.Label>Step 4. - Choose Song(s) to Upload</Form.Label>
+                    <Form.Group controlId="formBasicPassword">
+
+                      <Form.Control
+                        variant="success"
+                        type="file"
+                        ref={songsRef}
+                        multiple
+                      />
+                   
+
+                    <Button className="mt-3" variant="primary" onClick={handleSongUpload}>
+                      Step 5. - Click Here
+                    </Button>
+                    </Form.Group>
+
+                    <Form.Group>
+
+                    
+                    
+
+
+                    </Form.Group>
+                  </Form>
+                </div>
               }
-            /> */}
+            />
+<Card
+              title="Upload to the Website"
+              category="Finish your submission"
+              ctTableFullWidth
+              ctTableResponsive
+              content={
+                <div>
+                  {/* <Form className="m-3" onSubmit={handleSubmit}> */}
+                  {/* </Form> */}
+                  <Form className="m-3" onSubmit={handleSubmit}>
+                  <ListGroupItem className="text-center">
+                    <Button 
+                      
+                      variant="danger"
+                      type="submit"
+                      disabled={state.loading}
+                    >Step 6. Click Here To Upload
+                    </Button>
+                    </ListGroupItem>
+                    </Form>
+
+
+                  </div>
+              }
+            />
           </Col>
         </Row>
       </Container>
@@ -204,6 +235,11 @@ function Upload() {
 }
 
 export default Upload;
+
+
+
+
+
 
 
 
