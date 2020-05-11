@@ -12,7 +12,9 @@ import Row from 'react-bootstrap/Row';
 import "react-jinke-music-player/lib/styles/index.less";
 import { CardDeck } from "react-bootstrap";
 
-
+import API from "../utils/API"
+import { isAuth } from "./helper";
+import { toast } from "react-toastify";
 
 function Center() {
   
@@ -158,13 +160,72 @@ function Center() {
     spaceBar: true,
   }
 
+  const [listenerInfo, updateListenerInfo] = React.useState({
+    subscriptionToken: 0,
+    currentListenerData:{},
+    paused:false
+});
+
+React.useEffect(()=>{
+  //get current user and set subscription token and user info
+ API.getUsers()
+  .then((result) => {
+      const email = isAuth().email;
+      const currentUser = result.data.filter(user => user.email === email);
+      listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+      updateListenerInfo({
+        ...listenerInfo,
+        subscriptionToken:  currentUser[0].subscriptionToken,
+        currentListenerData:  currentUser[0]
+      })
+  }) .catch((err) => {
+
+    toast.error("Failed to Get User info");
+});
+}, ['subscriptionToken'])
+
+const chargeListenerToken = () =>{
+      if(listenerInfo.paused === false){
+        const token = Number(listenerInfo.subscriptionToken) -1;
+        API.getUsers()
+        .then((result) => {
+            const email = isAuth().email;
+            const currentUser = result.data.filter(user => user.email === email);
+            //calculate subscriptionToken 
+            const userSubscriptionToken = token;
+
+            //update user payment required to false after intial signup
+            const data = { ...currentUser[0], paymentRequired: false, subscriptionToken: userSubscriptionToken };
+            API.updateUser(data._id, data).then(() => {
+              updateListenerInfo({
+                ...listenerInfo,
+                subscriptionToken: data.subscriptionToken,
+                currentListenerData:data
+                })
+            })
+        })
+      } else if(listenerInfo.paused === true){
+        updateListenerInfo({
+          ...listenerInfo,
+           paused:false
+          })
+      }
+}
+
+const skipChargeOnResume = () => {
+  updateListenerInfo({
+    ...listenerInfo,
+     paused:true
+    })
+}
+
   return (
     <div style={{ backgroundColor: "#313131", height: "100vh" }}>
-      <Search />
+      <Search token={listenerInfo.subscriptionToken}/>
       <div id="centerDiv">
         <AlbumList />
       </div>
-      <ReactJkMusicPlayer {...options} />
+      <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause ={skipChargeOnResume} />
     </div>
   )
 }
