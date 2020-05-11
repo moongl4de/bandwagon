@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, CardColumns, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Details from "./DetailsModal";
+import "../App.css"
 
 function AlbumList() {
   // access global state of albums
@@ -30,16 +31,16 @@ function AlbumList() {
 
   useEffect(() => {
     getAlbums();
-    console.log(state)
+    console.log("useEffect State:",state)
   }, []);
 
   return (
     <Container>
-      <h1>All Albums</h1>
+      <h1 className="albumHeader">All Albums</h1>
       {state.albums.length ? (
         <CardColumns>
           {state.albums.map((album) => (
-            <Card style={{ width: "18rem" }} key={album._id}>
+            <Card className="albumCard animate__animated animate__fadeIn" style={{ width: "18rem" }} key={album._id}>
               <Card.Img
                 variant="top"
                 src={album.art}
@@ -48,7 +49,7 @@ function AlbumList() {
               <Card.Body>
                 <Card.Title>{album.title}</Card.Title>
                 <Card.Text>{album.description}</Card.Text>
-                <Button onClick={() => setModalShow(true)}> Details </Button>
+                <Button className="albumBtn" onClick={() => setModalShow(true)}> Details </Button>
                 {/* <Link to={"/albums/" + album._id}> */}
                 <Details id={album._id} show={modalShow} onHide={() => setModalShow(false)} />
                 {/* </Link> */}
