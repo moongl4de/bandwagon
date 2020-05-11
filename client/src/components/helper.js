@@ -1,9 +1,6 @@
 
 import cookie from 'js-cookie';
 
-const sendgridMail = require('@sendgrid/mail')
-sendgridMail.setApiKey(process.env.SENDGRID_APIKEY)
-
 
 // set in cookie
 export const setCookie = (key, value) => {
@@ -78,21 +75,6 @@ export const updateUser = (response, next) => {
     next();
 };
 
-  //function to send email
-  export const sendEmail =(email, emailContent)=>{
-    //send email to user
-    sendgridMail.send(emailContent).then((sentSuccessfully) => {
-        console.log("SENT EMAIL")
-        return (
-             `Email has been sent to ${email} `
-        )
-    }).catch(err => {
-        console.log("email error = "+ err)
-        return(
-        `Email send failed : ${err}`
-        )
-    })
-}
 
 
 
