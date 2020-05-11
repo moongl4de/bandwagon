@@ -41,7 +41,7 @@ function App() {
         {/* <ListenerPrivateRoute exact path='/albums/:id' component={Details}/> */}
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
+        <Route exact path='/admin/upload' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
