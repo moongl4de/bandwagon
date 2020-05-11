@@ -72,14 +72,11 @@ function Login(props) {
                   user: res.data.user,
                 });
               }
-
+              toast.success(`Hey ${res.data.user.name}, Welcome back!`)
             })
-            toast.success(`Hey ${res.data.user.name}, Welcome back!`)
+           
         })
-          .catch((err) => {
-            console.log("error" + err);
-            toast.error("Failed to sign in");
-          });
+        
       })
       .catch((err) => {
         console.log("error" + err);
@@ -151,6 +148,9 @@ function Login(props) {
         ) : null}
         {signInData.user.role === "artist" ? (
           <Redirect to="/admin/dashboard" />
+        ) : null}
+            {signInData.user.role === "admin" ? (
+          <Redirect to="/admin/admin" />
         ) : null}
         <Container style={{ justifyContent: "center" }}>
           <Row>
