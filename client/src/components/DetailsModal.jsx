@@ -6,6 +6,7 @@ import { Modal, Button, ListGroup, Item } from "react-bootstrap";
 
 function Details(props) {
   const [state, dispatch] = useStoreContext();
+  
 
 //   console.log(state);
 
