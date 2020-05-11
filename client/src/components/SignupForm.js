@@ -103,6 +103,7 @@ function Signup(props) {
       {/*Hide sign up for logged in user - checks on localstorage and logs in user if token and user info exist */}
       {authData && authData.role === 'listener' ? <Redirect to="/listener" /> : null}
       {authData && authData.role === 'artist' ? <Redirect to="/admin/dashboard" /> : null}
+      {authData && authData.role === 'admin' ? <Redirect to="/admin/admin" /> : null}
       <div id="loginContainer">
         <ToastContainer />
         <video id="videoBackground" style={{}} autoPlay muted loop>
@@ -178,6 +179,13 @@ function Signup(props) {
                   name="formHorizontalRadios"
                   id="formHorizontalRadios2"
                   value="artist"
+                />
+                   <Form.Check
+                  type="radio"
+                  label="Admin"
+                  name="formHorizontalRadios"
+                  id="formHorizontalRadios3"
+                  value="admin"
                 />
               </div>
 

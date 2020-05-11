@@ -33,9 +33,22 @@ exports.signup = (req, res) => {
     }, process.env.JWT_ACCOUNT_ACTIVATION, {
         expiresIn: '15m'
     })
-    console.log(token)
 
-    const emailSendData = {
+    const emailSendData =  role === 'admin' ?  {
+        from: process.env.EMAIL_FROM,
+        //send to one of the admins for activation
+        to: 'me2say@gmail.com',
+        subject: `Bandwagon Admin User account requested by - ${name}`,
+        html: `<h1>Bandwagon Admin User account requested by - ${name}</h1>
+         <h2>Please use the following link to APPROVE ADMIN ROLE</h2>
+        <p>${process.env.CLIENT_URL}/activate/${token}</p>
+        <br>
+        <h5>Become an official Band Wagoner!!</h5>
+        <p>${process.env.CLIENT_URL}</p>
+        <br/>
+        <p>Bandwagon Team</p>
+        `
+    }  : {
         from: process.env.EMAIL_FROM,
         to: email,
         subject: `Activate your Band-Wagon ${role} account`,
@@ -45,10 +58,26 @@ exports.signup = (req, res) => {
         <br>
         <h5>Become an official Band Wagoner!!</h5>
         <p>${process.env.CLIENT_URL}</p>
+        <br/>
+        <p>Bandwagon Team</p>
         `
     }
 
-    //send email
+    const accountApprovedEmail = {
+        from: process.env.EMAIL_FROM,
+        to: email,
+        subject: `Hey ${name}, Your Band-Wagon ${role} account has been approved`,
+        html: `<h1>Hey ${name}, Your Band-Wagon ${role} account has been approved</h1>
+         <h2>Please use the following link to Access your Band Wagon ${role} account</h2>
+        <p>${process.env.CLIENT_URL}</p>
+        <br>
+        <h5>You have become an official Band Wagon Boss!!</h5>
+        <br/>
+        <p>Bandwagon Team</p>
+        `
+    }
+
+    //send email to direct to user for listener or artist roles. For Admin it will be sent to administrator for
     sendgridMail.send(emailSendData).then((sentSuccessfully) => {
         console.log("SENT EMAIL")
         return res.json({
