@@ -1,4 +1,5 @@
 import React from "react"
+import { useStoreContext } from "../utils/globalContext";
 import "../App.css"
 import ArtistContainer from "./ArtistContainer"
 import Search from "./Searchbar"
@@ -11,19 +12,21 @@ import Row from 'react-bootstrap/Row';
 import "react-jinke-music-player/lib/styles/index.less";
 import { CardDeck } from "react-bootstrap";
 
-import API from "../utils/API"
-import { isAuth } from "./helper";
-import { toast } from "react-toastify";
 
+
+function Center() {
+  const [state, dispatch] = useStoreContext();
+  console.log("STATE TEST", state)
+  
     const audioListTest = [
       {
-        name: 'Hide Away From Us',
-        singer: 'Alex Gignilliat',
+        name: state.currentAlbum.title,
+        singer: state.currentAlbum.title,
         cover:
-          'https://bit.ly/2xmv9IN',
+          state.currentAlbum.art,
         musicSrc: () => {
           return Promise.resolve(
-            'https://audiotestacg.s3.us-east-2.amazonaws.com/Hide+Away+From+Us+-+Alex+Gignilliat.mp3'
+            `${state.currentAlbum.songs[0]}`
           )
         },
       },
@@ -54,7 +57,7 @@ const options = {
     // Replace a new playlist with the first loaded playlist
     // instead of adding it at the end of it.
     // [type `boolean`, default `false`]
-    clearPriorAudioLists: false,
+    clearPriorAudioLists: true,
 
     // Play your new play list right after your new play list is loaded turn false.
     // [type `boolean`, default `false`]
@@ -152,78 +155,11 @@ const options = {
 
     // Play and pause audio through blank space [type `Boolean` default `false`]
     spaceBar: true,
-
 }
-
-//placeholder code
-
-function Center() {
-  const [listenerInfo, updateListenerInfo] = React.useState({
-    subscriptionToken: 0,
-    currentListenerData:{},
-    paused:false
-});
-
-React.useEffect(()=>{
-  //get current user and set subscription token and user info
- API.getUsers()
-  .then((result) => {
-      const email = isAuth().email;
-      const currentUser = result.data.filter(user => user.email === email);
-      listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-      updateListenerInfo({
-        ...listenerInfo,
-        subscriptionToken:  currentUser[0].subscriptionToken,
-        currentListenerData:  currentUser[0]
-      })
-  }) .catch((err) => {
-
-    toast.error("Failed to Get User info");
-});
-}, ['subscriptionToken'])
-
-const chargeListenerToken = () =>{
-      if(listenerInfo.paused === false){
-        const token = Number(listenerInfo.subscriptionToken) -1;
-        API.getUsers()
-        .then((result) => {
-            const email = isAuth().email;
-            const currentUser = result.data.filter(user => user.email === email);
-            //calculate subscriptionToken 
-            const userSubscriptionToken = token;
-  
-            //update user payment required to false after intial signup
-            const data = { ...currentUser[0], paymentRequired: false, subscriptionToken: userSubscriptionToken };
-            API.updateUser(data._id, data).then(() => {
-              updateListenerInfo({
-                ...listenerInfo,
-                subscriptionToken: data.subscriptionToken,
-                currentListenerData:data
-                })
-            })
-        })
-      } else if(listenerInfo.paused === true){
-        updateListenerInfo({
-          ...listenerInfo,
-           paused:false
-          })
-      }
-
-
-}
-
-const skipChargeOnResume = () => {
-  updateListenerInfo({
-    ...listenerInfo,
-     paused:true
-    })
-}
-
-
     let backgroundImageVariable = "https://upload.wikimedia.org/wikipedia/commons/7/77/Question_mark-pixels.jpg"
     return (
        <div style={{backgroundColor: "#313131", height: "100vh"}}>
-         <Search token={listenerInfo.subscriptionToken}/>
+         <Search />
         <div id="centerDiv">
             <AlbumList />
 
@@ -234,10 +170,8 @@ const skipChargeOnResume = () => {
             </div> */}
            
         </div>
-         <ReactJkMusicPlayer {...options}  onAudioPlay={chargeListenerToken} onAudioPause ={skipChargeOnResume}/>
-         
+         <ReactJkMusicPlayer {...options} />
          </div>
-       
     )
 }
 
