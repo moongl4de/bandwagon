@@ -1,6 +1,7 @@
 
 import cookie from 'js-cookie';
 
+
 // set in cookie
 export const setCookie = (key, value) => {
     if (window !== 'undefined') {
@@ -73,6 +74,7 @@ export const updateUser = (response, next) => {
     }
     next();
 };
+
 
 
 
