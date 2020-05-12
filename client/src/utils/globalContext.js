@@ -5,6 +5,11 @@ const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "LOADING":
+  return {
+    ...state,
+    loading: true
+  };
     case "SET_CURRENT_ALBUM":
     return {
       ...state,
@@ -17,12 +22,6 @@ const reducer = (state, action) => {
         currentAlbum: action.album,
         loading: false
       };
-      case "LOADING":
-    return {
-      ...state,
-      loading: true
-    };
- 
   case "LOAD_ALBUMS":
     return {
       ...state,
@@ -44,7 +43,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       user: "",
       title: "",
       art: "",
-      release: "",
+      // release: "",
       songs: [],
       description: "",
     },

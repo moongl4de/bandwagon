@@ -5,19 +5,32 @@ const albumController = require("../../controllers/albumController");
 // const mongoose = require('mongoose')
 
 
-router
-  .route("/upload")
-  .post(albumController.create);
+// router
+//   .route("/upload")
+//   .post(albumController.create);
 
 
   router
   .route("/")
-  .get(albumController.findAll);
+  .get(albumController.findAll)
+  .put(albumController.update)
+  .post(albumController.create);
 
   router
   .route("/:id")
   .get(albumController.findById)
 
+  router
+  .route("/add")
+  .post(albumController.insert);
+
+
+
+
+
+
+
+  
 
 // router.post('/user', (req, res) => {
 //   User.create(req.body)
