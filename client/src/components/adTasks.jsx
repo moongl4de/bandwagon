@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import Checkbox from "./adCustomCheckbox.jsx";
+
 import Button from "./adCustomButton.jsx";
 
 export class Tasks extends Component {
