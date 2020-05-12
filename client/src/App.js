@@ -39,17 +39,15 @@ function App() {
         {/* <Route exact path='/test' component={AWS}/> */}
         <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
         {/* <ListenerPrivateRoute exact path='/albums/:id' component={Details}/> */}
-        {/* <Switch>
-        <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
-          <Redirect from="/admin" to="/admin/dashboard" />
-        </Switch> */}
-        <Route exact path='/admin/admin' component={Admin2}/>
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
+        <Route exact path='/admin/upload' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
+        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
+        <AdminPrivateRoute exact path='/admin/admin' component={Admin2}/>
+        
         
       </StoreProvider>
     </Router>

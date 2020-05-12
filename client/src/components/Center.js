@@ -1,8 +1,9 @@
 import React from "react"
+import { useStoreContext } from "../utils/globalContext";
 import "../App.css"
 import ArtistContainer from "./ArtistContainer"
 import Search from "./Searchbar"
-import ReactDOM from "react-dom";
+import ReactDOM, { render } from "react-dom";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import AlbumList from "./AlbumList"
@@ -15,21 +16,26 @@ import API from "../utils/API"
 import { isAuth } from "./helper";
 import { toast } from "react-toastify";
 
-    const audioListTest = [
-      {
-        name: 'Hide Away From Us',
-        singer: 'Alex Gignilliat',
-        cover:
-          'https://bit.ly/2xmv9IN',
-        musicSrc: () => {
-          return Promise.resolve(
-            'https://audiotestacg.s3.us-east-2.amazonaws.com/Hide+Away+From+Us+-+Alex+Gignilliat.mp3'
-          )
-        },
-      },
-    ]
+function Center() {
+  
+  const [state, dispatch] = useStoreContext();
+  console.log("STATE TEST", state)
 
-const options = {
+  const audioListTest = [
+    {
+      name: state.currentAlbum.title,
+      singer: state.currentAlbum.title,
+      cover:
+        state.currentAlbum.art,
+      musicSrc: () => {
+        return Promise.resolve(
+          `${state.currentAlbum.songs[0]}`
+        )
+      },
+    },
+  ]
+
+  const options = {
 
     audioLists: audioListTest,
     //default play index of the audio player  [type `number` default `0`]
@@ -54,7 +60,7 @@ const options = {
     // Replace a new playlist with the first loaded playlist
     // instead of adding it at the end of it.
     // [type `boolean`, default `false`]
-    clearPriorAudioLists: false,
+    clearPriorAudioLists: true,
 
     // Play your new play list right after your new play list is loaded turn false.
     // [type `boolean`, default `false`]
@@ -75,8 +81,8 @@ const options = {
 
     //audio controller initial position    [ type `Object` default '{top:0,left:0}' ]
     defaultPosition: {
-        top: 300,
-        left: 120,
+      top: 300,
+      left: 120,
     },
 
     defaultPlayMode: 'order',
@@ -109,7 +115,7 @@ const options = {
     seeked: true,
 
     //Display chrome media session.  [type `Boolean` default `false`]
-    showMediaSession: true,
+    showMediaSession: false,
 
     //Displays the audio load progress bar.  [type `Boolean` default `true`]
     showProgressLoadBar: true,
@@ -152,12 +158,8 @@ const options = {
 
     // Play and pause audio through blank space [type `Boolean` default `false`]
     spaceBar: true,
+  }
 
-}
-
-//placeholder code
-
-function Center() {
   const [listenerInfo, updateListenerInfo] = React.useState({
     subscriptionToken: 0,
     currentListenerData:{},
@@ -191,7 +193,7 @@ const chargeListenerToken = () =>{
             const currentUser = result.data.filter(user => user.email === email);
             //calculate subscriptionToken 
             const userSubscriptionToken = token;
-  
+
             //update user payment required to false after intial signup
             const data = { ...currentUser[0], paymentRequired: false, subscriptionToken: userSubscriptionToken };
             API.updateUser(data._id, data).then(() => {
@@ -208,8 +210,6 @@ const chargeListenerToken = () =>{
            paused:false
           })
       }
-
-
 }
 
 const skipChargeOnResume = () => {
@@ -219,26 +219,15 @@ const skipChargeOnResume = () => {
     })
 }
 
-
-    let backgroundImageVariable = "https://upload.wikimedia.org/wikipedia/commons/7/77/Question_mark-pixels.jpg"
-    return (
-       <div style={{backgroundColor: "#313131", height: "100vh"}}>
-         <Search token={listenerInfo.subscriptionToken}/>
-        <div id="centerDiv">
-            <AlbumList />
-
-            {/* <div className="containerTest" style={{ backgroundImage: `url(${backgroundImageVariable})`, backgroundSize: "150%", backgroundPosition: "center" }}>
-                <ArtistContainer  />
-                <i class="fas fa-heart fa-2x"></i>
-                <i class="fas fa-share fa-2x"></i>
-            </div> */}
-           
-        </div>
-         <ReactJkMusicPlayer {...options}  onAudioPlay={chargeListenerToken} onAudioPause ={skipChargeOnResume}/>
-         
-         </div>
-       
-    )
+  return (
+    <div style={{ backgroundColor: "#313131", height: "100vh" }}>
+      <Search token={listenerInfo.subscriptionToken}/>
+      <div id="centerDiv">
+        <AlbumList />
+      </div>
+      <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause ={skipChargeOnResume} />
+    </div>
+  )
 }
 
 export default Center;
