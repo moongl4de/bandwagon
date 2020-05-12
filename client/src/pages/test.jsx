@@ -1,12 +1,11 @@
 
 import React, { useRef } from "react";
-import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { handleFileUpload } from "../stitch/app";
 import Card from "../components/adCard.jsx";
-import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
-import logo from "../assets/img/reactlogo.png"
+
 
 function Upload() {
 
@@ -27,7 +26,7 @@ function Upload() {
   };
 
   // empty artUrl for images that are returned from handleFileUpload function (defined in stitch folder)
-  
+
   // console.log(logo)
   let artUrl = [];
   const handleArtUpload = () => {
@@ -150,7 +149,7 @@ function Upload() {
                       </Form.Label>
                       <Form.Control type="file" ref={songsRef} multiple />
                       <Button variant="danger" onClick={handleSongUpload}>
-                      Upload Songs
+                        Upload Songs
                     </Button>
                       <Form.Label>Step 4. - Upload!</Form.Label>
                     </Form.Group>
