@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import AdminNavbarLinks from "./adNavbarLinks2.jsx";
 
 class Header extends Component {

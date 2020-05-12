@@ -1,9 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row'
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Logo from '../img/newlogoRev2.png'
@@ -12,15 +10,11 @@ import { Component } from "react";
 import { signout } from "./helper"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {
   InstantSearch,
   Hits,
   SearchBox,
-  Pagination,
-  Highlight,
-  ClearRefinements,
-  RefinementList,
   Configure,
 } from 'react-instantsearch-dom';
 import PropTypes from 'prop-types';
@@ -104,7 +98,7 @@ function Hit(props) {
 
 
     <div className="hit-container">
-      <img src={props.hit.image} style={{ maxWidth: "100%" }} />
+      <img src={props.hit.image} style={{ maxWidth: "100%" }} alt=""/>
 
       <div className="hit-price"  >{props.hit.artist}</div>
       <div className="hit-price"  >{props.hit.song}</div>

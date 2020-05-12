@@ -1,16 +1,16 @@
 import React from "react"
 import { useStoreContext } from "../utils/globalContext";
 import "../App.css"
-import ArtistContainer from "./ArtistContainer"
+// import ArtistContainer from "./ArtistContainer"
 import Search from "./Searchbar"
 import ReactDOM from "react-dom";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import AlbumList from "./AlbumList"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Row from 'react-bootstrap/Row';
+// import Row from 'react-bootstrap/Row';
 import "react-jinke-music-player/lib/styles/index.less";
-import { CardDeck } from "react-bootstrap";
+// import { CardDeck } from "react-bootstrap";
 
 import currentSongList from "../components/AlbumList"
 

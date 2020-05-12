@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import { Card } from "../components/adCard.jsx";
 import { StatsCard } from "../components/adStatsCard.jsx";
-
+import { Tasks } from "../components/adTasks.jsx";
 import {
   dataPie,
   legendPie,
@@ -68,7 +68,7 @@ class Dashboard extends Component {
             </Col>
           </Row>
           <Row>
-            <Col md={8}>
+            <Col md={6}>
               <Card
                 
                 id="chartHours"
@@ -91,25 +91,19 @@ class Dashboard extends Component {
                 }
               />
             </Col>
-            <Col md={4}>
+            <Col md={6}>
               <Card
-                
-                title="Total Plays"
-                category="By Album"
-                
+                title="Tasks"
+                category="Development To-Do"
+                stats="Updated 3 minutes ago"
+                statsIcon="fa fa-history"
                 content={
-                  <div
-                    id="chartPreferences"
-                    className="ct-chart ct-perfect-fourth"
-                  >
-                    <ChartistGraph data={dataPie} type="Pie" />
+                  <div className="table-full-width">
+                    <table className="table">
+                      <Tasks />
+                    </table>
                   </div>
                 }
-                legend={
-                  <div className="legend">{this.createLegend(legendPie)}</div>
-                  
-                }
-              
               />
             </Col>
           </Row>

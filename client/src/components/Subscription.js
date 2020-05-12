@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+// import Button from "react-bootstrap/Button";
+// import Form from "react-bootstrap/Form";
 import "../App.css"
 import video from "./videos/stock_footage_concert.mp4";
 import StripeCheckout from "react-stripe-checkout";
@@ -30,7 +30,7 @@ function Subscription() {
             subscription
         });
         const { status } = response.data
-        if (status == 'success') {
+        if (status === 'success') {
 
             API.getUsers()
                 .then((result) => {

@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { handleFileUpload } from "../stitch/app";
 import Card from "../components/adCard.jsx";
-import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
 import logo from "../assets/img/reactlogo.png";
@@ -192,7 +191,44 @@ function Upload() {
       <ToastContainer />
       <Container fluid>
         <Row>
-          <Col md={6}>
+          
+          <Col md={4}>
+            <Card
+              title="Upload Music"
+              category="Follow the steps below to upload."
+              ctTableFullWidth
+              ctTableResponsive
+              content={
+                <div>
+                  {/* <Form className="m-3" onSubmit={handleSubmit}> */}
+                  {/* </Form> */}
+                  <Form className="m-3">
+                    <Form.Label>Step 1. - Choose Song(s) to Upload</Form.Label>
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Control
+                        variant="success"
+                        // onChange={updateSongs}
+                        name="fileUrl"
+                        type="file"
+                        ref={songsRef}
+                        multiple
+                      />
+                      <Button
+                        className="mt-3"
+                        variant="primary"
+                        onClick={handleSongUpload}
+                      >
+                        Step 2. - Upload songs
+                      </Button>
+                    </Form.Group>
+                    <Form.Group></Form.Group>
+                  </Form>
+                </div>
+              }
+            />
+            </Col>
+           
+          <Col md={4}>
             <Card
               title="Upload Art"
               category="Follow the steps below to upload."
@@ -202,7 +238,7 @@ function Upload() {
                 <div>
                   <Form className="m-3">
                     <Form.Label>
-                      Step 1. - Fill out ALL of the fields
+                      Step 3. - Fill out ALL of the fields
                     </Form.Label>
                     <input
                       className="form-control mb-5"
@@ -227,7 +263,7 @@ function Upload() {
                       // ref={descriptionRef}
                       placeholder="Description"
                     />
-                    <Form.Label>Step 2. - Choose cover art file</Form.Label>
+                    <Form.Label>Step 4. - Choose cover art file</Form.Label>
                     <Form.Group controlId="formBasicPassword">
                       <Form.Control
                         variant="success"
@@ -239,47 +275,14 @@ function Upload() {
                       />
                     </Form.Group>
                     <Button variant="primary" onClick={handleArtUpload}>
-                      Step 2. - Upload Art
+                      Step 5. - Upload Art
                     </Button>
                   </Form>
                 </div>
               }
             />
           </Col>
-          <Col md={6}>
-            <Card
-              title="Upload Music"
-              category="Follow the steps below to upload."
-              ctTableFullWidth
-              ctTableResponsive
-              content={
-                <div>
-                  {/* <Form className="m-3" onSubmit={handleSubmit}> */}
-                  {/* </Form> */}
-                  <Form className="m-3">
-                    <Form.Label>Step 4. - Choose Song(s) to Upload</Form.Label>
-                    <Form.Group controlId="formBasicPassword">
-                      <Form.Control
-                        variant="success"
-                        // onChange={updateSongs}
-                        name="fileUrl"
-                        type="file"
-                        ref={songsRef}
-                        multiple
-                      />
-                      <Button
-                        className="mt-3"
-                        variant="primary"
-                        onClick={handleSongUpload}
-                      >
-                        Step 1. - Upload songs
-                      </Button>
-                    </Form.Group>
-                    <Form.Group></Form.Group>
-                  </Form>
-                </div>
-              }
-            />
+          <Col md={4}>
             <Card
               title="Upload to the Website"
               category="Finish your submission"
@@ -296,7 +299,7 @@ function Upload() {
                         type="submit"
                         disabled={state.loading}
                       >
-                        Step 3. Finish Upload!
+                        Step 6. Finish Upload!
                       </Button>
                     </ListGroupItem>
                   </Form>
