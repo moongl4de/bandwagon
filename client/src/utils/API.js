@@ -17,6 +17,24 @@ export default {
     return axios.put("/api/user/" + id, data);
   },
 
+    //Artist
+
+    getArtists: function() {
+      return axios.get("/api/artist");
+    },
+    getArtist: function(id) {
+      return axios.get("/api/artist/" + id);
+    },
+    deleteArtist: function(id) {
+      return axios.delete("/api/artist/" + id);
+    },
+    updateArtist: function(id, data) {
+      return axios.put("/api/artist/" + id, data);
+    },
+    createArtist: function(data = {}){
+      return axios.post("/api/artist", data)
+    },
+
   //ALBUMS 
   
   createAlbum: function(data = {}){
