@@ -19,18 +19,29 @@ export default {
 
   //ALBUMS 
   
+  createAlbum: function(data = {}){
+    return axios.post("/api/albums", data)
+  },
   getAlbums: function() {
     return axios.get("/api/albums");
   },
   getAlbum: function(id) {
     return axios.get("/api/albums/" + id);
   },
-  // deleteSong: function(id) {
+  // deleteAlbum: function(id) {
   //   return axios.delete("/api/songs/" + id);
   // },
-  uploadAlbum: function(data) {
-    return axios.post("/api/albums/upload", data);
+  updateAlbum: function(data) {
+    return axios.put("/api/albums", data);
+  },
+
+  //SONGS
+
+  uploadSongs: function(data){
+    return axios.post("/api/albums/add", data)
   }
+
+
 };
 
 

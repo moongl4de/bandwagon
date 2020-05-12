@@ -88,10 +88,10 @@ const handleFileUpload = (file) => {
         .then((result) => {
           // console.log("AWS promises", result)
           for (let i in result) {
-            console.log(result[i]);
+            // console.log(result[i]);
           }
           resolve(urlArr);
-          console.log("Stitch: urls array loaded to AWS", urlArr);
+          // console.log("Stitch: urls array loaded to AWS", urlArr);
           // console.log(result)
         })
         .catch((err) => {

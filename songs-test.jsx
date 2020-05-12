@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import {
   Container,
   Row,
@@ -15,8 +15,9 @@ import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
 import logo from "../assets/img/reactlogo.png";
 import { ToastContainer, toast } from "react-toastify";
+// import { SongContext } from "../utils/songContext";
+
 import algoliasearch from "algoliasearch";
-import { SongContext } from "../utils/songContext";
 
 // const searchClient = algoliasearch('BY7RM0A5T2',
 //   'c84d9d93579f57a4c7c7123119c9f4b2');
@@ -28,149 +29,89 @@ import { SongContext } from "../utils/songContext";
 //  }
 
 function Upload() {
-  // access album's global state
-  const [state, dispatch] = useStoreContext();
-
-  const artRef = useRef();
-  const songsRef = useRef();
-
-  const [files, setFiles] = useState({
-    art: ""
-  });
-
-  const [album, setAlbum] = useState({
-    _id: "",
+  const [songs, setSongs] = useState({
     user: "",
+    album: "",
     title: "",
-    description: "",
-    art: "",
-    song_ids: [],
+    fileUrl: "",
   });
 
-  const updateFiles = ({ target }) => {
-    setFiles({
-      ...files,
-      [target.name]: target.value,
-    });
-  };
-  const updateAlbum = ({ target }) => {
-    setAlbum({
-      ...album,
-      [target.name]: target.value,
-    });
-  };
+  // audioUrl.forEach((song) => Song.insert(song));
 
-  //on page load create an empty album with user id to get album's id to upload songs to
+  let audioUrl = [];
+  let audioTitle = [];
 
-  useEffect(() => {
-    const createAlbum = async () => {
-      const response = await API.createAlbum();
-      setAlbum({
-        ...album,
-        ...response.data,
-        user: JSON.parse(localStorage.getItem("user"))._id
-      })
-    };
-    createAlbum()
-  }, []);
-
-
-  const setLoading = () => {
-    dispatch({ type: "LOADING" });
-  };
-
-  const handleArtUpload = () => {
-    const artFile = Object.values(artRef.current.files);
-    handleFileUpload(artFile)
+  const handleSongUpload = () => {
+    const audiofile = Object.values(songsRef.current.files);
+    handleFileUpload(audiofile)
       .then((response) => {
-        setAlbum({ ...album, art: response });
-        console.log("Art: successfully loaded to AWS", response);
-        toast.success("Art: successfully selected");
+        audioUrl = response;
+        let titleArr = audiofile.forEach((file) => {
+          // console.log("song title", file.name)
+          audioTitle.push(file.name);
+        });
+        console.log(audioTitle);
+        console.log("Audio: successfully loaded to AWS", audioUrl);
+        toast.success("Music: successfully selected");
       })
       .catch((err) => {
         console.log(err);
         toast.danger("Something went wrong");
       });
   };
+  // access global state
+  const [state, dispatch] = useStoreContext();
 
+  //get user info from LS
+  let user = JSON.parse(localStorage.getItem("user"));
+  let userId = user._id;
+  console.log("Current Artist's ID ", userId);
 
-  // SONGS 
+  // set all refs for user input
+  const titleRef = useRef();
+  const descriptionRef = useRef();
+  const releaseRef = useRef();
+  const artRef = useRef();
+  const songsRef = useRef();
 
-  // const [song, setSong] = useState({
-  //   title: "",
-  //   fileUrl: "",
-  // });
+  // TODO: add a cool loader to this page
 
-  // const addSongs = (title, fileUrl) => {
-  //   setSongs([...songs, {title, fileUrl}])
-  // }
-
-  // const updateSongs = ({ target }) => {
-  //   setSong({
-  //     [target.name]: target.value,
-  //   });
-  //   console.log("SONG STATE on change", song)
-  // };
-  
-  const handleSongUpload = () => {
-    const audiofile = Object.values(songsRef.current.files);
-
-    handleFileUpload(audiofile)
-    .then((response) => {
-      console.log("Audio: successfully loaded to AWS", response);
-
-    //  let newTitle = audiofile.forEach((file) => {
-    //       console.log("each song title", file.name);
-    //     //  setSong({...song, title: file.name})
-    //     });
-
-      response.forEach((url) => {
-          console.log("each fileUrl:", url)
-          const title = url.split("-")[1]
-          console.log("SONG TITLE",title)
-            API.uploadSongs({
-              albumId: album._id,
-              title: title,
-              fileUrl: url
-            })
-            .then((result) => {
-              console.log("song sent to db", result.data.song_ids);
-
-              // setAlbum({ ...album, song_ids: [result.data.song_ids] });
-
-              toast.success("Songs successfully loaded");
-            })
-            .catch((err) => {
-              console.log(err);
-              toast.danger( "Something went wrong" );
-            });
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-        // toast.danger( "Something went wrong" );
-      });
+  const setLoading = () => {
+    dispatch({ type: "LOADING" });
   };
 
   // TODO: add validation for loading img and mp3 !before! able to hit submit (if no img selected - load bandwagon logo as default?)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Album to toad to DB", titleRef.current.value);
+    let artUrl = [];
+    const img = Object.values(artRef.current.files);
+    handleFileUpload(img)
+      .then((response) => {
+        artUrl = response;
+        console.log("Art: successfully loaded to AWS", artUrl);
+        toast.success("Art: successfully selected");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.danger("Something went wrong");
+      });
+    console.log("Album to load to DB", titleRef.current.value);
+
     setLoading();
-    // console.log("SONG", song)
-    console.log("Album to update", album)
-    API.updateAlbum({
-      _id: album._id,
-      // user: "",
-      title: album.title,
-      description: album.description,
-      art: album.art,
-      // song_ids: [],
-      
+
+    // API call to create Album object using reducer (defined in globalContext,js)
+
+    API.uploadAlbum({
+      user: userId,
+      title: titleRef.current.value,
+      art: artUrl,
+      release: releaseRef.current.value,
+      songs: [],
+      description: descriptionRef.current.value,
     })
       .then((result) => {
-        console.log("update was sent to DB!", result);
+        console.log("sent to DB", result);
         dispatch({
           type: "ADD_ALBUM",
           album: result,
@@ -179,12 +120,16 @@ function Upload() {
       })
       .catch((err) => {
         console.log(err);
-        // toast.danger( "Something went wrong" );
+        // toast.danger("Something went wrong");
       });
 
-    // titleRef.current.value = "";
-    // descriptionRef.current.value = "";
-    // releaseRef.current.value = "";
+    titleRef.current.value = "";
+    descriptionRef.current.value = "";
+    releaseRef.current.value = "";
+  };
+
+  const loadAlbum = () => {
+    console.log("hit");
   };
 
   return (
@@ -202,50 +147,44 @@ function Upload() {
                 <div>
                   <Form className="m-3">
                     <Form.Label>
-                      Step 1. - Fill out ALL of the fields
+                      {/* Step 1. - Fill out ALL of the fields */}
                     </Form.Label>
                     <input
                       className="form-control mb-5"
                       required
-                      onChange={updateAlbum}
-                      // ref={titleRef}
-                      name="title"
+                      ref={titleRef}
                       placeholder="Album Title"
                     />
-                    {/* <input
-                      className="form-control mb-5"
-                      required
-                      // ref={releaseRef}
-                      onChange={updateAlbum}
-                      name="release"
-                      placeholder="Release date"
-                    /> */}
                     <input
                       className="form-control mb-5"
-                      onChange={updateAlbum}
-                      name="description"
-                      // ref={descriptionRef}
+                      required
+                      ref={releaseRef}
+                      placeholder="Release date"
+                    />
+                    <input
+                      className="form-control mb-5"
+                      ref={descriptionRef}
                       placeholder="Description"
                     />
-                    <Form.Label>Step 2. - Choose cover art file</Form.Label>
+                    {/* <Form.Label>Step 2. - Choose cover art file</Form.Label> */}
                     <Form.Group controlId="formBasicPassword">
                       <Form.Control
                         variant="success"
-                        onChange={updateFiles}
-                        name="art"
                         type="file"
                         ref={artRef}
                         multiple
                       />
                     </Form.Group>
-                    <Button variant="primary" onClick={handleArtUpload}>
-                      Step 2. - Upload Art
+
+                    <Button variant="primary" onClick={handleSubmit}>
+                      Step 2. - Click Here
                     </Button>
                   </Form>
                 </div>
               }
             />
           </Col>
+
           <Col md={6}>
             <Card
               title="Upload Music"
@@ -257,24 +196,24 @@ function Upload() {
                   {/* <Form className="m-3" onSubmit={handleSubmit}> */}
                   {/* </Form> */}
                   <Form className="m-3">
-                    <Form.Label>Step 4. - Choose Song(s) to Upload</Form.Label>
+                    {/* <Form.Label>Step 4. - Choose Song(s) to Upload</Form.Label> */}
                     <Form.Group controlId="formBasicPassword">
                       <Form.Control
                         variant="success"
-                        // onChange={updateSongs}
-                        name="fileUrl"
                         type="file"
                         ref={songsRef}
                         multiple
                       />
+
                       <Button
                         className="mt-3"
                         variant="primary"
                         onClick={handleSongUpload}
                       >
-                        Step 1. - Upload songs
+                        Step 1. - Click Here
                       </Button>
                     </Form.Group>
+
                     <Form.Group></Form.Group>
                   </Form>
                 </div>
@@ -289,14 +228,14 @@ function Upload() {
                 <div>
                   {/* <Form className="m-3" onSubmit={handleSubmit}> */}
                   {/* </Form> */}
-                  <Form className="m-3" onSubmit={handleSubmit}>
+                  <Form className="m-3" onSubmit={loadAlbum}>
                     <ListGroupItem className="text-center">
                       <Button
                         variant="danger"
                         type="submit"
                         disabled={state.loading}
                       >
-                        Step 3. Finish Upload!
+                        Step 3. Publish Album
                       </Button>
                     </ListGroupItem>
                   </Form>
