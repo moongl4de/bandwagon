@@ -160,6 +160,8 @@ function Center() {
   //   // Play and pause audio through blank space [type `Boolean` default `false`]
   //   spaceBar: true,
   // }
+
+  
   
   return (
     <div style={{ backgroundColor: "#313131", height: "100vh" }}>
