@@ -1,15 +1,14 @@
 
-import React, { useRef, useState } from "react";
-import { Container, Row, Col, Table, Form, Button, ListGroupItem } from "react-bootstrap";
+import React, { useRef} from "react";
+import { Container, Row, Col, Form, Button, ListGroupItem } from "react-bootstrap";
 import { handleFileUpload } from "../stitch/app";
 import Card from "../components/adCard.jsx";
-import { thArray, tdArray } from "../variables/Variables.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
-import logo from "../assets/img/reactlogo.png"
+// import logo from "../assets/img/reactlogo.png"
 import { ToastContainer, toast } from "react-toastify";
 
-import algoliasearch from "algoliasearch";
+// import algoliasearch from "algoliasearch";
 
 // const searchClient = algoliasearch('BY7RM0A5T2',
 //   'c84d9d93579f57a4c7c7123119c9f4b2');

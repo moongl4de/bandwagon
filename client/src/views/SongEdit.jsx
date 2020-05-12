@@ -1,11 +1,8 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
   Col,
-
-
-
   Form
 } from "react-bootstrap";
 
@@ -172,6 +169,7 @@ function UserProfile() {
                     <img
                       src={artURL}
                       style={{ maxWidth: "250px" }}
+                      alt=""
                     ></img>
                   </center>
 

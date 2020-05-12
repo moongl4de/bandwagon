@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactJkMusicPlayer from "react-jinke-music-player";
+// import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import './App.css';
 import Center from "./components/Center"
-import BottomPlayer from "./components/PlayerFooter"
+// import BottomPlayer from "./components/PlayerFooter"
 import Subscription from "./components/Subscription"
 import Upload from "./pages/test"
 import Admin from './pages/Admin';
@@ -17,7 +17,7 @@ import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
 import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
-import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
+// import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 // import UserProfile from "./views/UserProfile.jsx";
 // import Upload from "./views/Upload.jsx";
 // import Library from "./views/Library.jsx";
@@ -31,27 +31,24 @@ function App() {
   return (
     <Router>
       <StoreProvider>
-      <Route exact path='/' component={Login}/>
-        <Route exact path='/signup' component={Signup}/>
-        <Route exact path='/activate/:token' component={ActivateUser}/>
-        <Route exact path='/test' component={ Upload }/>
-        <ListenerPrivateRoute exact path='/listener' component={Center}/>
+        <Route exact path='/' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/activate/:token' component={ActivateUser} />
+        <Route exact path='/test' component={Upload} />
+        <ListenerPrivateRoute exact path='/listener' component={Center} />
         {/* <Route exact path='/test' component={AWS}/> */}
-        <ListenerPrivateRoute exact path='/subscription' component={Subscription}/>
+        <ListenerPrivateRoute exact path='/subscription' component={Subscription} />
         {/* <ListenerPrivateRoute exact path='/albums/:id' component={Details}/> */}
-        {/* <Switch>
-        <ArtistPrivateRoute path="/admin" component={props => <AdminLayout {...props} />} />
-          <Redirect from="/admin" to="/admin/dashboard" />
-        </Switch> */}
-        <Route exact path='/admin/admin' component={Admin2}/>
-        <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
-        <ArtistPrivateRoute exact path='/admin/edit' component={Admin}/>
+
+        <Route exact path='/admin/admin' component={Admin2} />
+        <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin} />
+        <ArtistPrivateRoute exact path='/admin/user' component={Admin} />
+        <ArtistPrivateRoute exact path='/admin/upload' component={Admin} />
+        <ArtistPrivateRoute exact path='/admin/library' component={Admin} />
+        <ArtistPrivateRoute exact path='/admin/edit' component={Admin} />
         {/* <Route exact path='/test' component={AWS}/> */}
-        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
-        
+        <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage} />
+
       </StoreProvider>
     </Router>
 

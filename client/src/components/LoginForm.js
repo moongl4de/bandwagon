@@ -7,10 +7,10 @@ import Container from "react-bootstrap/Container";
 import video from "./videos/stock_footage_concert.mp4";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { authenticate, isAuth } from "./helper";
-import UserContext from "../utils/UserContext";
-import { useStoreContext } from "../utils/globalContext";
+// import UserContext from "../utils/UserContext";
+// import { useStoreContext } from "../utils/globalContext";
 import { handleLogin } from "../stitch/authentication";
 
 import axios from "axios";
@@ -158,6 +158,7 @@ function Login(props) {
               style={{ margin: "1% auto" }}
               id="loginLogo"
               src={require("../components/images/newlogo.png")}
+              alt=""
             ></img>
           </Row>
           <Row></Row>
