@@ -3,13 +3,13 @@ import { BrowserRouter, Redirect } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios'
 import jwt from 'jsonwebtoken';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-
+import API from "../utils/API"
 
 import "../App.css"
 
@@ -20,7 +20,8 @@ function ActivateUser(props) {
         token: '',
         role:'',
         email:'',
-        display: true
+        display: true,
+        userId:''
     })
 
 
@@ -58,7 +59,11 @@ function ActivateUser(props) {
             .then(res => {
                 console.log('ACCOUNT ACTIVATION', res);
                 if(role !== 'admin'){
-                    setAuthState({ ...userAuthState, display: false });
+                    if(role==='artist'){
+                        //cretae artist profile
+                        createArtistProfile({name:name, email: email, userId: res.data.id})
+                    }
+                    setAuthState({ ...userAuthState, userId: res.data.id, display: false });
                     toast.success('Your Account has been activated');
                 } else  if(role === 'admin'){
                     toast.success('Account has been activated');
@@ -70,7 +75,14 @@ function ActivateUser(props) {
                 toast.error('Activation Failed - Account already active');
             });
     }
-
+const createArtistProfile =(data)=>{
+ //cretae artist profile
+ API.createArtist(data).then(res=>{
+     console.log("artist created")
+ }).catch(err=>{
+     console.log("error "+ err)
+ })
+}
 
     return (
 

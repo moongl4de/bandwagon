@@ -1,27 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import AdminLayout from "./pages/Admin.jsx";
-import StripeCheckout from "react-stripe-checkout";
+// import StripeCheckout from "react-stripe-checkout";
 
 import "./assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
 import "./assets/css/pe-icon-7-stroke.css";
 
 ReactDOM.render(
   <React.StrictMode>
-
-
-
-    {/* <BrowserRouter>
-      <Switch>
-        <Route path="/admin" render={props => <AdminLayout {...props} />} />
-        <Redirect from="/admin" to="/admin/dashboard" />
-      </Switch>
-    </BrowserRouter> */}
-    <App />
+     <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
