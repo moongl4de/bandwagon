@@ -47,8 +47,8 @@ function App() {
         {/* <Route exact path='/test' component={AWS}/> */}
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
-        <AdminPrivateRoute exact path='/admin/admin' component={Admin2}/>
-        
+        {/* <AdminPrivateRoute exact path='/admin/admin' component={Admin2}/> */}
+        <Route exact path='/admin/admin' component={Admin2}/>
         
       </StoreProvider>
     </Router>

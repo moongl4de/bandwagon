@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Table } from "react-bootstrap";
 import { useStoreContext } from "../utils/globalContext";
-import './Library.css';
 import Card from "../components/adCard.jsx";
 import { Redirect } from "react-router-dom"
 
