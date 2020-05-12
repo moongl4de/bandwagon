@@ -17,6 +17,8 @@ function AlbumList() {
   // access global state of albums
   const [state, dispatch] = useStoreContext();
 
+  console.log("STAAAAAAAATE: ", state)
+
   // const [modalShow, setModalShow] = React.useState(false);
   const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
 
@@ -60,7 +62,7 @@ function AlbumList() {
     let idVariable = state.albums.filter(album => album._id === event.target.value)[0]
     // console.log("EVENT: ***********", {...currentSong, ...idVariable[0]})
     updateCurrentSong({ currentSongList: idVariable, modalShow: true })
-
+    console.log("idVariable: ", idVariable)
     console.log("CURRENT SONG: ", currentSong)
   }
 
@@ -116,7 +118,7 @@ function AlbumList() {
 
     // Play your new play list right after your new play list is loaded turn false.
     // [type `boolean`, default `false`]
-    autoPlayInitLoadPlayList: false,
+    autoPlayInitLoadPlayList: true,
 
     //Whether to load audio immediately after the page loads.  [type `Boolean | String`, default `false`]
     //"auto|metadata|none" "true| false"
@@ -149,7 +151,7 @@ function AlbumList() {
     once: false,
 
     //Whether the audio is played after loading is completed. [type `Boolean` default 'true']
-    autoPlay: false,
+    autoPlay: true,
 
     //Whether you can switch between two modes, full => mini  or mini => full   [type 'Boolean' default 'true']
     toggleMode: true,
@@ -287,21 +289,23 @@ function AlbumList() {
               <Card.Body>
                 <Card.Title>{album.title}</Card.Title>
                 <Card.Text>{album.description}</Card.Text>
-                <Button value={album._id} className="albumBtn" onClick={albumFunction}> Details </Button>
+                
+                <Button value={album._id} className="albumBtn" onClick={albumFunction}> Support </Button>
                 {/* <Link to={"/albums/" + album._id}> */}
                 <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} />
                 {/* </Link> */}
               </Card.Body>
-              <Card.Footer>
+              {/* <Card.Footer>
                 <small className="text-muted">Added {album.date}</small>
-              </Card.Footer>
-              <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause={skipChargeOnResume} />
+              </Card.Footer> */}
+              
             </Card>
           ))}
         </CardColumns>
       ) : (
           <h3>No albums available.</h3>
         )}
+        <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause={skipChargeOnResume} />
     </Container>
   );
 }

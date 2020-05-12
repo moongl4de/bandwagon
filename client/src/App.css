@@ -20,6 +20,31 @@ body {
 }
 
 
+
+.albumBtn:hover {
+  transition-duration: .5s !important;
+  text-align: center;
+  
+  background: linear-gradient(to right, rgb(216, 216, 216) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
+  background-size: 200% auto;
+  color: rgba(255, 255, 255, 0.616) !important;
+  letter-spacing: 5px;
+  animation: shine 10s linear infinite;
+  border-radius: 20px !important;
+  box-shadow: 0px 0px 4px rgb(255, 255, 255);
+
+}
+
+.albumBtn:active {
+  background-color: red !important;
+}
+@keyframes shine {
+  to {
+    background-position: 120% center;
+  }
+}
+
+
 .containerTest {
   width: 40rem;
   height: 40rem;
@@ -275,6 +300,9 @@ svg:hover {
 
 .albumCard {
   border-radius: 0px !important;
+  background: linear-gradient(to bottom left, rgba(201, 206, 253, 0.623) 50%, rgba(255, 215, 255, 0.534) 100%);
+
+  color: rgb(54, 54, 54) !important;
 }
 
 .albumCard:hover {
@@ -284,14 +312,38 @@ svg:hover {
 }
 
 .albumBtn {
-  border-radius: 0px !important;
-  border: 2px rgba(27, 0, 27, 0.63) solid !important;
+  border-radius: 20px !important;
+  border: 0px rgba(27, 0, 27, 0.63) solid !important;
   color: black !important;
   margin: 0 auto !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .albumHeader {
   color: white;
   text-shadow: 0px 0px 8px rgb(0, 0, 0);
-} 
+}
+
+.audio-circle-process-bar {
+  fill: red !important;
+}
+
+.modal{
+  border-radius: 0px !important;
+}
+
+.closeBtn {
+  transition-duration: .5s !important;
+  text-align: center;
+  
+  background: linear-gradient(to right, rgb(216, 216, 216) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
+  background-size: 200% auto;
+  color: rgba(255, 255, 255, 0.616) !important;
+  letter-spacing: 5px;
+  animation: shine 10s linear infinite;
+  border-radius: 20px !important;
+  border: none !important;
+}
 
