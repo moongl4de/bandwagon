@@ -273,5 +273,25 @@ svg:hover {
   
 }
 
+.albumCard {
+  border-radius: 0px !important;
+}
 
+.albumCard:hover {
+  border: 1px rgba(153, 0, 255, 0.37) solid;
+  transition-duration: 1s;
+  box-shadow: 0px 5px 10px rgba(84, 0, 95, 0.301);
+}
+
+.albumBtn {
+  border-radius: 0px !important;
+  border: 2px rgba(27, 0, 27, 0.63) solid !important;
+  color: black !important;
+  margin: 0 auto !important;
+}
+
+.albumHeader {
+  color: white;
+  text-shadow: 0px 0px 8px rgb(0, 0, 0);
+} 
 

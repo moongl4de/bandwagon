@@ -1,4 +1,4 @@
-import React, { useSate, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../utils/globalContext";
 // import logo from "../assets/img/reactlogo.png"
 import API from "../utils/API";
@@ -6,6 +6,9 @@ import { Modal, Button, ListGroup, Item } from "react-bootstrap";
 
 function Details(props) {
   const [state, dispatch] = useStoreContext();
+
+  // console.log("CONTEXT TEST: ", state)
+  
 
 //   console.log(state);
 
@@ -18,7 +21,7 @@ function Details(props) {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("current album - ", state.currentAlbum)
+  // console.log("current album - ", state.currentAlbum)
 
   //   const addToPlaylist = () => {
   //     dispatch({
