@@ -1,4 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
+import { isAuth } from "../components/helper";
+import API from "../utils/API"
 import {
   Container,
   Row,
@@ -15,67 +17,61 @@ import { UserCard } from "../components/adUserCard.jsx";
 import Button from "../components/adCustomButton.jsx";
 import backgd from "../assets/img/bands.jpg";
 import prophoto from "../assets/img/face-7.jpg";
+import { toast } from "react-toastify";
 
 function UserProfile() {
 
   const [state, setState] = useState({
     name: "",
+    email: "",
+    userId: "",
     username: "",
-    avatar: "",
+    avatar: prophoto,
     primarygenre: "",
     secondarygenre: "",
     city: "",
     country: "",
-    social: {
-      youtube: "",
-      twitter: "",
-      facebook: "",
-      instagram: ""
-    },
+    youtube: "",
+    twitter: "",
+    facebook: "",
+    instagram: "",
     bio: ""
   });
 
-  const [nam, setName] = useState("+Medic");
-  const [usernam, setUsername] = useState("medic911");
-  const [avata, setAvatar] = useState(prophoto);
-  const [primary, setPrimary] = useState("Metal");
-  const [secondary, setSecondary] = useState("Soul");
-  const [cit, setCity] = useState("Brisbane");
-  const [coun, setCountry] = useState("Australia");
-  const [you, setYoutube] = useState();
-  const [twit, setTwitter] = useState();
-  const [face, setFacebook] = useState();
-  const [insta, setInstagram] = useState();
-  const [bio2, setBio] = useState("A metal band with soulful roots");
+  const handleInputChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
+
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    setState({
-      ...state,
-      name: nam,
-      username: usernam,
-      avatar: avata,
-      primarygenre: primary,
-      secondarygenre: secondary,
-      city: cit,
-      country: coun,
-      social: {
-        youtube: you,
-        twitter: twit,
-        facebook: face,
-        instagram: insta
-      },
-      bio: bio2
-    });
-
-    console.log(state)
-
+    updateArtistProfile(state._id, state)
   }
 
+  useEffect(() => {
+    const userId = isAuth()._id;
+    API.getArtists().then(res => {
+      const currentArtistData = res.data.filter(artist => artist.userId === userId)
+      //update state with with current user from artist API call
+      setState({
+        ...currentArtistData[0],
+      })
 
+    })
+  }, [])
 
-
+  //function to update userprofile
+  const updateArtistProfile = (id, data) => {
+    API.updateArtist(id, data)
+      .then((result) => {
+        toast.success("successfully updated userprofile")
+      }).catch((err) => {
+        toast.error("Failed to update userprofile" + err);
+      });
+  }
 
   return (
     <div className="content">
@@ -85,73 +81,98 @@ function UserProfile() {
             <Card
               title="Edit Profile"
               content={
-                <Form onSubmit={handleSubmit} >
+                <Form  >
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Band Name:</Form.Label>
-                      <Form.Control type="text" placeholder="Band Name" onChange={e => setName(e.target.value)} />
+                      <Form.Control type="text" placeholder="Band Name" name="name"
+                        value={state.name}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>User Name:</Form.Label>
-                      <Form.Control type="text" placeholder="User Name" onChange={e => setUsername(e.target.value)} />
+                      <Form.Control type="text" placeholder="User Name" name="username"
+                        value={state.username}
+                        onChange={handleInputChange} />
                     </Form.Group>
                   </Form.Row>
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>City:</Form.Label>
-                      <Form.Control type="text" placeholder="City" onChange={e => setCity(e.target.value)} />
+                      <Form.Control type="text" placeholder="City"
+                        name="city"
+                        value={state.city}
+                        onChange={handleInputChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Country:</Form.Label>
-                      <Form.Control type="text" placeholder="Country" onChange={e => setCountry(e.target.value)} />
+                      <Form.Control type="text" placeholder="Country" name="country"
+                        value={state.country}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                   </Form.Row>
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Primary Genre:</Form.Label>
-                      <Form.Control type="text" placeholder="Genre" onChange={e => setPrimary(e.target.value)} />
+                      <Form.Control type="text" placeholder="Genre" name="primarygenre"
+                        value={state.primarygenre}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Secondary Genre:</Form.Label>
-                      <Form.Control type="text" placeholder="Genre" onChange={e => setSecondary(e.target.value)} />
+                      <Form.Control type="text" placeholder="Genre"
+                        name="secondarygenre"
+                        value={state.secondarygenre}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                   </Form.Row>
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Facebook:</Form.Label>
-                      <Form.Control type="text" placeholder="Link" onChange={e => setFacebook(e.target.value)} />
+                      <Form.Control type="text" placeholder="Link" name="facebook"
+                        value={state.facebook}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Twitter:</Form.Label>
-                      <Form.Control type="text" placeholder="Link" onChange={e => setTwitter(e.target.value)} />
+                      <Form.Control type="text" placeholder="Link"
+                        name="twitter"
+                        value={state.twitter}
+                        onChange={handleInputChange} />
                     </Form.Group>
                   </Form.Row>
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Youtube:</Form.Label>
-                      <Form.Control type="text" placeholder="Link" onChange={e => setYoutube(e.target.value)} />
+                      <Form.Control type="text" placeholder="Link"
+                        name="youtube"
+                        value={state.youtube}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Instagram:</Form.Label>
-                      <Form.Control type="text" placeholder="Link" onChange={e => setInstagram(e.target.value)} />
+                      <Form.Control type="text" placeholder="Link"
+                        name="instagram"
+                        value={state.instagram}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                   </Form.Row>
-
-
-
-
-
-
-
 
                   <Row>
                     <Col md={12}>
@@ -162,13 +183,15 @@ function UserProfile() {
                           componentClass="textarea"
                           bsClass="form-control"
                           placeholder="Write some stuff here...."
-                          onChange={e => setBio(e.target.value)}
+                          name="bio"
+                          value={state.bio}
+                          onChange={handleInputChange}
 
                         />
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Button bsStyle="info" pullRight fill type="submit"  >
+                  <Button bsStyle="info" pullRight fill type="submit" onClick={handleSubmit}  >
                     Update Profile
                     </Button>
                   <br />
@@ -185,18 +208,18 @@ function UserProfile() {
             <UserCard
               bgImage={backgd}
               avatar={prophoto}
-              name={nam}
-              userName={usernam}
+              name={state.name}
+              userName={state.username}
               description={
                 <div>
                   <span>
-                    {cit}, {coun}
+                    {state.city}, {state.country}
                     <br />
-                    Genres: {primary}, {secondary}</span>
+                    Genres: {state.primarygenre}, {state.secondarygenre}</span>
                   <br />
                   <br />
                   <span style={{ color: "grey", fontStyle: "italic", }}>
-                    "{bio2}"
+                    "{state.bio}"
 
                   </span>
                 </div>
@@ -204,16 +227,16 @@ function UserProfile() {
               socials={
                 <div>
                   <Button simple>
-                    <a href={face}> <i className="fa fa-facebook-square" /></a>
+                    <a href={state.facebook}> <i className="fa fa-facebook-square" /></a>
                   </Button>
                   <Button simple>
-                    <a href={twit}><i className="fa fa-twitter" /></a>
+                    <a href={state.twitter}><i className="fa fa-twitter" /></a>
                   </Button>
                   <Button simple>
-                    <a href={insta}><i className="fab fa-instagram" /></a>
+                    <a href={state.instagram}><i className="fab fa-instagram" /></a>
                   </Button>
                   <Button simple>
-                    <a href={you}><i className="fab fa-youtube" /></a>
+                    <a href={state.youtube}><i className="fab fa-youtube" /></a>
                   </Button>
                 </div>
               }

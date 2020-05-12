@@ -5,49 +5,56 @@ const mongoose = require('mongoose');
 const ArtistSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
+  },
+  email:{
+    type: String,
+    trim: true,
+    required: true,
+    lowercase: true,
+    unique:true
   },
   name: {
+    type: String
+  },
+  username: {
+    type: String
+  },
+  userId:{
     type: String
   },
   avatar: {
     type: Object
   },
-  release: {
-    type: Date
-  },
-  status: {
+  primarygenre: {
     type: String,
-    required: true
   },
-  genres: {
-    type: [Object],
-    required: true,
-    ref: 'genres'
+  secondarygenre: {
+    type: String,
+  },
+  city:{
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  youtube: {
+    type: String
+  },
+  twitter: {
+    type: String
+  },
+  facebook: {
+    type: String
+  },
+  linkedin: {
+    type: String
+  },
+  instagram: {
+    type: String
   },
   bio: {
     type: String
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  social: {
-    youtube: {
-      type: String
-    },
-    twitter: {
-      type: String
-    },
-    facebook: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    instagram: {
-      type: String
-    }
   }
 });
 
