@@ -20,17 +20,9 @@ const albumController = require("../../controllers/albumController");
   .route("/:id")
   .get(albumController.findById)
 
-  router
-  .route("/add")
-  .post(albumController.insert);
-
-
-
-
-
-
-
-  
+  // router
+  // .route("/songs")
+  // .post(albumController.insert);
 
 // router.post('/user', (req, res) => {
 //   User.create(req.body)
@@ -84,18 +76,5 @@ const albumController = require("../../controllers/albumController");
 // });
 
 
-
-// Matches with "/api/songs"
-// router
-//   .route("/")
-//   .get(songsController.findAll)
-//   .post(songsController.create);
-
-// // Matches with "/api/songs/:id"
-// router
-//   .route("/:id")
-//   .get(songsController.findById)
-//   .put(songsController.update)
-//   .delete(songsController.remove);
 
 module.exports = router;
