@@ -35,8 +35,21 @@ function AlbumList() {
       .catch((err) => console.log(err));
   };
 
+    const getSongs = () => {
+    
+    API.getSongs()
+      .then((results) => {
+        console.log("all songs from db:", results.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+  
+
   useEffect(() => {
-    getAlbums();
+    // getAlbums();
+    getSongs();
     console.log("useEffect State:", state)
   }, []);
 

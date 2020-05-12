@@ -56,10 +56,11 @@ export default {
   //SONGS
 
   uploadSongs: function(data){
-    return axios.post("/api/albums/add", data)
-  }
-
-
+    return axios.post("/api/songs", data)
+  },
+  getSongs: function() {
+    return axios.get("/api/songs");
+  },
 };
 
 
