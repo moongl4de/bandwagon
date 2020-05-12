@@ -128,6 +128,7 @@ exports.activateAccount = (req, res) => {
                     })
                 }
                 return res.json({
+                    id: user._id,
                     message: 'Sign Up Successfull'
                 })
             })
