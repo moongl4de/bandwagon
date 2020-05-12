@@ -43,7 +43,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-piggy text-success" />}
                 statsText="Tokens"
-                statsValue="1,281"
+                statsValue="81"
                 statsIcon={<i className="pe-7s-check" />}
                 statsIconText="Verified"
               />

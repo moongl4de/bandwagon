@@ -141,7 +141,7 @@ function Upload() {
             })
             .catch((err) => {
               console.log(err);
-              toast.danger( "Something went wrong" );
+              // toast.danger( "Something went wrong" );
             });
         })
       })
