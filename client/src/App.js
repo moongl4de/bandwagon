@@ -17,7 +17,7 @@ import ActivateUser from './components/ActivateUser';
 import ArtistPage from "./components/ArtistPage"
 import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
-// import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
+import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
 // import UserProfile from "./views/UserProfile.jsx";
 // import Upload from "./views/Upload.jsx";
 // import Library from "./views/Library.jsx";
@@ -41,6 +41,7 @@ function App() {
         {/* <ListenerPrivateRoute exact path='/albums/:id' component={Details}/> */}
         <ArtistPrivateRoute exact path='/admin/dashboard' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/edit' component={Admin}/>
         <Route exact path='/admin/upload' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
         {/* <Route exact path='/test' component={AWS}/> */}
