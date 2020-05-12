@@ -48,6 +48,7 @@ function App() {
         <ArtistPrivateRoute exact path='/admin/user' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/upload' component={Admin}/>
         <ArtistPrivateRoute exact path='/admin/library' component={Admin}/>
+        <ArtistPrivateRoute exact path='/admin/edit' component={Admin}/>
         {/* <Route exact path='/test' component={AWS}/> */}
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         

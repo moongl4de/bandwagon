@@ -244,14 +244,14 @@ var style = {
 // // // For tables
 // //
 //
-const thArray = ["Album", "Song", "Artist", "Country", "City"];
+const thArray = ["Album", "Song", "Release Date", "Edit", "Delete"];
 const tdArray = [
-  ["Fight With Tools", "Handlebars", "Flobots", "USA", "Denver"],
-  ["Grand National", "Daniella", "John Butler Trio", "Australia", "Sydney"],
-  ["An Awesome Wave", "Breezeblocks", "alt-J", "England", "Leeds"],
-  ["In With the Old", "Ashes", "Pepper", "USA", "Hawaii"],
-  ["ExtraOrdinary", "Helen", "Nizlopi", "Warwickshire", "Royal Leamington Spa"],
-  ["Food in the Belly", "The Letter", "Xavier Rudd", "Australia", "Sydney"]
+  ["Fight With Tools", "Handlebars", "1999"],
+  ["Grand National", "Daniella", "2001"],
+  ["An Awesome Wave", "Breezeblocks", "2010"],
+  ["In With the Old", "Ashes", "2008"],
+  ["ExtraOrdinary", "Helen", "2010"],
+  ["Food in the Belly", "The Letter", "2006"]
 ];
 
 
