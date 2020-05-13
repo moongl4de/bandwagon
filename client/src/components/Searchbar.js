@@ -93,7 +93,7 @@ class Search extends Component {
 };
 
 function Hit(props) {
-  console.log(props)
+  // console.log(props)
   return (
 
 
