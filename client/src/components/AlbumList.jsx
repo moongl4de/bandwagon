@@ -19,7 +19,18 @@ function AlbumList() {
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState({});
 
-  console.log("STAAAAAAAATE: ", state)
+  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('');
+  const [art, setArt] = useState('');
+
+  const [modalShow, setModalShow] = React.useState(false);
+
+
+  console.log(songs)
+
+
+
+
 
   // const [modalShow, setModalShow] = React.useState(false);
   // const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
@@ -63,18 +74,33 @@ function AlbumList() {
   // console.log("CURRENT SONG: ", currentSong)
   // }
 
-  const getCurrentSong = (e) => {
-    console.log("CLICKED SONG", e.target.id);
-    let clickedSongId = e.target.id;
-    let clickedSongTitle = e.target.title;
-    let clickedSongUrl = e.target.url;
-    setCurrentSong({currentSong: {
-      id: clickedSongId,
-      title: clickedSongTitle,
-      url: clickedSongUrl
-    }});
+  const getCurrentSong = (song) => {
+    console.log("CLICKED SONG", song.id);
+    let clickedSongId = song.id;
+    let clickedSongTitle = song.title.replace(/%20/g," ");
+    let clickedSongUrl = song.fileUrl;
+    setModalShow(true)
+
+
+
+
+    setUrl(clickedSongUrl)
+    setTitle(clickedSongTitle)
+    // setArt(clickedSongArt)
+
+    setCurrentSong({
+      currentSong: {
+        id: clickedSongId,
+        title: clickedSongTitle,
+        url: clickedSongUrl
+      }
+    });
     // console.log(currentSong);
   };
+
+  console.log("art: ", art)
+  console.log("title: ", title)
+  console.log("URL:", url)
 
   console.log(currentSong);
 
@@ -90,18 +116,18 @@ function AlbumList() {
 
   const audioListTest = [
     {
-      name: currentSong.title,
-      singer: currentSong.title,
-      cover: currentSong.art,
+      name: title,
+      singer: title,
+      cover: art,
       musicSrc: () => {
-        console.log(currentSong.fileUrl, "currentSong.fileUrl");
-        return Promise.resolve(`${currentSong.fileUrl}`);
+        // console.log(currentSong.fileUrl, "currentSong.fileUrl");
+        return Promise.resolve(`${url}`);
       },
     },
   ];
 
   const options = {
-    // audioLists: currentSong.fileUrl ? audioListTest : [],
+    audioLists: audioListTest,
     //default play index of the audio player  [type `number` default `0`]
     defaultPlayIndex: 0,
 
@@ -224,10 +250,10 @@ function AlbumList() {
     spaceBar: true,
   };
 
-  if (currentSong.fileUrl) {
-    console.log("audioListTest", audioListTest);
-    options.audioLists = audioListTest;
-  }
+  // if (currentSong.fileUrl) {
+  //   console.log("audioListTest", audioListTest);
+  //   options.audioLists = audioListTest;
+  // }
 
   // const [listenerInfo, updateListenerInfo] = React.useState({
   //   subscriptionToken: 0,
@@ -305,7 +331,7 @@ function AlbumList() {
             >
               <Card.Img
                 variant="top"
-                //  src={album.art}
+                 src={song.art}
                 style={{ height: "300px" }}
               />
               <Card.Body>
@@ -318,11 +344,13 @@ function AlbumList() {
                   title={song.title}
                   url={song.fileUrl}
                   name="currentSong"
-                  onClick={getCurrentSong}
+                  onClick={() => getCurrentSong(song)}
                 >
+                  
                   {" "}
                   Details{" "}
                 </Button>
+                <Details />
                 {/* <Link to={"/albums/" + album._id}> */}
                 {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
                 {/* </Link> */}
@@ -331,17 +359,18 @@ function AlbumList() {
                 {/* <small className="text-muted">Added {album.date}</small> */}
                 {song._id}
               </Card.Footer>
-              <ReactJkMusicPlayer
-                {...options}
-                // onAudioPlay={chargeListenerToken}
-                // onAudioPause={skipChargeOnResume}
-              />
+
             </Card>
           ))}
         </CardColumns>
       ) : (
-        <h3>No albums available.</h3>
-      )}
+          <h3>No albums available.</h3>
+        )}
+      <ReactJkMusicPlayer
+        {...options}
+      // onAudioPlay={chargeListenerToken}
+      // onAudioPause={skipChargeOnResume}
+      />
     </Container>
 
     //   {state.albums.length ? (
