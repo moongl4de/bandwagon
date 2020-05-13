@@ -2,7 +2,16 @@ body {
   background-color: rgb(33,33,33);
   font-family: "Roboto";
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 
+}
+
+
+
+.cardContainer {
+  margin-bottom: 10%;
+  display: flex;
+  justify-content: center;
 }
 
 ::-webkit-scrollbar {
@@ -25,10 +34,10 @@ body {
   transition-duration: .5s !important;
   text-align: center;
   
-  background: linear-gradient(to right, rgb(216, 216, 216) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
+  background: linear-gradient(to right, rgb(165, 163, 255) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
   background-size: 200% auto;
   color: rgba(255, 255, 255, 0.616) !important;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   animation: shine 10s linear infinite;
   border-radius: 20px !important;
   box-shadow: 0px 0px 4px rgb(255, 255, 255);
@@ -141,9 +150,6 @@ padding: 5px;
   background-color: #313131;
   display: flex;
   justify-content: center;
-  
-  
-  
 }
 
 
@@ -167,7 +173,7 @@ padding: 5px;
   
 }
 .subscriptionDiv:hover {
-  box-shadow: 0px 0px 25px rgba(27, 99, 255, 0.301);
+  box-shadow: 0px 0px 25px rgba(27, 99, 255, 0.582);
   cursor: pointer;
   border: 1px rgb(133, 81, 255) solid;
   background-color: rgb(255, 255, 255);
@@ -186,6 +192,8 @@ padding: 5px;
   #subHeader {
     color: red;
   }
+
+
 
 }
 #subHeader {
@@ -301,14 +309,20 @@ svg:hover {
 .albumCard {
   border-radius: 0px !important;
   background: linear-gradient(to bottom left, rgba(201, 206, 253, 0.623) 50%, rgba(255, 215, 255, 0.534) 100%);
-
   color: rgb(54, 54, 54) !important;
+  max-height: 500px;
+  max-width: 500px;
+  width: 450px !important;
+  height: 450px !important;
+  overflow-x: scroll;
+  margin: 20px !important;
 }
 
 .albumCard:hover {
-  border: 1px rgba(153, 0, 255, 0.37) solid;
-  transition-duration: 1s;
-  box-shadow: 0px 5px 10px rgba(84, 0, 95, 0.301);
+  border: 1px rgb(188, 88, 255) solid;
+  transition: 1s !important;
+  box-shadow: 0px 5px 12px rgba(184, 98, 255, 0.411);
+  background: linear-gradient(to bottom left, rgb(201, 206, 253) 50%, rgb(255, 215, 255) 100%);
 }
 
 .albumBtn {
@@ -338,12 +352,19 @@ svg:hover {
   transition-duration: .5s !important;
   text-align: center;
   
-  background: linear-gradient(to right, rgb(216, 216, 216) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
+  background: linear-gradient(to right, rgb(218, 162, 255) 10%, rgb(240, 168, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
   background-size: 200% auto;
   color: rgba(255, 255, 255, 0.616) !important;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   animation: shine 10s linear infinite;
   border-radius: 20px !important;
   border: none !important;
 }
+
+.card-group {
+  display: flex;
+  justify-content: center;
+}
+
+
 

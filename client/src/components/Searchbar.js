@@ -85,7 +85,7 @@ class Search extends Component {
             </Navbar.Collapse>
           </Nav>
         </Navbar>
-        <Configure hitsPerPage={12} />
+        <Configure hitsPerPage={0} />
         <Hits hitComponent={Hit} />
       </InstantSearch>
     )
