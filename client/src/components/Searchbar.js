@@ -18,6 +18,9 @@ import {
   Configure,
 } from 'react-instantsearch-dom';
 import PropTypes from 'prop-types';
+import "../App.css"
+
+
 
 
 const searchClient = algoliasearch('BY7RM0A5T2',
@@ -48,7 +51,7 @@ class Search extends Component {
     }
     return (
       <InstantSearch searchClient={searchClient} indexName="songs">
-        <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
+        <Navbar bg="" variant="dark" expand="lg" className="mb-3 navbar">
           <Navbar.Brand href="#home">
             <img
               alt=""
@@ -85,7 +88,7 @@ class Search extends Component {
             </Navbar.Collapse>
           </Nav>
         </Navbar>
-        <Configure hitsPerPage={12} />
+        <Configure hitsPerPage={0} />
         <Hits hitComponent={Hit} />
       </InstantSearch>
     )
