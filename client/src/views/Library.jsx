@@ -3,7 +3,7 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 import { useStoreContext } from "../utils/globalContext";
 import Card from "../components/adCard.jsx";
 import { Redirect } from "react-router-dom"
-
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -35,6 +35,7 @@ const array= {
   function handleDelete(e) {
     e.preventDefault();
     console.log("deleted")
+    toast.success("Your song has been deleted");
   }
 
   function handleEdit(e) {
@@ -69,6 +70,7 @@ const array= {
   
     return (
       <div className="content">
+        <ToastContainer />
       {(page === true) ? (
         <Redirect to="/admin/edit" />
       ) : null}

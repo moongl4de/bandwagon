@@ -135,11 +135,11 @@ function Upload() {
             .then((result) => {
               console.log("song sent to db", result.data.song_ids);
               // setAlbum({ ...album, song_ids: [result.data.song_ids] });
-              // toast.success("Songs successfully loaded");
+              toast.success("Songs successfully loaded");
             })
             .catch((err) => {
               console.log(err);
-              // toast.danger( "Something went wrong" );
+              toast.danger( "Something went wrong" );
             });
         })
       })
