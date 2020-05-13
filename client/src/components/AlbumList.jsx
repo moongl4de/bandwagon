@@ -10,6 +10,9 @@ import "../App.css";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 
+import ReactDOM from 'react-dom'
+import ReactWOW from 'react-wow'
+
 import { isAuth } from "./helper";
 import { toast } from "react-toastify";
 
@@ -24,6 +27,7 @@ function AlbumList() {
   const [art, setArt] = useState('');
 
   const [modalShow, setModalShow] = React.useState(false);
+
 
 
   console.log(songs)
@@ -77,7 +81,7 @@ function AlbumList() {
   const getCurrentSong = (song) => {
     console.log("CLICKED SONG", song.id);
     let clickedSongId = song.id;
-    let clickedSongTitle = song.title.replace(/%20/g," ");
+    let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
     setModalShow(true)
 
@@ -318,38 +322,40 @@ function AlbumList() {
   // };
 
   return (
-    <Container>
+    <div className="cardContainer">
       <h1 className="albumHeader"></h1>
-
       {songs.length ? (
-        <CardColumns>
+        <div className="card-group">
           {songs.map((song) => (
+           <div class="row">
             <Card
-              className="albumCard animate__animated animate__fadeIn"
+              className="albumCard wow animate__animated animate__zoomIn col-10"
               style={{ width: "18rem" }}
               key={song._id}
             >
+              <Button
+
+                value={song._id}
+                className="albumBtn"
+                id={song._id}
+                title={song.title}
+                url={song.fileUrl}
+                name="currentSong"
+                onClick={() => getCurrentSong(song)}
+              >
+
+                {" "}
+                  Support Artist{" "}
+              </Button>
               <Card.Img
                 variant="top"
-                 src={song.album_art}
+                src={song.album_art}
                 style={{ height: "300px" }}
               />
               <Card.Body>
                 <Card.Title>{song.title}</Card.Title>
                 <Card.Text> url to hide {song.fileUrl}</Card.Text>
-                <Button
-                  value={song._id}
-                  className="albumBtn"
-                  id={song._id}
-                  title={song.title}
-                  url={song.fileUrl}
-                  name="currentSong"
-                  onClick={() => getCurrentSong(song)}
-                >
-                  
-                  {" "}
-                  Details{" "}
-                </Button>
+
                 <Details />
                 {/* <Link to={"/albums/" + album._id}> */}
                 {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
@@ -359,19 +365,24 @@ function AlbumList() {
                 {/* <small className="text-muted">Added {album.date}</small> */}
                 {song._id}
               </Card.Footer>
-
+           
             </Card>
+            </div>
+
           ))}
-        </CardColumns>
+        </div>
       ) : (
           <h3>No albums available.</h3>
         )}
+
       <ReactJkMusicPlayer
+
         {...options}
       // onAudioPlay={chargeListenerToken}
       // onAudioPause={skipChargeOnResume}
       />
-    </Container>
+
+    </div>
 
     //   {state.albums.length ? (
     //     <CardColumns>
