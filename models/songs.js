@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 
 const SongSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'user'
-    // },
+    user: {
+      type: String
+    },
     albumId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'album'
@@ -22,10 +21,9 @@ const SongSchema = new mongoose.Schema(
     //   type: Number,
     //   default: 0
     // },
-    // album_art: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'album'
-    // },
+    album_art: {
+      type: Object,
+    },
     // release: {
     //   type: Date
     // },
