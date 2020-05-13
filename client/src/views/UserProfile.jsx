@@ -241,11 +241,7 @@ function UserProfile() {
                 </div>
               }
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={8}>
-            <Card
+    <Card
               title="Edit Profile Image"
               content={
                 <form>
@@ -258,7 +254,7 @@ function UserProfile() {
 
                         <Form.Label>Choose Profile Picture to Upload</Form.Label>
                         <Form.Control type="file" />
-                        <Form.Label>Upload!</Form.Label>
+                        
                       </FormGroup>
                     </Col>
                   </Row>
@@ -271,9 +267,10 @@ function UserProfile() {
               }
             />
 
+
           </Col>
         </Row>
-
+        
 
 
 
