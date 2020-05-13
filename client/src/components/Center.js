@@ -14,13 +14,13 @@ import "react-jinke-music-player/lib/styles/index.less";
 
 import currentSongList from "../components/AlbumList"
 
-console.log('CURRENT TEST: ', currentSongList)
+// console.log('CURRENT TEST: ', currentSongList)
 
 
 
 function Center() {
-  const [state, dispatch] = useStoreContext();
-  console.log("STATE TEST", state)
+  // const [state, dispatch] = useStoreContext();
+  // console.log("STATE TEST", state)
 
   // const audioListTest = [
   //   {
