@@ -360,5 +360,7 @@ svg:hover {
   justify-content: center;
 }
 
-
+#inputID::placeholder {
+  color: rgb(71, 71, 71);
+}
 

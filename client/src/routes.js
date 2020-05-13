@@ -38,7 +38,7 @@ const dashboardRoutes = [
   {
     path: "/edit",
     name: "Edit Music Info",
-    icon: "pe-7s-cloud-upload",
+    icon: "pe-7s-scissors",
     component: SongEdit,
     layout: "/admin"
   }
