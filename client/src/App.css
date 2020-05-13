@@ -192,18 +192,12 @@ padding: 5px;
   #subHeader {
     color: red;
   }
-
-
-
 }
 #subHeader {
   font-size: 30px;
   font-family: "Roboto";
 }
 
-#navbar {
-  background-color: #000000 !important;
-}
 
 /* Algolia Search css */
 
