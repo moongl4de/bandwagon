@@ -1,4 +1,4 @@
-import React, { useSate, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../utils/globalContext";
 // import logo from "../assets/img/reactlogo.png"
 import API from "../utils/API";
@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, CardColumns, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Details from "./DetailsModal";
-import "../App.css"
+import "../App.css";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 
@@ -15,81 +15,91 @@ import { toast } from "react-toastify";
 
 function AlbumList() {
   // access global state of albums
-  const [state, dispatch] = useStoreContext();
+  // const [state, dispatch] = useStoreContext();
+  const [songs, setSongs] = useState([]);
+  const [currentSong, setCurrentSong] = useState({});
 
   // const [modalShow, setModalShow] = React.useState(false);
-  const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
+  // const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
 
   //   console.log(state)
 
-  const getAlbums = () => {
-    dispatch({ type: "LOADING" });
-    API.getAlbums()
-      .then((results) => {
-        console.log("all albums from db:", results.data);
-        dispatch({
-          type: "LOAD_ALBUMS",
-          albums: results.data,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  // const getAlbums = () => {
+  //   dispatch({ type: "LOADING" });
+  //   API.getAlbums()
+  //     .then((results) => {
+  //       console.log("all albums from db:", results.data);
+  //       dispatch({
+  //         type: "LOAD_ALBUMS",
+  //         albums: results.data,
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-    const getSongs = () => {
-    
+  const getSongs = () => {
     API.getSongs()
       .then((results) => {
         console.log("all songs from db:", results.data);
+        setSongs(results.data);
+        // setCurrentSong(results.data[4])
       })
       .catch((err) => console.log(err));
   };
-
-
-  
 
   useEffect(() => {
     // getAlbums();
     getSongs();
-    console.log("useEffect State:", state)
+    // console.log("useEffect State:", songs)
   }, []);
 
+  // const getAlbumId = (event) => {
+  // let idVariable = state.albums.filter(album => album._id === event.target.value)[0]
+  // console.log("EVENT: ***********", {...currentSong, ...idVariable[0]})
+  // updateCurrentSong({ currentSongList: idVariable, modalShow: true })
 
-  useEffect(() => { console.log(currentSong) }, [currentSong])
+  // console.log("CURRENT SONG: ", currentSong)
+  // }
 
-  const getAlbumId = (event) => {
-    let idVariable = state.albums.filter(album => album._id === event.target.value)[0]
-    // console.log("EVENT: ***********", {...currentSong, ...idVariable[0]})
-    updateCurrentSong({ currentSongList: idVariable, modalShow: true })
+  const getCurrentSong = (e) => {
+    console.log("CLICKED SONG", e.target.id);
+    let clickedSongId = e.target.id;
+    let clickedSongTitle = e.target.title;
+    let clickedSongUrl = e.target.url;
+    setCurrentSong({currentSong: {
+      id: clickedSongId,
+      title: clickedSongTitle,
+      url: clickedSongUrl
+    }});
+    // console.log(currentSong);
+  };
 
-    console.log("CURRENT SONG: ", currentSong)
-  }
+  console.log(currentSong);
+
+  // useEffect(() => {setCurrentSong({currentSong : clickedSong})})
 
   const albumFunction = (event) => {
-    getAlbumId(event);
+    getCurrentSong(event);
 
     // updateCurrentSong({...currentSong, modalShow: true})
 
-    console.log("CLICKED")
-  }
-
+    console.log("CLICKED", event);
+  };
 
   const audioListTest = [
     {
-      name: currentSong.currentSongList.title,
-      singer: currentSong.currentSongList.title,
-      cover:
-        currentSong.currentSongList.art,
+      name: currentSong.title,
+      singer: currentSong.title,
+      cover: currentSong.art,
       musicSrc: () => {
-        return Promise.resolve(
-          `${currentSong.currentSongList.songs}`
-        )
+        console.log(currentSong.fileUrl, "currentSong.fileUrl");
+        return Promise.resolve(`${currentSong.fileUrl}`);
       },
     },
-  ]
+  ];
 
   const options = {
-
-    audioLists: audioListTest,
+    // audioLists: currentSong.fileUrl ? audioListTest : [],
     //default play index of the audio player  [type `number` default `0`]
     defaultPlayIndex: 0,
 
@@ -97,7 +107,7 @@ function AlbumList() {
     // playIndex: 0,
 
     //color of the music player theme    [ type `string: 'light' or 'dark'  ` default 'dark' ]
-    theme: 'dark',
+    theme: "dark",
 
     // Specifies movement boundaries. Accepted values:
     // - `parent` restricts movement within the node's offsetParent
@@ -107,7 +117,7 @@ function AlbumList() {
     //   These indicate how far in each direction the draggable
     //   can be moved.
     // Ref: https://github.com/STRML/react-draggable#draggable-api
-    bounds: 'body',
+    bounds: "body",
 
     // Replace a new playlist with the first loaded playlist
     // instead of adding it at the end of it.
@@ -137,10 +147,10 @@ function AlbumList() {
       left: 120,
     },
 
-    defaultPlayMode: 'order',
+    defaultPlayMode: "order",
 
     //audio mode        mini | full          [type `String`  default `mini`]
-    mode: 'full',
+    mode: "full",
 
     /**
      * [ type `Boolean` default 'false' ]
@@ -210,107 +220,157 @@ function AlbumList() {
 
     // Play and pause audio through blank space [type `Boolean` default `false`]
     spaceBar: true,
+  };
+
+  if (currentSong.fileUrl) {
+    console.log("audioListTest", audioListTest);
+    options.audioLists = audioListTest;
   }
 
-  const [listenerInfo, updateListenerInfo] = React.useState({
-    subscriptionToken: 0,
-    currentListenerData: {},
-    paused: false
-  });
+  // const [listenerInfo, updateListenerInfo] = React.useState({
+  //   subscriptionToken: 0,
+  //   currentListenerData: {},
+  //   paused: false,
+  // });
 
-  React.useEffect(() => {
-    //get current user and set subscription token and user info
-    API.getUsers()
-      .then((result) => {
-        const email = isAuth().email;
-        const currentUser = result.data.filter(user => user.email === email);
-        listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-        updateListenerInfo({
-          ...listenerInfo,
-          subscriptionToken: currentUser[0].subscriptionToken,
-          currentListenerData: currentUser[0]
-        })
-      }).catch((err) => {
+  // React.useEffect(() => {
+  //   //get current user and set subscription token and user info
+  //   API.getUsers()
+  //     .then((result) => {
+  //       const email = isAuth().email;
+  //       const currentUser = result.data.filter((user) => user.email === email);
+  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+  //       updateListenerInfo({
+  //         ...listenerInfo,
+  //         subscriptionToken: currentUser[0].subscriptionToken,
+  //         currentListenerData: currentUser[0],
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Failed to Get User info");
+  //     });
+  // }, ["subscriptionToken"]);
 
-        toast.error("Failed to Get User info");
-      });
-  }, ['subscriptionToken'])
+  // const chargeListenerToken = () => {
+  //   if (listenerInfo.paused === false) {
+  //     const token = Number(listenerInfo.subscriptionToken) - 1;
+  //     API.getUsers().then((result) => {
+  //       const email = isAuth().email;
+  //       const currentUser = result.data.filter((user) => user.email === email);
+  //       //calculate subscriptionToken
+  //       const userSubscriptionToken = token;
 
-  const chargeListenerToken = () => {
-    if (listenerInfo.paused === false) {
-      const token = Number(listenerInfo.subscriptionToken) - 1;
-      API.getUsers()
-        .then((result) => {
-          const email = isAuth().email;
-          const currentUser = result.data.filter(user => user.email === email);
-          //calculate subscriptionToken 
-          const userSubscriptionToken = token;
+  //       //update user payment required to false after intial signup
+  //       const data = {
+  //         ...currentUser[0],
+  //         paymentRequired: false,
+  //         subscriptionToken: userSubscriptionToken,
+  //       };
+  //       API.updateUser(data._id, data).then(() => {
+  //         updateListenerInfo({
+  //           ...listenerInfo,
+  //           subscriptionToken: data.subscriptionToken,
+  //           currentListenerData: data,
+  //         });
+  //       });
+  //     });
+  //   } else if (listenerInfo.paused === true) {
+  //     updateListenerInfo({
+  //       ...listenerInfo,
+  //       paused: false,
+  //     });
+  //   }
+  // };
 
-          //update user payment required to false after intial signup
-          const data = { ...currentUser[0], paymentRequired: false, subscriptionToken: userSubscriptionToken };
-          API.updateUser(data._id, data).then(() => {
-            updateListenerInfo({
-              ...listenerInfo,
-              subscriptionToken: data.subscriptionToken,
-              currentListenerData: data
-            })
-          })
-        })
-    } else if (listenerInfo.paused === true) {
-      updateListenerInfo({
-        ...listenerInfo,
-        paused: false
-      })
-    }
-  }
-
-  const skipChargeOnResume = () => {
-    updateListenerInfo({
-      ...listenerInfo,
-      paused: true
-    })
-  }
-
+  // const skipChargeOnResume = () => {
+  //   updateListenerInfo({
+  //     ...listenerInfo,
+  //     paused: true,
+  //   });
+  // };
 
   return (
     <Container>
-      <h1 className="albumHeader">All Albums</h1>
-      {state.albums.length ? (
+      <h1 className="albumHeader"></h1>
+
+      {songs.length ? (
         <CardColumns>
-          {state.albums.map((album) => (
-            <Card className="albumCard animate__animated animate__fadeIn" style={{ width: "18rem" }} key={album._id}>
+          {songs.map((song) => (
+            <Card
+              className="albumCard animate__animated animate__fadeIn"
+              style={{ width: "18rem" }}
+              key={song._id}
+            >
               <Card.Img
                 variant="top"
-                src={album.art}
+                //  src={album.art}
                 style={{ height: "300px" }}
               />
               <Card.Body>
-                <Card.Title>{album.title}</Card.Title>
-                <Card.Text>{album.description}</Card.Text>
-                <Button value={album._id} className="albumBtn" onClick={albumFunction}> Details </Button>
+                <Card.Title>{song.title}</Card.Title>
+                <Card.Text> url to hide {song.fileUrl}</Card.Text>
+                <Button
+                  value={song._id}
+                  className="albumBtn"
+                  id={song._id}
+                  title={song.title}
+                  url={song.fileUrl}
+                  name="currentSong"
+                  onClick={getCurrentSong}
+                >
+                  {" "}
+                  Details{" "}
+                </Button>
                 {/* <Link to={"/albums/" + album._id}> */}
-                <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} />
+                {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
                 {/* </Link> */}
               </Card.Body>
               <Card.Footer>
-                <small className="text-muted">Added {album.date}</small>
+                {/* <small className="text-muted">Added {album.date}</small> */}
+                {song._id}
               </Card.Footer>
-              <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause={skipChargeOnResume} />
+              <ReactJkMusicPlayer
+                {...options}
+                // onAudioPlay={chargeListenerToken}
+                // onAudioPause={skipChargeOnResume}
+              />
             </Card>
           ))}
         </CardColumns>
       ) : (
-          <h3>No albums available.</h3>
-        )}
+        <h3>No albums available.</h3>
+      )}
     </Container>
+
+    //   {state.albums.length ? (
+    //     <CardColumns>
+    //       {state.albums.map((album) => (
+    //         <Card className="albumCard animate__animated animate__fadeIn" style={{ width: "18rem" }} key={album._id}>
+    //           <Card.Img
+    //             variant="top"
+    //             src={album.art}
+    //             style={{ height: "300px" }}
+    //           />
+    //           <Card.Body>
+    //             <Card.Title>{album.title}</Card.Title>
+    //             <Card.Text>{album.description}</Card.Text>
+    //             <Button value={album._id} className="albumBtn" onClick={albumFunction}> Details </Button>
+    //             {/* <Link to={"/albums/" + album._id}> */}
+    //             <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} />
+    //             {/* </Link> */}
+    //           </Card.Body>
+    //           <Card.Footer>
+    //             <small className="text-muted">Added {album.date}</small>
+    //           </Card.Footer>
+    //           <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause={skipChargeOnResume} />
+    //         </Card>
+    //       ))}
+    //     </CardColumns>
+    //   ) : (
+    //       <h3>No albums available.</h3>
+    //     )}
+    // </Container>
   );
 }
 
 export default AlbumList;
-
-{
-  /* // <strong>
-// {album.title} by User name here {}
-// {album.songs}
-// </strong> */
-}
