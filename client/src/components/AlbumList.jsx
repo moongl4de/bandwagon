@@ -30,8 +30,6 @@ function AlbumList() {
 
 
 
-
-
   // const [modalShow, setModalShow] = React.useState(false);
   // const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
 
