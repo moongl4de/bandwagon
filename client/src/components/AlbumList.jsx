@@ -19,6 +19,8 @@ function AlbumList() {
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState({});
 
+  console.log("STAAAAAAAATE: ", state)
+
   // const [modalShow, setModalShow] = React.useState(false);
   // const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
 
@@ -126,7 +128,7 @@ function AlbumList() {
 
     // Play your new play list right after your new play list is loaded turn false.
     // [type `boolean`, default `false`]
-    autoPlayInitLoadPlayList: false,
+    autoPlayInitLoadPlayList: true,
 
     //Whether to load audio immediately after the page loads.  [type `Boolean | String`, default `false`]
     //"auto|metadata|none" "true| false"
@@ -159,7 +161,7 @@ function AlbumList() {
     once: false,
 
     //Whether the audio is played after loading is completed. [type `Boolean` default 'true']
-    autoPlay: false,
+    autoPlay: true,
 
     //Whether you can switch between two modes, full => mini  or mini => full   [type 'Boolean' default 'true']
     toggleMode: true,

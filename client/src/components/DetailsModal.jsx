@@ -3,6 +3,7 @@ import { useStoreContext } from "../utils/globalContext";
 // import logo from "../assets/img/reactlogo.png"
 import API from "../utils/API";
 import { Modal, Button, ListGroup, Item } from "react-bootstrap";
+import "../App.css"
 
 function Details(props) {
   const [state, dispatch] = useStoreContext();
@@ -44,14 +45,15 @@ function Details(props) {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        className="modal"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {state.currentAlbum.title}
+            bandwagon
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>{state.currentAlbum.songs}</h4>
+          <h4 style={{textAlign: "center"}}>Thanks for the support!</h4>
           {/* <ListGroup>
             {state.currentAlbum.map((song) => {
               <ListGroup.Item>
@@ -61,7 +63,7 @@ function Details(props) {
           </ListGroup> */}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button className="closeBtn" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>
