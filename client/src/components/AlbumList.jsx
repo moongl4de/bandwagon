@@ -331,7 +331,7 @@ function AlbumList() {
             >
               <Card.Img
                 variant="top"
-                 src={song.art}
+                 src={song.album_art}
                 style={{ height: "300px" }}
               />
               <Card.Body>
