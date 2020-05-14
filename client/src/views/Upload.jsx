@@ -19,13 +19,7 @@ import { SongContext } from "../utils/songContext";
 import { isAuth } from "../components/helper";
 import { auth } from "google-auth-library";
 
-// const searchClient = algoliasearch('BY7RM0A5T2',
-//   'c84d9d93579f57a4c7c7123119c9f4b2');
-// const index = client.initIndex('songs');
-// function sendToAlgolia() {
-// const records =
-// index.saveObjects(records, { autoGenerateObjectIDIfNotExist: true });
-//  }
+
 function Upload() {
   // access album's global state and set local state for file upload
   const [state, dispatch] = useStoreContext();
@@ -109,29 +103,30 @@ function Upload() {
           response.forEach((url) => {
             console.log("each fileUrl:", url);
             const Songtitle = url.split("-")[1];
+
             API.uploadSongs({
               user: userId,
               albumId: album._id,
               title: Songtitle,
               fileUrl: url,
-              user: album.user
+              // album_art: album.art
             })
-            .then((result) => {
-              
-              console.log("song sent to db", result.data.song_ids);
-              // setAlbum({ ...album, song_ids: [result.data.song_ids] });
-              toast.success("Songs successfully loaded");
-            })
-            .catch((err) => {
-              console.log(err);
-              toast.danger( "Something went wrong" );
-            });
+              .then((result) => {
+                // console.log("song sent to db", result.data.song_ids);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          });
+          toast("Songs successfully uploaded!");
         })
         .catch((err) => {
           console.log(err);
           toast.warning("Unable to upload songs, please try again.");
         });
-    });
+    }
+  };
+
     
   
   // SUBMIT FORM
@@ -176,6 +171,7 @@ function Upload() {
         toast.warning("Something went wrong, please try again.");
       });
   };
+
   return (
     <div className="content">
       <ToastContainer />
@@ -295,6 +291,9 @@ function Upload() {
     </div>
   );
 }
-}
-}
+
+
 export default Upload;
+
+
+
