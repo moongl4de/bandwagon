@@ -432,24 +432,26 @@ function AlbumList() {
     //       <div className="card-group">
     //         {searchResults.map((song) => (
     //           <div class="row">
-    //             <Card
+                // <Card
 
-    //               className="albumCard wow animate__animated animate__zoomIn col-10"
-    //               style={{ width: "18rem", padding: "2%",}}
-    //               key={song._id}
-    //             >
-    //               <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
-    //               <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
-    //               <Card.Img
-    //                 variant="top"
-    //                 src={song.album_art}
-    //                 style={{ height: "100%", width: "100%;" }}
-    //                 className="albumCardImage"
-    //               />
-    //               <Card.Body>
+                  // className="albumCard wow animate__animated animate__zoomIn col-10"
+                  // style={{ width: "18rem", padding: "2%",}}
+                  // key={song._id}
+                // >
+                //   <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
+                //   <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
+                //   <Card.Img
+                //     variant="top"
+                //     src={song.album_art}
+                //     style={{ height: "100%", width: "100%;" }}
+                //     className="albumCardImage"
+                //   />
+                //   <Card.Body>
 
 
-    //                 <Details />
+                //     <Details />
+
+
     <Fragment>
       <Search token={listenerInfo.subscriptionToken} />
       {/* <div id="centerDiv"> */}
@@ -480,7 +482,7 @@ function AlbumList() {
                 <div class="row">
                   <Card
                     className="albumCard wow animate__animated animate__zoomIn col-10"
-                    style={{ width: "18rem" }}
+                    style={{ width: "18rem", padding: "2%",}}
                     key={song._id}
                   >
                     <Button
@@ -497,15 +499,16 @@ function AlbumList() {
                       {" "}
                   Support Artist{" "}
                     </Button>
-                    <Card.Img
-                      variant="top"
-                      src={song.art}
-                      style={{ height: "300px" }}
-                    />
+                   
                     <Card.Body>
-                      <Card.Title>{song.title}</Card.Title>
-                      <Card.Text> url to hide {song.fileUrl}</Card.Text>
-
+                    <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
+                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
+                  <Card.Img
+                    variant="top"
+                    src={song.album_art}
+                    style={{ height: "100%", width: "100%;" }}
+                    className="albumCardImage"
+                  />
                       <Details />
                       {/* <Link to={"/albums/" + album._id}> */}
                       {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
