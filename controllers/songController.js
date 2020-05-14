@@ -1,5 +1,6 @@
 const Album = require("../models/albums");
 const Song = require("../models/songs");
+const User = require('../models/songs')
 
 // Defining methods
 module.exports = {
@@ -62,10 +63,17 @@ module.exports = {
   //     .catch(err => res.status(422).json(err));
   // },
   insertArt: function (req, res) {
-    console.log("body", req.body);
+    // console.log("body", req.body);
     const { albumId, album_art } = req.body;
-    console.log("hit", albumId, album_art)
     Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  getArtist: function (req, res) {
+    // console.log("body", req.body);
+    User.find().forEach(function (name) {
+      
+  })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

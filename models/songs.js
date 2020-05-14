@@ -27,9 +27,10 @@ const SongSchema = new mongoose.Schema(
     // release: {
     //   type: Date
     // },
-    // artists: {
-    //   type: String
-    // },
+    artist: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'artist'
+    },
     // date: {
     //   type: Date,
     //   default: Date.now
