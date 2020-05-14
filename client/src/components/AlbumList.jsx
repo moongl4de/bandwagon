@@ -384,8 +384,8 @@ function AlbumList() {
                   style={{ width: "18rem", padding: "2%",}}
                   key={song._id}
                 >
-                  <Card.Title style={{textAlign: "center"}}><strong>Artist Name Here</strong></Card.Title>
-                  <Card.Text style={{textAlign: "center"}}>Song Name Here</Card.Text>
+                  <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
+                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
                   <Card.Img
                     variant="top"
                     src={song.album_art}

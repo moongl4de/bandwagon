@@ -6,7 +6,7 @@ router
   .post(songController.insert)
   .get(songController.findAll)
   .put(songController.insertArt)
-
+  .delete(songController.remove);
   
 // Matches with "/api/songs"
 // router
@@ -14,7 +14,7 @@ router
 //   .get(songsController.findAll)
 //   .post(songsController.create);
 
-// // Matches with "/api/songs/:id"
+// Matches with "/api/songs/:id"
 // router
 //   .route("/:id")
 //   .get(songsController.findById)
