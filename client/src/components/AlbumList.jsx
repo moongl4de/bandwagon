@@ -59,6 +59,7 @@ function AlbumList() {
         setSongs(results.data);
         setSearchResults(results.data)
 
+
         // setCurrentSong(results.data[4])
       })
       .catch((err) => console.log(err));
@@ -84,11 +85,10 @@ function AlbumList() {
     let clickedSongId = song.id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
+    let clickedSongArt = song.album_art
     setModalShow(true)
 
-
-
-
+    setArt(clickedSongArt)
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
     // setArt(clickedSongArt)
@@ -379,16 +379,17 @@ function AlbumList() {
             {searchResults.map((song) => (
               <div class="row">
                 <Card
+
                   className="albumCard wow animate__animated animate__zoomIn col-10"
-                  style={{ width: "18rem", padding: "2%" }}
+                  style={{ width: "18rem", padding: "2%",}}
                   key={song._id}
                 >
-                  <Card.Title style={{textAlign: "center"}}>Artist Name Here</Card.Title>
+                  <Card.Title style={{textAlign: "center"}}><strong>Artist Name Here</strong></Card.Title>
                   <Card.Text style={{textAlign: "center"}}>Song Name Here</Card.Text>
                   <Card.Img
                     variant="top"
-                    src={song.art}
-                    style={{ height: "300px" }}
+                    src={song.album_art}
+                    style={{ height: "100%", width: "100%;" }}
                     className="albumCardImage"
                   />
                   <Card.Body>
@@ -402,6 +403,7 @@ function AlbumList() {
                       id={song._id}
                       title={song.title}
                       url={song.fileUrl}
+                      art={song.album_art}
                       name="currentSong"
                       onClick={() => getCurrentSong(song)}
                     >
@@ -413,7 +415,7 @@ function AlbumList() {
                     {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
                     {/* </Link> */}
                   </Card.Body>
-                  <Card.Footer>
+                  <Card.Footer >
                     {/* <small className="text-muted">Added {album.date}</small> */}
                     {/* {song._id} */}
                   </Card.Footer>
@@ -433,6 +435,9 @@ function AlbumList() {
         // onAudioPlay={chargeListenerToken}
         // onAudioPause={skipChargeOnResume}
         />
+    
+    
+    
 
       </div>
       
@@ -467,6 +472,7 @@ function AlbumList() {
     //       <h3>No albums available.</h3>
     //     )}
     // </Container>
+    
   );
 }
 

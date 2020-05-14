@@ -29,7 +29,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.4.1",
     "react-toastify": "^5.5.0",
-    "react-toggle": "4.0.2"
+    "react-toggle": "4.0.2",
+    "react-wow": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

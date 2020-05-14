@@ -61,6 +61,11 @@ export default {
   getSongs: function() {
     return axios.get("/api/songs");
   },
+  uploadArt: function(data) {
+    return axios.put("/api/songs", data);
+  },
+  
+  
 };
 
 
