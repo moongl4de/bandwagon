@@ -1,9 +1,13 @@
+* {
+  stroke: rgba(249, 223, 255, 0) !important;
+}
+
 body {
   background-color: rgb(33,33,33);
   font-family: "Roboto";
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
-
+  overflow-x: hidden;
 }
 
 
@@ -29,20 +33,14 @@ body {
 }
 
 
+.row{
+  justify-content: center;
+} 
 
-.albumBtn:hover {
-  transition-duration: .5s !important;
-  text-align: center;
-  
-  background: linear-gradient(to right, rgb(165, 163, 255) 10%, rgb(243, 186, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
-  background-size: 200% auto;
-  color: rgba(255, 255, 255, 0.616) !important;
-  letter-spacing: 2px;
-  animation: shine 10s linear infinite;
-  border-radius: 20px !important;
-  box-shadow: 0px 0px 4px rgb(255, 255, 255);
 
-}
+
+
+
 
 .albumBtn:active {
   background-color: red !important;
@@ -215,6 +213,12 @@ padding: 5px;
   background-color: rgb(255, 255, 255) !important;
 }
 
+.rc-slider-step {
+  background-image: linear-gradient( to right, rgb(241, 173, 255), rgb(157, 196, 255) 120% ) !important;
+}
+
+
+
 .progress-bar {
   display: flex;
   flex-direction: column;
@@ -228,7 +232,7 @@ padding: 5px;
 }
 
 .rc-slider-track{
-  background-color: rgba(83, 71, 194, 0.877) !important;
+  background-color: rgba(0, 0, 0, 0.788) !important;
 }
 
 .panel-content{
@@ -306,9 +310,9 @@ svg:hover {
   color: rgb(54, 54, 54) !important;
   max-height: 500px;
   max-width: 500px;
-  width: 450px !important;
-  height: 450px !important;
-  overflow-x: scroll;
+  width: 350px !important;
+  height: 350px !important;
+  /* overflow-x: scroll; */
   margin: 20px !important;
 }
 
@@ -320,13 +324,30 @@ svg:hover {
 }
 
 .albumBtn {
-  border-radius: 20px !important;
+  border-radius: 0px !important;
   border: 0px rgba(27, 0, 27, 0.63) solid !important;
   color: black !important;
   margin: 0 auto !important;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.albumBtn:hover {
+ 
+  
+  
+  background: linear-gradient(to right, rgba(164, 163, 255, 0.342) 10%, rgba(243, 186, 255, 0.37) 40%, rgba(247, 153, 255, 0.336) 60%, rgba(32, 32, 32, 0.205) 80%);
+  background-size: 200% auto;
+  color: rgb(255, 255, 255) !important;
+  
+
 }
 
 .albumHeader {
@@ -335,8 +356,7 @@ svg:hover {
 }
 
 .audio-circle-process-bar {
-  fill: red !important;
-}
+stroke: red !important;}
 
 .modal{
   border-radius: 0px !important;
@@ -363,4 +383,57 @@ svg:hover {
 #inputID::placeholder {
   color: rgb(71, 71, 71);
 }
+
+#inputID {
+  background: linear-gradient(to bottom left, rgb(201, 206, 253) 50%, rgb(255, 215, 255) 100%);
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px rgb(253, 203, 255);
+}
+
+
+.albumCardImage {
+  max-width: 200px;
+  max-height: 200px;
+  margin: 0 auto;
+}
+
+.fa-play-circle {
+  color: #31313177;
+  border-radius: 50%;
+}
+
+.navbar-brand{
+  background: linear-gradient(270deg, #100b11, #1a1c22, #262e30, #2a2233, #1f1825);
+  background-size: 1000% 1000%;
+  border-radius: 50px;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  box-shadow: 0 0 15px px #141414;
+}
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.fa-github{
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 
