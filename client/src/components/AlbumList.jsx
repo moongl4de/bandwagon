@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useStoreContext } from "../utils/globalContext";
 // import logo from "../assets/img/reactlogo.png"
 import API from "../utils/API";
@@ -9,9 +9,10 @@ import Details from "./DetailsModal";
 import "../App.css";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
+import Search from "./Searchbar"
 
 import ReactDOM from 'react-dom'
-import ReactWOW from 'react-wow'
+// import ReactWOW from 'react-wow'
 
 import { isAuth } from "./helper";
 import { toast } from "react-toastify";
@@ -32,7 +33,7 @@ function AlbumList() {
 
   console.log(songs)
 
-
+  console.log("my song = ", currentSong)
 
 
 
@@ -79,14 +80,14 @@ function AlbumList() {
   // }
 
   const getCurrentSong = (song) => {
-    console.log("CLICKED SONG", song.id);
-    let clickedSongId = song.id;
+    console.log("CLICKED SONG", song._id);
+    let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
     setModalShow(true)
 
 
-
+    transferTokenToArtist(clickedSongId)
 
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
@@ -259,131 +260,176 @@ function AlbumList() {
   //   options.audioLists = audioListTest;
   // }
 
-  // const [listenerInfo, updateListenerInfo] = React.useState({
-  //   subscriptionToken: 0,
-  //   currentListenerData: {},
-  //   paused: false,
-  // });
+  const [listenerInfo, updateListenerInfo] = React.useState({
+    subscriptionToken: 0,
+    currentListenerData: {},
+    paused: false,
+  });
 
-  // React.useEffect(() => {
-  //   //get current user and set subscription token and user info
-  //   API.getUsers()
-  //     .then((result) => {
-  //       const email = isAuth().email;
-  //       const currentUser = result.data.filter((user) => user.email === email);
-  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-  //       updateListenerInfo({
-  //         ...listenerInfo,
-  //         subscriptionToken: currentUser[0].subscriptionToken,
-  //         currentListenerData: currentUser[0],
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to Get User info");
-  //     });
-  // }, ["subscriptionToken"]);
+  React.useEffect(() => {
+    //get current user and set subscription token and user info
+    API.getUsers()
+      .then((result) => {
+        const email = isAuth().email;
+        const currentUser = result.data.filter((user) => user.email === email);
+        //listners current token value at page load
+        listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+        updateListenerInfo({
+          ...listenerInfo,
+          subscriptionToken: currentUser[0].subscriptionToken,
+          currentListenerData: currentUser[0],
+        });
+      })
+      .catch((err) => {
+        toast.error("Failed to Get User info");
+      });
+  }, ["subscriptionToken"]);
 
-  // const chargeListenerToken = () => {
-  //   if (listenerInfo.paused === false) {
-  //     const token = Number(listenerInfo.subscriptionToken) - 1;
-  //     API.getUsers().then((result) => {
-  //       const email = isAuth().email;
-  //       const currentUser = result.data.filter((user) => user.email === email);
-  //       //calculate subscriptionToken
-  //       const userSubscriptionToken = token;
+  const chargeListenerToken = () => {
+    if (listenerInfo.paused === false) {
+      console.log("current song in charge = ", currentSong)
+      const token = Number(listenerInfo.subscriptionToken) - 1;
+      //get user to charge token
+      API.getUsers().then((result) => {
+        const email = isAuth().email;
+        //set current user body to use in update request
+        const currentUser = result.data.filter((user) => user.email === email);
+        //calculate subscriptionToken
+        const userSubscriptionToken = token;
 
-  //       //update user payment required to false after intial signup
-  //       const data = {
-  //         ...currentUser[0],
-  //         paymentRequired: false,
-  //         subscriptionToken: userSubscriptionToken,
-  //       };
-  //       API.updateUser(data._id, data).then(() => {
-  //         updateListenerInfo({
-  //           ...listenerInfo,
-  //           subscriptionToken: data.subscriptionToken,
-  //           currentListenerData: data,
-  //         });
-  //       });
-  //     });
-  //   } else if (listenerInfo.paused === true) {
-  //     updateListenerInfo({
-  //       ...listenerInfo,
-  //       paused: false,
-  //     });
-  //   }
-  // };
+        //update user payment required to false after intial signup
+        const data = {
+          ...currentUser[0],
+          paymentRequired: false,
+          subscriptionToken: userSubscriptionToken,
+        };
 
-  // const skipChargeOnResume = () => {
-  //   updateListenerInfo({
-  //     ...listenerInfo,
-  //     paused: true,
-  //   });
-  // };
+        //update the user with the new token value
+        API.updateUser(data._id, data).then(() => {
+          // transfer token to artist
+          // transferTokenToArtist();
+          //update state
+          updateListenerInfo({
+            ...listenerInfo,
+            subscriptionToken: data.subscriptionToken,
+            currentListenerData: data,
+          });
+        });
+      });
+    } else if (listenerInfo.paused === true) {
+      updateListenerInfo({
+        ...listenerInfo,
+        paused: false,
+      });
+    }
+  };
+
+  const skipChargeOnResume = () => {
+    updateListenerInfo({
+      ...listenerInfo,
+      paused: true,
+    });
+  };
+
+
+  const transferTokenToArtist = (id) => {
+    const songId = currentSong.id
+    console.log("currentSong.id1 = " + songId)
+    //get the currentSongBody from DB
+    API.getSongs(id).then((res) => {
+  const currentSongPlayed = res.data.filter(song => song._id === id)[0]
+      API.updateSong({
+        ...currentSongPlayed,
+        token_earned: Number(currentSongPlayed.token_earned) + 1,
+        count_play: Number(currentSongPlayed.count_play) + 1
+        // song_ids: []
+
+      })
+        .then((result) => {
+          console.log("update was sent to DB!", result);
+          setCurrentSong({
+            ...currentSongPlayed,
+            token_earned: currentSongPlayed.token_earned + 1,
+            count_play: currentSongPlayed.count_play + 1
+          });
+          toast.success("Successfully Transferred token to artist");
+        })
+
+
+    }).catch((err) => {
+      console.log(err);
+      // toast.danger( "Something went wrong" );
+    });
+  }
+
 
   return (
-    <div className="cardContainer">
-      <h1 className="albumHeader"></h1>
-      {songs.length ? (
-        <div className="card-group">
-          {songs.map((song) => (
-           <div class="row">
-            <Card
-              className="albumCard wow animate__animated animate__zoomIn col-10"
-              style={{ width: "18rem" }}
-              key={song._id}
-            >
-              <Button
+    <Fragment>
+      <Search token={listenerInfo.subscriptionToken} />
+      <div id="centerDiv">
+        <div className="cardContainer">
+          <h1 className="albumHeader"></h1>
+          {songs.length ? (
+            <div className="card-group">
+              {songs.map((song) => (
+                <div class="row">
+                  <Card
+                    className="albumCard wow animate__animated animate__zoomIn col-10"
+                    style={{ width: "18rem" }}
+                    key={song._id}
+                  >
+                    <Button
 
-                value={song._id}
-                className="albumBtn"
-                id={song._id}
-                title={song.title}
-                url={song.fileUrl}
-                name="currentSong"
-                onClick={() => getCurrentSong(song)}
-              >
+                      value={song._id}
+                      className="albumBtn"
+                      id={song._id}
+                      title={song.title}
+                      url={song.fileUrl}
+                      name="currentSong"
+                      onClick={() => getCurrentSong(song)}
+                    >
 
-                {" "}
+                      {" "}
                   Support Artist{" "}
-              </Button>
-              <Card.Img
-                variant="top"
-                src={song.art}
-                style={{ height: "300px" }}
-              />
-              <Card.Body>
-                <Card.Title>{song.title}</Card.Title>
-                <Card.Text> url to hide {song.fileUrl}</Card.Text>
+                    </Button>
+                    <Card.Img
+                      variant="top"
+                      src={song.art}
+                      style={{ height: "300px" }}
+                    />
+                    <Card.Body>
+                      <Card.Title>{song.title}</Card.Title>
+                      <Card.Text> url to hide {song.fileUrl}</Card.Text>
 
-                <Details />
-                {/* <Link to={"/albums/" + album._id}> */}
-                {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                {/* </Link> */}
-              </Card.Body>
-              <Card.Footer>
-                {/* <small className="text-muted">Added {album.date}</small> */}
-                {song._id}
-              </Card.Footer>
-           
-            </Card>
+                      <Details />
+                      {/* <Link to={"/albums/" + album._id}> */}
+                      {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                      {/* </Link> */}
+                    </Card.Body>
+                    <Card.Footer>
+                      {/* <small className="text-muted">Added {album.date}</small> */}
+                      {song._id}
+                    </Card.Footer>
+
+                  </Card>
+                </div>
+
+              ))}
             </div>
+          ) : (
+              <h3>No albums available.</h3>
+            )}
 
-          ))}
+          <ReactJkMusicPlayer
+
+            {...options}
+            onAudioPlay={chargeListenerToken}
+            onAudioPause={skipChargeOnResume}
+          />
+
         </div>
-      ) : (
-          <h3>No albums available.</h3>
-        )}
-
-      <ReactJkMusicPlayer
-
-        {...options}
-      // onAudioPlay={chargeListenerToken}
-      // onAudioPause={skipChargeOnResume}
-      />
-
-    </div>
-
+      </div>
+    </Fragment>
     //   {state.albums.length ? (
     //     <CardColumns>
     //       {state.albums.map((album) => (

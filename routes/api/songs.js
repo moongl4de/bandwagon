@@ -5,7 +5,12 @@ router
   .route("/")
   .post(songController.insert)
   .get(songController.findAll)
+  .put(songController.updateSong)
 
+
+  router
+  .route("/:id")
+  .get(songController.findSongById)
   
 // Matches with "/api/songs"
 // router

@@ -5,8 +5,8 @@ const Song = require("../models/songs");
 module.exports = {
   insert: function (req, res) {
     console.log(req.body);
-    const { albumId, title, fileUrl } = req.body;
-    const newSong = { albumId, title, fileUrl };
+    const { albumId, title, fileUrl, user } = req.body;
+    const newSong = { albumId, title, fileUrl, user };
     Song.create(newSong)
       .then((dbModel) =>
         Album.findByIdAndUpdate(
@@ -26,6 +26,24 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+    findSongById: function(req, res) {
+      Song.findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+    updateSong: function(req, res) {
+    const { _id } = req.body;
+    Song.findByIdAndUpdate(_id, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+    const { _id } = req.body;
+    Album.findByIdAndUpdate(_id, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   //   remove: function(req, res) {
   //     Song.findById({ _id: req.params.id })
   //       .then(dbModel => dbModel.remove())

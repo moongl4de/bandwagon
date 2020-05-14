@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 
 const SongSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'user'
-    // },
+    user: {
+      type: Object,
+    },
     albumId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'album'
@@ -18,6 +17,14 @@ const SongSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    token_earned:{
+      type: Number,
+      default:0
+    },
+    count_play:{
+      type:Number,
+      default:0
+    }
     // plays: {
     //   type: Number,
     //   default: 0

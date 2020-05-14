@@ -16,6 +16,8 @@ import logo from "../assets/img/reactlogo.png";
 import { ToastContainer, toast } from "react-toastify";
 import algoliasearch from "algoliasearch";
 import { SongContext } from "../utils/songContext";
+import { isAuth } from "../components/helper";
+import { auth } from "google-auth-library";
 
 // const searchClient = algoliasearch('BY7RM0A5T2',
 //   'c84d9d93579f57a4c7c7123119c9f4b2');
@@ -29,7 +31,6 @@ import { SongContext } from "../utils/songContext";
 function Upload() {
   // access album's global state
   const [state, dispatch] = useStoreContext();
-
   const artRef = useRef();
   const songsRef = useRef();
 
@@ -39,7 +40,7 @@ function Upload() {
 
   const [album, setAlbum] = useState({
     _id: "",
-    user: "",
+    user: {},
     title: "",
     description: "",
     art: "",
@@ -62,14 +63,17 @@ function Upload() {
   //on page load create an empty album with user id to get album's id to upload songs to
 
   useEffect(() => {
+    //get current user from local storage
+    const user = isAuth();
     const createAlbum = async () => {
       const response = await API.createAlbum();
       setAlbum({
         ...album,
         ...response.data,
-        user: JSON.parse(localStorage.getItem("user"))._id
+        user: user
       })
     };
+    console.log("user - ", album.user)
     createAlbum()
   }, []);
 
@@ -130,9 +134,16 @@ function Upload() {
             API.uploadSongs({
               albumId: album._id,
               title: title,
-              fileUrl: url
+              fileUrl: url,
+              user: album.user
             })
             .then((result) => {
+              console.log("loggsssss = ", {
+                albumId: album._id,
+                title: title,
+                fileUrl: url,
+                user: album.user
+              })
               console.log("song sent to db", result.data.song_ids);
               // setAlbum({ ...album, song_ids: [result.data.song_ids] });
               // toast.success("Songs successfully loaded");
@@ -159,7 +170,7 @@ function Upload() {
     console.log("Album to update", album)
     API.updateAlbum({
       _id: album._id,
-      // user: "",
+       user: album.user,
       title: album.title,
       description: album.description,
       art: album.art,

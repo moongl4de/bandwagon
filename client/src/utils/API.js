@@ -61,6 +61,12 @@ export default {
   getSongs: function() {
     return axios.get("/api/songs");
   },
+  getSong: function(id) {
+    return axios.get("/api/songs/" + id);
+  },
+  updateSong: function( data) {
+    return axios.put("/api/songs",data);
+  },
 };
 
 

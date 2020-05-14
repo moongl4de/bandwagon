@@ -13,6 +13,9 @@ import "react-jinke-music-player/lib/styles/index.less";
 // import { CardDeck } from "react-bootstrap";
 
 import currentSongList from "../components/AlbumList"
+import API from "../utils/API";
+import { isAuth } from "./helper";
+import { toast } from "react-toastify";
 
 // console.log('CURRENT TEST: ', currentSongList)
 
@@ -160,15 +163,13 @@ function Center() {
   //   // Play and pause audio through blank space [type `Boolean` default `false`]
   //   spaceBar: true,
   // }
-
-  
   
   return (
     <div style={{ backgroundColor: "#313131", height: "100vh" }}>
-      <Search />
-      <div id="centerDiv">
+      {/* <Search token={listenerInfo.subscriptionToken}/> */}
+      {/* <div id="centerDiv"> */}
         <AlbumList />
-      </div>
+      {/* </div> */}
 
     </div>
   )
