@@ -34,7 +34,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-cloud-upload text-warning" />}
                 statsText="Songs Uploaded"
-                statsValue="14"
+                statsValue={this.props.totalPlay}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
@@ -43,7 +43,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-piggy text-success" />}
                 statsText="Tokens"
-                statsValue="81"
+                statsValue={this.props.totalTokenEarned}
                 statsIcon={<i className="pe-7s-check" />}
                 statsIconText="Verified"
               />
@@ -52,7 +52,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-headphones text-danger" />}
                 statsText="Total Plays"
-                statsValue="23"
+                statsValue= {this.props.totalNumberPlayed}
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
               />

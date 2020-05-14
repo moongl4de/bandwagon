@@ -10,13 +10,13 @@ import "react-jinke-music-player/lib/styles/index.less";
 import "../App.css"
 
 function Center() {
-
+ 
   return (
     <div style={{ backgroundColor: "#313131", height: "100vh" }}>
-      <Search />
-      <div id="centerDiv">
+      {/* <Search /> */}
+      {/* <div id="centerDiv"> */}
         <AlbumList />
-      </div>
+      {/* </div> */}
 
     </div>
   )

@@ -5,6 +5,9 @@ import NotificationSystem from "react-notification-system";
 import AdminNavbar from "../components/adNavbar.jsx";
 import Footer from "../components/adFooter";
 import Sidebar from "../components/adSidebar";
+import { isAuth } from "../components/helper";
+import API from "../utils/API";
+import { toast } from "react-toastify";
 
 
 import { style } from "../variables/Variables.jsx";
@@ -19,7 +22,9 @@ class Admin extends Component {
       image: image,
       color: "black",
       hasImage: true,
-      fixedClasses: "dropdown show-dropdown open"
+      fixedClasses: "dropdown show-dropdown open",
+      totalSongsUploaded: 0,
+      totalTokenEarned: 0
     };
   }
 
@@ -34,6 +39,9 @@ class Admin extends Component {
               <prop.component
                 {...props}
                 handleClick={this.handleNotificationClick}
+                totalPlay={this.state.totalSongsUploaded}
+                totalTokenEarned={this.state.totalTokenEarned}
+                totalNumberPlayed={this.state.totalNumberPlayed}
               />
             )}
             key={key}
@@ -72,6 +80,28 @@ class Admin extends Component {
       this.setState({ fixedClasses: "dropdown" });
     }
   };
+  componentDidMount() {
+    const userId = isAuth()._id;
+
+    //try to search by passing a search parameter
+    API.getSongs().then((res) => {
+
+      const artistSongs = res.data.filter(song => song.user._id === userId);
+      let totalTokenEarned1 = 0;
+      let totalNumberPlayed1 = 0;
+      for (let i = 0; i < artistSongs.length; i++) {
+        totalTokenEarned1 += artistSongs[i].token_earned;
+        totalNumberPlayed1 += artistSongs[i].count_play;
+      }
+      console.log("totalTokenEarned1 " + totalTokenEarned1)
+      this.setState({ totalSongsUploaded: artistSongs.length });
+      this.setState({ totalTokenEarned: totalTokenEarned1 });
+      this.setState({ totalNumberPlayed: totalNumberPlayed1 })
+
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
   componentDidUpdate(e) {
     if (
@@ -86,7 +116,28 @@ class Admin extends Component {
     //   document.scrollingElement.scrollTop = 0;
     //   this.refs.mainPanel.scrollTop = 0;
     // }
+
   }
+
+  //  transferTokenToArtist = () => {
+  //    const userId = isAuth().id;
+
+  //    //try to search by passing a search parameter
+  //   API.getSongs().then((res) => {
+  //    const artistSongs = res.data.filter(song => song.user._id === userId);
+  //    this.setState({ totalSongsUploaded: artistSongs.length });
+
+  //   }).then((result) => {
+  //     console.log("update was sent to DB!", result);
+
+  //     toast.success("Successfully Transferred token to artist");
+  //   }).catch((err) => {
+  //     console.log(err);
+  //     // toast.danger( "Something went wrong" );
+  //   });
+  // }
+
+
   render() {
     return (
       <div className="wrapper">
@@ -99,7 +150,7 @@ class Admin extends Component {
             {...this.props}
             brandText={this.getBrandText('Bandwagon')}
           />
-          <Switch>{this.getRoutes(routes)}</Switch>
+          <Switch >{this.getRoutes(routes)} totalPlay={this.state.totalSongsUploaded}</Switch>
           <Footer />
 
         </div>
