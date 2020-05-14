@@ -46,9 +46,9 @@ export default {
   getAlbum: function(id) {
     return axios.get("/api/albums/" + id);
   },
-  // deleteAlbum: function(id) {
-  //   return axios.delete("/api/songs/" + id);
-  // },
+  deleteAlbum: function(id) {
+    return axios.delete("/api/songs/" + id);
+  },
   updateAlbum: function(data) {
     return axios.put("/api/albums", data);
   },
@@ -61,9 +61,18 @@ export default {
   getSongs: function() {
     return axios.get("/api/songs");
   },
+  getSong: function(id) {
+    return axios.get("/api/songs/" + id);
+  },
+  updateSong: function( data) {
+    return axios.put("/api/songs",data);
+  },
   uploadArt: function(data) {
     return axios.put("/api/songs", data);
   },
+  // deleteSongs: function(id) {
+  //   return axios.delete("/api/songs/" + id);
+  // },
   
   
 };

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const SongSchema = new mongoose.Schema(
   {
     user: {
-      type: String
+      type: Object,
     },
     albumId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +16,14 @@ const SongSchema = new mongoose.Schema(
     fileUrl: {
       type: String,
       required: true,
+    },
+    token_earned:{
+      type: Number,
+      default:0
+    },
+    count_play:{
+      type:Number,
+      default:0
     },
     // plays: {
     //   type: Number,

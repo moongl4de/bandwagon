@@ -15,36 +15,43 @@ import Button from "../components/adCustomButton.jsx";
 
 
 function UserProfile() {
-  console.log("Hello Alan")
+  
 
   const [state, setState] = useState({
-    name: "",
-    album: "",
-    date: "",
-    description: "",
-    art: ""
+    album: "test album",
+    song: "test name",
+    date: "test date",
+    description: "test description",
+    art: "https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg"
   });
 
-  const [nam, setName] = useState("test name");
-  const [alb, setAlbum] = useState("test album");
-  const [dat, setDate] = useState("test date");
-  const [description, setDescription] = useState("test description");
-  const [art, setArt] = useState("test art");
-  const [artURL, setArtURL] = useState("https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg");
+  // const [nam, setName] = useState("test name");
+  // const [alb, setAlbum] = useState("test album");
+  // const [dat, setDate] = useState("test date");
+  // const [description, setDescription] = useState("test description");
+  // const [art, setArt] = useState("test art");
+  // const [artURL, setArtURL] = useState("https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg");
   const [page, setPage] = useState(false);
 
+  const handleInputChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
+  
+  
+  
+  
+  
+  
+  
+  
   const handleSubmit = e => {
     e.preventDefault();
 
-    setState({
-      ...state,
-      name: nam,
-      album: alb,
-      date: dat,
-      description: description,
-      art: art
-    });
-    console.log('Button is cliked!');
+    
+    console.log('Button is clicked!');
     setPage(true)
 
 
@@ -76,8 +83,9 @@ function UserProfile() {
                       <Form.Control
                         type="text"
                         placeholder="Album Title"
-                        onChange={e => setAlbum(e.target.value)}
-                        defaultValue={alb} />
+                        onChange={handleInputChange}
+                        value={state.album}
+                         />
                     </Form.Group>
                   </Form.Row>
 
@@ -87,8 +95,9 @@ function UserProfile() {
                       <Form.Control
                         type="text"
                         placeholder="Song Name"
-                        onChange={e => setName(e.target.value)}
-                        defaultValue={nam} />
+                        onChange={handleInputChange}
+                        value={state.song}
+                         />
                     </Form.Group>
 
 
@@ -100,8 +109,8 @@ function UserProfile() {
                       <Form.Control
                         type="text"
                         placeholder="Release Date"
-                        onChange={e => setDate(e.target.value)}
-                        defaultValue={dat} />
+                        onChange={handleInputChange}
+                        value={state.date} />
                     </Form.Group>
 
 
@@ -114,8 +123,8 @@ function UserProfile() {
                       <Form.Control
                         type="text"
                         placeholder="Description"
-                        onChange={e => setDescription(e.target.value)}
-                        defaultValue={description} />
+                        onChange={handleInputChange}
+                        value={state.description} />
                     </Form.Group>
 
                   </Form.Row>
@@ -127,8 +136,8 @@ function UserProfile() {
                       <Form.Control
                         type="text"
                         placeholder="Art"
-                        onChange={e => setArt(e.target.value)}
-                        defaultValue={art} />
+                        onChange={handleInputChange}
+                        value={state.art} />
                     </Form.Group>
 
                   </Form.Row>
@@ -167,7 +176,7 @@ function UserProfile() {
                 <div>
                   <center>
                     <img
-                      src={artURL}
+                      src={state.art}
                       style={{ maxWidth: "250px" }}
                       alt=""
                     ></img>
