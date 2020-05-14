@@ -24,7 +24,8 @@ class Admin extends Component {
       hasImage: true,
       fixedClasses: "dropdown show-dropdown open",
       totalSongsUploaded: 0,
-      totalTokenEarned: 0
+      totalTokenEarned: 0,
+      totalNumberPlayed: 0,
     };
   }
 
@@ -85,8 +86,9 @@ class Admin extends Component {
 
     //try to search by passing a search parameter
     API.getSongs().then((res) => {
-
+console.log("user id ="  , res.data)
       const artistSongs = res.data.filter(song => song.user._id === userId);
+      console.log("user id = userId" , artistSongs)
       let totalTokenEarned1 = 0;
       let totalNumberPlayed1 = 0;
       for (let i = 0; i < artistSongs.length; i++) {
@@ -96,8 +98,8 @@ class Admin extends Component {
       console.log("totalTokenEarned1 " + totalTokenEarned1)
       this.setState({ totalSongsUploaded: artistSongs.length });
       this.setState({ totalTokenEarned: totalTokenEarned1 });
-      this.setState({ totalNumberPlayed: totalNumberPlayed1 })
-
+      this.setState({ totalNumberPlayed: totalNumberPlayed1 });
+console.log("state = "+ this.state)
     }).catch((err) => {
       console.log(err);
     });

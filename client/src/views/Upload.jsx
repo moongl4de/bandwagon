@@ -105,7 +105,7 @@ function Upload() {
             const Songtitle = url.split("-")[1];
 
             API.uploadSongs({
-              user: userId,
+              user: album.user,
               albumId: album._id,
               title: Songtitle,
               fileUrl: url,
