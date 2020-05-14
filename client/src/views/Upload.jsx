@@ -16,6 +16,9 @@ import logo from "../assets/img/reactlogo.png";
 import { ToastContainer, toast } from "react-toastify";
 import algoliasearch from "algoliasearch";
 import { SongContext } from "../utils/songContext";
+import { isAuth } from "../components/helper";
+import { auth } from "google-auth-library";
+
 // const searchClient = algoliasearch('BY7RM0A5T2',
 //   'c84d9d93579f57a4c7c7123119c9f4b2');
 // const index = client.initIndex('songs');
@@ -36,7 +39,7 @@ function Upload() {
   });
   const [album, setAlbum] = useState({
     _id: "",
-    user: "",
+    user: {},
     title: "",
     description: "",
     art: "",
@@ -57,15 +60,18 @@ function Upload() {
   //on page load create an empty album with user id to get album's id to upload songs to
   const userId = JSON.parse(localStorage.getItem("user"))._id;
   useEffect(() => {
+    //get current user from local storage
+    const user = isAuth();
     const createAlbum = async () => {
       const response = await API.createAlbum();
       setAlbum({
         ...album,
         ...response.data,
-        user: userId,
-      });
+        user: user
+      })
     };
-    createAlbum();
+    console.log("user - ", album.user)
+    createAlbum()
   }, []);
   const setLoading = () => {
     dispatch({ type: "LOADING" });
@@ -108,23 +114,26 @@ function Upload() {
               albumId: album._id,
               title: Songtitle,
               fileUrl: url,
-              // album_art: album.art
+              user: album.user
             })
-              .then((result) => {
-                // console.log("song sent to db", result.data.song_ids);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          });
-          toast("Songs successfully uploaded!");
+            .then((result) => {
+              
+              console.log("song sent to db", result.data.song_ids);
+              // setAlbum({ ...album, song_ids: [result.data.song_ids] });
+              toast.success("Songs successfully loaded");
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.danger( "Something went wrong" );
+            });
         })
         .catch((err) => {
           console.log(err);
           toast.warning("Unable to upload songs, please try again.");
         });
-    }
-  };
+    });
+    
+  
   // SUBMIT FORM
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -282,5 +291,7 @@ function Upload() {
       </Container>
     </div>
   );
+}
+}
 }
 export default Upload;

@@ -5,8 +5,10 @@ const Song = require("../models/songs");
 module.exports = {
   insert: function (req, res) {
     console.log(req.body);
-    const { user, albumId, title, fileUrl } = req.body;
-    const newSong = { user, albumId, title, fileUrl };
+    const { albumId, title, fileUrl, user } = req.body;
+    const newSong = { albumId, title, fileUrl, user };
+    // const { user, albumId, title, fileUrl } = req.body;
+    // const newSong = { user, albumId, title, fileUrl };
     Song.create(newSong)
       .then((dbModel) =>
         Album.findByIdAndUpdate(
@@ -26,6 +28,42 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+    findSongById: function(req, res) {
+      Song.findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+    updateSong: function(req, res) {
+    const { _id } = req.body;
+    Song.findByIdAndUpdate(_id, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+    const { _id } = req.body;
+    Album.findByIdAndUpdate(_id, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  insertArt: function (req, res) {
+    console.log("body", req.body);
+    const { albumId, album_art } = req.body;
+    console.log("hit", albumId, album_art)
+    Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  //   remove: function(req, res) {
+  //     Song.findById({ _id: req.params.id })
+  //       .then(dbModel => dbModel.remove())
+  //       .then(dbModel => res.json(dbModel))
+  //       .catch(err => res.status(422).json(err));
+  //   }
+
+
+//  //ALBUMS
   // insertArt: function (req, res) {
   //   console.log(req.body);
   //   const { albumId, art } = req.body;
@@ -75,7 +113,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
-
+};
   // insertArt: function (req, res) {
   //   console.log(req.body);
   //   const { albumId, album_art } = req.body;
@@ -105,5 +143,5 @@ module.exports = {
   //     })
   //     .catch(err => res.status(422).json(err));
   // }
-};
+
 

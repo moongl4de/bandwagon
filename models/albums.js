@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const AlbumSchema = new mongoose.Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      type: Object,
     },
     title: {
       type: String,
