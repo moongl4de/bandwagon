@@ -30,7 +30,7 @@ function AlbumList() {
 
 
 
-  
+
 
 
 
@@ -58,7 +58,8 @@ function AlbumList() {
         console.log("all songs from db:", results.data);
         setSongs(results.data);
         setSearchResults(results.data)
-        
+
+
         // setCurrentSong(results.data[4])
       })
       .catch((err) => console.log(err));
@@ -67,7 +68,7 @@ function AlbumList() {
   useEffect(() => {
     // getAlbums();
     getSongs();
-    
+
     // console.log("useEffect State:", songs)
   }, []);
 
@@ -84,11 +85,10 @@ function AlbumList() {
     let clickedSongId = song.id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
+    let clickedSongArt = song.album_art
     setModalShow(true)
 
-
-
-
+    setArt(clickedSongArt)
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
     // setArt(clickedSongArt)
@@ -108,7 +108,7 @@ function AlbumList() {
   console.log("URL:", url)
 
   console.log(currentSong);
-  
+
   // useEffect(() => {setCurrentSong({currentSong : clickedSong})})
 
   const albumFunction = (event) => {
@@ -240,7 +240,7 @@ function AlbumList() {
     extendsContent: null,
 
     //default volume of the audio player [type `Number` default `1` range `0-1`]
-    defaultVolume: 1,
+    defaultVolume: .5,
 
     //playModeText show time [type `Number(ms)` default `700`]
     playModeShowTime: 600,
@@ -259,7 +259,7 @@ function AlbumList() {
   const [searchResults, setSearchResults] = useState([]);
   // const handleChange = e => {
   //   setSearchTerm(e.target.value);
-    
+
   // };
   // React.useEffect(() => {
   //   const results = songs.filter(song =>
@@ -272,13 +272,13 @@ function AlbumList() {
   const searchFilter = (e) => {
     const filter = e.target.value;
     const filteredUserList = songs.filter(song => {
-        let values = Object.values(song).join("").toLowerCase();
-        return values.indexOf(filter.toLowerCase()) !== -1;
+      let values = Object.values(song).join("").toLowerCase();
+      return values.indexOf(filter.toLowerCase()) !== -1;
     });
     setSearchResults(filteredUserList);
-    
+
     console.log("LOOK HERE:" + searchResults)
-}
+  }
 
 
   // if (currentSong.fileUrl) {
@@ -349,90 +349,100 @@ function AlbumList() {
   // };
 
   return (
+
     <div>
       <Row className="justify-content-md-center">
-      <Col md={5}>
-      
-    <Form inline>
-      <FormControl 
-        style={{textAlign:"center", width:"100%"}}
-        type="text" 
-        placeholder="Search here..." 
-        className="mr-md-5"
-        type="text"
-        id="inputID"
-        
-        onChange={e => searchFilter(e)}
+        <Col md={5}>
+
+          <Form inline>
+            <FormControl
+              style={{ textAlign: "center", width: "100%" }}
+              type="text"
+              placeholder="Search here..."
+              className="mr-md-5"
+              type="text"
+              id="inputID"
+
+              onChange={e => searchFilter(e)}
+            />
+
+          </Form>
+        </Col>
+      </Row>
+
+
+      <div className="cardContainer">
+
+        <h1 className="albumHeader"></h1>
+        {songs.length ? (
+          <div className="card-group">
+            {searchResults.map((song) => (
+              <div class="row">
+                <Card
+
+                  className="albumCard wow animate__animated animate__zoomIn col-10"
+                  style={{ width: "18rem", padding: "2%",}}
+                  key={song._id}
+                >
+                  <Card.Title style={{textAlign: "center"}}><strong>Artist Name Here</strong></Card.Title>
+                  <Card.Text style={{textAlign: "center"}}>Song Name Here</Card.Text>
+                  <Card.Img
+                    variant="top"
+                    src={song.album_art}
+                    style={{ height: "100%", width: "100%;" }}
+                    className="albumCardImage"
+                  />
+                  <Card.Body>
+
+
+                    <Details />
+                    <Button
+
+                      value={song._id}
+                      className="albumBtn"
+                      id={song._id}
+                      title={song.title}
+                      url={song.fileUrl}
+                      art={song.album_art}
+                      name="currentSong"
+                      onClick={() => getCurrentSong(song)}
+                    >
+
+                      {" "}
+                      <span><i class="far fa-play-circle fa-3x playRotate"></i></span>{" "}
+                    </Button>
+                    {/* <Link to={"/albums/" + album._id}> */}
+                    {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                    {/* </Link> */}
+                  </Card.Body>
+                  <Card.Footer >
+                    {/* <small className="text-muted">Added {album.date}</small> */}
+                    {/* {song._id} */}
+                  </Card.Footer>
+
+                </Card>
+              </div>
+
+            ))}
+          </div>
+        ) : (
+            <h3>No albums available.</h3>
+          )}
+
+        <ReactJkMusicPlayer
+
+          {...options}
+        // onAudioPlay={chargeListenerToken}
+        // onAudioPause={skipChargeOnResume}
         />
-      
-    </Form>
-    </Col>
-    </Row>
     
     
-    <div className="cardContainer">
+    
+
+      </div>
       
-      <h1 className="albumHeader"></h1>
-      {songs.length ? (
-        <div className="card-group">
-          {searchResults.map((song) => (
-           <div class="row">
-            <Card
-              className="albumCard wow animate__animated animate__zoomIn col-10"
-              style={{ width: "18rem" }}
-              key={song._id}
-            >
-              <Button
-
-                value={song._id}
-                className="albumBtn"
-                id={song._id}
-                title={song.title}
-                url={song.fileUrl}
-                name="currentSong"
-                onClick={() => getCurrentSong(song)}
-              >
-
-                {" "}
-                  Support Artist{" "}
-              </Button>
-              <Card.Img
-                variant="top"
-                src={song.album_art}
-                style={{ height: "300px" }}
-              />
-              <Card.Body>
-                <Card.Title>{song.title}</Card.Title>
-                <Card.Text> url to hide {song.fileUrl}</Card.Text>
-
-                <Details />
-                {/* <Link to={"/albums/" + album._id}> */}
-                {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                {/* </Link> */}
-              </Card.Body>
-              <Card.Footer>
-                {/* <small className="text-muted">Added {album.date}</small> */}
-                {song._id}
-              </Card.Footer>
-           
-            </Card>
-            </div>
-
-          ))}
-        </div>
-      ) : (
-          <h3>No albums available.</h3>
-        )}
-
-      <ReactJkMusicPlayer
-
-        {...options}
-      // onAudioPlay={chargeListenerToken}
-      // onAudioPause={skipChargeOnResume}
-      />
-
     </div>
-    </div>
+    
 
     //   {state.albums.length ? (
     //     <CardColumns>
@@ -462,6 +472,7 @@ function AlbumList() {
     //       <h3>No albums available.</h3>
     //     )}
     // </Container>
+    
   );
 }
 
