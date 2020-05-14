@@ -52,13 +52,14 @@ class Search extends Component {
     return (
       <InstantSearch searchClient={searchClient} indexName="songs">
         <Navbar bg="" variant="dark" expand="lg" className="mb-3 navbar">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="#home" className="nlist">
             <img
               alt=""
               src={Logo}
               width="30"
               height="30"
               className="d-inline-block align-top"
+              
 
             />{' '}
       bandwagon

@@ -61,7 +61,7 @@ module.exports = {
   //       .then(dbModel => res.json(dbModel))
   //       .catch(err => res.status(422).json(err));
   //   }
-};
+
 
 //  //ALBUMS
   // insertArt: function (req, res) {
@@ -99,8 +99,21 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
- 
-
+  insertArt: function (req, res) {
+    console.log("body", req.body);
+    const { albumId, album_art } = req.body;
+    console.log("hit", albumId, album_art)
+    Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  remove: function(req, res) {
+    Song.findById({ _id: req.params.id })
+      .then(dbModel => dbModel.remove())
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
+};
   // insertArt: function (req, res) {
   //   console.log(req.body);
   //   const { albumId, album_art } = req.body;
