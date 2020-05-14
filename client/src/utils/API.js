@@ -67,6 +67,11 @@ export default {
   updateSong: function( data) {
     return axios.put("/api/songs",data);
   },
+  uploadArt: function(data) {
+    return axios.put("/api/songs", data);
+  },
+  
+  
 };
 
 

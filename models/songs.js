@@ -24,15 +24,14 @@ const SongSchema = new mongoose.Schema(
     count_play:{
       type:Number,
       default:0
-    }
+    },
     // plays: {
     //   type: Number,
     //   default: 0
     // },
-    // album_art: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'album'
-    // },
+    album_art: {
+      type: Object,
+    },
     // release: {
     //   type: Date
     // },

@@ -67,13 +67,7 @@ class Search extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
 
-            <Form inline>
-              <SearchBox >
-
-                <FormControl type="text" placeholder="Search by artist, song, etc..." className="mr-sm-2" style={{ minWidth: "34rem" }} />
-                <Button variant="light" className="search mr-sm-4 ">Search</Button>
-              </SearchBox>
-            </Form>
+            
           </Navbar.Collapse>
 
           <Nav className="mr-auto">

@@ -38,6 +38,9 @@ function Upload() {
     art: ""
   });
 
+  const userId = JSON.parse(localStorage.getItem("user"))._id
+  // console.log(user)
+
   const [album, setAlbum] = useState({
     _id: "",
     user: {},
@@ -132,6 +135,7 @@ function Upload() {
           const title = url.split("-")[1]
           console.log("SONG TITLE",title)
             API.uploadSongs({
+              user: userId,
               albumId: album._id,
               title: title,
               fileUrl: url,
@@ -146,11 +150,11 @@ function Upload() {
               })
               console.log("song sent to db", result.data.song_ids);
               // setAlbum({ ...album, song_ids: [result.data.song_ids] });
-              // toast.success("Songs successfully loaded");
+              toast.success("Songs successfully loaded");
             })
             .catch((err) => {
               console.log(err);
-              // toast.danger( "Something went wrong" );
+              toast.danger( "Something went wrong" );
             });
         })
       })
@@ -167,28 +171,45 @@ function Upload() {
     // console.log("Album to toad to DB", titleRef.current.value);
     setLoading();
     // console.log("SONG", song)
-    console.log("Album to update", album)
+    // console.log("Album to update", album)
     API.updateAlbum({
       _id: album._id,
-       user: album.user,
+      user: userId,
       title: album.title,
       description: album.description,
       art: album.art,
-      // song_ids: [],
-      
     })
       .then((result) => {
-        console.log("update was sent to DB!", result);
+        console.log("Updated album", result);
         dispatch({
           type: "ADD_ALBUM",
           album: result,
         });
-        toast.success("Successfully Uploaded to Website");
+      toast.success("Successfully Uploaded to Website")
+
+      console.log("stuff for song update", album._id, album.art)
+      API.uploadArt({
+        // user: userId,
+        albumId: album._id,
+        // title: title,
+        // fileUrl: url,
+        album_art: album.art
+      })
+      .then((res) => {
+        console.log("after upload art API", res)
       })
       .catch((err) => {
         console.log(err);
         // toast.danger( "Something went wrong" );
+      })
+    })
+      .catch((err) => {
+        console.log(err);
+        // toast.danger( "Something went wrong" );
       });
+
+
+      
 
     // titleRef.current.value = "";
     // descriptionRef.current.value = "";

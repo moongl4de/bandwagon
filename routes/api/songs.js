@@ -6,6 +6,7 @@ router
   .post(songController.insert)
   .get(songController.findAll)
   .put(songController.updateSong)
+  .put(songController.insertArt)
 
 
   router

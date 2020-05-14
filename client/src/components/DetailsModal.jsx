@@ -13,14 +13,14 @@ function Details(props) {
 
 //   console.log(state);
 
-  const id = props.id;
+  // const id = props.id;
 //   console.log(id);
 
-  useEffect(() => {
-    API.getAlbum(id)
-      .then((res) => dispatch({ type: "SET_CURRENT_ALBUM", album: res.data }))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   API.getAlbum(id)
+  //     .then((res) => dispatch({ type: "SET_CURRENT_ALBUM", album: res.data }))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   // console.log("current album - ", state.currentAlbum)
 

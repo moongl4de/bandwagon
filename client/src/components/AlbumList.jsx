@@ -65,11 +65,29 @@ function AlbumList() {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    // getAlbums();
-    getSongs();
-    // console.log("useEffect State:", songs)
-  }, []);
+  // useEffect(() => {
+  //   // getAlbums();
+  //   getSongs();
+
+
+  //     //get current user and set subscription token and user info
+  //     API.getUsers()
+  //     .then((result) => {
+  //       const id = isAuth()._id;
+  //       const currentUser = result.data.filter((user) => user._id === id);
+  //       //listners current token value at page load
+  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+  //       updateListenerInfo({
+  //         ...listenerInfo,
+  //         subscriptionToken: currentUser[0].subscriptionToken,
+  //         currentListenerData: currentUser[0],
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Failed to Get User info");
+  //     });
+  //   // console.log("useEffect State:", songs)
+  // }, [listenerInfo.subscriptionToken]);
 
   // const getAlbumId = (event) => {
   // let idVariable = state.albums.filter(album => album._id === event.target.value)[0]
@@ -87,19 +105,19 @@ function AlbumList() {
     setModalShow(true)
 
 
-    transferTokenToArtist(clickedSongId)
+
 
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
     // setArt(clickedSongArt)
 
     setCurrentSong({
-      currentSong: {
-        id: clickedSongId,
-        title: clickedSongTitle,
-        url: clickedSongUrl
-      }
+      id: clickedSongId,
+      title: clickedSongTitle,
+      url: clickedSongUrl,
     });
+
+    chargeListenerToken();
     // console.log(currentSong);
   };
 
@@ -118,6 +136,131 @@ function AlbumList() {
 
     console.log("CLICKED", event);
   };
+
+
+
+  const [listenerInfo, updateListenerInfo] = React.useState({
+    subscriptionToken: 0,
+    currentListenerData: {},
+    paused: false,
+  });
+
+
+  useEffect(() => {
+    // getAlbums();
+    getSongs();
+
+
+      //get current user and set subscription token and user info
+      API.getUsers()
+      .then((result) => {
+        const id = isAuth()._id;
+        const currentUser = result.data.filter((user) => user._id === id);
+        //listners current token value at page load
+        listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+        updateListenerInfo({
+          ...listenerInfo,
+          subscriptionToken: currentUser[0].subscriptionToken,
+          currentListenerData: currentUser[0],
+        });
+      })
+      .catch((err) => {
+        toast.error("Failed to Get User info");
+      });
+    // console.log("useEffect State:", songs)
+  }, ['subscriptionToken']);
+  // React.useEffect(() => {
+  //   //get current user and set subscription token and user info
+  //   API.getUsers()
+  //     .then((result) => {
+  //       const id = isAuth()._id;
+  //       const currentUser = result.data.filter((user) => user._id === id);
+  //       //listners current token value at page load
+  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
+  //       updateListenerInfo({
+  //         ...listenerInfo,
+  //         subscriptionToken: currentUser[0].subscriptionToken,
+  //         currentListenerData: currentUser[0],
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Failed to Get User info");
+  //     });
+  // }, [listenerInfo.subscriptionToken]);
+
+  const chargeListenerToken = () => {
+    if (listenerInfo.paused === false) {
+      const token = Number(listenerInfo.subscriptionToken) - 1;
+      //get user to charge token
+      API.getUsers().then((result) => {
+        const email = isAuth().email;
+        //set current user body to use in update request
+        const currentUser = result.data.filter((user) => user.email === email);
+        //calculate subscriptionToken
+        const userSubscriptionToken = token;
+
+        //update user payment required to false after intial signup
+        const data = {
+          ...currentUser[0],
+          paymentRequired: false,
+          subscriptionToken: userSubscriptionToken,
+        };
+
+        //update the user with the new token value
+        API.updateUser(data._id, data).then(() => {
+          // transfer token to artist
+          transferTokenToArtist();
+          //update state
+          updateListenerInfo({
+            ...listenerInfo,
+            subscriptionToken: data.subscriptionToken,
+            currentListenerData: data,
+          });
+        });
+      });
+    } else if (listenerInfo.paused === true) {
+      updateListenerInfo({
+        ...listenerInfo,
+        paused: false,
+      });
+    }
+  };
+
+  const skipChargeOnResume = () => {
+    updateListenerInfo({
+      ...listenerInfo,
+      paused: true,
+    });
+  };
+
+
+  const transferTokenToArtist = () => {
+    console.log("song id dddd -? ", currentSong)
+    //get the currentSongBody from DB
+    API.getSong(currentSong.id).then((res) => {
+      console.log("res.data ============ ", res.data)
+      setCurrentSong({
+        ...currentSong,
+        ...res.data,
+        token_earned: res.data.token_earned + 1,
+        count_play: res.data.count_play + 1
+      });
+      API.updateSong(currentSong)
+        .then((result) => {
+          console.log("update was sent to DB!", result);
+
+          console.log("song id dddd22222 - ", currentSong)
+          toast.success("Successfully Transferred token to artist");
+        })
+
+
+    }).catch((err) => {
+      console.log(err);
+      // toast.danger( "Something went wrong" );
+    });
+  }
+
+
 
   const audioListTest = [
     {
@@ -260,107 +403,7 @@ function AlbumList() {
   //   options.audioLists = audioListTest;
   // }
 
-  const [listenerInfo, updateListenerInfo] = React.useState({
-    subscriptionToken: 0,
-    currentListenerData: {},
-    paused: false,
-  });
 
-  React.useEffect(() => {
-    //get current user and set subscription token and user info
-    API.getUsers()
-      .then((result) => {
-        const email = isAuth().email;
-        const currentUser = result.data.filter((user) => user.email === email);
-        //listners current token value at page load
-        listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-        updateListenerInfo({
-          ...listenerInfo,
-          subscriptionToken: currentUser[0].subscriptionToken,
-          currentListenerData: currentUser[0],
-        });
-      })
-      .catch((err) => {
-        toast.error("Failed to Get User info");
-      });
-  }, ["subscriptionToken"]);
-
-  const chargeListenerToken = () => {
-    if (listenerInfo.paused === false) {
-      console.log("current song in charge = ", currentSong)
-      const token = Number(listenerInfo.subscriptionToken) - 1;
-      //get user to charge token
-      API.getUsers().then((result) => {
-        const email = isAuth().email;
-        //set current user body to use in update request
-        const currentUser = result.data.filter((user) => user.email === email);
-        //calculate subscriptionToken
-        const userSubscriptionToken = token;
-
-        //update user payment required to false after intial signup
-        const data = {
-          ...currentUser[0],
-          paymentRequired: false,
-          subscriptionToken: userSubscriptionToken,
-        };
-
-        //update the user with the new token value
-        API.updateUser(data._id, data).then(() => {
-          // transfer token to artist
-          // transferTokenToArtist();
-          //update state
-          updateListenerInfo({
-            ...listenerInfo,
-            subscriptionToken: data.subscriptionToken,
-            currentListenerData: data,
-          });
-        });
-      });
-    } else if (listenerInfo.paused === true) {
-      updateListenerInfo({
-        ...listenerInfo,
-        paused: false,
-      });
-    }
-  };
-
-  const skipChargeOnResume = () => {
-    updateListenerInfo({
-      ...listenerInfo,
-      paused: true,
-    });
-  };
-
-
-  const transferTokenToArtist = (id) => {
-    const songId = currentSong.id
-    console.log("currentSong.id1 = " + songId)
-    //get the currentSongBody from DB
-    API.getSongs(id).then((res) => {
-  const currentSongPlayed = res.data.filter(song => song._id === id)[0]
-      API.updateSong({
-        ...currentSongPlayed,
-        token_earned: Number(currentSongPlayed.token_earned) + 1,
-        count_play: Number(currentSongPlayed.count_play) + 1
-        // song_ids: []
-
-      })
-        .then((result) => {
-          console.log("update was sent to DB!", result);
-          setCurrentSong({
-            ...currentSongPlayed,
-            token_earned: currentSongPlayed.token_earned + 1,
-            count_play: currentSongPlayed.count_play + 1
-          });
-          toast.success("Successfully Transferred token to artist");
-        })
-
-
-    }).catch((err) => {
-      console.log(err);
-      // toast.danger( "Something went wrong" );
-    });
-  }
 
 
   return (
@@ -423,7 +466,7 @@ function AlbumList() {
           <ReactJkMusicPlayer
 
             {...options}
-            onAudioPlay={chargeListenerToken}
+            // onAudioPlay={chargeListenerToken}
             onAudioPause={skipChargeOnResume}
           />
 
