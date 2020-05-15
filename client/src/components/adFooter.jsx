@@ -20,7 +20,7 @@ class Footer extends Component {
               <a href="#pablo">
                 Bandwagon
             </a>
-            , where music happens
+            , where music lives
           </p>
           </Nav>
         </Container>
