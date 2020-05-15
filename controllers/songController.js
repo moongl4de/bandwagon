@@ -34,6 +34,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findSongByUserId: function(req, res) {
+    Song.find({'user._id' : req.params.id})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+},
     updateSong: function(req, res) {
     const { _id } = req.body;
     Song.findByIdAndUpdate(_id, req.body)

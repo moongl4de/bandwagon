@@ -94,7 +94,9 @@ class Admin extends Component {
     const userId = isAuth()._id;
 
     //try to search by passing a search parameter
-    API.getSongs().then( (res) => {
+    API.getSongByUserId(userId).then( (res) => {
+      //filter Songs by specific user
+
       //set data for pie chart
       const songPlayCountData = [];
       const songPlayNameData = [];
