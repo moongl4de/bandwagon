@@ -92,8 +92,8 @@ function handleEdit(song) {
   console.log("YOYOYOYOYOY")
   console.log(song)
   setState({
-    album: song.albumId,
     title: song.title,
+    albumName: song.album["Album title"],
     date: song.date,
     description: song.album.description,
     art: song.album.art
@@ -115,16 +115,14 @@ function renderTableHeader() {
 
 function renderTableData() {
   return newsongs.map((song) => {
-    
-    const { albumId, title, date, _id } = song //destructuring
-    
+    console.log(song)
     return (
-      <tr key={albumId}>
-        <td>{albumId}</td>
-        <td>{title}</td>
-        <td>{date}</td>
+      <tr key={song.albumId}>
+        <td>{song.album["Album title"]}</td>
+        <td>{song.title}</td>
+        <td>{song.date}</td>
         <td><a style={{ cursor: "pointer", color: "orange" }} class='edit-song'onClick={() => handleEdit(song)}>EDIT</a></td>
-        <td><a style={{ cursor: "pointer", color: "red" }} class='delete-song' id={_id} onClick={() => deleteSongs(song)}>DELETE</a></td>
+        <td><a style={{ cursor: "pointer", color: "red" }} class='delete-song' id={song._id} onClick={() => deleteSongs(song)}>DELETE</a></td>
       </tr>
     )
   })
@@ -225,12 +223,12 @@ function renderTableData() {
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
-                      <Form.Label>Release Date:</Form.Label>
+                      <Form.Label>Album Name:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder={state.date}
+                        placeholder={state.albumName}
                         onChange={handleInputChange}
-                        name="date"
+                        name="album"
                         disabled
                          />
                     </Form.Group>
