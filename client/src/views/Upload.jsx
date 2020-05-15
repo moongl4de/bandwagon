@@ -53,7 +53,7 @@ function Upload() {
     });
   };
   //on page load create an empty album with user id to get album's id to upload songs to
-  // const userId = JSON.parse(localStorage.getItem("user"))._id;
+
   useEffect(() => {
     //get current user from local storage
     const user = isAuth();
