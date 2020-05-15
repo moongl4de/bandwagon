@@ -34,6 +34,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findSongByUserId: function(req, res) {
+    Song.find({'user._id' : req.params.id})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+},
     updateSong: function(req, res) {
     const { _id } = req.body;
     Song.findByIdAndUpdate(_id, req.body)
@@ -67,8 +72,14 @@ module.exports = {
   //     .catch(err => res.status(422).json(err));
   // },
   remove: function(req, res) {
+    const songId = req.params.id;
+    console.log(`the id to delete is: ${songId}`);
     Song.findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .then(dbModel => {
+
+       
+        dbModel.remove();
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

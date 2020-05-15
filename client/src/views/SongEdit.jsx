@@ -1,29 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import {
   Container,
   Row,
   Col,
-  Form
+  Form,
+  Table
 } from "react-bootstrap";
-
+import { ToastContainer, toast } from "react-toastify";
 import { Card } from "../components/adCard.jsx";
 import { Redirect } from "react-router-dom"
-
+import API from "../utils/API";
 import Button from "../components/adCustomButton.jsx";
+import { isAuth } from "../components/helper";
 
 
 
 
 function UserProfile() {
-  
+  const array= {
+    data: [
+      { album: "Fight With Tools", song: "Handlebars", date: "1999", edit: "", delete: "" },
+      { album: "Grand National", song: "Daniella", date: "2001", },
+      { album: "An Awesome Wave", song: "Breezeblocks", date: "2010", },
+      { album: "In With the Old", song: "Ashes", date: "2008", },
+      { album: "ExtraOrdinary", song: "Helen", date: "2010", },
+      { album: "Food in the Belly", song: "The Letter", date: "2006", },
+      { album: "Fight With Tools", song: "Handlebars", date: "1999" },
+      { album: "Grand National", song: "Daniella", date: "2001", },
+      { album: "An Awesome Wave", song: "Breezeblocks", date: "2010", },
+      { album: "In With the Old", song: "Ashes", date: "2008", },
+      { album: "ExtraOrdinary", song: "Helen", date: "2010", },
+      { album: "Food in the Belly", song: "The Letter", date: "2006", }
+    ]
+  }
 
-  const [state, setState] = useState({
-    album: "test album",
-    song: "test name",
-    date: "test date",
-    description: "test description",
-    art: "https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg"
-  });
+  const [state, setState] = useState([]);
 
   // const [nam, setName] = useState("test name");
   // const [alb, setAlbum] = useState("test album");
@@ -32,6 +43,92 @@ function UserProfile() {
   // const [art, setArt] = useState("test art");
   // const [artURL, setArtURL] = useState("https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg");
   const [page, setPage] = useState(false);
+  
+  const [newsongs, setNewSongs] = useState([]);
+  const [editSong, setEditSong] = useState([]);
+  
+  
+  const getSongs = () => {
+    const userId = isAuth()._id;
+    API.getSongByUserId(userId)
+      .then((results) => {
+        console.log("all songs from db:", results.data);
+        setNewSongs(results.data);
+     
+
+
+       
+      })
+      .catch((err) => console.log(err));
+  };
+ 
+  useEffect(() => {
+
+    getSongs();
+    
+  }, []); 
+
+const deleteSongs = (song) => {
+  console.log("CLICKED SONG", song);
+
+  const id = song._id
+  API.deleteAlbum(id)
+  .then((res) => {
+    console.log("after delete API", res)
+    getSongs()
+    toast("Your song has been deleted")
+     })
+  .catch((err) => console.log("ERROR:"+ err));
+  
+};
+
+
+
+
+
+
+function handleEdit(song) {
+  // const { albumId, title, date, _id, description} = song
+  console.log("YOYOYOYOYOY")
+  console.log(song)
+  setState({
+    album: song.albumId,
+    title: song.title,
+    date: song.date,
+    description: song.album.description,
+    art: song.album.art
+  });
+  setEditSong(song)
+
+ 
+
+  // setPage(true);
+  console.log("go to edit")
+}
+
+function renderTableHeader() {
+  let header = Object.keys(array.data[0])
+  return header.map((key, index) => {
+    return <th key={index}>{key.toUpperCase()}</th>
+  })
+}
+
+function renderTableData() {
+  return newsongs.map((song) => {
+    
+    const { albumId, title, date, _id } = song //destructuring
+    
+    return (
+      <tr key={albumId}>
+        <td>{albumId}</td>
+        <td>{title}</td>
+        <td>{date}</td>
+        <td><a style={{ cursor: "pointer", color: "orange" }} class='edit-song'onClick={() => handleEdit(song)}>EDIT</a></td>
+        <td><a style={{ cursor: "pointer", color: "red" }} class='delete-song' id={_id} onClick={() => deleteSongs(song)}>DELETE</a></td>
+      </tr>
+    )
+  })
+}
 
   const handleInputChange = (event) => {
     setState({
@@ -49,10 +146,32 @@ function UserProfile() {
   
   const handleSubmit = e => {
     e.preventDefault();
-
+   
+    let data = state
+    console.log("HERE")
+    console.log(state)
+   API.updateSong({ 
+    
+    ...data,
+    ...editSong,
+    title: data.title,
+       
+      })
+        .then((result) => {
+          console.log("song updated", result.data);
+          getSongs();
+          toast("Your song has been changed")
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    
+    // toast("Songs successfully edited");
+      
+      // updateSongInfo(song)
     
     console.log('Button is clicked!');
-    setPage(true)
+    // setPage(true)
 
 
   }
@@ -75,7 +194,7 @@ function UserProfile() {
               category="Please select a song from the Library to edit"
               content={
                 <Form onSubmit={handleSubmit} >
-                  <Form.Row>
+                  {/* <Form.Row>
 
 
                     <Form.Group as={Col} controlId="formGridText">
@@ -87,16 +206,17 @@ function UserProfile() {
                         value={state.album}
                          />
                     </Form.Group>
-                  </Form.Row>
+                  </Form.Row> */}
 
                   <Form.Row>
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Song Name:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Song Name"
+                        placeholder={state.title}
                         onChange={handleInputChange}
-                        value={state.song}
+                        name = "title"
+                        
                          />
                     </Form.Group>
 
@@ -108,9 +228,11 @@ function UserProfile() {
                       <Form.Label>Release Date:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Release Date"
+                        placeholder={state.date}
                         onChange={handleInputChange}
-                        value={state.date} />
+                        name="date"
+                        disabled
+                         />
                     </Form.Group>
 
 
@@ -122,9 +244,11 @@ function UserProfile() {
                       <Form.Label>Description:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Description"
+                        placeholder={state.description}
                         onChange={handleInputChange}
-                        value={state.description} />
+                        name = "description"
+                        disabled
+                         />
                     </Form.Group>
 
                   </Form.Row>
@@ -132,12 +256,14 @@ function UserProfile() {
                   <Form.Row>
 
                     <Form.Group as={Col} controlId="formGridText">
-                      <Form.Label>Art Title:</Form.Label>
+                      <Form.Label>Art URL:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Art"
+                        placeholder={state.art}
                         onChange={handleInputChange}
-                        value={state.art} />
+                        name="art"
+                        disabled
+                        />
                     </Form.Group>
 
                   </Form.Row>
@@ -196,7 +322,38 @@ function UserProfile() {
 
 
 
-      </Container>
+    
+          <Row>
+            <Col md={12}>
+              <Card
+                title="Uploaded Music"
+                category="Welcome to Your Music Library"
+                ctTableFullWidth
+                ctTableResponsive
+                content={
+                  <div>
+
+                    <Table id='students' className="ml-3" striped hover>
+                      <tbody>
+                        <tr>{renderTableHeader()}</tr>
+                        {renderTableData()}
+                      </tbody>
+                    </Table>
+                  </div>
+
+
+
+
+
+
+
+                }
+              />
+            </Col>
+
+
+          </Row>
+        </Container>
     </div >
   );
 }

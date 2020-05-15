@@ -14,6 +14,9 @@ import {
   legendSales,
 } from "../variables/Variables.jsx";
 
+import { Pie } from 'react-chartjs-2'
+
+
 class Dashboard extends Component {
   createLegend(json) {
     var legend = [];
@@ -52,7 +55,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-headphones text-danger" />}
                 statsText="Total Plays"
-                statsValue= {this.props.totalNumberPlayed}
+                statsValue={this.props.totalNumberPlayed}
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
               />
@@ -70,11 +73,11 @@ class Dashboard extends Component {
           <Row>
             <Col md={8}>
               <Card
-                
+
                 id="chartHours"
                 title="Songs Played"
                 category="by month performance"
-                
+
                 content={
                   <div className="ct-chart">
                     <ChartistGraph
@@ -82,7 +85,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsSales}
                       responsiveOptions={responsiveSales}
-                      
+
                     />
                   </div>
                 }
@@ -93,23 +96,49 @@ class Dashboard extends Component {
             </Col>
             <Col md={4}>
               <Card
-                
+
                 title="Total Plays"
-                category="By Album"
-                
+                category="By Song"
+
                 content={
                   <div
                     id="chartPreferences"
                     className="ct-chart ct-perfect-fourth"
                   >
-                    <ChartistGraph data={dataPie} type="Pie" />
+
+                    <Pie data={{
+                      labels: this.props.songPlayName,
+                      datasets: [
+                        {
+                          label: 'Song Data',
+                          backgroundColor: [
+                            '#B21F00',
+                            '#C9DE00',
+                            '#2FDE00',
+                            '#00A6B4',
+                            '#6800B4'
+                          ],
+                          hoverBackgroundColor: [
+                            '#501800',
+                            '#4B5000',
+                            '#175000',
+                            '#003350',
+                            '#35014F'
+                          ],
+                          data: this.props.songPlayPercentage,
+                        }
+                      ]
+                    }} options={{
+
+                      legend: {
+                        display: false,
+                        position: 'bottom'
+                      }
+
+                    }} />
                   </div>
                 }
-                legend={
-                  <div className="legend">{this.createLegend(legendPie)}</div>
-                  
-                }
-              
+
               />
             </Col>
           </Row>

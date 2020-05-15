@@ -235,7 +235,7 @@ function Upload() {
           </Col>
           <Col>
             <Card
-              title="Album details"
+              title="Album Details"
               // category="Follow the steps below to upload."
               ctTableFullWidth
               ctTableResponsive
@@ -247,8 +247,8 @@ function Upload() {
                       className="form-control mb-5"
                       required
                       onChange={updateAlbum}
-                      name="title"
-                      placeholder="Album Title"
+                      name="Album title"
+                      placeholder="Title"
                     />
                     {/* <input
                       className="form-control mb-5"

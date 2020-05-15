@@ -9,8 +9,9 @@ import API from "../utils/API";
 
 
 
-function Library() {
-
+function Library({updateSongInfo}) {
+console.log("THIIIIISSSS:")
+// console.log(props)
 const [page, setPage] = useState(false);
 const array= {
       data: [
@@ -57,9 +58,11 @@ const array= {
     API.deleteAlbum(id)
     .then((res) => {
       console.log("after delete API", res)
+      getSongs()
       toast.success("Your song has been deleted")
        })
     .catch((err) => console.log("ERROR:"+ err));
+    
 };
 
   
@@ -71,8 +74,10 @@ const array= {
     toast.success("Your song has been deleted");
   }
 
-  function handleEdit(e) {
-    e.preventDefault();
+  function handleEdit(song) {
+    
+    
+
     setPage(true);
     console.log("go to edit")
   }
@@ -92,7 +97,7 @@ const array= {
           <td>{albumId}</td>
           <td>{title}</td>
           <td>{date}</td>
-          <td><a style={{ cursor: "pointer", color: "orange" }} class='edit-song'onClick={handleEdit}>EDIT</a></td>
+          <td><a style={{ cursor: "pointer", color: "orange" }} class='edit-song'onClick={() => handleEdit(song)}>EDIT</a></td>
           <td><a style={{ cursor: "pointer", color: "red" }} class='delete-song' id={_id} onClick={() => deleteSongs(song)}>DELETE</a></td>
         </tr>
       )

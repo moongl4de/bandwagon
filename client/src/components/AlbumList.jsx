@@ -10,6 +10,7 @@ import "../App.css";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import Search from "./Searchbar"
+import BootstrapCarousel from "./Carousel"
 
 import ReactDOM from 'react-dom'
 // import ReactWOW from 'react-wow'
@@ -25,6 +26,7 @@ function AlbumList() {
 
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
+  const [artist, setArtist] = useState('')
   const [art, setArt] = useState('');
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -44,10 +46,12 @@ function AlbumList() {
 
 
   const getCurrentSong = async (song) => {
-   
+
     let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
+    let clickedSongArtist = song.user.name;
+    let clickedSongArt = song.album.art;
     setModalShow(true)
 
 
@@ -55,7 +59,8 @@ function AlbumList() {
 
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
-    // setArt(clickedSongArt)
+    setArt(clickedSongArt)
+    setArtist(clickedSongArtist)
 
     setCurrentSong(song);
     await chargeListenerToken();
@@ -174,7 +179,7 @@ function AlbumList() {
 
   const audioListTest = [
     {
-      name: title,
+      name: artist,
       singer: title,
       cover: art,
       musicSrc: () => {
@@ -293,7 +298,7 @@ function AlbumList() {
     extendsContent: null,
 
     //default volume of the audio player [type `Number` default `1` range `0-1`]
-    defaultVolume: 1,
+    defaultVolume: 0.5,
 
     //playModeText show time [type `Number(ms)` default `700`]
     playModeShowTime: 600,
@@ -328,11 +333,12 @@ function AlbumList() {
     <Fragment>
       <Search token={listenerInfo.subscriptionToken} />
       <Row className="justify-content-md-center">
+ 
         <Col md={5}>
 
           <Form inline>
             <FormControl
-              style={{ textAlign: "center", width: "100%" }}
+              style={{ textAlign: "center", width: "100%"}}
               type="text"
               placeholder="Search here..."
               className="mr-md-5"
@@ -354,7 +360,7 @@ function AlbumList() {
               <div class="row">
                 <Card
                   className="albumCard wow animate__animated animate__zoomIn col-10"
-                  style={{ width: "18rem", padding: "2%", }}
+                  style={{ width: "18rem", padding: "2%",  }}
                   key={song._id}
                 >
                   <Button
@@ -364,50 +370,57 @@ function AlbumList() {
                     id={song._id}
                     title={song.title}
                     url={song.fileUrl}
+                    art={song.album.art}
+                    artist={song.user.name}
                     name="currentSong"
                     onClick={() => getCurrentSong(song)}
                   >
 
                     {" "}
-                  Support Artist{" "}
-                    </Button>
-                   
-                    <Card.Body>
-                    <Card.Title style={{textAlign: "center"}}><strong>{song.user.name}</strong></Card.Title>
-                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
-                  <Card.Img
-                    variant="top"
-                    src={song.album.art}
-                    style={{ height: "100%", width: "100%;" }}
-                    className="albumCardImage"
-                  />
-                      <Details />
-                      {/* <Link to={"/albums/" + album._id}> */}
-                      {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                      {/* </Link> */}
-                    </Card.Body>
-                    <Card.Footer>
-                      {/* <small className="text-muted">Added {album.date}</small> */}
-                      {/* {song._id} */}
-                    </Card.Footer>
+                    <i style={{color: "white", boxShadow: "0px 0px 10px black"}}class="far fa-play-circle fa-5x"></i>{" "}
+                  </Button>
 
-                  </Card>
-                </div>
+                  <Card.Body>
+                    <Card.Title style={{ textAlign: "center" }}><strong>{song.user.name}</strong></Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>{song.title}</Card.Text>
+                    <div className="d-flex justify-content-center align-items-center">
+                    <Card.Img
+                      variant="top"
+                      src={song.album.art}
+                      style={{ height: "100%", width: "100%;", margin: "0 auto !important" }}
+                      className="albumCardImage"
+                    />
+                    </div>
+                    <Details />
+                    {/* <Link to={"/albums/" + album._id}> */}
+                    {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                    {/* </Link> */}
+                  </Card.Body>
+                  {/* <Card.Footer> */}
+                    {/* <small className="text-muted">Added {album.date}</small> */}
+                    {/* {song._id} */}
+                  {/* </Card.Footer> */}
 
-              ))}
-            </div>
-          ) : (
-              <h3>No albums available.</h3>
-            )}
+                </Card>
+              </div>
 
-          <ReactJkMusicPlayer
+            ))}
+          </div>
+        ) : (
+            <h3>No albums available.</h3>
+          )}
+            <br/>
+          
 
-            {...options}
-            // onAudioPlay={chargeListenerToken}
-            onAudioPause={skipChargeOnResume}
-          />
+        <ReactJkMusicPlayer
 
-        </div>
+          {...options}
+          // onAudioPlay={chargeListenerToken}
+          onAudioPause={skipChargeOnResume}
+        />
+       
+
+      </div>
       {/* </div> */}
     </Fragment>
   );

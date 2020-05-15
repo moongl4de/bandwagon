@@ -52,6 +52,7 @@ class Search extends Component {
     return (
       <InstantSearch searchClient={searchClient} indexName="songs">
         <Navbar bg="" variant="dark" expand="lg" className="mb-3 navbar">
+        
           <Navbar.Brand href="#home" className="nlist">
             <img
               alt=""
@@ -63,8 +64,10 @@ class Search extends Component {
 
             />{' '}
       bandwagon
+      
     </Navbar.Brand>
-
+    {/* <p style={{color: "white", width: "100%", marginLeft:"1.5%", fontWeight: "lighter", textAlign: "center", letterSpacing: "10px"}} className="d-flex justify-content-center align-items-center">where music lives</p> */}
+        
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
 
@@ -73,10 +76,10 @@ class Search extends Component {
 
           <Nav className="mr-auto">
             <Navbar.Collapse className="justify-content-end">
-
+      
               <Nav className="mr-auto">
                 <Nav.Link  ><i class="fas fa-coins fa-sm"></i>
-    Token : {this.props.token}</Nav.Link>
+    Tokens : {this.props.token}</Nav.Link>
                 <Nav.Link href="/subscription" >Buy Tokens</Nav.Link>
                 <Nav.Link href="#link" onClick={() => this.logOut()}>Log Out</Nav.Link>
               </Nav>
