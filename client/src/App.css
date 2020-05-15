@@ -1,497 +1,481 @@
-/* * {
-  stroke: rgba(249, 223, 255, 0) !important;
-} */
-
 body {
-  background-color: rgb(33,33,33);
-  font-family: "Roboto";
-  text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+	background-color: rgb(33, 33, 33);
+	font-family: "Roboto";
+	text-rendering: optimizeLegibility;
+	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 .cardContainer {
-  margin-bottom: 10%;
-  display: flex;
-  justify-content: center;
+	margin-bottom: 10%;
+	display: flex;
+	justify-content: center;
 }
 
 ::-webkit-scrollbar {
-  width: 11px;
+	width: 11px;
 }
 
 ::-webkit-scrollbar-track {
-  padding: 20px !important;
-  /* -webkit-box-shadow: inset 0 0 10px rgb(0, 0, 0);  */
-  border-radius: 0px;
-  background-image: linear-gradient( to bottom, #f49eff, rgb(138, 185, 255) 100% ) 
+	padding: 20px !important;
+	/* -webkit-box-shadow: inset 0 0 10px rgb(0, 0, 0);  */
+	border-radius: 0px;
+	background-image: linear-gradient( to bottom, #f49eff, rgb(138, 185, 255) 100%)
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.39);
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.514); 
+	border-radius: 20px;
+	background: white;
+	border: 1px solid rgba(0, 0, 0, 0.39);
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.514);
 }
 
+.row {
+	justify-content: center;
+}
 
-.row{
-  justify-content: center;
-} 
-
-
-.albumButton:focus {outline:0 !important;}
-
-
+.albumButton:focus {
+	outline: 0 !important;
+}
 
 .albumBtn:active {
-  background-color: red !important;
-}
-@keyframes shine {
-  to {
-    background-position: 120% center;
-  }
+	background-color: red !important;
 }
 
+@keyframes shine {
+	to {
+		background-position: 120% center;
+	}
+}
 
 .containerTest {
-  width: 40rem;
-  height: 40rem;
-  background-color: #c0bebe;
-  box-shadow: 0px 4px 15px black;
-  margin: 0 auto;
+	width: 40rem;
+	height: 40rem;
+	background-color: #c0bebe;
+	box-shadow: 0px 4px 15px black;
+	margin: 0 auto;
 }
 
 .artistContainer {
-  width: 40%;
-  height: 40%;
-  background-color: rgba(255, 255, 255, 0.897);
-  margin: 0 auto;
-  border: 1px solid white;
-  
+	width: 40%;
+	height: 40%;
+	background-color: rgba(255, 255, 255, 0.897);
+	margin: 0 auto;
+	border: 1px solid white;
 }
 
 #albumArt {
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0 auto;
-  box-shadow: 0px 5px 8px black;
-  
-  
+	max-width: 100%;
+	max-height: 100%;
+	margin: 0 auto;
+	box-shadow: 0px 5px 8px black;
 }
 
-.fas{
-  background: -webkit-gradient(linear, left bottom, right top, from(rgba(161, 161, 161, 0.432)), to(rgba(255, 255, 255, 0.61)));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 2px;
-  
+.fas {
+	background: -webkit-gradient(linear, left bottom, right top, from(rgba(161, 161, 161, 0.432)), to(rgba(255, 255, 255, 0.61)));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin: 2px;
 }
 
 #loginLogo {
-  width: 14%;
-  min-width: 125px; 
-  background-color: rgb(0, 0, 0);
-  border-radius: 10px;
-  padding: 10px 20px;
-  background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #bdb0ff, #b0b1ff, #e7cbff);
-  background-size: 500% 500%;
-  -webkit-animation: AnimationName 15s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-   
+	width: 14%;
+	min-width: 125px;
+	border-radius: 10px;
+	padding: 10px 20px;
+	background: linear-gradient(270deg, #f7d2ff2c, #9eb6ff34, #bdb0ff3a, #b0b1ff46, #e7cbff3f);
+	background-size: 500% 500%;
+	-webkit-animation: AnimationName 15s ease infinite;
+	-moz-animation: AnimationName 30s ease infinite;
+	animation: AnimationName 30s ease infinite;
 }
 
-
 #loginContainer {
-
-  width: 100%;
-  height: 100vh;
-  
-
+	width: 100%;
+	height: 100vh;
 }
 
 .custBtn {
-  background-color: rgb(255, 255, 255) !important;
-  border: 1px solid black !important;
-  background-image: linear-gradient( to bottom, #f9d0ff, rgb(205, 225, 255) 120% ) !important;
+	background-color: rgb(255, 255, 255) !important;
+	border: 1px solid black !important;
+	background-image: linear-gradient( to bottom, #f9d0ff, rgb(205, 225, 255) 120%) !important;
 }
 
 .custBtn2 {
-  position: absolute;
-  height: 8% !important;
-  bottom: 0;
-  margin: 0 auto !important;
-  width: 100%;
-  background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #bdb0ff, #b0b1ff, #e7cbff);
-  background-size: 500% 500%;
-  -webkit-animation: AnimationName 15s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-  border-radius: 20px;
-  color: white !important;
-  border: 1px white solid !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
+	position: absolute;
+	height: 8% !important;
+	bottom: 0;
+	margin: 0 auto !important;
+	width: 100%;
+	background: linear-gradient(270deg, #f7d2ff60, #9eb6ff5b, #bdb0ff4f, #b0b1ff62, #e7cbff56);
+	background-size: 500% 500%;
+	-webkit-animation: AnimationName 15s ease infinite;
+	-moz-animation: AnimationName 30s ease infinite;
+	animation: AnimationName 30s ease infinite;
+	border-radius: 20px;
+	color: white !important;
+  border: 1px rgba(255, 255, 255, 0.548) solid !important;
+  border-left: rgba(0, 0, 0, 0) !important;
+  border-right: rgba(0, 0, 0, 0) !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	padding: 0 !important;
 }
 
 #whatIsBtn {
-  font-size: 30px;
-  font-weight: lighter;
-  
-  font-family: "Roboto";
+	font-size: 25px;
+	font-weight: lighter;
+	font-family: "Roboto";
   letter-spacing: 4px;
+  margin: auto;
 }
 
 #formContainer {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  color: rgb(255, 255, 255);
-  
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	color: rgb(255, 255, 255);
 }
 
 #custom-switch {
-  background-color: red;
+	background-color: red;
 }
 
 #radioBox {
-margin: 5px;
-border: 1px solid rgba(0, 0, 0, 0.199);
-padding: 5px;
+	margin: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.199);
+	padding: 5px;
 }
 
 #videoBackground {
-  
-  height: auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  filter: blur(1px)
-  brightness(30%)
-  saturate(.3);
-  background-color: rgb(255, 255, 255);
- 
-  
+	height: auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	filter: blur(1px) brightness(30%) saturate(.3);
+	background-color: rgb(255, 255, 255);
 }
 
+
 /* Text size on charts */
+
 .ct-label {
-  font-size: 1.0rem !important;
+	font-size: 1.0rem !important;
 }
 
 #centerDiv {
-  background-color: #313131;
-  display: flex;
-  justify-content: center;
+	background-color: #313131;
+	display: flex;
+	justify-content: center;
 }
 
-
-.subscriptionDiv{
-  background-color: rgba(255, 255, 255, 0.123);
-  height: 50vh;
-  border-radius: 15px;
-  border: 1px solid white;
-  margin-top: 10%;
-  text-align: center;
-  max-height: 500px;
-  
+.subscriptionDiv {
+	background-color: rgba(255, 255, 255, 0.123);
+	height: 50vh;
+	border-radius: 15px;
+	border: 1px solid white;
+	margin-top: 10%;
+	text-align: center;
+	max-height: 500px;
 }
 
 .innerContainer {
-  border: 1px solid rgba(255, 255, 255, 0.507);
-  background-color: rgba(223, 223, 223, 0.712);
-  height: 90%;
-  border-radius: 10px;
-  margin: 5% auto;
-  
-}
-.subscriptionDiv:hover {
-  box-shadow: 0px 0px 25px rgba(27, 99, 255, 0.582);
-  cursor: pointer;
-  border: 1px rgb(133, 81, 255) solid;
-  background-color: rgb(255, 255, 255);
-  text-shadow: 0px 0px 5px rgba(0, 10, 36, 0.637);
-  transition: 1s;
- 
+	border: 1px solid rgba(255, 255, 255, 0.507);
+	background-color: rgba(223, 223, 223, 0.712);
+	height: 90%;
+	border-radius: 10px;
+	margin: 5% auto;
 }
 
+.subscriptionDiv:hover {
+	box-shadow: 0px 0px 25px rgba(27, 99, 255, 0.582);
+	cursor: pointer;
+	border: 1px rgb(133, 81, 255) solid;
+	background-color: rgb(255, 255, 255);
+	text-shadow: 0px 0px 5px rgba(0, 10, 36, 0.637);
+	transition: 1s;
+}
 
 @media only screen and (max-width: 600px) {
-  .subscriptionDiv {
-    margin: 2% 10%;
-    height: 40vh;
-  }
-
-  #subHeader {
-    color: red;
-  }
+	.subscriptionDiv {
+		margin: 2% 10%;
+		height: 40vh;
+	}
+	#subHeader {
+		color: red;
+	}
 }
+
 #subHeader {
-  font-size: 30px;
-  font-family: "Roboto";
+	font-size: 30px;
+	font-family: "Roboto";
 }
 
 
 /* Algolia Search css */
 
-.ais-SearchBox { margin: 0; }
-.ais-Pagination { margin-top: 1em }
-
-
-.ais-InstantSearch { max-width: 960px; overflow: hidden; margin: 0 }
-.ais-Hits-item { padding: 0em; width: calc(16.6667% - 1rem) }
-
-
-.hit-price { color: rgb(255, 255, 255); font-size: 14px; text-align: center;}
-
-.rc-slider-handle {
-  background-color: rgb(255, 255, 255) !important;
+.ais-SearchBox {
+	margin: 0;
 }
 
-.rc-slider-step {
-  background-image: linear-gradient( to right, rgb(241, 173, 255), rgb(157, 196, 255) 120% ) !important;
+.ais-Pagination {
+	margin-top: 1em
 }
 
-
-
-.progress-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #00a6ff00 !important;
-  transition: width .6s ease;
-}
-
-.rc-slider-track{
-  background-color: rgba(0, 0, 0, 0.788) !important;
-}
-
-.panel-content{
-  background-image:
-  linear-gradient(
-    to right,
-    rgb(121, 121, 121),
-    rgb(30, 30, 30) 100%
-  );
-}
-
-.rc-slider-step {
-  background-image:
-  linear-gradient(
-    to right,
-    rgba(212, 0, 255, 0.363),
-    rgba(255, 0, 0, 0.356) 120%
-  );
-}
-
-.react-jinke-music-player-main svg {
-  font-size: 24px;
-}
-
-svg:hover {
-  fill: rgb(160, 138, 175);
-  transition-duration: 10s !important;
-}
-.music-player-controller-setting{
- color: black;
- background-color: rgba(75, 0, 105, 0.37) !important;
-}
-
-.music-player-controller {
-  color: pink !important;
+.ais-InstantSearch {
+	max-width: 960px;
+	overflow: hidden;
+	margin: 0
 }
 
 .ais-Hits-item {
-  box-shadow: 0px 0px 10px black;
-  max-width: 200px;
-  min-width: 200px;
-  min-height: 200px;
-  
-  
+	padding: 0em;
+	width: calc(16.6667% - 1rem)
+}
+
+.hit-price {
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+	text-align: center;
+}
+
+.rc-slider-handle {
+	background-color: rgb(255, 255, 255) !important;
+}
+
+.rc-slider-step {
+	background-image: linear-gradient( to right, rgb(241, 173, 255), rgb(157, 196, 255) 120%) !important;
+}
+
+.progress-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	background-color: #00a6ff00 !important;
+	transition: width .6s ease;
+}
+
+.rc-slider-track {
+	background-color: rgba(0, 0, 0, 0.788) !important;
+}
+
+.panel-content {
+	background-image: linear-gradient( to right, rgb(121, 121, 121), rgb(30, 30, 30) 100%);
+}
+
+.rc-slider-step {
+	background-image: linear-gradient( to right, rgba(212, 0, 255, 0.363), rgba(255, 0, 0, 0.356) 120%);
+}
+
+.react-jinke-music-player-main svg {
+	font-size: 24px;
+}
+
+svg:hover {
+	fill: rgb(160, 138, 175);
+	transition-duration: 10s !important;
+}
+
+.music-player-controller-setting {
+	color: black;
+	background-color: rgba(75, 0, 105, 0.37) !important;
+}
+
+.music-player-controller {
+	color: pink !important;
+}
+
+.ais-Hits-item {
+	box-shadow: 0px 0px 10px black;
+	max-width: 200px;
+	min-width: 200px;
+	min-height: 200px;
 }
 
 .hit-container {
-  background-color: rgba(0, 0, 0, 0.678);
-  margin: 0 auto !important;
-  justify-self: stretch;
- 
-  
+	background-color: rgba(0, 0, 0, 0.678);
+	margin: 0 auto !important;
+	justify-self: stretch;
 }
 
 .bg-dark {
-  background-color: #000000 !important;
+	background-color: #000000 !important;
 }
 
 .ais-Hits {
-  display: flex;
-  justify-content: center;
-  max-width: 70%;
-  margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	max-width: 70%;
+	margin: 0 auto;
 }
 
 .ais-Hits-list {
-  display: flex;
-  padding: 0;
-  
+	display: flex;
+	padding: 0;
 }
 
 .albumCard {
-  border-radius: 0px !important;
-  background: linear-gradient(to bottom left, rgba(201, 206, 253, 0.623) 50%, rgba(255, 215, 255, 0.534) 100%);
-  color: rgb(54, 54, 54) !important;
-  max-height: 500px;
-  max-width: 500px;
-  width: 350px !important;
-  height: 350px !important;
-  /* overflow-x: scroll; */
-  margin: 20px !important;
+	border-radius: 0px !important;
+	background: linear-gradient(to bottom left, rgba(201, 206, 253, 0.623) 50%, rgba(255, 215, 255, 0.534) 100%);
+	color: rgb(54, 54, 54) !important;
+	max-height: 500px;
+	max-width: 500px;
+	width: 350px !important;
+	height: 350px !important;
+	/* overflow-x: scroll; */
+	margin: 20px !important;
 }
 
 .albumCard:hover {
-  border: 1px rgb(188, 88, 255) solid;
-  transition: 1s !important;
-  box-shadow: 0px 5px 12px rgba(184, 98, 255, 0.411);
-  background: linear-gradient(to bottom left, rgb(201, 206, 253) 50%, rgb(255, 215, 255) 100%);
+	border: 1px rgb(188, 88, 255) solid;
+	transition: 1s !important;
+	box-shadow: 0px 5px 12px rgba(184, 98, 255, 0.411);
+	background: linear-gradient(to bottom left, rgb(201, 206, 253) 50%, rgb(255, 215, 255) 100%);
 }
 
 .albumBtn {
-  border-radius: 0px !important;
-  border: 0px rgba(27, 0, 27, 0.63) solid !important;
-  color: black !important;
-  margin: 0 auto !important;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+	border-radius: 0px !important;
+	border: 0px rgba(27, 0, 27, 0.63) solid !important;
+	color: black !important;
+	margin: 0 auto !important;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 .albumBtn:hover {
- 
-  
-  
-  background: linear-gradient(to right, rgba(164, 163, 255, 0.342) 10%, rgba(243, 186, 255, 0.37) 40%, rgba(247, 153, 255, 0.336) 60%, rgba(32, 32, 32, 0.205) 80%);
-  background-size: 200% auto;
-  color: rgb(255, 255, 255) !important;
-  
-
+	background: linear-gradient(to right, rgba(164, 163, 255, 0.342) 10%, rgba(243, 186, 255, 0.37) 40%, rgba(247, 153, 255, 0.336) 60%, rgba(32, 32, 32, 0.205) 80%);
+	background-size: 200% auto;
+	color: rgb(255, 255, 255) !important;
 }
 
 .albumHeader {
-  color: white;
-  text-shadow: 0px 0px 8px rgb(0, 0, 0);
+	color: white;
+	text-shadow: 0px 0px 8px rgb(0, 0, 0);
 }
 
 .audio-circle-process-bar {
-stroke: red !important;}
+	stroke: red !important;
+}
 
-.modal{
-  border-radius: 0px !important;
+.modal {
+	border-radius: 0px !important;
 }
 
 .closeBtn {
-  transition-duration: .5s !important;
-  text-align: center;
-  
-  background: linear-gradient(to right, rgb(218, 162, 255) 10%, rgb(240, 168, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
-  background-size: 200% auto;
-  color: rgba(255, 255, 255, 0.616) !important;
-  letter-spacing: 2px;
-  animation: shine 10s linear infinite;
-  border-radius: 20px !important;
-  border: none !important;
+	transition-duration: .5s !important;
+	text-align: center;
+	background: linear-gradient(to right, rgb(218, 162, 255) 10%, rgb(240, 168, 255) 40%, rgb(247, 153, 255) 60%, rgb(32, 32, 32) 80%);
+	background-size: 200% auto;
+	color: rgba(255, 255, 255, 0.616) !important;
+	letter-spacing: 2px;
+	animation: shine 10s linear infinite;
+	border-radius: 20px !important;
+	border: none !important;
 }
 
 .card-group {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 #inputID::placeholder {
-  color: rgb(71, 71, 71);
+	color: rgb(71, 71, 71);
 }
 
 #inputID {
-  background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #bdb0ff, #b0b1ff, #e7cbff);
-  background-size: 500% 500%;
-  -webkit-animation: AnimationName 15s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-  border-radius: 20px;
-  margin: 0 auto;
-  box-shadow: 0px 0px 4px rgb(253, 203, 255);
-  width: 100vw !important;
+	background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #bdb0ff, #b0b1ff, #e7cbff);
+	background-size: 500% 500%;
+	-webkit-animation: AnimationName 15s ease infinite;
+	-moz-animation: AnimationName 30s ease infinite;
+	animation: AnimationName 30s ease infinite;
+	border-radius: 20px;
+	margin: 0 auto;
+	box-shadow: 0px 0px 4px rgb(253, 203, 255);
+	width: 100vw !important;
 }
 
-/* .form-inline {
-  display: flex !important;
-  justify-content: center !important;
-
-} */
-
-
 .albumCardImage {
-  max-width: 200px;
-  max-height: 200px;
-  margin: 0 auto;
+	max-width: 200px;
+	max-height: 200px;
+	margin: 0 auto;
 }
 
 .fa-play-circle {
-  color: #31313177;
-  border-radius: 50%;
+	color: #31313177;
+	border-radius: 50%;
 }
 
-.nlist{
-  background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #e5e0ff, #cb9dff, #edd8ff);
-  background-size: 500% 500%;
-  border-radius: 50px;
-  color: #313131 !important;
-  -webkit-animation: AnimationName 15s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-  box-shadow: 0 0 15px px #141414;
+.nlist {
+	background: linear-gradient(270deg, #f7d2ff, #9eb6ff, #e5e0ff, #cb9dff, #edd8ff);
+	background-size: 500% 500%;
+	border-radius: 50px;
+	color: #313131 !important;
+	-webkit-animation: AnimationName 15s ease infinite;
+	-moz-animation: AnimationName 30s ease infinite;
+	animation: AnimationName 30s ease infinite;
+	box-shadow: 0 0 15px px #141414;
 }
+
 @-webkit-keyframes AnimationName {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
+
 @-moz-keyframes AnimationName {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
+
 @keyframes AnimationName {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
-.fa-github{
-  margin: 0;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.fa-github {
+	margin: 0;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
-
-
