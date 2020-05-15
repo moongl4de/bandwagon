@@ -9,6 +9,7 @@ mongoose.connect(
   "mongodb://localhost/bandwagon"
 );
 
+// DATA EXAMPLE
 
 // album:
 // art: ["http://bandwagon.s3.amazonaws.com/5ebc496bb753b4de04d28e22-test%20art%202.jpg"]
