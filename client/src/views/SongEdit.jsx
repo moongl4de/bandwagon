@@ -50,13 +50,13 @@ function UserProfile() {
   const [page, setPage] = useState(false);
 
   const [songs, setSongs] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [editSong, setEditSong] = useState([]);
   const getSongs = () => {
     API.getSongs()
       .then((results) => {
         console.log("all songs from db:", results.data);
         setSongs(results.data);
-        setSearchResults(results.data)
+        
 
 
        
@@ -100,9 +100,9 @@ function handleEdit(song) {
     description: song.description,
     art: song.album_art
   });
+  setEditSong(song)
 
-  
-  // updateSongInfo(song)
+ 
 
   // setPage(true);
   console.log("go to edit")
@@ -146,7 +146,25 @@ function renderTableData() {
   
   const handleSubmit = e => {
     e.preventDefault();
-
+    console.log(state)
+   API.upateSong({ 
+    ...editSong,
+    ...state,
+    title: state.title
+       
+      })
+        .then((result) => {
+          console.log("song updated", result.data);
+         
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    
+    // toast("Songs successfully edited");
+      
+      // updateSongInfo(song)
     
     console.log('Button is clicked!');
     // setPage(true)
