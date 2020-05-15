@@ -18,6 +18,7 @@ import ArtistPage from "./components/ArtistPage"
 import ArtistPrivateRoute from "./components/privateRoutes/ArtistPrivateRoute"
 import ListenerPrivateRoute from "./components/privateRoutes/ListenerPrivateRoute"
 import AdminPrivateRoute from "./components/privateRoutes/AdminPrivateRoute"
+import Info from "./components/Info"
 // import UserProfile from "./views/UserProfile.jsx";
 // import Upload from "./views/Upload.jsx";
 // import Library from "./views/Library.jsx";
@@ -45,6 +46,7 @@ function App() {
         <ArtistPrivateRoute exact path='/artistpage' component={ArtistPage}/>
         <AdminPrivateRoute exact path='/admin/admin' component={Admin2}/>
         {/* <Route exact path='/admin/admin' component={Admin2}/> */}
+        <Route exact path="/info" component={Info}/>
       </StoreProvider>
     </Router>
 

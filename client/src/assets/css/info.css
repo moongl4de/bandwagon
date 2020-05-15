@@ -1,0 +1,228 @@
+html {
+    /* background-color: #313131; */
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.btn {
+    border-radius: 0px !important;
+    border: 1px solid white !important;
+}
+
+body {
+    background-color: #313131 !important;
+    scroll-behavior: smooth;
+    
+}
+
+.leftside, .rightside {
+    height: 50vh;
+    width: 100%
+}
+
+.leftside {
+    background: url("../img/listenerImage.jpg") no-repeat center;
+    filter: saturate(0);
+
+}
+
+.rightside {
+    background: url("../img/reznor.jpg") no-repeat center;
+    filter: saturate(0);
+    
+
+}
+
+h2 {
+    color: white;
+    font-size: 22px !important;
+}
+
+.test {
+    display: none;
+    opacity: 0;
+}
+
+
+.rightside h1, .leftside h1  {
+    animation: fadeIn ease 2s;
+    -webkit-animation: fadeIn ease 2s;
+    -moz-animation: fadeIn ease 2s;
+    -o-animation: fadeIn ease 2s;
+    -ms-animation: fadeIn ease 2s;
+}
+
+.leftside:hover, .rightside:hover {
+    filter: saturate(1);
+    transition: 1.5s;
+    
+}
+
+.rightside:hover .test, .leftside:hover .test {
+    display: block;
+    
+    text-align: center;
+    opacity: 1;
+    animation: fadeIn ease 2s;
+    -webkit-animation: fadeIn ease 2s;
+    -moz-animation: fadeIn ease 2s;
+    -o-animation: fadeIn ease 2s;
+    -ms-animation: fadeIn ease 2s;
+}
+
+
+.leftside:hover h1 {
+    display: none;
+    transition-duration: 1s !important;
+    text-align: center;
+    animation: fadeOut ease 8s;
+    -webkit-animation: fadeOut ease 8s;
+    -moz-animation: fadeOut ease 8s;
+    -o-animation: fadeOut ease 8s;
+    -ms-animation: fadeOut ease 8s;
+}
+
+.rightside:hover h1 {
+    display: none;
+    transition-duration: 1s !important;
+    animation: fadeOut ease 8s;
+    -webkit-animation: fadeOut ease 8s;
+    -moz-animation: fadeOut ease 8s;
+    -o-animation: fadeOut ease 8s;
+    -ms-animation: fadeOut ease 8s;
+}
+
+@media screen and (min-width: 768px){
+    .leftside, .rightside {
+        height: 100vh
+    }
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.507);
+}
+
+.rightoverlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(243, 155, 255, 0.644);
+    
+    
+}
+
+.leftoverlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(162, 155, 255, 0.678);
+
+}
+
+.header1 {
+    height: 101vh;
+    padding-top: 30vh;
+}
+
+h3 {
+    color: white;
+}
+
+.devImg {
+    width: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 14px crimson;
+}
+
+.cardInfo {
+    background: linear-gradient( to bottom, rgb(255, 164, 247), rgb(140, 186, 255) 120% ) !important;
+    filter: saturate(.2);
+    padding: 5px;
+    border: 0px;
+}
+
+.cardInfo:hover {
+    filter: saturate(1);
+    transition-duration: 1s;
+    box-shadow: 0px 2px 8px rgb(0, 0, 0);
+}
+
+.githubLink {
+    color: #313131 !important;
+}
+
+.githubLink:hover {
+    color: white !important;
+    transition: .5s;
+}
+
+.devDesc {
+    color: rgb(0, 0, 0);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.623);;
+}
+
+.meetHr1 {
+    width: 60%;
+    box-shadow: 0px 0px 15px rgb(255, 123, 248);
+    color: white;
+    border-top: 2px solid rgb(255, 197, 242);
+}
+
+.meetHr2 {
+    width: 60%;
+    box-shadow: 0px 0px 15px rgb(160, 178, 255);
+    color: white;
+    border-top: 2px solid rgb(180, 184, 255);
+}
+
+#bandwagon {
+    font-size: 50px;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.438);
+    
+}
+
+.devName {
+    font-size: 20px;
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.582);;
+}
+
+.slogan {
+    font-size: 20px;
+    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.205);
+    
+}
+
+.icons {
+    width: 300px;
+    height: 200px;
+    border-radius: 180px;
+
+    overflow: hidden;
+}
+
+/* .fab {
+    color: white;
+    margin: 10px
+} */
+
+#mongo {
+    margin-top: 22px;
+   width: 400px;
+   height: 120px;
+   filter: hue-rotate(150);
+   background-color: rgb(255, 254, 254);
+   border-radius: 20px;
+   border: 1px solid white;
+   padding: 5px;
+   filter: saturate(0)
+}
+
+#meetHeader {
+    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(255, 209, 253));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
