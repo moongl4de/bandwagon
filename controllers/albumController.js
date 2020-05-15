@@ -1,5 +1,8 @@
 const Album = require('../models/albums')
+<<<<<<< HEAD
 const Song = require("../models/songs");
+=======
+>>>>>>> d879528a1b586783472f4d22b4fdad76cc7edde6
 
 
 // Defining methods
@@ -36,6 +39,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
+
 };
 
 
