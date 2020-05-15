@@ -6,7 +6,6 @@ router
   .route("/")
   .post(songController.insert)
   .get(songController.findAll)
-  // .put(songController.insertAlbumInfo)
   .put(songController.updateSong)
   .delete(songController.remove);
 
@@ -14,5 +13,9 @@ router
   router
   .route("/:id")
   .get(songController.findSongById)
+
+  router
+  .route("/info")
+  .put(songController.insertAlbumInfo)
 
   module.exports = router;
