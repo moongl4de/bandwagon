@@ -25,6 +25,7 @@ function AlbumList() {
 
   const [url, setUrl] = useState('');
   const [title, setTitle] = useState('');
+  const [artist, setArtist] = useState('')
   const [art, setArt] = useState('');
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -44,10 +45,12 @@ function AlbumList() {
 
 
   const getCurrentSong = async (song) => {
-   
+
     let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
+    let clickedSongArtist = song.user.name;
+    let clickedSongArt = song.album.art;
     setModalShow(true)
 
 
@@ -55,7 +58,8 @@ function AlbumList() {
 
     setUrl(clickedSongUrl)
     setTitle(clickedSongTitle)
-    // setArt(clickedSongArt)
+    setArt(clickedSongArt)
+    setArtist(clickedSongArtist)
 
     setCurrentSong(song);
     await chargeListenerToken();
@@ -174,7 +178,7 @@ function AlbumList() {
 
   const audioListTest = [
     {
-      name: title,
+      name: artist,
       singer: title,
       cover: art,
       musicSrc: () => {
@@ -364,50 +368,52 @@ function AlbumList() {
                     id={song._id}
                     title={song.title}
                     url={song.fileUrl}
+                    art={song.album.art}
+                    artist={song.user.name}
                     name="currentSong"
                     onClick={() => getCurrentSong(song)}
                   >
 
                     {" "}
                   Support Artist{" "}
-                    </Button>
-                   
-                    <Card.Body>
-                    <Card.Title style={{textAlign: "center"}}><strong>{song.user.name}</strong></Card.Title>
-                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
-                  <Card.Img
-                    variant="top"
-                    src={song.album.art}
-                    style={{ height: "100%", width: "100%;" }}
-                    className="albumCardImage"
-                  />
-                      <Details />
-                      {/* <Link to={"/albums/" + album._id}> */}
-                      {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                      {/* </Link> */}
-                    </Card.Body>
-                    <Card.Footer>
-                      {/* <small className="text-muted">Added {album.date}</small> */}
-                      {/* {song._id} */}
-                    </Card.Footer>
+                  </Button>
 
-                  </Card>
-                </div>
+                  <Card.Body>
+                    <Card.Title style={{ textAlign: "center" }}><strong>{song.user.name}</strong></Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>{song.title}</Card.Text>
+                    <Card.Img
+                      variant="top"
+                      src={song.album.art}
+                      style={{ height: "100%", width: "100%;" }}
+                      className="albumCardImage"
+                    />
+                    <Details />
+                    {/* <Link to={"/albums/" + album._id}> */}
+                    {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                    {/* </Link> */}
+                  </Card.Body>
+                  <Card.Footer>
+                    {/* <small className="text-muted">Added {album.date}</small> */}
+                    {/* {song._id} */}
+                  </Card.Footer>
 
-              ))}
-            </div>
-          ) : (
-              <h3>No albums available.</h3>
-            )}
+                </Card>
+              </div>
 
-          <ReactJkMusicPlayer
+            ))}
+          </div>
+        ) : (
+            <h3>No albums available.</h3>
+          )}
 
-            {...options}
-            // onAudioPlay={chargeListenerToken}
-            onAudioPause={skipChargeOnResume}
-          />
+        <ReactJkMusicPlayer
 
-        </div>
+          {...options}
+          // onAudioPlay={chargeListenerToken}
+          onAudioPause={skipChargeOnResume}
+        />
+
+      </div>
       {/* </div> */}
     </Fragment>
   );
