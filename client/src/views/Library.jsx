@@ -76,7 +76,7 @@ const array= {
 
   function handleEdit(song) {
     
-    updateSongInfo(song)
+    
 
     setPage(true);
     console.log("go to edit")

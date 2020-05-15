@@ -222,7 +222,7 @@ function Upload() {
           </Col>
           <Col md={4}>
             <Card
-              title="Song Details"
+              title="Album Details"
               // category="Follow the steps below to upload."
               ctTableFullWidth
               ctTableResponsive
@@ -234,7 +234,7 @@ function Upload() {
                       className="form-control mb-5"
                       required
                       onChange={updateAlbum}
-                      name="title"
+                      name="Album title"
                       placeholder="Title"
                     />
                     {/* <input
@@ -251,7 +251,7 @@ function Upload() {
                       className="form-control mb-5"
                       onChange={updateAlbum}
                       name="description"
-                      placeholder="Description"
+                      placeholder="Album description"
                     />
                     <Form.Label>Choose cover art file</Form.Label>
                     <Form.Group controlId="formBasicPassword">

@@ -17,7 +17,6 @@ router
   router
   .route("/:id")
   .get(songController.findSongById)
-
   .delete(songController.remove);
   
 // Matches with "/api/songs"
@@ -32,7 +31,6 @@ router
 //   .get(songsController.findById)
 //   .put(songsController.update)
 //   .delete(songsController.remove);
-
 
   router
   .route("/info")
