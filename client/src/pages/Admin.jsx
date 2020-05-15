@@ -26,8 +26,10 @@ class Admin extends Component {
       fixedClasses: "dropdown show-dropdown open",
       totalSongsUploaded: 0,
       totalTokenEarned: 0,
-      
       totalNumberPlayed: 0,
+      songPlayPercentage:[0, 0, 0],
+      songPlayName:['a', 'b', 'c'],
+
     };
   }
 
@@ -47,6 +49,8 @@ class Admin extends Component {
                 totalPlay={this.state.totalSongsUploaded}
                 totalTokenEarned={this.state.totalTokenEarned}
                 totalNumberPlayed={this.state.totalNumberPlayed}
+                songPlayPercentage ={this.state.songPlayPercentage} 
+                songPlayName = {this.state.songPlayName}
                 
               />
             )}
@@ -90,10 +94,26 @@ class Admin extends Component {
     const userId = isAuth()._id;
 
     //try to search by passing a search parameter
-    API.getSongs().then((res) => {
-console.log("user id ="  , res.data)
+    API.getSongs().then( (res) => {
+      //set data for pie chart
+      const songPlayCountData = [];
+      const songPlayNameData = [];
+      let sum = 0;
+      res.data.forEach(song => {
+        sum = sum + song.count_play;
+        songPlayCountData.push(song.count_play);
+        songPlayNameData.push(song.title);
+      })
+
+      // calculate percentage for play count
+     const songPlayPercentageData = songPlayCountData.map(count => {
+        return  Math.round((100 * count)/sum)
+      })
+
+      this.setState({songPlayPercentage : songPlayPercentageData})
+      this.setState({songPlayName : songPlayNameData})
+
       const artistSongs = res.data.filter(song => song.user._id === userId);
-      console.log("user id = userId" , artistSongs)
       let totalTokenEarned1 = 0;
       let totalNumberPlayed1 = 0;
       for (let i = 0; i < artistSongs.length; i++) {
@@ -104,7 +124,7 @@ console.log("user id ="  , res.data)
       this.setState({ totalSongsUploaded: artistSongs.length });
       this.setState({ totalTokenEarned: totalTokenEarned1 });
       this.setState({ totalNumberPlayed: totalNumberPlayed1 });
-console.log("state = "+ this.state)
+
     }).catch((err) => {
       console.log(err);
     });
@@ -125,25 +145,6 @@ console.log("state = "+ this.state)
     // }
 
   }
-
-  //  transferTokenToArtist = () => {
-  //    const userId = isAuth().id;
-
-  //    //try to search by passing a search parameter
-  //   API.getSongs().then((res) => {
-  //    const artistSongs = res.data.filter(song => song.user._id === userId);
-  //    this.setState({ totalSongsUploaded: artistSongs.length });
-
-  //   }).then((result) => {
-  //     console.log("update was sent to DB!", result);
-
-  //     toast.success("Successfully Transferred token to artist");
-  //   }).catch((err) => {
-  //     console.log(err);
-  //     // toast.danger( "Something went wrong" );
-  //   });
-  // }
-
 
   render() {
     return (
