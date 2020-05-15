@@ -35,7 +35,7 @@ function UserProfile() {
 
   const [state, setState] = useState({
     album: "Two Roads Diverged",
-    song: "Yellow",
+    title: "Yellow",
     date: "2001",
     description: "listen to it",
     art: "https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg"
@@ -48,15 +48,15 @@ function UserProfile() {
   // const [art, setArt] = useState("test art");
   // const [artURL, setArtURL] = useState("https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg");
   const [page, setPage] = useState(false);
-
+  
   const [songs, setSongs] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [editSong, setEditSong] = useState([]);
   const getSongs = () => {
     API.getSongs()
       .then((results) => {
         console.log("all songs from db:", results.data);
         setSongs(results.data);
-        setSearchResults(results.data)
+        
 
 
        
@@ -79,7 +79,7 @@ const deleteSongs = (song) => {
   .then((res) => {
     console.log("after delete API", res)
     getSongs()
-    toast.success("Your song has been deleted")
+    toast("Your song has been deleted")
      })
   .catch((err) => console.log("ERROR:"+ err));
   
@@ -95,14 +95,14 @@ function handleEdit(song) {
   console.log(song)
   setState({
     album: song.albumId,
-    song: song.title,
+    title: song.title,
     date: song.date,
     description: song.description,
     art: song.album_art
   });
+  setEditSong(song)
 
-  
-  // updateSongInfo(song)
+ 
 
   // setPage(true);
   console.log("go to edit")
@@ -146,7 +146,27 @@ function renderTableData() {
   
   const handleSubmit = e => {
     e.preventDefault();
-
+   
+    let data = state
+    
+   API.updateSong({ 
+    ...editSong,
+    ...data,
+    title: data.title
+       
+      })
+        .then((result) => {
+          console.log("song updated", result.data);
+          getSongs();
+          toast("Your song has been changed")
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    
+    // toast("Songs successfully edited");
+      
+      // updateSongInfo(song)
     
     console.log('Button is clicked!');
     // setPage(true)
@@ -191,8 +211,9 @@ function renderTableData() {
                       <Form.Label>Song Name:</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder={state.song}
+                        placeholder={state.title}
                         onChange={handleInputChange}
+                        name = "title"
                         
                          />
                     </Form.Group>
@@ -207,7 +228,8 @@ function renderTableData() {
                         type="text"
                         placeholder={state.date}
                         onChange={handleInputChange}
-                        
+                        name="date"
+                        disabled
                          />
                     </Form.Group>
 
@@ -222,6 +244,8 @@ function renderTableData() {
                         type="text"
                         placeholder={state.description}
                         onChange={handleInputChange}
+                        name = "description"
+                        disabled
                          />
                     </Form.Group>
 
@@ -235,6 +259,8 @@ function renderTableData() {
                         type="text"
                         placeholder={state.art}
                         onChange={handleInputChange}
+                        name="art"
+                        disabled
                         />
                     </Form.Group>
 
