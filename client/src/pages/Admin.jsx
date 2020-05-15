@@ -8,6 +8,8 @@ import Sidebar from "../components/adSidebar";
 import { isAuth } from "../components/helper";
 import API from "../utils/API";
 import { toast } from "react-toastify";
+import moment from 'moment';
+
 
 
 import { style } from "../variables/Variables.jsx";
@@ -27,18 +29,23 @@ class Admin extends Component {
       totalSongsUploaded: 0,
       totalTokenEarned: 0,
       totalNumberPlayed: 0,
-      songPlayPercentage:[0, 0, 0],
-      songPlayName:['a', 'b', 'c'],
+      songPlayPercentage: [0, 0, 0],
+      songPlayName: ['a', 'b', 'c'],
+      //album data for bar chart
+      albumNameData :[],
+      albumPlayCountData: [],
+      albumTokenData:[],
+      albumCreatedDateData:[],
 
     };
   }
 
- 
+
 
   getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        
+
         return (
           <Route
             path={prop.layout + prop.path}
@@ -49,9 +56,13 @@ class Admin extends Component {
                 totalPlay={this.state.totalSongsUploaded}
                 totalTokenEarned={this.state.totalTokenEarned}
                 totalNumberPlayed={this.state.totalNumberPlayed}
-                songPlayPercentage ={this.state.songPlayPercentage} 
-                songPlayName = {this.state.songPlayName}
-                
+                songPlayPercentage={this.state.songPlayPercentage}
+                songPlayName={this.state.songPlayName}
+                albumNameData ={this.state.albumNameData}
+                albumPlayCountData = {this.state.albumPlayCountData}
+                albumTokenData = {this.state.albumTokenData}
+                albumCreatedDateData = {this.state.albumCreatedDateData}
+
               />
             )}
             key={key}
@@ -91,31 +102,31 @@ class Admin extends Component {
     }
   };
   componentDidMount() {
+    //get user info from localStorage
     const userId = isAuth()._id;
 
     //try to search by passing a search parameter
-    API.getSongByUserId(userId).then( (res) => {
-      //filter Songs by specific user
+    API.getSongByUserId(userId).then((resSong) => {
 
       //set data for pie chart
       const songPlayCountData = [];
       const songPlayNameData = [];
       let sum = 0;
-      res.data.forEach(song => {
+      resSong.data.forEach(song => {
         sum = sum + song.count_play;
         songPlayCountData.push(song.count_play);
         songPlayNameData.push(song.title);
       })
 
       // calculate percentage for play count
-     const songPlayPercentageData = songPlayCountData.map(count => {
-        return  Math.round((100 * count)/sum)
+      const songPlayPercentageData = songPlayCountData.map(count => {
+        return Math.round((100 * count) / sum)
       })
+      //set state for pie chart data
+      this.setState({ songPlayPercentage: songPlayPercentageData })
+      this.setState({ songPlayName: songPlayNameData })
 
-      this.setState({songPlayPercentage : songPlayPercentageData})
-      this.setState({songPlayName : songPlayNameData})
-
-      const artistSongs = res.data.filter(song => song.user._id === userId);
+      const artistSongs = resSong.data.filter(song => song.user._id === userId);
       let totalTokenEarned1 = 0;
       let totalNumberPlayed1 = 0;
       for (let i = 0; i < artistSongs.length; i++) {
@@ -126,6 +137,40 @@ class Admin extends Component {
       this.setState({ totalSongsUploaded: artistSongs.length });
       this.setState({ totalTokenEarned: totalTokenEarned1 });
       this.setState({ totalNumberPlayed: totalNumberPlayed1 });
+
+
+      //generate data for bar chart
+      API.getAlbumByUserId(userId).then((resAlbum) => {
+        //generate data correlation between album and song
+        // let albumPlayData = [];
+        let albumNameData1 = [];
+        let albumPlayCountData1 = [];
+        let albumTokenData1 = [];
+        let albumCreatedDateData1 = [];
+        const albumInfo = resAlbum.data.map(album => {
+          if(album.song_ids.length > 0){
+          let playCount = 0;
+          let tokenCount = 0;
+          for (let i = 0; i < resSong.data.length; i++) {
+            if (album._id === resSong.data[i].albumId) {
+              playCount = playCount + Number(resSong.data[i].count_play);
+              tokenCount = tokenCount + Number(resSong.data[i].token_earned);
+            }
+          }
+
+          albumNameData1.push(album.title);
+          albumPlayCountData1.push(playCount);
+          albumTokenData1.push(tokenCount);
+          albumCreatedDateData1.push(moment(album.createdAt).format('MM/DD/YYYY'));
+        }
+        })
+        this.setState({ albumNameData: albumNameData1 });
+        this.setState({ albumPlayCountData: albumPlayCountData1 });
+        this.setState({ albumTokenData: albumTokenData1 });
+        this.setState({ albumCreatedDateData: albumCreatedDateData1 });
+
+      })
+
 
     }).catch((err) => {
       console.log(err);
