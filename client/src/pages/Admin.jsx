@@ -148,6 +148,7 @@ class Admin extends Component {
         let albumTokenData1 = [];
         let albumCreatedDateData1 = [];
         const albumInfo = resAlbum.data.map(album => {
+          if(album.song_ids.length > 0){
           let playCount = 0;
           let tokenCount = 0;
           for (let i = 0; i < resSong.data.length; i++) {
@@ -161,7 +162,7 @@ class Admin extends Component {
           albumPlayCountData1.push(playCount);
           albumTokenData1.push(tokenCount);
           albumCreatedDateData1.push(moment(album.createdAt).format('MM/DD/YYYY'));
-
+        }
         })
         this.setState({ albumNameData: albumNameData1 });
         this.setState({ albumPlayCountData: albumPlayCountData1 });
