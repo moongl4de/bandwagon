@@ -17,6 +17,7 @@ import image from "../assets/img/sidebar-1.jpg";
 class Admin extends Component {
   constructor(props) {
     super(props);
+    // this.updateSongInfo = this.updateSongInfo.bind(this);
     this.state = {
       _notificationSystem: null,
       image: image,
@@ -25,14 +26,21 @@ class Admin extends Component {
       fixedClasses: "dropdown show-dropdown open",
       totalSongsUploaded: 0,
       totalTokenEarned: 0,
+
+      songToEdit: {},
       totalNumberPlayed: 0,
     };
+  }
+
+  updateSongInfo = song => {
+    this.setState({songToEdit: song })
+    console.log(song)
   }
 
   getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        console.log(routes);
+        
         return (
           <Route
             path={prop.layout + prop.path}
@@ -43,6 +51,7 @@ class Admin extends Component {
                 totalPlay={this.state.totalSongsUploaded}
                 totalTokenEarned={this.state.totalTokenEarned}
                 totalNumberPlayed={this.state.totalNumberPlayed}
+                songToEdit= {song => this.updateSongInfo(song)}
               />
             )}
             key={key}
@@ -152,7 +161,7 @@ console.log("state = "+ this.state)
             {...this.props}
             brandText={this.getBrandText('Bandwagon')}
           />
-          <Switch >{this.getRoutes(routes)} totalPlay={this.state.totalSongsUploaded}</Switch>
+          <Switch >{this.getRoutes(routes)} totalPlay={this.state.totalSongsUploaded} songToEdit={song => this.updateSongInfo(song)}</Switch>
           <Footer />
 
         </div>

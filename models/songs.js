@@ -31,6 +31,7 @@ const SongSchema = new mongoose.Schema(
     album_art: {
       type: Object,
     },
+
     // release: {
     //   type: Date
     // },
@@ -38,6 +39,7 @@ const SongSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'artist'
     },
+
     // date: {
     //   type: Date,
     //   default: Date.now
