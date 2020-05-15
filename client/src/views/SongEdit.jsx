@@ -88,12 +88,13 @@ const deleteSongs = (song) => {
 
 function handleEdit(song) {
   // const { albumId, title, date, _id, description} = song
+  console.log("YOYOYOYOYOY")
   console.log(song)
   setState({
     album: song.albumId,
     title: song.title,
     date: song.date,
-    description: song.description,
+    description: song.album.description,
     art: song.album.art
   });
   setEditSong(song)
@@ -145,13 +146,14 @@ function renderTableData() {
   const handleSubmit = e => {
     e.preventDefault();
    
-    let data = editSong
-    // console.log("HERE")
-    // console.log(editSong)
+    let data = state
+    console.log("HERE")
+    console.log(state)
    API.updateSong({ 
-    ...editSong,
+    
     ...data,
-    title: data.title
+    ...editSong,
+    title: data.title,
        
       })
         .then((result) => {
