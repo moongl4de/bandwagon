@@ -71,6 +71,9 @@ export default {
   insertAlbumInfo: function(data) {
     return axios.put("/api/songs/info", data);
   },
+  getSongByUserId: function(id){
+    return axios.get("/api/songs/userId/" + id)
+  }
   // deleteSongs: function(id) {
   //   return axios.delete("/api/songs/" + id);
   // },
