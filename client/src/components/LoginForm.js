@@ -157,8 +157,8 @@ function Login(props) {
             <img
               style={{ margin: "1% auto" }}
               id="loginLogo"
-              src={require("../components/images/newlogo.png")}
-              alt=""
+              src={require("../img/newlogoRev.png")}
+              alt="Bandwagon Logo"
             ></img>
           </Row>
           <Row></Row>
@@ -199,18 +199,26 @@ function Login(props) {
                 />
               </Form.Group>
 
-              <Button variant="dark" onClick={handleSubmit}>
+              <Button className="custBtn" variant="dark" onClick={handleSubmit}>
                 Login
             </Button>
               <a href="/signup">
                 {" "}
-                <Button className="offset-4" variant="dark">
+                <Button className="offset-4 custBtn" variant="dark">
                   Sign Up
               </Button>{" "}
               </a>
             </Form>
+
           </Row>
+
         </Container>
+        <a href="/info">
+                {" "}
+                <Button className="custBtn2" variant="light">
+                 <p id="whatIsBtn">What is Bandwagon?</p> 
+              </Button>{" "}
+              </a>
       </div>
     </Fragment>
   );

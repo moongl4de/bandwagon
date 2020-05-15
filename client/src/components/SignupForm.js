@@ -110,20 +110,20 @@ function Signup(props) {
           <source src={video} type="video/mp4"></source>
         </video>
         <Container style={{ justifyContent: "center" }}>
-          <Row>
+          <Row style={{marginBottom: "1%"}}>
             <img
               style={{ margin: "1% auto" }}
               id="loginLogo"
-              src={require("./images/newlogo.png")}
+              src={require("../img/newlogoRev.png")}
             ></img>
           </Row>
-          <Row>
+          <Row style={{marginBottom: "1%"}}>
             <h3 style={{ width: "100%", textAlign: "center", color: "white" }}>
               Sign Up
           </h3>
           </Row>
           <Row>
-            <Form id="formContainer" style={{ margin: "3% auto" }}>
+            <Form id="formContainer" style={{ margin: "5% auto" }}>
               <Form.Group controlId="formBasicName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
