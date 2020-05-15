@@ -37,11 +37,7 @@ const SongSchema = new mongoose.Schema(
     artist: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'artist'
-    },
-    // date: {
-    //   type: Date,
-    //   default: Date.now
-    // }
+    }
   },
   {
     timestamps: true,

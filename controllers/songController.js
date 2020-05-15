@@ -5,11 +5,8 @@ const User = require('../models/songs')
 // Defining methods
 module.exports = {
   insert: function (req, res) {
-    // console.log(req.body);
     const { albumId, title, fileUrl, user } = req.body;
     const newSong = { albumId, title, fileUrl, user};
-    // const { user, albumId, title, fileUrl } = req.body;
-    // const newSong = { user, albumId, title, fileUrl };
     Song.create(newSong)
       .then((dbModel) =>
         Album.findByIdAndUpdate(
@@ -52,15 +49,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   insertAlbumInfo: function (req, res) {
-    const { albumId, album } = req.body;
-    console.log("hit", albumId, album)
-    Song.updateMany({albumId : albumId }, { $set: {album : album}})
-    // Song.findByIdAndUpdate(
-    //   albumId,
-    //   { $push: { album: album } },
-    //   { new: true }
-    // )
-    // .populate("albumId")
+    const { albumId, album, album_art } = req.body;
+    console.log("hit", albumId, album, album_art)
+    Song.updateMany({albumId : albumId }, { $set: {"album" : album, "album_art": album_art}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -76,8 +67,6 @@ module.exports = {
     console.log(`the id to delete is: ${songId}`);
     Song.findById({ _id: req.params.id })
       .then(dbModel => {
-
-       
         dbModel.remove();
       })
       .then(dbModel => res.json(dbModel))

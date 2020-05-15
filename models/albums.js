@@ -7,7 +7,6 @@ const AlbumSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      // required: true
     },
     art: {
       type: Object,
@@ -19,7 +18,6 @@ const AlbumSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "songs",
-        // required: true,
       },
     ],
     description: {

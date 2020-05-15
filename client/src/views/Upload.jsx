@@ -12,13 +12,14 @@ import { handleFileUpload } from "../stitch/app";
 import Card from "../components/adCard.jsx";
 import API from "../utils/API";
 import { useStoreContext } from "../utils/globalContext";
-// import logo from "../assets/img/reactlogo.png";
+import logo from "../assets/img/reactlogo.png";
 import { ToastContainer, toast } from "react-toastify";
 import algoliasearch from "algoliasearch";
 // import { SongContext } from "../utils/songContext";
 import { isAuth } from "../components/helper";
 import { auth } from "google-auth-library";
 import "font-awesome/css/font-awesome.min.css";
+import { Link } from 'react-router-dom'
 
 function Upload() {
   // access album's global state, set local states and refs for file upload to AWS
@@ -169,7 +170,7 @@ function Upload() {
         API.insertAlbumInfo({
           albumId: album._id,
           album: album,
-          // album_art: album.art
+          album_art: album.art
         })
           .then((res) => {
             // console.log("after upload art API", res);
@@ -307,7 +308,8 @@ function Upload() {
               content={
                 <div>
                   <Form className="m-3" onSubmit={handleSubmit}>
-                    {/* <ListGroupItem className="text-center"> */}
+
+                  <Link to="/admin/dashboard">
                       <Button
                         variant="primary"
                         type="submit"
@@ -315,7 +317,7 @@ function Upload() {
                       >
                         Step 3 - Finish Upload!
                       </Button>
-                    {/* </ListGroupItem> */}
+                      </Link>
                   </Form>
                 </div>
               }
