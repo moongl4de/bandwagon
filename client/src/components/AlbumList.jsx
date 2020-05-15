@@ -44,7 +44,7 @@ function AlbumList() {
 
 
   const getCurrentSong = async (song) => {
-    console.log("CLICKED SONG Mesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay "+JSON.stringify(song._id)+ song._id);
+    console.log("CLICKED SONG Mesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay " + JSON.stringify(song._id) + song._id);
     let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
@@ -58,8 +58,8 @@ function AlbumList() {
     // setArt(clickedSongArt)
 
     setCurrentSong(song);
-     await  chargeListenerToken();
-     await transferTokenToArtist(clickedSongId);
+    await chargeListenerToken();
+    await transferTokenToArtist(clickedSongId);
   };
 
   const albumFunction = (event) => {
@@ -80,8 +80,8 @@ function AlbumList() {
     getSongs();
 
 
-      //get current user and set subscription token and user info
-      API.getUsers()
+    //get current user and set subscription token and user info
+    API.getUsers()
       .then((result) => {
         const id = isAuth()._id;
         const currentUser = result.data.filter((user) => user._id === id);
@@ -103,7 +103,7 @@ function AlbumList() {
     if (listenerInfo.paused === false) {
       const token = Number(listenerInfo.subscriptionToken) - 1;
       //get user to charge token
-     await  API.getUsers().then(async (result) => {
+      await API.getUsers().then(async (result) => {
         const email = isAuth().email;
         //set current user body to use in update request
         const currentUser = result.data.filter((user) => user.email === email);
@@ -147,7 +147,7 @@ function AlbumList() {
 
   const transferTokenToArtist = async (id) => {
     //get the currentSongBody from DB
-   await API.getSong(id).then(async (res) => {
+    await API.getSong(id).then(async (res) => {
       setCurrentSong({
         ...currentSong,
         ...res.data,
@@ -155,12 +155,13 @@ function AlbumList() {
         count_play: res.data.count_play + 1
       });
       API.updateSong({
-      ...currentSong,
-      ...res.data,
-      token_earned: res.data.token_earned + 1,
-      count_play: res.data.count_play + 1
-    })
+        ...currentSong,
+        ...res.data,
+        token_earned: res.data.token_earned + 1,
+        count_play: res.data.count_play + 1
+      })
         .then((result) => {
+          console.log("transferred ======= 1")
           toast.success("Successfully Transferred token to artist");
         })
     }).catch((err) => {
@@ -306,7 +307,7 @@ function AlbumList() {
     // Play and pause audio through blank space [type `Boolean` default `false`]
     spaceBar: true,
   };
-  
+
   const [searchResults, setSearchResults] = useState([]);
 
 
@@ -327,7 +328,7 @@ function AlbumList() {
     <Fragment>
       <Search token={listenerInfo.subscriptionToken} />
       <Row className="justify-content-md-center">
-         <Col md={5}>
+        <Col md={5}>
 
           <Form inline>
             <FormControl
@@ -345,68 +346,68 @@ function AlbumList() {
         </Col>
       </Row>
 
-        <div className="cardContainer">
-          <h1 className="albumHeader"></h1>
-          {songs.length ? (
-            <div className="card-group">
-              {searchResults.map((song) => (
-                <div class="row">
-                  <Card
-                    className="albumCard wow animate__animated animate__zoomIn col-10"
-                    style={{ width: "18rem", padding: "2%",}}
-                    key={song._id}
+      <div className="cardContainer">
+        <h1 className="albumHeader"></h1>
+        {songs.length ? (
+          <div className="card-group">
+            {searchResults.map((song) => (
+              <div class="row">
+                <Card
+                  className="albumCard wow animate__animated animate__zoomIn col-10"
+                  style={{ width: "18rem", padding: "2%", }}
+                  key={song._id}
+                >
+                  <Button
+
+                    value={song._id}
+                    className="albumBtn"
+                    id={song._id}
+                    title={song.title}
+                    url={song.fileUrl}
+                    name="currentSong"
+                    onClick={() => getCurrentSong(song)}
                   >
-                    <Button
 
-                      value={song._id}
-                      className="albumBtn"
-                      id={song._id}
-                      title={song.title}
-                      url={song.fileUrl}
-                      name="currentSong"
-                      onClick={() => getCurrentSong(song)}
-                    >
-
-                      {" "}
+                    {" "}
                   Support Artist{" "}
-                    </Button>
-                   
-                    <Card.Body>
-                    <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
-                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
-                  <Card.Img
-                    variant="top"
-                    src={song.album_art}
-                    style={{ height: "100%", width: "100%;" }}
-                    className="albumCardImage"
-                  />
-                      <Details />
-                      {/* <Link to={"/albums/" + album._id}> */}
-                      {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                      {/* </Link> */}
-                    </Card.Body>
-                    <Card.Footer>
-                      {/* <small className="text-muted">Added {album.date}</small> */}
-                      {song._id}
-                    </Card.Footer>
+                  </Button>
 
-                  </Card>
-                </div>
+                  <Card.Body>
+                    <Card.Title style={{ textAlign: "center" }}><strong>{song.albumId}</strong></Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>{song.title}</Card.Text>
+                    <Card.Img
+                      variant="top"
+                      src={song.album_art}
+                      style={{ height: "100%", width: "100%;" }}
+                      className="albumCardImage"
+                    />
+                    <Details />
+                    {/* <Link to={"/albums/" + album._id}> */}
+                    {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                    {/* </Link> */}
+                  </Card.Body>
+                  <Card.Footer>
+                    {/* <small className="text-muted">Added {album.date}</small> */}
+                    {song._id}
+                  </Card.Footer>
 
-              ))}
-            </div>
-          ) : (
-              <h3>No albums available.</h3>
-            )}
+                </Card>
+              </div>
 
-          <ReactJkMusicPlayer
+            ))}
+          </div>
+        ) : (
+            <h3>No albums available.</h3>
+          )}
 
-            {...options}
-            // onAudioPlay={chargeListenerToken}
-            onAudioPause={skipChargeOnResume}
-          />
+        <ReactJkMusicPlayer
 
-        </div>
+          {...options}
+          // onAudioPlay={chargeListenerToken}
+          onAudioPause={skipChargeOnResume}
+        />
+
+      </div>
     </Fragment>
   );
 }
