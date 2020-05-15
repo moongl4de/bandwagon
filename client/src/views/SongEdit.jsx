@@ -11,6 +11,7 @@ import { Card } from "../components/adCard.jsx";
 import { Redirect } from "react-router-dom"
 import API from "../utils/API";
 import Button from "../components/adCustomButton.jsx";
+import { isAuth } from "../components/helper";
 
 
 
@@ -48,7 +49,8 @@ function UserProfile() {
   
   
   const getSongs = () => {
-    API.getSongs()
+    const userId = isAuth()._id;
+    API.getSongByUserId(userId)
       .then((results) => {
         console.log("all songs from db:", results.data);
         setNewSongs(results.data);
@@ -63,7 +65,6 @@ function UserProfile() {
   useEffect(() => {
 
     getSongs();
-
     
   }, []); 
 
