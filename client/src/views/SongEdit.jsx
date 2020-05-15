@@ -33,13 +33,7 @@ function UserProfile() {
     ]
   }
 
-  const [state, setState] = useState({
-    album: "Two Roads Diverged",
-    title: "Yellow",
-    date: "2001",
-    description: "listen to it",
-    art: "https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg"
-  });
+  const [state, setState] = useState([]);
 
   // const [nam, setName] = useState("test name");
   // const [alb, setAlbum] = useState("test album");
@@ -49,23 +43,25 @@ function UserProfile() {
   // const [artURL, setArtURL] = useState("https://i.pinimg.com/originals/20/13/ac/2013ac80f2aededf644ac3b96de44a64.jpg");
   const [page, setPage] = useState(false);
   
-  const [songs, setSongs] = useState([]);
+  const [newsongs, setNewSongs] = useState([]);
   const [editSong, setEditSong] = useState([]);
+  
+  
   const getSongs = () => {
     API.getSongs()
       .then((results) => {
         console.log("all songs from db:", results.data);
-        setSongs(results.data);
-        
+        setNewSongs(results.data);
+     
 
 
        
       })
       .catch((err) => console.log(err));
   };
-
+ 
   useEffect(() => {
-    
+
     getSongs();
 
     
@@ -98,7 +94,7 @@ function handleEdit(song) {
     title: song.title,
     date: song.date,
     description: song.description,
-    art: song.album_art
+    art: song.album.art
   });
   setEditSong(song)
 
@@ -116,8 +112,10 @@ function renderTableHeader() {
 }
 
 function renderTableData() {
-  return songs.map((song) => {
+  return newsongs.map((song) => {
+    
     const { albumId, title, date, _id } = song //destructuring
+    
     return (
       <tr key={albumId}>
         <td>{albumId}</td>
@@ -147,8 +145,9 @@ function renderTableData() {
   const handleSubmit = e => {
     e.preventDefault();
    
-    let data = state
-    
+    let data = editSong
+    // console.log("HERE")
+    // console.log(editSong)
    API.updateSong({ 
     ...editSong,
     ...data,
