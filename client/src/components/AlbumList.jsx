@@ -44,7 +44,7 @@ function AlbumList() {
 
 
   const getCurrentSong = async (song) => {
-    console.log("CLICKED SONG Mesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay " + JSON.stringify(song._id) + song._id);
+   
     let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
@@ -370,44 +370,45 @@ function AlbumList() {
 
                     {" "}
                   Support Artist{" "}
-                  </Button>
+                    </Button>
+                   
+                    <Card.Body>
+                    <Card.Title style={{textAlign: "center"}}><strong>{song.user.name}</strong></Card.Title>
+                  <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
+                  <Card.Img
+                    variant="top"
+                    // src={song.album.art}
+                    style={{ height: "100%", width: "100%;" }}
+                    className="albumCardImage"
+                  />
+                      <Details />
+                      {/* <Link to={"/albums/" + album._id}> */}
+                      {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
+                      {/* </Link> */}
+                    </Card.Body>
+                    <Card.Footer>
+                      {/* <small className="text-muted">Added {album.date}</small> */}
+                      {/* {song._id} */}
+                    </Card.Footer>
 
-                  <Card.Body>
-                    <Card.Title style={{ textAlign: "center" }}><strong>{song.albumId}</strong></Card.Title>
-                    <Card.Text style={{ textAlign: "center" }}>{song.title}</Card.Text>
-                    <Card.Img
-                      variant="top"
-                      src={song.album_art}
-                      style={{ height: "100%", width: "100%;" }}
-                      className="albumCardImage"
-                    />
-                    <Details />
-                    {/* <Link to={"/albums/" + album._id}> */}
-                    {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
-                    {/* </Link> */}
-                  </Card.Body>
-                  <Card.Footer>
-                    {/* <small className="text-muted">Added {album.date}</small> */}
-                    {song._id}
-                  </Card.Footer>
+                  </Card>
+                </div>
 
-                </Card>
-              </div>
+              ))}
+            </div>
+          ) : (
+              <h3>No albums available.</h3>
+            )}
 
-            ))}
-          </div>
-        ) : (
-            <h3>No albums available.</h3>
-          )}
+          <ReactJkMusicPlayer
 
-        <ReactJkMusicPlayer
+            {...options}
+            // onAudioPlay={chargeListenerToken}
+            onAudioPause={skipChargeOnResume}
+          />
 
-          {...options}
-          // onAudioPlay={chargeListenerToken}
-          onAudioPause={skipChargeOnResume}
-        />
-
-      </div>
+        </div>
+      {/* </div> */}
     </Fragment>
   );
 }

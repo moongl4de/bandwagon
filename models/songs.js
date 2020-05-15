@@ -25,19 +25,19 @@ const SongSchema = new mongoose.Schema(
       type:Number,
       default:0
     },
-    // plays: {
-    //   type: Number,
-    //   default: 0
-    // },
+    album: {
+      type: Object,
+    },
     album_art: {
       type: Object,
     },
     // release: {
     //   type: Date
     // },
-    // artists: {
-    //   type: String
-    // },
+    artist: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'artist'
+    },
     // date: {
     //   type: Date,
     //   default: Date.now
