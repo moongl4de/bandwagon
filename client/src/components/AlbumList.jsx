@@ -377,7 +377,7 @@ function AlbumList() {
                   <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
                   <Card.Img
                     variant="top"
-                    // src={song.album.art}
+                    src={song.album.art}
                     style={{ height: "100%", width: "100%;" }}
                     className="albumCardImage"
                   />
