@@ -28,32 +28,7 @@ function AlbumList() {
   const [art, setArt] = useState('');
 
   const [modalShow, setModalShow] = React.useState(false);
-
-
-
   console.log(songs)
-
-  console.log("my song = ", currentSong)
-
-
-
-  // const [modalShow, setModalShow] = React.useState(false);
-  // const [currentSong, updateCurrentSong] = React.useState({ modalShow: false, currentSongList: {} })
-
-  //   console.log(state)
-
-  // const getAlbums = () => {
-  //   dispatch({ type: "LOADING" });
-  //   API.getAlbums()
-  //     .then((results) => {
-  //       console.log("all albums from db:", results.data);
-  //       dispatch({
-  //         type: "LOAD_ALBUMS",
-  //         albums: results.data,
-  //       });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const getSongs = () => {
     API.getSongs()
@@ -66,40 +41,10 @@ function AlbumList() {
       .catch((err) => console.log(err));
   };
 
-  // useEffect(() => {
-  //   // getAlbums();
-  //   getSongs();
 
 
-  //     //get current user and set subscription token and user info
-  //     API.getUsers()
-  //     .then((result) => {
-  //       const id = isAuth()._id;
-  //       const currentUser = result.data.filter((user) => user._id === id);
-  //       //listners current token value at page load
-  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-  //       updateListenerInfo({
-  //         ...listenerInfo,
-  //         subscriptionToken: currentUser[0].subscriptionToken,
-  //         currentListenerData: currentUser[0],
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to Get User info");
-  //     });
-  //   // console.log("useEffect State:", songs)
-  // }, [listenerInfo.subscriptionToken]);
-
-  // const getAlbumId = (event) => {
-  // let idVariable = state.albums.filter(album => album._id === event.target.value)[0]
-  // console.log("EVENT: ***********", {...currentSong, ...idVariable[0]})
-  // updateCurrentSong({ currentSongList: idVariable, modalShow: true })
-
-  // console.log("CURRENT SONG: ", currentSong)
-  // }
-
-  const getCurrentSong = (song) => {
-    console.log("CLICKED SONG", song._id);
+  const getCurrentSong = async (song) => {
+   
     let clickedSongId = song._id;
     let clickedSongTitle = song.title.replace(/%20/g, " ");
     let clickedSongUrl = song.fileUrl;
@@ -112,30 +57,13 @@ function AlbumList() {
     setTitle(clickedSongTitle)
     // setArt(clickedSongArt)
 
-    setCurrentSong({
-      id: clickedSongId,
-      title: clickedSongTitle,
-      url: clickedSongUrl,
-    });
-
-    chargeListenerToken();
-    // console.log(currentSong);
+    setCurrentSong(song);
+    await chargeListenerToken();
+    await transferTokenToArtist(clickedSongId);
   };
-
-  console.log("art: ", art)
-  console.log("title: ", title)
-  console.log("URL:", url)
-
-  console.log(currentSong);
-
-  // useEffect(() => {setCurrentSong({currentSong : clickedSong})})
 
   const albumFunction = (event) => {
     getCurrentSong(event);
-
-    // updateCurrentSong({...currentSong, modalShow: true})
-
-    console.log("CLICKED", event);
   };
 
 
@@ -152,8 +80,8 @@ function AlbumList() {
     getSongs();
 
 
-      //get current user and set subscription token and user info
-      API.getUsers()
+    //get current user and set subscription token and user info
+    API.getUsers()
       .then((result) => {
         const id = isAuth()._id;
         const currentUser = result.data.filter((user) => user._id === id);
@@ -168,32 +96,14 @@ function AlbumList() {
       .catch((err) => {
         toast.error("Failed to Get User info");
       });
-    // console.log("useEffect State:", songs)
-  }, ['subscriptionToken']);
-  // React.useEffect(() => {
-  //   //get current user and set subscription token and user info
-  //   API.getUsers()
-  //     .then((result) => {
-  //       const id = isAuth()._id;
-  //       const currentUser = result.data.filter((user) => user._id === id);
-  //       //listners current token value at page load
-  //       listenerInfo.subscriptionToken = currentUser[0].subscriptionToken;
-  //       updateListenerInfo({
-  //         ...listenerInfo,
-  //         subscriptionToken: currentUser[0].subscriptionToken,
-  //         currentListenerData: currentUser[0],
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to Get User info");
-  //     });
-  // }, [listenerInfo.subscriptionToken]);
 
-  const chargeListenerToken = () => {
+  }, [listenerInfo.subscriptionToken]);
+
+  const chargeListenerToken = async () => {
     if (listenerInfo.paused === false) {
       const token = Number(listenerInfo.subscriptionToken) - 1;
       //get user to charge token
-      API.getUsers().then((result) => {
+      await API.getUsers().then(async (result) => {
         const email = isAuth().email;
         //set current user body to use in update request
         const currentUser = result.data.filter((user) => user.email === email);
@@ -208,9 +118,9 @@ function AlbumList() {
         };
 
         //update the user with the new token value
-        API.updateUser(data._id, data).then(() => {
+        await API.updateUser(data._id, data).then(() => {
           // transfer token to artist
-          transferTokenToArtist();
+          // transferTokenToArtist();
           //update state
           updateListenerInfo({
             ...listenerInfo,
@@ -235,26 +145,25 @@ function AlbumList() {
   };
 
 
-  const transferTokenToArtist = () => {
-    console.log("song id dddd -? ", currentSong)
+  const transferTokenToArtist = async (id) => {
     //get the currentSongBody from DB
-    API.getSong(currentSong.id).then((res) => {
-      console.log("res.data ============ ", res.data)
+    await API.getSong(id).then(async (res) => {
       setCurrentSong({
         ...currentSong,
         ...res.data,
         token_earned: res.data.token_earned + 1,
         count_play: res.data.count_play + 1
       });
-      API.updateSong(currentSong)
+      API.updateSong({
+        ...currentSong,
+        ...res.data,
+        token_earned: res.data.token_earned + 1,
+        count_play: res.data.count_play + 1
+      })
         .then((result) => {
-          console.log("update was sent to DB!", result);
-
-          console.log("song id dddd22222 - ", currentSong)
+          console.log("transferred ======= 1")
           toast.success("Successfully Transferred token to artist");
         })
-
-
     }).catch((err) => {
       console.log(err);
       // toast.danger( "Something went wrong" );
@@ -399,11 +308,6 @@ function AlbumList() {
     spaceBar: true,
   };
 
-  // if (currentSong.fileUrl) {
-  //   console.log("audioListTest", audioListTest);
-  //   options.audioLists = audioListTest;
-  // }
-  
   const [searchResults, setSearchResults] = useState([]);
 
 
@@ -414,49 +318,17 @@ function AlbumList() {
       return values.indexOf(filter.toLowerCase()) !== -1;
     });
     setSearchResults(filteredUserList);
-
-    console.log("LOOK HERE:" + searchResults)
   }
 
 
 
   return (
 
-    // <div>
-    //   
-
-    //   <div className="cardContainer">
-
-    //     <h1 className="albumHeader"></h1>
-    //     {songs.length ? (
-    //       <div className="card-group">
-    //         {searchResults.map((song) => (
-    //           <div class="row">
-                // <Card
-
-                  // className="albumCard wow animate__animated animate__zoomIn col-10"
-                  // style={{ width: "18rem", padding: "2%",}}
-                  // key={song._id}
-                // >
-                //   <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
-                //   <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
-                //   <Card.Img
-                //     variant="top"
-                //     src={song.album_art}
-                //     style={{ height: "100%", width: "100%;" }}
-                //     className="albumCardImage"
-                //   />
-                //   <Card.Body>
-
-
-                //     <Details />
-
 
     <Fragment>
       <Search token={listenerInfo.subscriptionToken} />
-      {/* <div id="centerDiv"> */}
       <Row className="justify-content-md-center">
-         <Col md={5}>
+        <Col md={5}>
 
           <Form inline>
             <FormControl
@@ -474,29 +346,29 @@ function AlbumList() {
         </Col>
       </Row>
 
-        <div className="cardContainer">
-          <h1 className="albumHeader"></h1>
-          {songs.length ? (
-            <div className="card-group">
-              {searchResults.map((song) => (
-                <div class="row">
-                  <Card
-                    className="albumCard wow animate__animated animate__zoomIn col-10"
-                    style={{ width: "18rem", padding: "2%",}}
-                    key={song._id}
+      <div className="cardContainer">
+        <h1 className="albumHeader"></h1>
+        {songs.length ? (
+          <div className="card-group">
+            {searchResults.map((song) => (
+              <div class="row">
+                <Card
+                  className="albumCard wow animate__animated animate__zoomIn col-10"
+                  style={{ width: "18rem", padding: "2%", }}
+                  key={song._id}
+                >
+                  <Button
+
+                    value={song._id}
+                    className="albumBtn"
+                    id={song._id}
+                    title={song.title}
+                    url={song.fileUrl}
+                    name="currentSong"
+                    onClick={() => getCurrentSong(song)}
                   >
-                    <Button
 
-                      value={song._id}
-                      className="albumBtn"
-                      id={song._id}
-                      title={song.title}
-                      url={song.fileUrl}
-                      name="currentSong"
-                      onClick={() => getCurrentSong(song)}
-                    >
-
-                      {" "}
+                    {" "}
                   Support Artist{" "}
                     </Button>
                    
@@ -505,7 +377,7 @@ function AlbumList() {
                   <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
                   <Card.Img
                     variant="top"
-                    src={song.album.art}
+                    // src={song.album.art}
                     style={{ height: "100%", width: "100%;" }}
                     className="albumCardImage"
                   />
@@ -538,34 +410,6 @@ function AlbumList() {
         </div>
       {/* </div> */}
     </Fragment>
-    //   {state.albums.length ? (
-    //     <CardColumns>
-    //       {state.albums.map((album) => (
-    //         <Card className="albumCard animate__animated animate__fadeIn" style={{ width: "18rem" }} key={album._id}>
-    //           <Card.Img
-    //             variant="top"
-    //             src={album.art}
-    //             style={{ height: "300px" }}
-    //           />
-    //           <Card.Body>
-    //             <Card.Title>{album.title}</Card.Title>
-    //             <Card.Text>{album.description}</Card.Text>
-    //             <Button value={album._id} className="albumBtn" onClick={albumFunction}> Details </Button>
-    //             {/* <Link to={"/albums/" + album._id}> */}
-    //             <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} />
-    //             {/* </Link> */}
-    //           </Card.Body>
-    //           <Card.Footer>
-    //             <small className="text-muted">Added {album.date}</small>
-    //           </Card.Footer>
-    //           <ReactJkMusicPlayer {...options} onAudioPlay={chargeListenerToken} onAudioPause={skipChargeOnResume} />
-    //         </Card>
-    //       ))}
-    //     </CardColumns>
-    //   ) : (
-    //       <h3>No albums available.</h3>
-    //     )}
-    // </Container>
   );
 }
 

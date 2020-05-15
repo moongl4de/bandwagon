@@ -6,7 +6,7 @@ router
   .route("/")
   .post(songController.insert)
   .get(songController.findAll)
-  .put(songController.insertAlbumInfo)
+  // .put(songController.insertAlbumInfo)
   .put(songController.updateSong)
   .delete(songController.remove);
 
