@@ -297,7 +297,7 @@ function AlbumList() {
     extendsContent: null,
 
     //default volume of the audio player [type `Number` default `1` range `0-1`]
-    defaultVolume: 1,
+    defaultVolume: 0.5,
 
     //playModeText show time [type `Number(ms)` default `700`]
     playModeShowTime: 600,
@@ -336,7 +336,7 @@ function AlbumList() {
 
           <Form inline>
             <FormControl
-              style={{ textAlign: "center", width: "100%" }}
+              style={{ textAlign: "center", width: "100%"}}
               type="text"
               placeholder="Search here..."
               className="mr-md-5"
@@ -358,7 +358,7 @@ function AlbumList() {
               <div class="row">
                 <Card
                   className="albumCard wow animate__animated animate__zoomIn col-10"
-                  style={{ width: "18rem", padding: "2%", }}
+                  style={{ width: "18rem", padding: "2%",  }}
                   key={song._id}
                 >
                   <Button
@@ -375,27 +375,29 @@ function AlbumList() {
                   >
 
                     {" "}
-                  Support Artist{" "}
+                    <i style={{color: "white", boxShadow: "0px 0px 10px black"}}class="far fa-play-circle fa-5x"></i>{" "}
                   </Button>
 
                   <Card.Body>
                     <Card.Title style={{ textAlign: "center" }}><strong>{song.user.name}</strong></Card.Title>
                     <Card.Text style={{ textAlign: "center" }}>{song.title}</Card.Text>
+                    <div className="d-flex justify-content-center align-items-center">
                     <Card.Img
                       variant="top"
                       src={song.album.art}
-                      style={{ height: "100%", width: "100%;" }}
+                      style={{ height: "100%", width: "100%;", margin: "0 auto !important" }}
                       className="albumCardImage"
                     />
+                    </div>
                     <Details />
                     {/* <Link to={"/albums/" + album._id}> */}
                     {/* <Details id={album._id} show={currentSong.modalShow} onHide={() => updateCurrentSong({ ...currentSong, modalShow: false })} /> */}
                     {/* </Link> */}
                   </Card.Body>
-                  <Card.Footer>
+                  {/* <Card.Footer> */}
                     {/* <small className="text-muted">Added {album.date}</small> */}
                     {/* {song._id} */}
-                  </Card.Footer>
+                  {/* </Card.Footer> */}
 
                 </Card>
               </div>

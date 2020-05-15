@@ -6,7 +6,7 @@ import "../../src/assets/css/info.css"
 function Info() {
     return (
 
-        <div>
+        <div style={{margin: "0 1%"}}>
             <div className="header1">
             <br/>
             <hr className="meetHr1 wow animate__animated animate__backInDown animate__fast" />
@@ -21,7 +21,7 @@ function Info() {
 
             </div>
             <div className="header1">
-                <div className="row ">
+                <div className="row">
                     <h3 className="wow animate__animated animate__fadeIn animate__slow" style={{ padding: "0 20px", textAlign: "center" }}>Bandwagon is a digital music streaming platform designed with listeners and artists in mind.</h3><br />
                 </div>
                 <div className="row  wow animate__animated animate__fadeIn">
@@ -34,7 +34,7 @@ function Info() {
                         <div className="leftoverlay d-flex justify-content-center align-items-center">
                             <h1 style={{ letterSpacing: 15 }}>Listeners</h1>
                             <div className="test">
-                                <h2>Listeners are given a number of tokens every month to spend on streaming songs via instant microtransactions.<br /><br />When a song is streamed, a token is sent directly to that artist.<br /><br /></h2>
+                                <h2 style={{padding: "0px 10px"}}>Listeners are given a number of tokens every month to spend on streaming songs via instant microtransactions.<br /><br />When a song is streamed, a token is sent directly to that artist.<br /><br /></h2>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ function Info() {
                         <div className="rightoverlay d-flex justify-content-center align-items-center">
                             <h1 style={{ letterSpacing: 15 }}>Artists</h1>
                             <div className="test">
-                                <h2>Artists are able to upload their music directly to the site, removing the need for distribution middlemen. <br /><br />Artists keep 100% of the profit they generate through the support of their listeners. </h2>
+                                <h2 style={{padding: "0 10px"}}>Artists are able to upload their music directly to the site, removing the need for distribution middlemen. <br /><br />Artists keep 100% of the profit they generate through the support of their listeners. </h2>
                             </div>
                         </div>
                     </div>
