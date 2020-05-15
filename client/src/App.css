@@ -19,17 +19,20 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(165, 0, 0, 0); 
+  padding: 20px !important;
+  -webkit-box-shadow: inset 0 0 10px rgb(0, 0, 0); 
   border-radius: 0px;
+  background-image: linear-gradient( to bottom, rgb(238, 152, 255), rgb(126, 178, 255) 120% ) 
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 0px;
-  -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0); 
+  border-radius: 20px;
+  background: white;
+  -webkit-box-shadow: inset 0 0 5px rgb(0, 0, 0); 
 }
 
 

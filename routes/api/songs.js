@@ -8,7 +8,7 @@ router
   .get(songController.findAll)
   .put(songController.updateSong)
 
-  .put(songController.insertArt)
+  // .put(songController.insertArt)
 
   .delete(songController.remove);
 
