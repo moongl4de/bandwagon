@@ -10,6 +10,7 @@ import "../App.css";
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 import Search from "./Searchbar"
+import BootstrapCarousel from "./Carousel"
 
 import ReactDOM from 'react-dom'
 // import ReactWOW from 'react-wow'
@@ -332,6 +333,7 @@ function AlbumList() {
     <Fragment>
       <Search token={listenerInfo.subscriptionToken} />
       <Row className="justify-content-md-center">
+ 
         <Col md={5}>
 
           <Form inline>
@@ -407,6 +409,8 @@ function AlbumList() {
         ) : (
             <h3>No albums available.</h3>
           )}
+            <br/>
+          
 
         <ReactJkMusicPlayer
 
@@ -414,6 +418,7 @@ function AlbumList() {
           // onAudioPlay={chargeListenerToken}
           onAudioPause={skipChargeOnResume}
         />
+       
 
       </div>
       {/* </div> */}
