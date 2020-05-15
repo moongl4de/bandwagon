@@ -32,12 +32,12 @@ const SongSchema = new mongoose.Schema(
     album_art: {
       type: Object,
     },
-    // release: {
-    //   type: Date
-    // },
-    // artists: {
-    //   type: String
-    // },
+    release: {
+      type: Date
+    },
+    description: {
+      type: String
+    }
     // date: {
     //   type: Date,
     //   default: Date.now

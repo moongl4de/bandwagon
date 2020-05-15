@@ -108,8 +108,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
+    const songId = req.params.id;
+    console.log(`the id to delete is: ${songId}`);
     Song.findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .then(dbModel => {
+
+       
+        dbModel.remove();
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

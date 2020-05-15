@@ -28,22 +28,22 @@ const dashboardRoutes = [
     component: Upload,
     layout: "/admin"
   },
-  {
-    path: "/library",
-    name: "Library",
-    icon: "pe-7s-musiclist",
-    component: Library,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/library",
+  //   name: "Library",
+  //   icon: "pe-7s-scissors",
+  //   component: Library,
+  //   layout: "/admin"
+  // },
   {
     path: "/edit",
-    name: "Edit Music Info",
-    icon: "pe-7s-scissors",
+    name: "Edit Music Library",
+    icon: "pe-7s-musiclist",
     component: SongEdit,
     layout: "/admin"
   }
 
-
+  
 ];
 
 export default dashboardRoutes;

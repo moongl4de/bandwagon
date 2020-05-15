@@ -47,6 +47,7 @@ export default {
     return axios.get("/api/albums/" + id);
   },
   deleteAlbum: function(id) {
+    console.log('halp me.');
     return axios.delete("/api/songs/" + id);
   },
   updateAlbum: function(data) {
