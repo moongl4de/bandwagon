@@ -26,15 +26,12 @@ class Admin extends Component {
       fixedClasses: "dropdown show-dropdown open",
       totalSongsUploaded: 0,
       totalTokenEarned: 0,
-      songToEdit: {},
+      
       totalNumberPlayed: 0,
     };
   }
 
-  updateSongInfo = song => {
-    this.setState({songToEdit: song })
-    console.log(song)
-  }
+ 
 
   getRoutes = routes => {
     return routes.map((prop, key) => {
@@ -50,7 +47,7 @@ class Admin extends Component {
                 totalPlay={this.state.totalSongsUploaded}
                 totalTokenEarned={this.state.totalTokenEarned}
                 totalNumberPlayed={this.state.totalNumberPlayed}
-                songToEdit= {song => this.updateSongInfo(song)}
+                
               />
             )}
             key={key}
@@ -160,7 +157,7 @@ console.log("state = "+ this.state)
             {...this.props}
             brandText={this.getBrandText('Bandwagon')}
           />
-          <Switch >{this.getRoutes(routes)} totalPlay={this.state.totalSongsUploaded} songToEdit={song => this.updateSongInfo(song)}</Switch>
+          <Switch >{this.getRoutes(routes)} totalPlay={this.state.totalSongsUploaded}</Switch>
           <Footer />
 
         </div>
