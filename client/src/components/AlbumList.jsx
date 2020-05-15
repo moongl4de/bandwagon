@@ -501,11 +501,11 @@ function AlbumList() {
                     </Button>
                    
                     <Card.Body>
-                    <Card.Title style={{textAlign: "center"}}><strong>{song.albumId}</strong></Card.Title>
+                    <Card.Title style={{textAlign: "center"}}><strong>{song.user.name}</strong></Card.Title>
                   <Card.Text style={{textAlign: "center"}}>{song.title}</Card.Text>
                   <Card.Img
                     variant="top"
-                    src={song.album_art}
+                    src={song.album.art}
                     style={{ height: "100%", width: "100%;" }}
                     className="albumCardImage"
                   />
@@ -516,7 +516,7 @@ function AlbumList() {
                     </Card.Body>
                     <Card.Footer>
                       {/* <small className="text-muted">Added {album.date}</small> */}
-                      {song._id}
+                      {/* {song._id} */}
                     </Card.Footer>
 
                   </Card>

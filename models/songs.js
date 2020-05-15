@@ -25,10 +25,9 @@ const SongSchema = new mongoose.Schema(
       type:Number,
       default:0
     },
-    // plays: {
-    //   type: Number,
-    //   default: 0
-    // },
+    album: {
+      type: Object,
+    },
     album_art: {
       type: Object,
     },

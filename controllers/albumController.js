@@ -23,8 +23,11 @@ module.exports = {
   },
   update: function(req, res) {
     const { _id } = req.body;
+    // console.log("UPDATE ALBUM",req.body)
     Album.findByIdAndUpdate(_id, req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => 
+        {console.log("UPDATE ALBUM",req.body)
+        res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {

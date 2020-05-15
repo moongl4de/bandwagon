@@ -6,9 +6,8 @@ router
   .route("/")
   .post(songController.insert)
   .get(songController.findAll)
+  .put(songController.insertAlbumInfo)
   .put(songController.updateSong)
-  .put(songController.insertArt)
-  .get(songController.getArtist)
   .delete(songController.remove);
 
 // Matches with "/api/songs/:id"

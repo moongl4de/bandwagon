@@ -67,7 +67,7 @@ export default {
   updateSong: function( data) {
     return axios.put("/api/songs",data);
   },
-  uploadArt: function(data) {
+  insertAlbumInfo: function(data) {
     return axios.put("/api/songs", data);
   },
   // deleteSongs: function(id) {

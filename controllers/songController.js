@@ -5,9 +5,9 @@ const User = require('../models/songs')
 // Defining methods
 module.exports = {
   insert: function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const { albumId, title, fileUrl, user } = req.body;
-    const newSong = { albumId, title, fileUrl, user };
+    const newSong = { albumId, title, fileUrl, user};
     // const { user, albumId, title, fileUrl } = req.body;
     // const newSong = { user, albumId, title, fileUrl };
     Song.create(newSong)
@@ -46,26 +46,23 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  insertArt: function (req, res) {
-    console.log("body", req.body);
-    const { albumId, album_art } = req.body;
-    console.log("hit", albumId, album_art)
-    Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
+  insertAlbumInfo: function (req, res) {
+    const { albumId, album } = req.body;
+    console.log("hit", albumId, album)
+    Song.updateMany({albumId : albumId }, { $set: {album : album}})
+    // Song.findByIdAndUpdate(
+    //   albumId,
+    //   { $push: { album: album } },
+    //   { new: true }
+    // )
+    // .populate("albumId")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  insertArt: function (req, res) {
-    // console.log("body", req.body);
-    const { albumId, album_art } = req.body;
-    Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  // getArtist: function (req, res) {
+  // insertArt: function (req, res) {
   //   // console.log("body", req.body);
-  //   User.find().forEach(function (name) {
-      
-  // })
+  //   const { albumId, album_art } = req.body;
+  //   Song.updateMany({albumId : albumId }, { $set: {album_art : album_art}})
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },

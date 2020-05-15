@@ -39,6 +39,7 @@ function Upload() {
     art: "",
     song_ids: [],
   });
+
   const updateFiles = ({ target }) => {
     setFiles({
       ...files,
@@ -52,7 +53,7 @@ function Upload() {
     });
   };
   //on page load create an empty album with user id to get album's id to upload songs to
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
+  // const userId = JSON.parse(localStorage.getItem("user"))._id;
   useEffect(() => {
     //get current user from local storage
     const user = isAuth();
@@ -64,7 +65,7 @@ function Upload() {
         user: user
       })
     };
-    console.log("user - ", album.user)
+    console.log("user - ", user)
     createAlbum()
   }, []);
   const setLoading = () => {
@@ -105,14 +106,21 @@ function Upload() {
             const Songtitle = url.split("-")[1];
 
             API.uploadSongs({
-              user: userId,
+              // album: album,
               albumId: album._id,
               title: Songtitle,
               fileUrl: url,
-              // album_art: album.art
+              user: album.user
             })
               .then((result) => {
-                // console.log("song sent to db", result.data.song_ids);
+                console.log("song sent to db", result.data);
+                // console.log("loggsssss = ", {
+                //   albumId: album._id,
+                //   title: Songtitle,
+                //   fileUrl: url,
+                //   user: album.user
+                // })
+                setAlbum({...album, song_ids:result.data.song_ids})
               })
               .catch((err) => {
                 console.log(err);
@@ -136,22 +144,25 @@ function Upload() {
     setLoading();
     API.updateAlbum({
       _id: album._id,
-      user: userId,
+      user: album.user,
       title: album.title,
       description: album.description,
       art: album.art,
     })
       .then((result) => {
         console.log("Updated album", result);
+
         dispatch({
           type: "ADD_ALBUM",
           album: result,
         });
         // AND SEND UPLOADED ART TO SONG COLLECTION FOR EACH SONG
-        console.log("stuff for song update", album._id, album.art);
-        API.uploadArt({
+        console.log("stuff for song update", album.art, album._id);
+
+        API.insertAlbumInfo({
           albumId: album._id,
-          album_art: album.art,
+          album: album
+          // album_art: album.art
         })
           .then((res) => {
             console.log("after upload art API", res);
