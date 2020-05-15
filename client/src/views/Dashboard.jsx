@@ -14,7 +14,7 @@ import {
   legendSales,
 } from "../variables/Variables.jsx";
 
-import { Pie } from 'react-chartjs-2'
+import { Pie, HorizontalBar } from 'react-chartjs-2'
 
 
 class Dashboard extends Component {
@@ -75,22 +75,53 @@ class Dashboard extends Component {
               <Card
 
                 id="chartHours"
-                title="Songs Played"
-                category="by month performance"
+                title="Albums Played"
+                category="Since upload date"
 
                 content={
                   <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataSales}
-                      type="Line"
-                      options={optionsSales}
-                      responsiveOptions={responsiveSales}
+                    <HorizontalBar data={{
+                      labels: this.props.albumNameData,
+                      datasets: [
+                        {
+                          label: 'Album Play',
+                          backgroundColor: [
+                            '#B21F00',
+                            '#C9DE00',
+                            '#2FDE00',
+                            '#00A6B4',
+                            '#6800B4'
+                          ],
+                          hoverBackgroundColor: [
+                            '#501800',
+                            '#4B5000',
+                            '#175000',
+                            '#003350',
+                            '#35014F'
+                          ],
+                          borderColor: 'rgba(0,0,0,1)',
+                          borderWidth: 3,
+                          data: this.props.albumPlayCountData
+                        }
+                      ]
+                    }} options={{
 
-                    />
+                      legend: {
+                        display: false,
+                        position: 'bottom'
+                      },
+                      scales: {
+                        yAxes: [{
+                            ticks: {
+                                display: false
+                            }
+                        }]
+                    }
+
+                    }}
+
+                     />
                   </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
                 }
               />
             </Col>

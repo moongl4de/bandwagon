@@ -20,6 +20,10 @@ const albumController = require("../../controllers/albumController");
   .route("/:id")
   .get(albumController.findById)
 
+  router
+  .route("/userId/:id")
+  .get(albumController.findByUserId)
+
   // router
   // .route("/songs")
   // .post(albumController.insert);
