@@ -4,43 +4,39 @@
 
 [Bandwagon - Live App](https://bandwagon-project.herokuapp.com/)
 
+![image](client/src/img/mockupApple.png)
+
+
 ## User Story
-As a music fan, I want to sample new music from lesser known bands and have my money given directly to these bands to support newer musicians.
-As a musician, I want a platform to get my music exposure, while getting funds to support my music career.
+As a consumer who enjoys streaming music, I want an application that allows me to listen to music while directly supporting the artists I enjoy so that I can get my music fix while funding artists instead of corporations.
+
+As an artist/musician/band, I want a service that allows me to not only cut out the distribution middlemen that eat away at my profit (CDBaby, Tunecore, etc), but also allows my fans to directly support what I create, so that I can continue doing what I love and make money in the process.
+
 
 ## Description
-A platform to connect newer musicians to fans directly, removeing the middle man to maximize funding going directly to the musicians.
+A digital music streaming platform designed with listeners and artists in mind.
 
-## Motivation
 
 ## Technologies Utilized
-React.js, Axios, Express, Material UI, Amazon S3, MongoDB, Algolia, and Stripe.
+React.js, MongoDB, Atlas, Mongoose AWS S3, Express, Stitch, Stripe, Node.js
 
 ## Screen Shots
-### Data Flow Diagram
-![image](./public/xx.png)
+![image](client/src/img/bandwagon-listener.png)
+![image](client/src/img/bandwagon-signup.png)
+![image](client/src/img/bandwagon-dash.png)
+![image](client/src/img/bandwagon-upload.png)
 
-### Landing Page
-![image](./public/xx.png)
+### Development Team
 
-### Fan Page
-![image](./public/xx.png)
-
-### Band Page
-![image](./public/xx.png)
-
+- [Alex Gignilliat](https://github.com/alexgignilliat)
+- [Alan Grosse](https://github.com/aagrosse)
+- [Daria Naumova](https://github.com/DariaNau)
+- [Mesay Bekele](https://github.com/mesayb)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests as appropriate.
 
-## Credits
-
-### Development Team
-- [Alex Gignilliat](https://github.com/alexgignilliat)
-- [Alan Grosse](https://github.com/aagrosse)
-- [Daria Naumova](https://github.com/DariaNau)
-- [Mesay Bekele](https://github.com/mesayb)
 
 ### Other
 - [Creative Tim](https://www.creative-tim.com/product/light-bootstrap-dashboard-react) (Bootstrap Dashboard Template)
