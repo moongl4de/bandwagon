@@ -98,7 +98,7 @@ function Info() {
                             <hr />
                             <Card.Text className="devDesc" style={{ textAlign: "center" }}>
                                 AWS/S3<br />
-                                Stitch<br />
+                                Stitch UI/Atlas<br />
                                 MongoDB<br />
 
                             </Card.Text>

@@ -53,6 +53,9 @@ export default {
   updateAlbum: function(data) {
     return axios.put("/api/albums", data);
   },
+  getAlbumByUserId: function(id){
+    return axios.get("/api/albums/userId/" + id)
+  },
 
   //SONGS
 

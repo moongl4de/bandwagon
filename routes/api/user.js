@@ -1,8 +1,5 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
-// const Song = require('../../models/songs')
-// const User = require('../../models/user')
-// const mongoose = require('mongoose')
 
 // Matches with "/api/user"
 router
