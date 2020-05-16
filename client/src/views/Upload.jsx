@@ -248,7 +248,7 @@ function Upload() {
                       className="form-control mb-5"
                       required
                       onChange={updateAlbum}
-                      name="Album title"
+                      name="title"
                       placeholder="Title"
                     />
                     {/* <input
