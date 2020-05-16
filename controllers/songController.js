@@ -49,9 +49,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   insertAlbumInfo: function (req, res) {
-    const { albumId, album, album_art } = req.body;
-    console.log("hit", albumId, album, album_art)
-    Song.updateMany({albumId : albumId }, { $set: {"album" : album, "album_art": album_art}})
+    const { albumId, album } = req.body;
+    console.log("hit", albumId, album)
+    Song.updateMany({albumId : albumId }, { $set: {album : album}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

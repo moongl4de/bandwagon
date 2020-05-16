@@ -370,7 +370,7 @@ function AlbumList() {
                     id={song._id}
                     title={song.title}
                     url={song.fileUrl}
-                    art={song.album_art}
+                    art={song.album.art}
                     artist={song.user.name}
                     name="currentSong"
                     onClick={() => getCurrentSong(song)}
@@ -386,7 +386,7 @@ function AlbumList() {
                     <div className="d-flex justify-content-center align-items-center">
                     <Card.Img
                       variant="top"
-                      src={song.album_art}
+                      src={song.album.art}
                       style={{ height: "100%", width: "100%;", margin: "0 auto !important" }}
                       className="albumCardImage"
                     />
