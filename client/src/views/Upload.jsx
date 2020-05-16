@@ -163,14 +163,14 @@ function Upload() {
         });
 
         // AND SEND UPLOADED ART TO SONG COLLECTION FOR EACH SONG
-        // console.log("stuff for song update", album.art, album._id);
+        console.log("stuff for song update", album, album._id);
 
         setAlbum({ ...album });
 
         API.insertAlbumInfo({
           albumId: album._id,
           album: album,
-          album_art: album.art
+          // album_art: album.art
         })
           .then((res) => {
             // console.log("after upload art API", res);
@@ -309,7 +309,7 @@ function Upload() {
                 <div>
                   <Form className="m-3" onSubmit={handleSubmit}>
 
-                  <Link to="/admin/dashboard">
+                  {/* <Link to="/admin/dashboard"> */}
                       <Button
                         variant="primary"
                         type="submit"
@@ -317,7 +317,7 @@ function Upload() {
                       >
                         Step 3 - Finish Upload!
                       </Button>
-                      </Link>
+                      {/* </Link> */}
                   </Form>
                 </div>
               }
