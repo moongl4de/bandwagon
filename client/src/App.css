@@ -123,6 +123,17 @@ body {
 	padding: 0 !important;
 }
 
+.custBtn3 {
+	background: linear-gradient(270deg, #d000ff60, #0040ff5b, #866eff4f, #f955ff62, #ff54e89a);
+margin: 100px auto 200px auto !important;
+width: 500px;
+color: white !important;
+background-size: 500% 500%;
+-webkit-animation: AnimationName 15s ease infinite;
+-moz-animation: AnimationName 30s ease infinite;
+animation: AnimationName 30s ease infinite;
+}
+
 #whatIsBtn {
 	font-size: 25px;
 	font-weight: lighter;

@@ -1,22 +1,23 @@
 import React from "react";
 import Card from "react-bootstrap/Card"
+import Button from "react-bootstrap/Button"
 
 import "../../src/assets/css/info.css"
 
 function Info() {
     return (
 
-        <div style={{margin: "0 1%"}}>
+        <div style={{ margin: "0 1%" }}>
             <div className="header1">
-            <br/>
-            <hr className="meetHr1 wow animate__animated animate__backInDown animate__fast" />
+                <br />
+                <hr className="meetHr1 wow animate__animated animate__backInDown animate__fast" />
                 <div className="row ">
                     <h1 className="wow animate__animated animate__fadeIn animate__slower" id="bandwagon">Bandwagon</h1><br />
                 </div>
                 <div className="row  wow animate__animated animate__fadeIn animate__delay-1s ">
                     <p className="slogan" style={{ color: "white", textAlign: "center", letterSpacing: "10px", fontWeight: "lighter" }}>where music lives</p>
                 </div>
-                <br/>
+                <br />
                 <hr className="meetHr2 wow animate__animated animate__backInUp" />
 
             </div>
@@ -34,7 +35,7 @@ function Info() {
                         <div className="leftoverlay d-flex justify-content-center align-items-center">
                             <h1 style={{ letterSpacing: 15 }}>Listeners</h1>
                             <div className="test">
-                                <h2 style={{padding: "0px 10px"}}>Listeners are given a number of tokens every month to spend on streaming songs via instant microtransactions.<br /><br />When a song is streamed, a token is sent directly to that artist.<br /><br /></h2>
+                                <h2 style={{ padding: "0px 10px" }}>Listeners are given a number of tokens every month to spend on streaming songs via instant microtransactions.<br /><br />When a song is streamed, a token is sent directly to that artist.<br /><br /></h2>
                             </div>
                         </div>
                     </div>
@@ -45,14 +46,14 @@ function Info() {
                         <div className="rightoverlay d-flex justify-content-center align-items-center">
                             <h1 style={{ letterSpacing: 15 }}>Artists</h1>
                             <div className="test">
-                                <h2 style={{padding: "0 10px"}}>Artists are able to upload their music directly to the site, removing the need for distribution middlemen. <br /><br />Artists keep 100% of the profit they generate through the support of their listeners. </h2>
+                                <h2 style={{ padding: "0 10px" }}>Artists are able to upload their music directly to the site, removing the need for distribution middlemen. <br /><br />Artists keep 100% of the profit they generate through the support of their listeners. </h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="header1" style={{ marginBottom: "40%" }}>
+            <div className="header1" style={{ marginBottom: "10%" }}>
                 <div className="row ">
                     <h1 id="meetHeader" style={{ padding: "0 20px", textAlign: "center" }}>Meet the developers</h1><br /><br />
                 </div>
@@ -121,10 +122,19 @@ function Info() {
 
                     </Card>
                     <br />
+
                 </div>
+                
                 <hr className="meetHr2 wow animate__animated animate__fadeInLeftBig animate__fast" />
+                <a style={{display: "flex", justifyContent: "center", alignItems: "center"}} href="/">
+                {" "}
+                <Button className="custBtn3" variant="light">
+                    <p id="whatIsBtn">Back to Bandwagon</p>
+                </Button>{" "}
+            </a>
+
             </div>
-            <br/>
+            <br />
             {/* <div className="row">
             <div className="header1" style={{ marginBottom: "15%" }}>
                 <h1 className="wow animate__animated animate__fadeInDownBig animate__fast">Technologies Used</h1>
@@ -150,6 +160,9 @@ function Info() {
             </div>
             </div> */}
 
+           
+
+            
         </div>
 
     )
