@@ -15,22 +15,26 @@ import { useStoreContext } from "../utils/globalContext";
 import logo from "../assets/img/reactlogo.png";
 import { ToastContainer, toast } from "react-toastify";
 import algoliasearch from "algoliasearch";
-import { SongContext } from "../utils/songContext";
+// import { SongContext } from "../utils/songContext";
 import { isAuth } from "../components/helper";
 import { auth } from "google-auth-library";
-
+import "font-awesome/css/font-awesome.min.css";
+import { Link } from 'react-router-dom'
 
 function Upload() {
-  // access album's global state and set local state for file upload
+  // access album's global state, set local states and refs for file upload to AWS
+
   const [state, dispatch] = useStoreContext();
   const artRef = useRef();
   const songsRef = useRef();
   const [files, setFiles] = useState({
     art: "",
   });
-  const [form, setValidateForm] = useState({
-    validated: false
+  const [loadingAWS, setLoadingAWS] = useState({
+    loading: false,
   });
+  const [loadingArt, setLoadingArt] = useState(false);
+  const [validation, setValidation] = useState(false)
   const [album, setAlbum] = useState({
     _id: "",
     user: {},
@@ -52,75 +56,78 @@ function Upload() {
       [target.name]: target.value,
     });
   };
+
   //on page load create an empty album with user id to get album's id to upload songs to
 
   useEffect(() => {
-    //get current user from local storage
+    //get current user
     const user = isAuth();
     const createAlbum = async () => {
       const response = await API.createAlbum();
       setAlbum({
         ...album,
         ...response.data,
-        user: user
-      })
+        user: user,
+      });
     };
-    console.log("user - ", user)
-    createAlbum()
+    // console.log("user - ", user)
+    createAlbum();
   }, []);
   const setLoading = () => {
     dispatch({ type: "LOADING" });
   };
+
   // ART UPLOAD
+
   const handleArtUpload = () => {
     const artFile = Object.values(artRef.current.files);
     if (!artFile.length) {
-      toast.warning("Please select a file to upload");
+      toast.warning("Please fill out all fields");
     } else {
+      setLoadingArt(true);
       handleFileUpload(artFile)
         .then((response) => {
           setAlbum({ ...album, art: response });
+          setValidation(true)
+          setLoadingArt(false);
           console.log("Art: successfully loaded to AWS", response);
           toast("Art successfully uploaded!");
-          setValidateForm({ validated: true })
         })
         .catch((err) => {
           console.log(err);
+          setLoadingArt(false);
           toast.warning("Unable to upload art, please try again.");
         });
     }
   };
+
   // SONGS UPLOAD
+
   const handleSongUpload = () => {
     const audiofile = Object.values(songsRef.current.files);
     if (!audiofile.length) {
-      toast.warning("Please fill out all fields");
+      toast.warning("Please select files to upload");
       return;
     } else {
+      setLoadingAWS({ loading: true });
       handleFileUpload(audiofile)
         .then((response) => {
           console.log("Audio: successfully loaded to AWS", response);
           // for each song we make an API call that loads files to S3 and sends url strings to mongodb collection
           response.forEach((url) => {
-            console.log("each fileUrl:", url);
+            // console.log("each fileUrl:", url);
             const Songtitle = url.split("-")[1];
 
             API.uploadSongs({
-              // album: album,
               albumId: album._id,
               title: Songtitle,
               fileUrl: url,
-              user: album.user
+              user: album.user,
             })
               .then((result) => {
-                console.log("song sent to db", result.data);
-                // console.log("loggsssss = ", {
-                //   albumId: album._id,
-                //   title: Songtitle,
-                //   fileUrl: url,
-                //   user: album.user
-                // })
-                setAlbum({...album, song_ids:result.data.song_ids})
+                // console.log("song sent to db", result.data);
+                setAlbum({ ...album, song_ids: result.data.song_ids });
+                setLoadingAWS({ loading: false });
               })
               .catch((err) => {
                 console.log(err);
@@ -130,16 +137,15 @@ function Upload() {
         })
         .catch((err) => {
           console.log(err);
+          setLoadingAWS({ loading: false });
           toast.warning("Unable to upload songs, please try again.");
         });
     }
   };
 
-
-
   // SUBMIT FORM
-  const handleSubmit = (event) => {
 
+  const handleSubmit = (event) => {
     event.preventDefault();
     setLoading();
     API.updateAlbum({
@@ -150,32 +156,34 @@ function Upload() {
       art: album.art,
     })
       .then((result) => {
-        console.log("Updated album", result);
-
+        // console.log("Updated album", result);
         dispatch({
           type: "ADD_ALBUM",
           album: result,
         });
+
         // AND SEND UPLOADED ART TO SONG COLLECTION FOR EACH SONG
-        console.log("stuff for song update", album.art, album._id);
+        // console.log("stuff for song update", album.art, album._id);
+
+        setAlbum({ ...album });
 
         API.insertAlbumInfo({
           albumId: album._id,
-          album: album
-          // album_art: album.art
+          album: album,
+          album_art: album.art
         })
           .then((res) => {
-            console.log("after upload art API", res);
+            // console.log("after upload art API", res);
           })
           .catch((err) => {
             console.log(err);
           });
         toast("Album successfully uploaded!");
-        // CLEAR FORM 
-        setAlbum({
-          title: "",
-          description: "",
-        });
+        // CLEAR FORM
+        // setAlbum({
+        //   title: "",
+        //   description: "",
+        // });
       })
       .catch((err) => {
         console.log(err);
@@ -187,8 +195,8 @@ function Upload() {
     <div className="content">
       <ToastContainer />
       <Container fluid>
-        <Row>
-          <Col md={4}>
+        <Row className="justify-content-md-center">
+          <Col>
             <Card
               title="Upload Music"
               category="Follow the steps below to upload."
@@ -206,21 +214,27 @@ function Upload() {
                         ref={songsRef}
                         multiple
                       />
-                      <Button
-                        className="mt-3"
-                        variant="primary"
-                        onClick={handleSongUpload}
-                      >
-                        Step 1. - Upload songs
-                      </Button>
+                      {loadingAWS.loading ? (
+                        <Button style={{textAlign: "center", verticalAlign: "middle"}} className="mt-3" variant="primary">
+                          {" "}
+                          <i className="fas fa-compact-disc fa-spin" style={{backgroundColor:"blue", marginRight: "20px"}}></i>Loading music
+                        </Button>
+                      ) : (
+                        <Button
+                          className="mt-3"
+                          variant="primary"
+                          onClick={handleSongUpload}
+                        >
+                          Step 1 - Upload songs
+                        </Button>
+                      )}
                     </Form.Group>
-                    <Form.Group></Form.Group>
                   </Form>
                 </div>
               }
             />
           </Col>
-          <Col md={4}>
+          <Col>
             <Card
               title="Album Details"
               // category="Follow the steps below to upload."
@@ -264,17 +278,28 @@ function Upload() {
                         multiple
                       />
                     </Form.Group>
-                    <Button variant="primary" onClick={handleArtUpload}>
-                      Step 2. - Upload Art
-                    </Button>
+                    {loadingArt ? (
+                        <Button style={{textAlign: "center"}} className="mt-3" variant="primary">
+                          {" "}
+                          <i className="fas fa-compact-disc fa-spin" style={{backgroundColor:"blue", marginRight: "20px"}}></i>Loading Art
+                        </Button>
+                      ) : (
+                        <Button
+                          className="mt-3"
+                          variant="primary"
+                          onClick={handleArtUpload}
+                        >
+                          Step 2 - Upload Art
+                        </Button>
+                      )}
                   </Form>
                 </div>
               }
             />
           </Col>
 
-          
-          <Col md={4}>
+          {validation ? (
+          <Col>
             <Card
               title="Upload to the Website"
               category="Finish your submission"
@@ -283,28 +308,26 @@ function Upload() {
               content={
                 <div>
                   <Form className="m-3" onSubmit={handleSubmit}>
-                    <ListGroupItem className="text-center">
+
+                  <Link to="/admin/dashboard">
                       <Button
-                        variant="danger"
+                        variant="primary"
                         type="submit"
                         disabled={state.loading}
                       >
-                        Step 3. Finish Upload!
+                        Step 3 - Finish Upload!
                       </Button>
-                    </ListGroupItem>
+                      </Link>
                   </Form>
                 </div>
               }
-            />
+            /> 
           </Col>
+          ) : (<div></div>)}
         </Row>
       </Container>
     </div>
   );
 }
 
-
 export default Upload;
-
-
-
