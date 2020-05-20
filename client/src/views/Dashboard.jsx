@@ -79,8 +79,10 @@ class Dashboard extends Component {
                 category="Since upload date"
 
                 content={
-                  <div className="ct-chart">
-                    <HorizontalBar data={{
+                  <div className="ct-chart" style={{maxWidth:"620px", margin:"0 auto", minHeight:"305px"}}>
+                    <HorizontalBar 
+                    style={{display:"inlineBlock"}}
+                    data={{
                       labels: this.props.albumNameData,
                       datasets: [
                         {
