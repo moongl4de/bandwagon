@@ -9,13 +9,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { Redirect } from "react-router-dom";
 import { authenticate, isAuth } from "./helper";
-// import UserContext from "../utils/UserContext";
-// import { useStoreContext } from "../utils/globalContext";
 import { handleLogin } from "../stitch/authentication";
-
 import axios from "axios";
 import API from "../utils/API"
-
 import "../App.css";
 
 function Login(props) {
@@ -57,7 +53,7 @@ function Login(props) {
               const currentUser = result.data.filter(user => user.email === res.data.user.email);
               //checks if user needs to make payment and sets payment state to true 
               if (currentUser[0].paymentRequired === 'true') {
-          
+
                 updateSignIn({
                   ...signInData,
                   token: res.data.token,
@@ -74,9 +70,7 @@ function Login(props) {
               }
               toast.success(`Hey ${res.data.user.name}, Welcome back!`)
             })
-           
         })
-        
       })
       .catch((err) => {
         console.log("error" + err);
@@ -128,12 +122,8 @@ function Login(props) {
   //   return (<Redirect to="/admin/dashboard" />);
   //   } else {
 
-
-
   return (
     <Fragment>
-
-
       <div id="loginContainer">
         <ToastContainer />
         <video id="videoBackground" style={{}} autoPlay muted loop>
@@ -149,7 +139,7 @@ function Login(props) {
         {signInData.user.role === "artist" ? (
           <Redirect to="/admin/dashboard" />
         ) : null}
-            {signInData.user.role === "admin" ? (
+        {signInData.user.role === "admin" ? (
           <Redirect to="/admin/admin" />
         ) : null}
         <Container style={{ justifyContent: "center" }}>
@@ -157,8 +147,8 @@ function Login(props) {
             <img
               style={{ margin: "1% auto" }}
               id="loginLogo"
-              src={require("../components/images/newlogo.png")}
-              alt=""
+              src={require("../img/newlogoRev.png")}
+              alt="Bandwagon Logo"
             ></img>
           </Row>
           <Row></Row>
@@ -198,23 +188,27 @@ function Login(props) {
                   label="Remember Me"
                 />
               </Form.Group>
-
-              <Button variant="dark" onClick={handleSubmit}>
+              <Button className="custBtn" variant="dark" onClick={handleSubmit}>
                 Login
             </Button>
               <a href="/signup">
                 {" "}
-                <Button className="offset-4" variant="dark">
+                <Button className="offset-4 custBtn" variant="dark">
                   Sign Up
               </Button>{" "}
               </a>
             </Form>
           </Row>
         </Container>
+        <a href="/info">
+          {" "}
+          <Button className="custBtn2" variant="light">
+            <p id="whatIsBtn">What is Bandwagon?</p>
+          </Button>{" "}
+        </a>
       </div>
     </Fragment>
   );
-  // }
 }
 
 export default Login;
