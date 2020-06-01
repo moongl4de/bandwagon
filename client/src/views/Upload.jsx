@@ -199,7 +199,7 @@ function Upload() {
           <Col>
             <Card
               title="Upload Music"
-              category="Follow the steps below to upload."
+              category="Must not exceed 15MB per upload"
               ctTableFullWidth
               ctTableResponsive
               content={
@@ -239,11 +239,12 @@ function Upload() {
               title="Album Details"
               // category="Follow the steps below to upload."
               ctTableFullWidth
+              category="Provide more details about your album."
               ctTableResponsive
               content={
                 <div>
                   <Form className="m-3">
-                    <Form.Label>Fill out the fields</Form.Label>
+                    {/* <Form.Label>Fill out the fields</Form.Label> */}
                     <input
                       className="form-control mb-5"
                       required
@@ -302,7 +303,7 @@ function Upload() {
           <Col>
             <Card
               title="Upload to the Website"
-              category="Finish your submission"
+              category="Review and finish your submission"
               ctTableFullWidth
               ctTableResponsive
               content={
