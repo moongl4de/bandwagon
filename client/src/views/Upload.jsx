@@ -90,7 +90,7 @@ function Upload() {
           setAlbum({ ...album, art: response });
           setValidation(true)
           setLoadingArt(false);
-          console.log("Art: successfully loaded to AWS", response);
+          // console.log("Art: successfully loaded to AWS", response);
           toast("Art successfully uploaded!");
         })
         .catch((err) => {
@@ -163,7 +163,8 @@ function Upload() {
         });
 
         // AND SEND UPLOADED ART TO SONG COLLECTION FOR EACH SONG
-        console.log("stuff for song update", album, album._id);
+        // console.log("stuff for song update", album, album._id);
+
 
         setAlbum({ ...album });
 
@@ -239,7 +240,7 @@ function Upload() {
               title="Album Details"
               // category="Follow the steps below to upload."
               ctTableFullWidth
-              category="Provide more details about your album."
+              category="Provide more details about your album"
               ctTableResponsive
               content={
                 <div>
