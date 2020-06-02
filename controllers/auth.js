@@ -43,7 +43,7 @@ exports.signup = (req, res) => {
          <h2>Please use the following link to APPROVE ADMIN ROLE</h2>
         <p>${process.env.CLIENT_URL}/activate/${token}</p>
         <br>
-        <h5>Become an official Band Wagoner!!</h5>
+        <h5>Become an official Bandwagoner! (Is that a word? Who knows. It is now!) </h5>
         <p>${process.env.CLIENT_URL}</p>
         <br/>
         <p>Bandwagon Team</p>
@@ -51,12 +51,12 @@ exports.signup = (req, res) => {
     }  : {
         from: process.env.EMAIL_FROM,
         to: email,
-        subject: `Activate your Band-Wagon ${role} account`,
-        html: `<h1>Hey ${name}, welcome to Band Wagon</h1>
-         <h2>Please use the folowing link to activate your Band Wagon ${role} account</h2>
+        subject: `Activate your Bandwagon ${role} account`,
+        html: `<h1>Hey ${name}, welcome to Bandwagon</h1>
+         <h2>Please use the folowing link to activate your Bandwagon ${role} account</h2>
         <p>${process.env.CLIENT_URL}/activate/${token}</p>
         <br>
-        <h5>Become an official Band Wagoner!!</h5>
+        <h5>Become an official Bandwagoner! (Is that a word? Who knows. It is now!)</h5>
         <p>${process.env.CLIENT_URL}</p>
         <br/>
         <p>Bandwagon Team</p>
@@ -66,12 +66,12 @@ exports.signup = (req, res) => {
     const accountApprovedEmail = {
         from: process.env.EMAIL_FROM,
         to: email,
-        subject: `Hey ${name}, Your Band-Wagon ${role} account has been approved`,
-        html: `<h1>Hey ${name}, Your Band-Wagon ${role} account has been approved</h1>
-         <h2>Please use the following link to Access your Band Wagon ${role} account</h2>
+        subject: `Hey ${name}, Your Bandwagon ${role} account has been approved`,
+        html: `<h1>Hey ${name}, Your Bandwagon ${role} account has been approved</h1>
+         <h2>Please use the following link to Access your Bandwagon ${role} account</h2>
         <p>${process.env.CLIENT_URL}</p>
         <br>
-        <h5>You have become an official Band Wagon Boss!!</h5>
+        <h5>You have become an official Bandwagon Boss!!</h5>
         <br/>
         <p>Bandwagon Team</p>
         `
