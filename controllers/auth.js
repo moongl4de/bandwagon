@@ -54,7 +54,7 @@ exports.signup = (req, res) => {
         subject: `Activate your Band-Wagon ${role} account`,
         html: `<h1>Hey ${name}, welcome to Band Wagon</h1>
          <h2>Please use the folowing link to activate your Band Wagon ${role} account</h2>
-        <p>${process.env.CLIENT_URL}/activate/${token}</p>
+         <a href=${process.env.CLIENT_URL}/activate/${token}><button style="background-image:url('https://bandwagon-project.herokuapp.com/static/media/newlogoRev.7555c142.png'); width:70%; height:70px;">Click here to Activate</button></a>
         <br>
         <h5>Become an official Band Wagoner!!</h5>
         <p>${process.env.CLIENT_URL}</p>
@@ -149,8 +149,11 @@ exports.signin = (req, res) => {
                 error: `User with that email does not exist : ${err}`
             })
         }
+
         if (!user.authenticate(password)) {
-            error: "Invalid password"
+            return res.status(400).json({
+                error: 'Email and password do not match'
+            });
         }
 
         const token = jwt.sign({
