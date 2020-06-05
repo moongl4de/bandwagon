@@ -38,10 +38,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 
-### Other
-- [Creative Tim](https://www.creative-tim.com/product/light-bootstrap-dashboard-react) (Bootstrap Dashboard Template)
-
-
 ## License
 [MIT]
 MIT License
