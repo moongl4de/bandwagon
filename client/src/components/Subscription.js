@@ -25,7 +25,7 @@ function Subscription() {
 
     async function handleToken(token, addresses) {
         console.log({ token, addresses })
-        const response = await axios.post('http://localhost:9000/checkout', {
+        const response = await axios.post('/checkout', {
             token,
             subscription
         });
