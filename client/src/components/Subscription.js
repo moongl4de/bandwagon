@@ -25,12 +25,15 @@ function Subscription() {
 
     async function handleToken(token, addresses) {
         console.log({ token, addresses })
-        const response = await axios.post('/checkout', {
+        let paymentStat = 'pending';
+        const response = await axios.post('/api/checkout', {
             token,
             subscription
+        }).then(result =>{
+            paymentStat = 'success';
         });
-        const { status } = response.data
-        if (status === 'success') {
+        // const { status } = response.data
+        if (paymentStat === 'success') {
 
             API.getUsers()
                 .then((result) => {
